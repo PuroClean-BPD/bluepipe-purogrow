@@ -97,7 +97,7 @@ const HeroSection = () => {
                       <p className="text-2xl font-bold text-dark-surface-foreground">{stat.value}</p>
                       <p className="text-sm text-dark-surface-foreground/45 mt-0.5">{stat.label}</p>
                     </div>
-                    <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-400">
+                    <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-primary/10 text-primary">
                       {stat.change}
                     </span>
                   </motion.div>
