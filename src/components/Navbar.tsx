@@ -16,14 +16,14 @@ const Navbar = () => {
   const location = useLocation();
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-dark-surface/95 backdrop-blur-md border-b border-dark-surface-foreground/10">
-      <div className="container-main flex items-center justify-between h-16 lg:h-20">
-        <Link to="/" className="flex items-center gap-2">
+    <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl" style={{ background: 'hsl(var(--dark-surface) / 0.92)', borderBottom: '1px solid hsl(var(--dark-surface-foreground) / 0.08)' }}>
+      <div className="container-main flex items-center justify-between h-16 lg:h-[72px]">
+        <Link to="/" className="flex items-center gap-2.5">
           <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-[hsl(230,100%,65%)] flex items-center justify-center">
             <span className="text-primary-foreground font-bold text-sm">BP</span>
           </div>
-          <span className="text-dark-surface-foreground font-bold text-lg tracking-tight">
-            BluePipe <span className="font-normal opacity-70">Digital</span>
+          <span className="font-bold text-lg tracking-tight" style={{ color: 'hsl(var(--dark-surface-foreground))' }}>
+            BluePipe <span className="font-normal opacity-60">Digital</span>
           </span>
         </Link>
 
@@ -33,11 +33,14 @@ const Navbar = () => {
             <Link
               key={link.href}
               to={link.href}
-              className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-                location.pathname === link.href
-                  ? "text-primary-foreground bg-primary/20"
-                  : "text-dark-surface-foreground/70 hover:text-dark-surface-foreground hover:bg-dark-surface-foreground/5"
-              }`}
+              className="px-4 py-2 rounded-lg text-sm font-medium transition-colors"
+              style={{
+                color: location.pathname === link.href
+                  ? 'hsl(var(--primary))'
+                  : 'hsl(var(--dark-surface-foreground) / 0.65)',
+              }}
+              onMouseEnter={(e) => { if (location.pathname !== link.href) e.currentTarget.style.color = 'hsl(var(--dark-surface-foreground))'; }}
+              onMouseLeave={(e) => { if (location.pathname !== link.href) e.currentTarget.style.color = 'hsl(var(--dark-surface-foreground) / 0.65)'; }}
             >
               {link.label}
             </Link>
@@ -45,17 +48,18 @@ const Navbar = () => {
         </div>
 
         <div className="hidden lg:flex items-center gap-3">
-          <Button variant="hero-secondary" size="lg" asChild>
+          <Button variant="hero-secondary" size="default" asChild>
             <Link to="/contact">Book a Call</Link>
           </Button>
-          <Button variant="gradient" size="lg" asChild>
+          <Button variant="gradient" size="default" asChild>
             <Link to="/free-audit">Free Marketing Audit</Link>
           </Button>
         </div>
 
         {/* Mobile toggle */}
         <button
-          className="lg:hidden text-dark-surface-foreground p-2"
+          className="lg:hidden p-2"
+          style={{ color: 'hsl(var(--dark-surface-foreground))' }}
           onClick={() => setMobileOpen(!mobileOpen)}
         >
           {mobileOpen ? <X size={24} /> : <Menu size={24} />}
@@ -64,14 +68,15 @@ const Navbar = () => {
 
       {/* Mobile menu */}
       {mobileOpen && (
-        <div className="lg:hidden bg-dark-surface border-t border-dark-surface-foreground/10 pb-6">
+        <div className="lg:hidden pb-6" style={{ background: 'hsl(var(--dark-surface))', borderTop: '1px solid hsl(var(--dark-surface-foreground) / 0.08)' }}>
           <div className="container-main flex flex-col gap-1 pt-4">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 to={link.href}
                 onClick={() => setMobileOpen(false)}
-                className="px-4 py-3 rounded-lg text-dark-surface-foreground/80 hover:text-dark-surface-foreground hover:bg-dark-surface-foreground/5 text-sm font-medium"
+                className="px-4 py-3 rounded-lg text-sm font-medium transition-colors"
+                style={{ color: 'hsl(var(--dark-surface-foreground) / 0.75)' }}
               >
                 {link.label}
               </Link>

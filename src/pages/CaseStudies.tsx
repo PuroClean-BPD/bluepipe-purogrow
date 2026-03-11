@@ -60,18 +60,14 @@ const CaseStudies = () => {
   return (
     <div className="min-h-screen">
       <Navbar />
-      <section className="section-dark pt-32 pb-16 lg:pt-40 lg:pb-20">
+      <section className="page-header">
         <div className="container-main">
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            <p className="text-sm font-medium text-primary mb-3">Case Studies</p>
-            <h1 className="text-4xl lg:text-5xl font-bold text-dark-surface-foreground mb-4">
+          <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
+            <p className="section-label">Case Studies</p>
+            <h1 className="font-bold mb-5" style={{ color: 'hsl(var(--dark-surface-foreground))' }}>
               Real Results for Real Franchises
             </h1>
-            <p className="text-dark-surface-foreground/60 text-lg max-w-2xl">
+            <p className="section-description-dark">
               See how BluePipe Digital's marketing systems are helping PuroClean franchise owners generate more leads, win more jobs, and grow their businesses.
             </p>
           </motion.div>
@@ -79,27 +75,27 @@ const CaseStudies = () => {
       </section>
 
       <SectionWrapper>
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="grid md:grid-cols-2 gap-5">
           {caseStudies.map((study, i) => (
             <motion.div
               key={study.location}
-              className="card-elevated p-8"
+              className="card-elevated p-7"
               initial={{ opacity: 0, y: 8 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: i * 0.05 }}
             >
               <div className="flex items-center gap-2 text-primary mb-4">
-                <TrendingUp size={18} />
+                <TrendingUp size={16} />
                 <span className="text-sm font-medium">{study.location}</span>
               </div>
               <p className="text-4xl font-bold text-foreground mb-1">{study.metric}</p>
               <p className="text-sm text-muted-foreground mb-4">{study.metricLabel}</p>
               <p className="text-sm text-muted-foreground leading-relaxed mb-6">{study.description}</p>
               
-              <div className="space-y-2 mb-6">
+              <div className="space-y-2.5 mb-6">
                 {study.results.map((result) => (
-                  <div key={result} className="flex items-center gap-2 text-sm text-foreground">
+                  <div key={result} className="flex items-center gap-2.5 text-sm text-foreground">
                     <ArrowUpRight size={14} className="text-primary shrink-0" />
                     {result}
                   </div>
@@ -108,9 +104,7 @@ const CaseStudies = () => {
 
               <div className="flex flex-wrap gap-2">
                 {study.tags.map((tag) => (
-                  <span key={tag} className="px-2.5 py-1 rounded-full bg-secondary text-secondary-foreground text-xs font-medium">
-                    {tag}
-                  </span>
+                  <span key={tag} className="tag">{tag}</span>
                 ))}
               </div>
             </motion.div>

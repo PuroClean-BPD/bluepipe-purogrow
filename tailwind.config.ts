@@ -53,6 +53,7 @@ export default {
         "dark-surface": {
           DEFAULT: "hsl(var(--dark-surface))",
           foreground: "hsl(var(--dark-surface-foreground))",
+          muted: "hsl(var(--dark-surface-muted))",
         },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",

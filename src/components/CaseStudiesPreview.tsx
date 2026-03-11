@@ -31,10 +31,10 @@ const caseStudies = [
 const CaseStudiesPreview = () => {
   return (
     <SectionWrapper>
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14">
         <div>
-          <p className="text-sm font-medium text-primary mb-3">Case Studies</p>
-          <h2 className="text-3xl lg:text-4xl font-bold text-foreground">
+          <p className="section-label">Case Studies</p>
+          <h2 className="font-bold text-foreground">
             Real Results for Real Franchises
           </h2>
         </div>
@@ -46,18 +46,18 @@ const CaseStudiesPreview = () => {
         </Button>
       </div>
 
-      <div className="grid md:grid-cols-3 gap-6">
+      <div className="grid md:grid-cols-3 gap-5">
         {caseStudies.map((study, i) => (
           <motion.div
             key={study.location}
-            className="card-elevated p-8"
+            className="card-elevated p-7"
             initial={{ opacity: 0, y: 8 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.4, delay: i * 0.05 }}
+            transition={{ duration: 0.4, delay: i * 0.06 }}
           >
-            <div className="flex items-center gap-2 text-primary mb-6">
-              <TrendingUp size={18} />
+            <div className="flex items-center gap-2 text-primary mb-5">
+              <TrendingUp size={16} />
               <span className="text-sm font-medium">{study.location}</span>
             </div>
             <p className="text-4xl font-bold text-foreground mb-1">{study.metric}</p>
@@ -65,12 +65,7 @@ const CaseStudiesPreview = () => {
             <p className="text-sm text-muted-foreground leading-relaxed mb-6">{study.description}</p>
             <div className="flex flex-wrap gap-2">
               {study.tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="px-2.5 py-1 rounded-full bg-secondary text-secondary-foreground text-xs font-medium"
-                >
-                  {tag}
-                </span>
+                <span key={tag} className="tag">{tag}</span>
               ))}
             </div>
           </motion.div>
