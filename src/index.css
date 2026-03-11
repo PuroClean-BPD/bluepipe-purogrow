@@ -34,16 +34,13 @@
     --input: 220 20% 90%;
     --ring: 210 100% 70%;
 
-    --radius: 0.75rem;
+    --radius: 0.5rem;
 
     --dark-surface: 220 40% 12%;
     --dark-surface-foreground: 220 20% 96%;
-    --dark-surface-light: 220 35% 16%;
 
     --gradient-primary: linear-gradient(135deg, hsl(210, 100%, 56%), hsl(230, 100%, 65%));
     --gradient-primary-hover: linear-gradient(135deg, hsl(210, 100%, 50%), hsl(230, 100%, 58%));
-    --gradient-mesh: radial-gradient(ellipse 80% 50% at 50% -20%, hsl(210 100% 56% / 0.12), transparent);
-    --gradient-mesh-accent: radial-gradient(ellipse 60% 40% at 80% 50%, hsl(350 85% 55% / 0.06), transparent);
 
     --ease-out-quad: cubic-bezier(0.25, 0.1, 0.25, 1.0);
 
@@ -79,7 +76,7 @@
   }
 
   p {
-    line-height: 1.7;
+    line-height: 1.6;
     text-wrap: pretty;
   }
 }
@@ -88,19 +85,11 @@
   .section-dark {
     background-color: hsl(var(--dark-surface));
     color: hsl(var(--dark-surface-foreground));
-    position: relative;
   }
 
   .section-light {
     background-color: hsl(var(--background));
     color: hsl(var(--foreground));
-    position: relative;
-  }
-
-  .section-light-alt {
-    background-color: hsl(var(--secondary));
-    color: hsl(var(--foreground));
-    position: relative;
   }
 
   .container-main {
@@ -115,59 +104,12 @@
   }
 
   .card-elevated {
-    box-shadow: 0 0 0 1px hsl(220 20% 90% / 0.8), 0 2px 4px hsl(220 20% 10% / 0.03), 0 12px 24px -12px hsl(220 20% 10% / 0.05);
-    @apply rounded-2xl bg-card transition-all duration-300;
+    box-shadow: 0 0 0 1px rgba(0,0,0,.07), 0 2px 4px rgba(0,0,0,.03), 0 12px 24px -12px rgba(0,0,0,.05);
+    @apply rounded-2xl bg-card transition-all duration-200;
   }
 
   .card-elevated:hover {
     transform: translateY(-4px);
-    box-shadow: 0 0 0 1px hsl(210 100% 56% / 0.15), 0 4px 8px hsl(220 20% 10% / 0.05), 0 24px 48px -12px hsl(220 20% 10% / 0.1);
-  }
-
-  .card-dark {
-    background: hsl(var(--dark-surface-light));
-    border: 1px solid hsl(220 30% 20%);
-    @apply rounded-2xl transition-all duration-300;
-  }
-
-  .card-dark:hover {
-    transform: translateY(-4px);
-    border-color: hsl(210 100% 56% / 0.3);
-    box-shadow: 0 0 0 1px hsl(210 100% 56% / 0.1), 0 24px 48px -12px hsl(220 40% 5% / 0.4);
-  }
-
-  .mesh-gradient {
-    background-image: var(--gradient-mesh), var(--gradient-mesh-accent);
-  }
-
-  .glow-orb {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(120px);
-    pointer-events: none;
-  }
-
-  .section-divider {
-    height: 1px;
-    background: linear-gradient(90deg, transparent, hsl(var(--border)), transparent);
-  }
-
-  .badge-pill {
-    @apply inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium;
-    background: hsl(210 100% 56% / 0.08);
-    border: 1px solid hsl(210 100% 56% / 0.15);
-    color: hsl(var(--primary));
-  }
-
-  .stat-card {
-    @apply rounded-2xl p-6 text-center;
-    background: hsl(var(--dark-surface-light));
-    border: 1px solid hsl(220 30% 20%);
-  }
-
-  .number-badge {
-    @apply w-10 h-10 rounded-xl flex items-center justify-center text-sm font-bold;
-    background: var(--gradient-primary);
-    color: hsl(var(--primary-foreground));
+    box-shadow: 0 0 0 1px rgba(0,0,0,.07), 0 4px 8px rgba(0,0,0,.05), 0 16px 32px -12px rgba(0,0,0,.08);
   }
 }
