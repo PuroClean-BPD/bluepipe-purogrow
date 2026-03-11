@@ -6,6 +6,15 @@ import { ArrowRight, Play } from "lucide-react";
 const HeroSection = () => {
   return (
     <section className="section-dark relative overflow-hidden">
+      {/* Background grid lines */}
+      <div
+        className="absolute inset-0 opacity-[0.07]"
+        style={{
+          backgroundImage:
+            'linear-gradient(to right, hsl(var(--dark-surface-foreground)) 1px, transparent 1px), linear-gradient(to bottom, hsl(var(--dark-surface-foreground)) 1px, transparent 1px)',
+          backgroundSize: '80px 80px',
+        }}
+      />
       {/* Subtle gradient orb */}
       <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/4" />
       
