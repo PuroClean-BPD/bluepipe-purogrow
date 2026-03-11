@@ -21,8 +21,8 @@
     --secondary: 220 20% 96%;
     --secondary-foreground: 220 18% 18%;
 
-    --muted: 220 15% 90%;
-    --muted-foreground: 220 10% 40%;
+    --muted: 220 15% 92%;
+    --muted-foreground: 220 10% 46%;
 
     --accent: 350 85% 55%;
     --accent-foreground: 0 0% 100%;
@@ -30,14 +30,15 @@
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 220 20% 90%;
-    --input: 220 20% 90%;
+    --border: 220 16% 90%;
+    --input: 220 16% 90%;
     --ring: 210 100% 70%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
 
     --dark-surface: 220 40% 12%;
     --dark-surface-foreground: 220 20% 96%;
+    --dark-surface-muted: 220 30% 18%;
 
     --gradient-primary: linear-gradient(135deg, hsl(210, 100%, 56%), hsl(230, 100%, 65%));
     --gradient-primary-hover: linear-gradient(135deg, hsl(210, 100%, 50%), hsl(230, 100%, 58%));
@@ -71,17 +72,23 @@
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Satoshi', sans-serif;
     font-weight: 700;
-    letter-spacing: -0.025em;
+    letter-spacing: -0.03em;
     text-wrap: balance;
+    line-height: 1.1;
   }
 
+  h1 { @apply text-4xl lg:text-5xl xl:text-6xl; }
+  h2 { @apply text-3xl lg:text-4xl xl:text-[2.75rem]; }
+  h3 { @apply text-lg lg:text-xl; }
+
   p {
-    line-height: 1.6;
+    line-height: 1.7;
     text-wrap: pretty;
   }
 }
 
 @layer components {
+  /* ── Section patterns ── */
   .section-dark {
     background-color: hsl(var(--dark-surface));
     color: hsl(var(--dark-surface-foreground));
@@ -92,10 +99,16 @@
     color: hsl(var(--foreground));
   }
 
-  .container-main {
-    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  .section-muted {
+    background-color: hsl(var(--secondary));
+    color: hsl(var(--foreground));
   }
 
+  .container-main {
+    @apply max-w-7xl mx-auto px-5 sm:px-6 lg:px-8;
+  }
+
+  /* ── Typography utilities ── */
   .gradient-text {
     background: var(--gradient-primary);
     -webkit-background-clip: text;
@@ -103,13 +116,88 @@
     background-clip: text;
   }
 
+  .section-label {
+    @apply text-sm font-semibold tracking-wide uppercase text-primary mb-3;
+    letter-spacing: 0.05em;
+  }
+
+  .section-description {
+    @apply text-muted-foreground text-lg max-w-2xl leading-relaxed;
+  }
+
+  .section-description-dark {
+    color: hsl(var(--dark-surface-foreground) / 0.6);
+    @apply text-lg max-w-2xl leading-relaxed;
+  }
+
+  /* ── Card system ── */
   .card-elevated {
-    box-shadow: 0 0 0 1px rgba(0,0,0,.07), 0 2px 4px rgba(0,0,0,.03), 0 12px 24px -12px rgba(0,0,0,.05);
-    @apply rounded-2xl bg-card transition-all duration-200;
+    @apply rounded-2xl bg-card border border-border/60 transition-all duration-300;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.04), 0 6px 16px -6px rgba(0, 0, 0, 0.06);
   }
 
   .card-elevated:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 0 0 1px rgba(0,0,0,.07), 0 4px 8px rgba(0,0,0,.05), 0 16px 32px -12px rgba(0,0,0,.08);
+    transform: translateY(-2px);
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.04), 0 12px 28px -8px rgba(0, 0, 0, 0.1);
+  }
+
+  .card-dark {
+    @apply rounded-2xl border transition-all duration-300;
+    background: hsl(var(--dark-surface-muted));
+    border-color: hsl(var(--dark-surface-foreground) / 0.08);
+  }
+
+  .card-dark:hover {
+    transform: translateY(-2px);
+    border-color: hsl(var(--dark-surface-foreground) / 0.14);
+  }
+
+  /* ── Icon containers ── */
+  .icon-box {
+    @apply w-12 h-12 rounded-xl flex items-center justify-center shrink-0;
+    background: hsl(var(--primary) / 0.1);
+  }
+
+  .icon-box-sm {
+    @apply w-10 h-10 rounded-xl flex items-center justify-center shrink-0;
+    background: hsl(var(--primary) / 0.1);
+  }
+
+  /* ── Form inputs ── */
+  .form-input {
+    @apply w-full rounded-xl border border-border bg-background px-4 py-3 text-sm transition-shadow;
+    @apply focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/40;
+  }
+
+  .form-input-dark {
+    @apply w-full rounded-xl px-4 py-3 text-sm transition-shadow;
+    background: hsl(var(--dark-surface-foreground) / 0.08);
+    border: 1px solid hsl(var(--dark-surface-foreground) / 0.15);
+    color: hsl(var(--dark-surface-foreground));
+    @apply focus:outline-none focus:ring-2 focus:ring-primary/30;
+  }
+
+  .form-input-dark::placeholder {
+    color: hsl(var(--dark-surface-foreground) / 0.4);
+  }
+
+  .form-label {
+    @apply block text-sm font-medium mb-2;
+  }
+
+  /* ── Tag/badge ── */
+  .tag {
+    @apply px-3 py-1 rounded-full text-xs font-medium;
+    background: hsl(var(--primary) / 0.08);
+    color: hsl(var(--primary));
+  }
+
+  .tag-muted {
+    @apply px-3 py-1 rounded-full bg-secondary text-secondary-foreground text-xs font-medium;
+  }
+
+  /* ── Page header (dark hero for subpages) ── */
+  .page-header {
+    @apply section-dark pt-32 pb-16 lg:pt-40 lg:pb-20;
   }
 }
