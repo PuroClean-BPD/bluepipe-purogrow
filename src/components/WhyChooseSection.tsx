@@ -15,28 +15,28 @@ const WhyChooseSection = () => {
   return (
     <SectionWrapper variant="dark">
       <div className="text-center mb-16">
-        <p className="text-sm font-medium text-primary mb-3">Why BluePipe</p>
-        <h2 className="text-3xl lg:text-4xl font-bold text-dark-surface-foreground mb-4">
+        <p className="section-label">Why BluePipe</p>
+        <h2 className="font-bold mb-5" style={{ color: 'hsl(var(--dark-surface-foreground))' }}>
           Why Franchise Owners Choose BluePipe Digital
         </h2>
       </div>
 
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {reasons.map((reason, i) => (
           <motion.div
             key={reason.title}
-            className="flex gap-4"
+            className="card-dark p-6 flex gap-4"
             initial={{ opacity: 0, y: 8 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.4, delay: i * 0.05 }}
           >
-            <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
-              <reason.icon size={20} className="text-primary" />
+            <div className="icon-box-sm">
+              <reason.icon size={18} className="text-primary" />
             </div>
             <div>
-              <h3 className="font-semibold text-dark-surface-foreground mb-1">{reason.title}</h3>
-              <p className="text-sm text-dark-surface-foreground/60">{reason.desc}</p>
+              <h3 className="font-semibold mb-1.5 text-base" style={{ color: 'hsl(var(--dark-surface-foreground))' }}>{reason.title}</h3>
+              <p className="text-sm leading-relaxed" style={{ color: 'hsl(var(--dark-surface-foreground) / 0.6)' }}>{reason.desc}</p>
             </div>
           </motion.div>
         ))}
