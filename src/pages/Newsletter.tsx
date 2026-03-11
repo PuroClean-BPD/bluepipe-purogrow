@@ -1,6 +1,7 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SectionWrapper from "@/components/SectionWrapper";
+import AuditCTASection from "@/components/AuditCTASection";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { Mail, BookOpen, TrendingUp, Lightbulb } from "lucide-react";
@@ -104,6 +105,7 @@ const Newsletter = () => {
         </div>
       </SectionWrapper>
 
+      <AuditCTASection />
       <Footer />
     </div>
   );

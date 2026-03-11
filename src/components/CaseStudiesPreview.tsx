@@ -1,7 +1,7 @@
 import SectionWrapper from "./SectionWrapper";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, TrendingUp } from "lucide-react";
+import { ArrowRight, TrendingUp, Phone } from "lucide-react";
 import { motion } from "framer-motion";
 
 const caseStudies = [
@@ -71,6 +71,33 @@ const CaseStudiesPreview = () => {
           </motion.div>
         ))}
       </div>
+
+      {/* CTA after case study metrics */}
+      <motion.div
+        className="mt-14 text-center"
+        initial={{ opacity: 0, y: 8 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.4 }}
+      >
+        <p className="text-muted-foreground mb-5">
+          Want results like these for your franchise?
+        </p>
+        <div className="flex flex-col sm:flex-row gap-3 justify-center">
+          <Button variant="gradient" size="lg" asChild>
+            <Link to="/free-audit">
+              See Your Growth Opportunities
+              <ArrowRight size={16} className="ml-1" />
+            </Link>
+          </Button>
+          <Button variant="secondary-pill" size="lg" asChild>
+            <Link to="/contact">
+              <Phone size={14} className="mr-1" />
+              Book a Strategy Call
+            </Link>
+          </Button>
+        </div>
+      </motion.div>
     </SectionWrapper>
   );
 };

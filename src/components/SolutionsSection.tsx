@@ -1,6 +1,7 @@
 import SectionWrapper from "./SectionWrapper";
 import { MapPin, Megaphone, Star, Share2, Search } from "lucide-react";
 import { motion } from "framer-motion";
+import InlineCTA from "./InlineCTA";
 
 const solutions = [
   {
@@ -61,6 +62,12 @@ const SolutionsSection = () => {
           </motion.div>
         ))}
       </div>
+
+      <InlineCTA
+        headline="See How These Solutions Work for Your Franchise"
+        description="Request a free marketing audit and we'll show you exactly which solutions will have the biggest impact on your local lead generation."
+        primaryLabel="Get Your Free Marketing Audit"
+      />
     </SectionWrapper>
   );
 };
