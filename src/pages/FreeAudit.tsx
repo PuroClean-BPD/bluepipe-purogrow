@@ -17,20 +17,20 @@ const FreeAudit = () => {
   return (
     <div className="min-h-screen">
       <Navbar />
-      <section className="section-dark pt-32 pb-20 lg:pt-40 lg:pb-28">
+      <section className="section-dark pt-32 pb-24 lg:pt-40 lg:pb-32">
         <div className="container-main">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
             <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
-              <p className="text-sm font-medium text-primary mb-3">Free Marketing Audit</p>
-              <h1 className="text-4xl lg:text-5xl font-bold text-dark-surface-foreground mb-6">
+              <p className="section-label">Free Marketing Audit</p>
+              <h1 className="font-bold mb-6" style={{ color: 'hsl(var(--dark-surface-foreground))' }}>
                 Discover How Your Franchise <span className="gradient-text">Stacks Up Online</span>
               </h1>
-              <p className="text-dark-surface-foreground/60 text-lg mb-8 max-w-lg">
+              <p className="section-description-dark mb-8 max-w-lg">
                 Get a comprehensive, no-obligation audit of your franchise's digital marketing presence. See exactly where you stand and where the opportunities are.
               </p>
-              <div className="space-y-3">
+              <div className="space-y-3.5">
                 {auditIncludes.map((item) => (
-                  <div key={item} className="flex items-center gap-3 text-dark-surface-foreground/80">
+                  <div key={item} className="flex items-center gap-3" style={{ color: 'hsl(var(--dark-surface-foreground) / 0.8)' }}>
                     <CheckCircle2 size={18} className="text-primary shrink-0" />
                     <span className="text-sm">{item}</span>
                   </div>
@@ -39,40 +39,41 @@ const FreeAudit = () => {
             </motion.div>
 
             <motion.div
-              className="bg-background rounded-2xl p-8 shadow-2xl"
+              className="bg-card rounded-2xl p-8 border border-border/60"
+              style={{ boxShadow: '0 20px 60px -15px rgba(0,0,0,0.3)' }}
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
             >
               <h2 className="text-xl font-bold text-foreground mb-6">Request Your Free Audit</h2>
-              <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
+              <form className="space-y-5" onSubmit={(e) => e.preventDefault()}>
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-foreground mb-1.5">First Name</label>
-                    <input className="w-full rounded-lg border border-border bg-background px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary" placeholder="John" />
+                    <label className="form-label text-foreground">First Name</label>
+                    <input className="form-input" placeholder="John" />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-foreground mb-1.5">Last Name</label>
-                    <input className="w-full rounded-lg border border-border bg-background px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary" placeholder="Smith" />
+                    <label className="form-label text-foreground">Last Name</label>
+                    <input className="form-input" placeholder="Smith" />
                   </div>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-foreground mb-1.5">Email</label>
-                  <input type="email" className="w-full rounded-lg border border-border bg-background px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary" placeholder="john@puroclean.com" />
+                  <label className="form-label text-foreground">Email</label>
+                  <input type="email" className="form-input" placeholder="john@puroclean.com" />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-foreground mb-1.5">Phone</label>
-                  <input type="tel" className="w-full rounded-lg border border-border bg-background px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary" placeholder="(555) 123-4567" />
+                  <label className="form-label text-foreground">Phone</label>
+                  <input type="tel" className="form-input" placeholder="(555) 123-4567" />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-foreground mb-1.5">Franchise Location</label>
-                  <input className="w-full rounded-lg border border-border bg-background px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary" placeholder="PuroClean of [Your City]" />
+                  <label className="form-label text-foreground">Franchise Location</label>
+                  <input className="form-input" placeholder="PuroClean of [Your City]" />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-foreground mb-1.5">Website URL (optional)</label>
-                  <input type="url" className="w-full rounded-lg border border-border bg-background px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary" placeholder="https://puroclean.com/your-location" />
+                  <label className="form-label text-foreground">Website URL (optional)</label>
+                  <input type="url" className="form-input" placeholder="https://puroclean.com/your-location" />
                 </div>
-                <Button variant="gradient" size="xl" className="w-full mt-2" type="submit">
+                <Button variant="gradient" size="xl" className="w-full mt-1" type="submit">
                   Get My Free Audit
                   <ArrowRight size={18} className="ml-1" />
                 </Button>

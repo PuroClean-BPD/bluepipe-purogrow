@@ -64,14 +64,14 @@ const Pricing = () => {
   return (
     <div className="min-h-screen">
       <Navbar />
-      <section className="section-dark pt-32 pb-16 lg:pt-40 lg:pb-20">
+      <section className="page-header">
         <div className="container-main text-center">
           <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
-            <p className="text-sm font-medium text-primary mb-3">Pricing</p>
-            <h1 className="text-4xl lg:text-5xl font-bold text-dark-surface-foreground mb-4">
+            <p className="section-label">Pricing</p>
+            <h1 className="font-bold mb-5" style={{ color: 'hsl(var(--dark-surface-foreground))' }}>
               Simple, Transparent Pricing
             </h1>
-            <p className="text-dark-surface-foreground/60 text-lg max-w-2xl mx-auto">
+            <p className="section-description-dark mx-auto">
               Choose the marketing system that fits your franchise. All plans include a dedicated account manager and transparent reporting.
             </p>
           </motion.div>
@@ -79,13 +79,13 @@ const Pricing = () => {
       </section>
 
       <SectionWrapper>
-        <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
+        <div className="grid md:grid-cols-3 gap-5 lg:gap-6">
           {plans.map((plan, i) => (
             <motion.div
               key={plan.name}
-              className={`rounded-2xl p-8 border ${
+              className={`rounded-2xl p-7 border transition-all duration-300 ${
                 plan.featured
-                  ? "border-primary shadow-[0_0_0_1px_hsl(var(--primary)),0_12px_40px_-12px_hsla(210,100%,50%,0.2)] relative"
+                  ? "border-primary shadow-[0_0_0_1px_hsl(var(--primary)),0_16px_48px_-12px_hsla(210,100%,50%,0.2)] relative bg-card"
                   : "card-elevated"
               }`}
               initial={{ opacity: 0, y: 8 }}
@@ -94,7 +94,7 @@ const Pricing = () => {
               transition={{ duration: 0.4, delay: i * 0.1 }}
             >
               {plan.featured && (
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-primary text-primary-foreground text-xs font-medium">
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-primary text-primary-foreground text-xs font-semibold">
                   Most Popular
                 </div>
               )}
@@ -103,12 +103,12 @@ const Pricing = () => {
                 <span className="text-4xl font-bold text-foreground">{plan.price}</span>
                 <span className="text-muted-foreground text-sm">{plan.period}</span>
               </div>
-              <p className="text-sm text-muted-foreground mb-6">{plan.description}</p>
+              <p className="text-sm text-muted-foreground mb-7 leading-relaxed">{plan.description}</p>
 
               <Button
                 variant={plan.featured ? "gradient" : "secondary-pill"}
                 size="lg"
-                className="w-full mb-6"
+                className="w-full mb-7"
                 asChild
               >
                 <Link to="/free-audit">

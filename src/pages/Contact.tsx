@@ -8,23 +8,23 @@ const Contact = () => {
   return (
     <div className="min-h-screen">
       <Navbar />
-      <section className="section-dark pt-32 pb-16 lg:pt-40 lg:pb-20">
+      <section className="page-header">
         <div className="container-main">
           <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="max-w-2xl">
-            <p className="text-sm font-medium text-primary mb-3">Contact Us</p>
-            <h1 className="text-4xl lg:text-5xl font-bold text-dark-surface-foreground mb-4">
+            <p className="section-label">Contact Us</p>
+            <h1 className="font-bold mb-5" style={{ color: 'hsl(var(--dark-surface-foreground))' }}>
               Let's Talk About Growing Your Franchise
             </h1>
-            <p className="text-dark-surface-foreground/60 text-lg">
+            <p className="section-description-dark">
               Ready to take the next step? Reach out and we'll schedule a strategy call to discuss how BluePipe Digital can help your PuroClean franchise generate more leads.
             </p>
           </motion.div>
         </div>
       </section>
 
-      <section className="section-light py-20 lg:py-28">
+      <section className="section-light py-24 lg:py-32">
         <div className="container-main">
-          <div className="grid lg:grid-cols-5 gap-12 lg:gap-20">
+          <div className="grid lg:grid-cols-5 gap-12 lg:gap-16">
             <div className="lg:col-span-3">
               <motion.div
                 className="card-elevated p-8"
@@ -34,28 +34,28 @@ const Contact = () => {
                 transition={{ duration: 0.4 }}
               >
                 <h2 className="text-xl font-bold text-foreground mb-6">Send Us a Message</h2>
-                <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
+                <form className="space-y-5" onSubmit={(e) => e.preventDefault()}>
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-sm font-medium text-foreground mb-1.5">First Name</label>
-                      <input className="w-full rounded-lg border border-border bg-background px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary" placeholder="John" />
+                      <label className="form-label text-foreground">First Name</label>
+                      <input className="form-input" placeholder="John" />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-foreground mb-1.5">Last Name</label>
-                      <input className="w-full rounded-lg border border-border bg-background px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary" placeholder="Smith" />
+                      <label className="form-label text-foreground">Last Name</label>
+                      <input className="form-input" placeholder="Smith" />
                     </div>
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-foreground mb-1.5">Email</label>
-                    <input type="email" className="w-full rounded-lg border border-border bg-background px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary" placeholder="john@puroclean.com" />
+                    <label className="form-label text-foreground">Email</label>
+                    <input type="email" className="form-input" placeholder="john@puroclean.com" />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-foreground mb-1.5">Phone</label>
-                    <input type="tel" className="w-full rounded-lg border border-border bg-background px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary" placeholder="(555) 123-4567" />
+                    <label className="form-label text-foreground">Phone</label>
+                    <input type="tel" className="form-input" placeholder="(555) 123-4567" />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-foreground mb-1.5">How can we help?</label>
-                    <textarea rows={4} className="w-full rounded-lg border border-border bg-background px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary resize-none" placeholder="Tell us about your franchise and marketing goals..." />
+                    <label className="form-label text-foreground">How can we help?</label>
+                    <textarea rows={4} className="form-input resize-none" placeholder="Tell us about your franchise and marketing goals..." />
                   </div>
                   <Button variant="gradient" size="xl" className="w-full" type="submit">
                     Send Message
@@ -65,42 +65,30 @@ const Contact = () => {
               </motion.div>
             </div>
 
-            <div className="lg:col-span-2 space-y-8">
+            <div className="lg:col-span-2 space-y-6">
               <motion.div
                 initial={{ opacity: 0, y: 8 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: 0.1 }}
               >
-                <h3 className="text-lg font-semibold text-foreground mb-4">Get in Touch</h3>
-                <div className="space-y-4">
-                  <div className="flex items-start gap-3">
-                    <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
-                      <Mail size={18} className="text-primary" />
+                <h3 className="text-lg font-semibold text-foreground mb-5">Get in Touch</h3>
+                <div className="space-y-5">
+                  {[
+                    { icon: Mail, label: "Email", value: "hello@bluepipedigital.com" },
+                    { icon: Phone, label: "Phone", value: "(555) 123-4567" },
+                    { icon: MapPin, label: "Office", value: "United States" },
+                  ].map((item) => (
+                    <div key={item.label} className="flex items-start gap-4">
+                      <div className="icon-box-sm">
+                        <item.icon size={18} className="text-primary" />
+                      </div>
+                      <div>
+                        <p className="text-sm font-medium text-foreground">{item.label}</p>
+                        <p className="text-sm text-muted-foreground">{item.value}</p>
+                      </div>
                     </div>
-                    <div>
-                      <p className="text-sm font-medium text-foreground">Email</p>
-                      <p className="text-sm text-muted-foreground">hello@bluepipedigital.com</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
-                      <Phone size={18} className="text-primary" />
-                    </div>
-                    <div>
-                      <p className="text-sm font-medium text-foreground">Phone</p>
-                      <p className="text-sm text-muted-foreground">(555) 123-4567</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
-                      <MapPin size={18} className="text-primary" />
-                    </div>
-                    <div>
-                      <p className="text-sm font-medium text-foreground">Office</p>
-                      <p className="text-sm text-muted-foreground">United States</p>
-                    </div>
-                  </div>
+                  ))}
                 </div>
               </motion.div>
 
@@ -112,7 +100,7 @@ const Contact = () => {
                 transition={{ duration: 0.4, delay: 0.2 }}
               >
                 <h3 className="font-semibold text-foreground mb-2">Prefer a Call?</h3>
-                <p className="text-sm text-muted-foreground mb-4">
+                <p className="text-sm text-muted-foreground mb-5 leading-relaxed">
                   Schedule a free 30-minute strategy call to discuss your franchise's marketing goals.
                 </p>
                 <Button variant="secondary-pill" size="lg" className="w-full">

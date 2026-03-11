@@ -54,21 +54,21 @@ const Newsletter = () => {
   return (
     <div className="min-h-screen">
       <Navbar />
-      <section className="section-dark pt-32 pb-16 lg:pt-40 lg:pb-20">
+      <section className="page-header">
         <div className="container-main">
           <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
-            <p className="text-sm font-medium text-primary mb-3">Newsletter</p>
-            <h1 className="text-4xl lg:text-5xl font-bold text-dark-surface-foreground mb-4">
+            <p className="section-label">Newsletter</p>
+            <h1 className="font-bold mb-5" style={{ color: 'hsl(var(--dark-surface-foreground))' }}>
               Marketing Insights for Franchise Growth
             </h1>
-            <p className="text-dark-surface-foreground/60 text-lg max-w-2xl mb-8">
+            <p className="section-description-dark mb-8">
               Weekly tips, strategies, and industry insights designed specifically for PuroClean franchise owners who want to grow their businesses.
             </p>
             <form className="flex flex-col sm:flex-row gap-3 max-w-md" onSubmit={(e) => e.preventDefault()}>
               <input
                 type="email"
                 placeholder="Enter your email"
-                className="flex-1 rounded-lg bg-dark-surface-foreground/10 border border-dark-surface-foreground/20 px-4 py-3 text-sm text-dark-surface-foreground placeholder:text-dark-surface-foreground/40 focus:outline-none focus:ring-2 focus:ring-primary/30"
+                className="form-input-dark flex-1"
               />
               <Button variant="gradient" size="lg" type="submit">
                 <Mail size={16} className="mr-1" />
@@ -80,23 +80,24 @@ const Newsletter = () => {
       </section>
 
       <SectionWrapper>
-        <h2 className="text-2xl font-bold text-foreground mb-8">Latest Articles</h2>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="flex items-end justify-between mb-10">
+          <h2 className="font-bold text-foreground">Latest Articles</h2>
+        </div>
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
           {articles.map((article, i) => (
             <motion.article
               key={article.title}
-              className="card-elevated p-6 cursor-pointer"
+              className="card-elevated p-6 cursor-pointer group"
               initial={{ opacity: 0, y: 8 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: i * 0.05 }}
             >
               <div className="flex items-center gap-2 mb-4">
-                <article.icon size={16} className="text-primary" />
-                <span className="text-xs font-medium text-primary">{article.category}</span>
+                <span className="tag">{article.category}</span>
                 <span className="text-xs text-muted-foreground ml-auto">{article.date}</span>
               </div>
-              <h3 className="font-semibold text-foreground mb-2 leading-snug">{article.title}</h3>
+              <h3 className="font-semibold text-foreground mb-2.5 leading-snug group-hover:text-primary transition-colors">{article.title}</h3>
               <p className="text-sm text-muted-foreground leading-relaxed">{article.preview}</p>
             </motion.article>
           ))}

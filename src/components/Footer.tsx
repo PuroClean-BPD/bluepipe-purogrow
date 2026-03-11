@@ -23,32 +23,33 @@ const footerLinks = {
 
 const Footer = () => {
   return (
-    <footer className="section-dark border-t border-dark-surface-foreground/10">
+    <footer className="section-dark" style={{ borderTop: '1px solid hsl(var(--dark-surface-foreground) / 0.08)' }}>
       <div className="container-main py-16 lg:py-20">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 lg:gap-12">
           <div className="col-span-2 md:col-span-1">
-            <Link to="/" className="flex items-center gap-2 mb-4">
+            <Link to="/" className="flex items-center gap-2.5 mb-5">
               <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-[hsl(230,100%,65%)] flex items-center justify-center">
                 <span className="text-primary-foreground font-bold text-sm">BP</span>
               </div>
-              <span className="text-dark-surface-foreground font-bold text-lg tracking-tight">
-                BluePipe <span className="font-normal opacity-70">Digital</span>
+              <span className="font-bold text-lg tracking-tight" style={{ color: 'hsl(var(--dark-surface-foreground))' }}>
+                BluePipe <span className="font-normal opacity-60">Digital</span>
               </span>
             </Link>
-            <p className="text-dark-surface-foreground/60 text-sm max-w-xs">
+            <p className="text-sm max-w-xs leading-relaxed" style={{ color: 'hsl(var(--dark-surface-foreground) / 0.5)' }}>
               The official digital marketing partner for PuroClean franchise owners.
             </p>
           </div>
 
           {Object.entries(footerLinks).map(([category, links]) => (
             <div key={category}>
-              <h4 className="text-dark-surface-foreground font-semibold text-sm mb-4">{category}</h4>
+              <h4 className="text-sm font-semibold mb-4" style={{ color: 'hsl(var(--dark-surface-foreground))' }}>{category}</h4>
               <ul className="space-y-3">
                 {links.map((link) => (
                   <li key={link.label}>
                     <Link
                       to={link.href}
-                      className="text-dark-surface-foreground/60 hover:text-dark-surface-foreground text-sm transition-colors"
+                      className="text-sm transition-colors hover:text-[hsl(var(--dark-surface-foreground))]"
+                      style={{ color: 'hsl(var(--dark-surface-foreground) / 0.5)' }}
                     >
                       {link.label}
                     </Link>
@@ -59,11 +60,11 @@ const Footer = () => {
           ))}
         </div>
 
-        <div className="border-t border-dark-surface-foreground/10 mt-12 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-dark-surface-foreground/40 text-sm">
+        <div className="mt-14 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4" style={{ borderTop: '1px solid hsl(var(--dark-surface-foreground) / 0.08)' }}>
+          <p className="text-sm" style={{ color: 'hsl(var(--dark-surface-foreground) / 0.35)' }}>
             © {new Date().getFullYear()} BluePipe Digital. All rights reserved.
           </p>
-          <p className="text-dark-surface-foreground/40 text-sm">
+          <p className="text-sm" style={{ color: 'hsl(var(--dark-surface-foreground) / 0.35)' }}>
             Official Marketing Partner of PuroClean
           </p>
         </div>
