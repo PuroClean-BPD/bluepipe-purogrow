@@ -1,6 +1,7 @@
 import SectionWrapper from "./SectionWrapper";
 import { Shield, Zap, Users, HeadphonesIcon, BarChart, Award } from "lucide-react";
 import { motion } from "framer-motion";
+import InlineCTA from "./InlineCTA";
 
 const reasons = [
   { icon: Shield, title: "Official PuroClean Partner", desc: "The only marketing company built with PuroClean's endorsement." },
@@ -41,6 +42,14 @@ const WhyChooseSection = () => {
           </motion.div>
         ))}
       </div>
+
+      <InlineCTA
+        variant="dark"
+        headline="Ready to Experience the Difference?"
+        description="Join 250+ franchise owners already growing with BluePipe Digital. Start with a free audit."
+        primaryLabel="Get Your Free Marketing Audit"
+        secondaryLabel="Book a Strategy Call"
+      />
     </SectionWrapper>
   );
 };

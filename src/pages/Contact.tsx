@@ -1,8 +1,10 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import AuditCTASection from "@/components/AuditCTASection";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { Mail, Phone, MapPin, ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Contact = () => {
   return (
@@ -97,6 +99,25 @@ const Contact = () => {
                 initial={{ opacity: 0, y: 8 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: 0.15 }}
+              >
+                <h3 className="font-semibold text-foreground mb-2">Want a Free Audit Instead?</h3>
+                <p className="text-sm text-muted-foreground mb-5 leading-relaxed">
+                  See exactly where your franchise stands online with a comprehensive, no-obligation marketing audit.
+                </p>
+                <Button variant="gradient" size="lg" className="w-full" asChild>
+                  <Link to="/free-audit">
+                    Get Your Free Marketing Audit
+                    <ArrowRight size={16} className="ml-1" />
+                  </Link>
+                </Button>
+              </motion.div>
+
+              <motion.div
+                className="card-elevated p-6"
+                initial={{ opacity: 0, y: 8 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: 0.2 }}
               >
                 <h3 className="font-semibold text-foreground mb-2">Prefer a Call?</h3>
@@ -104,6 +125,7 @@ const Contact = () => {
                   Schedule a free 30-minute strategy call to discuss your franchise's marketing goals.
                 </p>
                 <Button variant="secondary-pill" size="lg" className="w-full">
+                  <Phone size={14} className="mr-1" />
                   Book a Strategy Call
                 </Button>
               </motion.div>
