@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-import { ArrowRight, Play, CheckCircle2 } from "lucide-react";
+import { ArrowRight, Play, CheckCircle2, Shield, MapPin, Users, Wrench } from "lucide-react";
 
 const HeroSection = () => {
   return (
@@ -56,8 +56,8 @@ const HeroSection = () => {
             </Button>
           </div>
 
-          {/* Trust signals */}
-          <div className="flex flex-wrap items-center gap-x-6 gap-y-2 mt-10 justify-center lg:justify-start">
+          {/* Quick trust signals */}
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-2 mt-8 justify-center lg:justify-start">
             {["No contracts required", "Results in 30 days", "Franchise-specific strategies"].map((item) => (
               <div key={item} className="flex items-center gap-2">
                 <CheckCircle2 size={15} style={{ color: 'hsl(var(--dark-surface-foreground) / 0.4)' }} />
@@ -65,6 +65,37 @@ const HeroSection = () => {
               </div>
             ))}
           </div>
+
+          {/* Credibility proof strip */}
+          <motion.div
+            className="mt-12 pt-10 border-t"
+            style={{ borderColor: 'hsl(var(--dark-surface-foreground) / 0.08)' }}
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4, ease: [0.25, 0.1, 0.25, 1.0] }}
+          >
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+              {[
+                { icon: Shield, text: "Strategic Digital Marketing Partner for PuroClean" },
+                { icon: Wrench, text: "Built Specifically for Restoration Companies" },
+                { icon: MapPin, text: "Local Search & Lead Generation Specialists" },
+                { icon: Users, text: "Trusted by Franchise Owners" },
+              ].map(({ icon: Icon, text }) => (
+                <div
+                  key={text}
+                  className="flex items-start gap-3 px-4 py-3.5 rounded-xl"
+                  style={{ background: 'hsl(var(--dark-surface-foreground) / 0.03)', border: '1px solid hsl(var(--dark-surface-foreground) / 0.06)' }}
+                >
+                  <div className="mt-0.5 shrink-0 w-7 h-7 rounded-lg flex items-center justify-center" style={{ background: 'hsl(var(--primary) / 0.1)' }}>
+                    <Icon size={14} style={{ color: 'hsl(var(--primary))' }} />
+                  </div>
+                  <span className="text-xs font-medium leading-snug" style={{ color: 'hsl(var(--dark-surface-foreground) / 0.6)' }}>
+                    {text}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </motion.div>
         </motion.div>
       </div>
     </section>
