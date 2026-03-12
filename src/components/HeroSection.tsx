@@ -33,7 +33,7 @@ const HeroSection = () => {
           
           <h1 className="font-bold leading-[1.06] mb-6">
             <span style={{ color: 'hsl(var(--primary))' }}>Digital Marketing Built for</span>{" "}
-            <span style={{ color: '#d12229' }}>PuroClean</span>{" "}
+            <span className="font-extrabold" style={{ color: '#d12229' }}>PuroClean</span>{" "}
             <span style={{ color: 'hsl(var(--dark-surface-foreground))' }}>Franchise Growth</span>
           </h1>
           
