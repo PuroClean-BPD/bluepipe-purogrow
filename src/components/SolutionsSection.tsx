@@ -75,7 +75,7 @@ const SolutionsSection = () => {
         <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-4">
           Built to Support PuroClean Franchise Growth
         </p>
-        <img src={purocleanLogo} alt="PuroClean – The Paramedics of Property Damage" className="h-10 lg:h-12 w-auto" />
+        <img src={purocleanLogo} alt="PuroClean – The Paramedics of Property Damage" className="h-14 lg:h-16 w-auto" />
       </motion.div>
 
       <InlineCTA
