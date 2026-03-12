@@ -2,6 +2,8 @@ import { useState, useRef, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X, ChevronDown } from "lucide-react";
+import bluepipeLogo from "@/assets/bluepipe-logo.png";
+import { Menu, X, ChevronDown } from "lucide-react";
 
 const navLinks = [
   { label: "Case Studies", href: "/case-studies" },
