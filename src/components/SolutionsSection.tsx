@@ -2,6 +2,7 @@ import SectionWrapper from "./SectionWrapper";
 import { MapPin, Megaphone, Star, Share2, Search } from "lucide-react";
 import { motion } from "framer-motion";
 import InlineCTA from "./InlineCTA";
+import purocleanLogo from "@/assets/puroclean-logo.png";
 
 const solutions = [
   {
