@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-import { ArrowRight, Play, CheckCircle2 } from "lucide-react";
+import { ArrowRight, Play, CheckCircle2, Shield, MapPin, Users, Wrench } from "lucide-react";
 
 const HeroSection = () => {
   return (
