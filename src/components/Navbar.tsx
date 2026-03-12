@@ -39,13 +39,8 @@ const Navbar = () => {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl" style={{ background: 'hsl(var(--dark-surface) / 0.92)', borderBottom: '1px solid hsl(var(--dark-surface-foreground) / 0.08)' }}>
       <div className="container-main flex items-center justify-between h-16 lg:h-[72px]">
-        <Link to="/" className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-[hsl(230,100%,65%)] flex items-center justify-center">
-            <span className="text-primary-foreground font-bold text-sm">BP</span>
-          </div>
-          <span className="font-bold text-lg tracking-tight" style={{ color: 'hsl(var(--dark-surface-foreground))' }}>
-            BluePipe <span className="font-normal opacity-60">Digital</span>
-          </span>
+        <Link to="/" className="flex items-center">
+          <img src={bluepipeLogo} alt="BluePipe Digital" className="h-8 lg:h-9 w-auto" />
         </Link>
 
         {/* Desktop */}
