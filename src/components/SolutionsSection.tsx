@@ -64,6 +64,20 @@ const SolutionsSection = () => {
         ))}
       </div>
 
+      {/* PuroClean partnership badge */}
+      <motion.div
+        className="flex flex-col items-center mt-14"
+        initial={{ opacity: 0, y: 10 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5, delay: 0.3 }}
+      >
+        <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-4">
+          Built to Support PuroClean Franchise Growth
+        </p>
+        <img src={purocleanLogo} alt="PuroClean – The Paramedics of Property Damage" className="h-10 lg:h-12 w-auto" />
+      </motion.div>
+
       <InlineCTA
         headline="See How These Solutions Work for Your Franchise"
         description="Request a free marketing audit and we'll show you exactly which solutions will have the biggest impact on your local lead generation."
