@@ -58,7 +58,7 @@ const HeroSection = () => {
 
           {/* Quick trust signals */}
           <div className="flex flex-wrap items-center gap-x-6 gap-y-2 mt-8 justify-center lg:justify-start">
-            {["No contracts required", "Results in 30 days", "Franchise-specific strategies"].map((item) => (
+            {["Strategic Digital Marketing Partner for PuroClean", "Results in 30 days", "Franchise-specific strategies"].map((item) => (
               <div key={item} className="flex items-center gap-2">
                 <CheckCircle2 size={15} style={{ color: 'hsl(var(--dark-surface-foreground) / 0.4)' }} />
                 <span className="text-sm" style={{ color: 'hsl(var(--dark-surface-foreground) / 0.5)' }}>{item}</span>
