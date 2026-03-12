@@ -31,9 +31,10 @@ const HeroSection = () => {
             <span className="text-sm font-medium" style={{ color: 'hsl(var(--primary))' }}>Official PuroClean Marketing Partner</span>
           </div>
           
-          <h1 className="font-bold leading-[1.06] mb-6" style={{ color: 'hsl(var(--dark-surface-foreground))' }}>
-            Digital Marketing Built for{" "}
-            <span className="gradient-text">PuroClean Franchise Growth</span>
+          <h1 className="font-bold leading-[1.06] mb-6">
+            <span style={{ color: 'hsl(var(--primary))' }}>Digital Marketing Built for</span>{" "}
+            <span style={{ color: '#d12229' }}>PuroClean</span>{" "}
+            <span style={{ color: 'hsl(var(--dark-surface-foreground))' }}>Franchise Growth</span>
           </h1>
           
           <p className="text-lg lg:text-xl leading-relaxed max-w-2xl mb-10" style={{ color: 'hsl(var(--dark-surface-foreground) / 0.65)' }}>
