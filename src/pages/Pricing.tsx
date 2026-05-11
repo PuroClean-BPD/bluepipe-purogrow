@@ -152,7 +152,7 @@ const Pricing = () => {
         </div>
 
         {/* Pricing cards */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-6xl mx-auto">
           {seoTiers.map((tier, i) => (
             <motion.div
               key={tier.name}
