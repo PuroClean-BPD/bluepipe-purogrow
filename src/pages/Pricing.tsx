@@ -24,6 +24,9 @@ import {
   TrendingUp,
   Target,
   DollarSign,
+  Rocket,
+  Users,
+  Building2,
 } from "lucide-react";
 
 /* ─── SEO TIER DATA ─── */
