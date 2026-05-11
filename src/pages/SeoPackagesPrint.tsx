@@ -118,7 +118,7 @@ const SeoPackagesPrint = () => {
     <>
       {/* Print-specific styles — tuned for landscape US Letter, exactly 2 pages */}
       <style>{`
-        @page { size: 11in 8.5in; margin: 0.3in; }
+        @page { size: 11in 8.5in; margin: 0.25in; }
         @media print {
           html, body { background: white !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
           .no-print { display: none !important; }
@@ -127,8 +127,8 @@ const SeoPackagesPrint = () => {
             break-after: page;
             page-break-inside: avoid;
             break-inside: avoid;
-            height: 7.9in;
-            max-height: 7.9in;
+            height: 8in;
+            max-height: 8in;
             overflow: hidden;
           }
           .print-page:last-child { page-break-after: auto; break-after: auto; }
