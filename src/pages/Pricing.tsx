@@ -97,18 +97,18 @@ const comparisonRows: {
   icon: React.ElementType;
   values: (string | boolean)[];
 }[] = [
-  { label: "GBP Optimization", icon: Globe, values: [true, true, true, true] },
-  { label: "Reputation Management", icon: Star, values: [true, true, true, true] },
-  { label: "Citation Building", icon: Link2, values: [true, true, true, true] },
-  { label: "Monthly Profile Updates", icon: FileText, values: [true, true, true, true] },
-  { label: "SEO Keywords Targeted", icon: Search, values: ["—", "5", "10", "15"] },
-  { label: "On-Page Optimization", icon: MapPin, values: [false, true, true, true] },
-  { label: "Local Schema Implementation", icon: Globe, values: [false, true, true, true] },
-  { label: "Geo-Focused Content", icon: MapPin, values: [false, "Standard", "Advanced", "High-Frequency"] },
-  { label: "Backlink Authority Building", icon: Link2, values: [false, "Standard", "Higher", "Aggressive"] },
-  { label: "Press Releases", icon: Megaphone, values: [false, false, "Semi-Annual", "Quarterly"] },
-  { label: "Build Fee (one-time)", icon: DollarSign, values: ["$400", "$500", "$500", "$500"] },
-  { label: "Monthly Management", icon: BarChart3, values: ["$300/mo", "$750/mo", "$1,350/mo", "$2,250/mo"] },
+  { label: "GBP Optimization", icon: Globe, values: [true, true, true] },
+  { label: "Reputation Management", icon: Star, values: [true, true, true] },
+  { label: "Citation Building", icon: Link2, values: [true, true, true] },
+  { label: "Monthly Profile Updates", icon: FileText, values: [true, true, true] },
+  { label: "SEO Keywords Targeted", icon: Search, values: ["5", "10", "15"] },
+  { label: "On-Page Optimization", icon: MapPin, values: [true, true, true] },
+  { label: "Local Schema Implementation", icon: Globe, values: [true, true, true] },
+  { label: "Geo-Focused Content", icon: MapPin, values: ["Standard", "Advanced", "High-Frequency"] },
+  { label: "Backlink Authority Building", icon: Link2, values: ["Standard", "Higher", "Aggressive"] },
+  { label: "Press Releases", icon: Megaphone, values: [false, "Semi-Annual", "Quarterly"] },
+  { label: "Build Fee (one-time)", icon: DollarSign, values: ["$500", "$500", "$500"] },
+  { label: "Monthly Management", icon: BarChart3, values: ["$750/mo", "$1,350/mo", "$2,250/mo"] },
 ];
 
 const fmt = (n: number) => `$${n.toLocaleString()}`;
