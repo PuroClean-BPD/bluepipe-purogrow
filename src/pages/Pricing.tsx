@@ -39,8 +39,8 @@ const seoTiers = [
     name: "Builder SEO",
     tagline: "Targeted local growth",
     buildFee: 500,
-    monthly: 750,
-    firstMonth: 1250,
+    monthly: 850,
+    firstMonth: 1350,
     features: [
       "Full Google Business Profile optimization",
       "Reputation management system",
@@ -122,7 +122,7 @@ const comparisonRows: {
     values: [false, "1 City (up to 50K pop.)", "Up to 3 Cities (150K total pop.)"],
   },
   { label: "Build Fee (one-time)", icon: DollarSign, values: ["$500", "$500", "$500"] },
-  { label: "Monthly Management", icon: BarChart3, values: ["$750/mo", "$1,350/mo", "$2,250/mo"] },
+  { label: "Monthly Management", icon: BarChart3, values: ["$850/mo", "$1,350/mo", "$2,250/mo"] },
 ];
 
 const fmt = (n: number) => `$${n.toLocaleString()}`;
