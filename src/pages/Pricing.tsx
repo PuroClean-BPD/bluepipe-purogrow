@@ -27,6 +27,10 @@ import {
   Rocket,
   Users,
   Building2,
+  Sparkles,
+  ArrowDown,
+  Compass,
+  Zap,
 } from "lucide-react";
 
 /* ─── SEO TIER DATA ─── */
