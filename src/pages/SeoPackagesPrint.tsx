@@ -171,21 +171,21 @@ const SeoPackagesPrint = () => {
           <div className="absolute -top-32 -right-32 w-80 h-80 rounded-full bg-primary/20 blur-3xl pointer-events-none" />
           <div className="absolute -bottom-32 -left-32 w-80 h-80 rounded-full bg-blue-600/15 blur-3xl pointer-events-none" />
 
-          <div className="relative max-w-[1400px] mx-auto px-7 py-3">
+          <div className="relative max-w-[1400px] mx-auto px-8 py-5">
             {/* Header */}
-            <div className="flex items-start justify-between mb-2">
+            <div className="flex items-start justify-between mb-4">
               <div className="max-w-3xl">
-                <div className="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full bg-white/10 border border-white/15 mb-1.5">
+                <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-white/10 border border-white/15 mb-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-primary" />
-                  <span className="text-[9px] tracking-[0.18em] font-semibold text-white/80 uppercase">
+                  <span className="text-[10px] tracking-[0.18em] font-semibold text-white/80 uppercase">
                     Strategic Digital Marketing Solutions for PuroClean Franchises
                   </span>
                 </div>
-                <h1 className="text-white font-bold leading-[1.05] text-[1.7rem]">
+                <h1 className="text-white font-bold leading-[1.05] text-[2rem]">
                   Local Visibility &amp; <span className="gradient-text">Growth Solutions</span> for{" "}
                   <span style={{ color: PURO_RED }}>PuroClean</span> Franchise Owners
                 </h1>
-                <p className="mt-1.5 text-white/65 text-[12px] max-w-3xl leading-snug">
+                <p className="mt-2 text-white/65 text-[13px] max-w-3xl leading-snug">
                   BluePipe Digital helps PuroClean franchise owners increase local visibility, generate more
                   qualified restoration leads, and expand market authority using proven digital marketing systems.
                 </p>
@@ -201,123 +201,195 @@ const SeoPackagesPrint = () => {
             </div>
 
             {/* Pricing cards */}
-            <div className="grid grid-cols-3 gap-3 mt-1">
+            <div className="grid grid-cols-3 gap-4 mt-2">
               {seoPackages.map((pkg) => (
                 <div
                   key={pkg.name}
-                  className={`relative rounded-xl p-3 flex flex-col ${
+                  className={`relative rounded-xl p-4 flex flex-col ${
                     pkg.featured
                       ? "bg-gradient-to-br from-primary/20 via-blue-600/10 to-transparent border-2 border-primary/60 shadow-[0_0_30px_-10px_hsl(var(--primary)/0.6)]"
                       : "bg-white/[0.04] border border-white/10"
                   }`}
                 >
                   {pkg.featured && (
-                    <div className="absolute -top-2 left-1/2 -translate-x-1/2 px-2 py-0.5 rounded-full bg-gradient-to-r from-primary to-blue-500 text-white text-[9px] font-bold tracking-wider shadow-lg">
+                    <div className="absolute -top-2.5 left-1/2 -translate-x-1/2 px-2.5 py-0.5 rounded-full bg-gradient-to-r from-primary to-blue-500 text-white text-[10px] font-bold tracking-wider shadow-lg">
                       ★ MOST POPULAR
                     </div>
                   )}
-                  <div className="text-[9px] tracking-[0.18em] font-bold text-primary mb-0.5">
+                  <div className="text-[10px] tracking-[0.18em] font-bold text-primary mb-1">
                     {pkg.featured ? "AGGRESSIVE GROWTH" : pkg.label}
                   </div>
-                  <h3 className="text-white text-base font-bold">{pkg.name}</h3>
-                  <div className="mt-1 flex items-baseline gap-1">
-                    <span className="text-white text-2xl font-bold leading-none">${pkg.price}</span>
-                    <span className="text-white/50 text-xs">/month</span>
+                  <h3 className="text-white text-lg font-bold">{pkg.name}</h3>
+                  <div className="mt-1.5 flex items-baseline gap-1">
+                    <span className="text-white text-3xl font-bold leading-none">${pkg.price}</span>
+                    <span className="text-white/50 text-sm">/month</span>
                   </div>
-                  <div className="text-white/50 text-[10px] mt-0.5">{pkg.setup}</div>
-                  <div className="mt-1 inline-flex items-center gap-1 px-1.5 py-0.5 rounded bg-white/5 border border-white/10 w-fit">
-                    <span className="text-white/60 text-[9px]">First month:</span>
-                    <span className="text-white text-[10px] font-bold">{pkg.firstMonth}</span>
+                  <div className="text-white/50 text-[11px] mt-1">{pkg.setup}</div>
+                  <div className="mt-1.5 inline-flex items-center gap-1 px-2 py-0.5 rounded bg-white/5 border border-white/10 w-fit">
+                    <span className="text-white/60 text-[10px]">First month:</span>
+                    <span className="text-white text-[11px] font-bold">{pkg.firstMonth}</span>
                   </div>
 
-                  <ul className="mt-2 space-y-1 flex-1">
+                  <ul className="mt-3 space-y-1.5 flex-1">
                     {pkg.features.map((f) => (
-                      <li key={f} className="flex items-start gap-1.5">
-                        <Check className="w-3 h-3 text-primary mt-[3px] shrink-0" strokeWidth={3} />
-                        <span className="text-white/85 text-[10.5px] leading-tight">{f}</span>
+                      <li key={f} className="flex items-start gap-2">
+                        <Check className="w-3.5 h-3.5 text-primary mt-[3px] shrink-0" strokeWidth={3} />
+                        <span className="text-white/85 text-[11.5px] leading-snug">{f}</span>
                       </li>
                     ))}
                   </ul>
 
-                  <div className="mt-2 pt-1.5 border-t border-white/10">
-                    <div className="text-[8.5px] tracking-wider font-semibold text-white/40 uppercase">
+                  <div className="mt-3 pt-2 border-t border-white/10">
+                    <div className="text-[9px] tracking-wider font-semibold text-white/40 uppercase mb-0.5">
                       Best for
                     </div>
-                    <p className="text-white/70 text-[10px] leading-snug">{pkg.bestFor}</p>
+                    <p className="text-white/70 text-[10.5px] leading-snug">{pkg.bestFor}</p>
                   </div>
                 </div>
               ))}
             </div>
 
-            {/* Comparison table */}
-            <div className="mt-2">
-              <div className="flex items-end justify-between mb-1.5">
-                <div>
-                  <div className="text-[9px] tracking-[0.18em] font-bold text-primary uppercase">
-                    Side-by-Side Comparison
-                  </div>
-                  <h2 className="text-base font-bold text-white">Compare SEO Growth Packages</h2>
-                </div>
+            {/* CTA banner */}
+            <div className="mt-5 rounded-xl bg-gradient-to-r from-[hsl(var(--dark-surface))] via-primary/35 to-[hsl(var(--dark-surface))] p-4 flex items-center justify-between relative overflow-hidden border border-white/10">
+              <div className="absolute inset-0 opacity-10" style={{
+                backgroundImage: 'linear-gradient(to right, white 1px, transparent 1px)',
+                backgroundSize: '40px 40px',
+              }} />
+              <div className="relative">
+                <h3 className="text-white text-lg font-bold">Not Sure Which Package Fits Your Market?</h3>
+                <p className="text-white/75 text-[12px] mt-0.5">
+                  Schedule a complimentary marketing audit and we'll recommend the right growth strategy.
+                </p>
               </div>
-
-              <div className="rounded-xl border border-white/10 overflow-hidden bg-white">
-                <table className="w-full">
-                  <thead>
-                    <tr className="bg-gradient-to-r from-[hsl(var(--dark-surface))] to-[hsl(var(--dark-surface-muted))] text-white">
-                      <th className="text-left text-[10px] font-semibold tracking-wider uppercase px-3 py-1.5 w-[34%]">
-                        Feature
-                      </th>
-                      <th className="text-center text-[10px] font-semibold px-2 py-1.5">Builder SEO</th>
-                      <th className="text-center text-[10px] font-semibold px-2 py-1.5 bg-primary/30">
-                        Booster SEO ★
-                      </th>
-                      <th className="text-center text-[10px] font-semibold px-2 py-1.5">Dominator SEO</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {comparisonRows.map((row, i) => {
-                      const Icon = row.icon;
-                      return (
-                        <tr key={row.label} className={i % 2 === 0 ? "bg-white" : "bg-secondary/40"}>
-                          <td className="px-3 py-1">
-                            <div className="flex items-center gap-1.5">
-                              <div className="w-5 h-5 rounded bg-primary/10 flex items-center justify-center">
-                                <Icon className="w-2.5 h-2.5 text-primary" />
-                              </div>
-                              <span className="text-[11px] font-medium text-foreground">{row.label}</span>
-                            </div>
-                          </td>
-                          {row.values.map((v, j) => (
-                            <td
-                              key={j}
-                              className={`text-center px-2 py-1 ${j === 1 ? "bg-primary/[0.06]" : ""}`}
-                            >
-                              <Cell v={v} />
-                            </td>
-                          ))}
-                        </tr>
-                      );
-                    })}
-                    <tr className="bg-gradient-to-r from-secondary/60 to-secondary/30">
-                      <td className="px-3 py-1.5 text-[11px] font-bold text-foreground">First Month Total</td>
-                      <td className="text-center px-2 py-1.5 text-[11px] font-bold">$1,350</td>
-                      <td className="text-center px-2 py-1.5 text-[11px] font-bold bg-primary/10 text-primary">
-                        $1,850
-                      </td>
-                      <td className="text-center px-2 py-1.5 text-[11px] font-bold">$2,750</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
+              <Button variant="gradient" size="sm" asChild className="relative shrink-0">
+                <Link to="/free-audit">
+                  REQUEST A FREE AUDIT <ArrowRight className="ml-1.5 w-3.5 h-3.5" />
+                </Link>
+              </Button>
             </div>
 
             {/* Footer strip */}
-            <div className="mt-2 pt-1.5 border-t border-white/10 flex items-center justify-between text-white/40 text-[10px]">
+            <div className="mt-3 pt-2 border-t border-white/10 flex items-center justify-between text-white/40 text-[10px]">
               <div className="flex items-center gap-2">
                 <span style={{ color: PURO_RED }}>●</span>
                 <span>BluePipe Digital × PuroClean — Strategic Marketing Partner</span>
               </div>
-              <div>Page 1 of 2 · SEO Growth Packages</div>
+              <div>Page 1 of 3 · SEO Growth Packages</div>
+            </div>
+          </div>
+        </section>
+
+        {/* ============== PAGE 2 — Comparison Chart ============== */}
+        <section className="print-page section-dark relative overflow-hidden">
+          <div className="absolute inset-0 opacity-[0.05] pointer-events-none" style={{
+            backgroundImage: 'linear-gradient(to right, white 1px, transparent 1px), linear-gradient(to bottom, white 1px, transparent 1px)',
+            backgroundSize: '48px 48px',
+          }} />
+          <div className="absolute -top-32 -right-32 w-80 h-80 rounded-full bg-primary/20 blur-3xl pointer-events-none" />
+          <div className="absolute -bottom-32 -left-32 w-80 h-80 rounded-full bg-blue-600/15 blur-3xl pointer-events-none" />
+
+          <div className="relative max-w-[1400px] mx-auto px-8 py-5">
+            {/* Header */}
+            <div className="flex items-end justify-between mb-4">
+              <div className="max-w-3xl">
+                <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-primary/15 border border-primary/30 mb-2">
+                  <Star className="w-3 h-3 text-primary" />
+                  <span className="text-[10px] tracking-[0.18em] font-bold text-primary uppercase">
+                    Side-by-Side Comparison
+                  </span>
+                </div>
+                <h1 className="text-white font-bold leading-[1.05] text-[2rem]">
+                  Compare <span className="gradient-text">SEO Growth Packages</span>
+                </h1>
+                <p className="mt-2 text-white/65 text-[13px] max-w-3xl leading-snug">
+                  Find the right visibility and expansion strategy for your market goals. Each package
+                  scales from foundational local SEO to full multi-market dominance.
+                </p>
+              </div>
+              <div className="shrink-0 text-right">
+                <div className="text-white/40 text-[10px] tracking-wider uppercase">Powered by</div>
+                <div className="text-white font-bold">BluePipe Digital</div>
+              </div>
+            </div>
+
+            {/* Comparison table — full width, more spacious */}
+            <div className="rounded-2xl border border-white/10 overflow-hidden bg-white shadow-lg">
+              <table className="w-full">
+                <thead>
+                  <tr className="bg-gradient-to-r from-[hsl(var(--dark-surface))] to-[hsl(var(--dark-surface-muted))] text-white">
+                    <th className="text-left text-[11px] font-semibold tracking-wider uppercase px-5 py-3 w-[34%]">
+                      Feature
+                    </th>
+                    <th className="text-center text-[11px] font-semibold px-3 py-3">Builder SEO</th>
+                    <th className="text-center text-[11px] font-semibold px-3 py-3 bg-primary/30 relative">
+                      <div className="absolute top-0 inset-x-0 h-0.5 bg-gradient-to-r from-transparent via-primary to-transparent" />
+                      Booster SEO ★
+                    </th>
+                    <th className="text-center text-[11px] font-semibold px-3 py-3">Dominator SEO</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {comparisonRows.map((row, i) => {
+                    const Icon = row.icon;
+                    return (
+                      <tr key={row.label} className={i % 2 === 0 ? "bg-white" : "bg-secondary/40"}>
+                        <td className="px-5 py-2">
+                          <div className="flex items-center gap-2.5">
+                            <div className="w-7 h-7 rounded-lg bg-primary/10 flex items-center justify-center">
+                              <Icon className="w-3.5 h-3.5 text-primary" />
+                            </div>
+                            <span className="text-[12.5px] font-medium text-foreground">{row.label}</span>
+                          </div>
+                        </td>
+                        {row.values.map((v, j) => (
+                          <td
+                            key={j}
+                            className={`text-center px-3 py-2 ${j === 1 ? "bg-primary/[0.06]" : ""}`}
+                          >
+                            <Cell v={v} />
+                          </td>
+                        ))}
+                      </tr>
+                    );
+                  })}
+                  <tr className="bg-gradient-to-r from-secondary/60 to-secondary/30">
+                    <td className="px-5 py-3 text-[12.5px] font-bold text-foreground">First Month Total</td>
+                    <td className="text-center px-3 py-3 text-[12.5px] font-bold">$1,350</td>
+                    <td className="text-center px-3 py-3 text-[12.5px] font-bold bg-primary/10 text-primary">
+                      $1,850
+                    </td>
+                    <td className="text-center px-3 py-3 text-[12.5px] font-bold">$2,750</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            {/* CTA banner */}
+            <div className="mt-4 rounded-xl bg-gradient-to-r from-primary via-blue-600 to-primary p-3.5 flex items-center justify-between relative overflow-hidden">
+              <div className="absolute inset-0 opacity-15" style={{
+                backgroundImage: 'linear-gradient(to right, white 1px, transparent 1px)',
+                backgroundSize: '32px 32px',
+              }} />
+              <div className="relative">
+                <h3 className="text-white text-base font-bold">Ready to Grow Your Market Visibility?</h3>
+                <p className="text-white/85 text-[11px] mt-0.5">
+                  Schedule a complimentary marketing audit and discover where your next growth opportunities exist.
+                </p>
+              </div>
+              <Button variant="hero-secondary" size="sm" asChild className="relative shrink-0 bg-white text-primary hover:bg-white/90">
+                <Link to="/free-audit">
+                  REQUEST A FREE AUDIT <ArrowRight className="ml-1.5 w-3.5 h-3.5" />
+                </Link>
+              </Button>
+            </div>
+
+            {/* Footer */}
+            <div className="mt-3 pt-2 border-t border-white/10 flex items-center justify-between text-white/40 text-[10px]">
+              <div className="flex items-center gap-2">
+                <span style={{ color: PURO_RED }}>●</span>
+                <span>BluePipeDigital.com · Strategic Marketing Partner for PuroClean</span>
+              </div>
+              <div>Page 2 of 3 · Comparison Chart</div>
             </div>
           </div>
         </section>
