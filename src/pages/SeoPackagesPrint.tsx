@@ -118,7 +118,7 @@ const SeoPackagesPrint = () => {
     <>
       {/* Print-specific styles — tuned for landscape US Letter, exactly 2 pages */}
       <style>{`
-        @page { size: 11in 8.5in; margin: 0.3in; }
+        @page { size: 11in 8.5in; margin: 0.25in; }
         @media print {
           html, body { background: white !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
           .no-print { display: none !important; }
@@ -127,8 +127,8 @@ const SeoPackagesPrint = () => {
             break-after: page;
             page-break-inside: avoid;
             break-inside: avoid;
-            height: 7.9in;
-            max-height: 7.9in;
+            height: 8in;
+            max-height: 8in;
             overflow: hidden;
           }
           .print-page:last-child { page-break-after: auto; break-after: auto; }
@@ -171,9 +171,9 @@ const SeoPackagesPrint = () => {
           <div className="absolute -top-32 -right-32 w-80 h-80 rounded-full bg-primary/20 blur-3xl pointer-events-none" />
           <div className="absolute -bottom-32 -left-32 w-80 h-80 rounded-full bg-blue-600/15 blur-3xl pointer-events-none" />
 
-          <div className="relative max-w-[1400px] mx-auto px-8 py-5">
+          <div className="relative max-w-[1400px] mx-auto px-7 py-3">
             {/* Header */}
-            <div className="flex items-start justify-between mb-3">
+            <div className="flex items-start justify-between mb-2">
               <div className="max-w-3xl">
                 <div className="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full bg-white/10 border border-white/15 mb-1.5">
                   <span className="w-1.5 h-1.5 rounded-full bg-primary" />
@@ -201,11 +201,11 @@ const SeoPackagesPrint = () => {
             </div>
 
             {/* Pricing cards */}
-            <div className="grid grid-cols-3 gap-3 mt-2">
+            <div className="grid grid-cols-3 gap-3 mt-1">
               {seoPackages.map((pkg) => (
                 <div
                   key={pkg.name}
-                  className={`relative rounded-xl p-3.5 flex flex-col ${
+                  className={`relative rounded-xl p-3 flex flex-col ${
                     pkg.featured
                       ? "bg-gradient-to-br from-primary/20 via-blue-600/10 to-transparent border-2 border-primary/60 shadow-[0_0_30px_-10px_hsl(var(--primary)/0.6)]"
                       : "bg-white/[0.04] border border-white/10"
@@ -250,7 +250,7 @@ const SeoPackagesPrint = () => {
             </div>
 
             {/* Comparison table */}
-            <div className="mt-3">
+            <div className="mt-2">
               <div className="flex items-end justify-between mb-1.5">
                 <div>
                   <div className="text-[9px] tracking-[0.18em] font-bold text-primary uppercase">
@@ -331,9 +331,9 @@ const SeoPackagesPrint = () => {
           <div className="absolute -top-32 -left-32 w-80 h-80 rounded-full bg-primary/20 blur-3xl pointer-events-none" />
           <div className="absolute -bottom-32 -right-32 w-80 h-80 rounded-full bg-blue-600/15 blur-3xl pointer-events-none" />
 
-          <div className="relative max-w-[1400px] mx-auto px-8 py-5">
+          <div className="relative max-w-[1400px] mx-auto px-7 py-3">
             {/* Header */}
-            <div className="flex items-start justify-between mb-3">
+            <div className="flex items-start justify-between mb-2">
               <div className="max-w-3xl">
                 <div className="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full bg-primary/15 border border-primary/30 mb-1.5">
                   <Rocket className="w-3 h-3 text-primary" />
@@ -355,7 +355,7 @@ const SeoPackagesPrint = () => {
               </div>
             </div>
 
-            <div className="grid grid-cols-12 gap-4">
+            <div className="grid grid-cols-12 gap-3">
               {/* Left col */}
               <div className="col-span-7 space-y-3">
                 {/* Expansion diagram */}
@@ -466,7 +466,7 @@ const SeoPackagesPrint = () => {
             </div>
 
             {/* Final CTA */}
-            <div className="mt-3 rounded-xl bg-gradient-to-r from-primary via-blue-600 to-primary p-3.5 flex items-center justify-between relative overflow-hidden">
+            <div className="mt-2 rounded-xl bg-gradient-to-r from-primary via-blue-600 to-primary p-3 flex items-center justify-between relative overflow-hidden">
               <div className="absolute inset-0 opacity-15" style={{
                 backgroundImage: 'linear-gradient(to right, white 1px, transparent 1px)',
                 backgroundSize: '32px 32px',
