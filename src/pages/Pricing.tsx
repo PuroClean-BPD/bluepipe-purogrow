@@ -29,28 +29,16 @@ import {
 /* ─── SEO TIER DATA ─── */
 const seoTiers = [
   {
-    name: "Managed GBP",
-    tagline: "Foundation visibility",
-    buildFee: 400,
-    monthly: 300,
-    firstMonth: 700,
-    features: [
-      "Full Google Business Profile optimization",
-      "Reputation management system",
-      "Citation building",
-      "Monthly profile updates",
-    ],
-    keywords: null,
-    featured: false,
-  },
-  {
     name: "Builder SEO",
     tagline: "Targeted local growth",
     buildFee: 500,
     monthly: 750,
     firstMonth: 1250,
     features: [
-      "Everything in Managed GBP",
+      "Full Google Business Profile optimization",
+      "Reputation management system",
+      "Citation building",
+      "Monthly profile updates",
       "5 keyword SEO targeting",
       "On-page optimization",
       "Local schema implementation",
@@ -109,18 +97,18 @@ const comparisonRows: {
   icon: React.ElementType;
   values: (string | boolean)[];
 }[] = [
-  { label: "GBP Optimization", icon: Globe, values: [true, true, true, true] },
-  { label: "Reputation Management", icon: Star, values: [true, true, true, true] },
-  { label: "Citation Building", icon: Link2, values: [true, true, true, true] },
-  { label: "Monthly Profile Updates", icon: FileText, values: [true, true, true, true] },
-  { label: "SEO Keywords Targeted", icon: Search, values: ["—", "5", "10", "15"] },
-  { label: "On-Page Optimization", icon: MapPin, values: [false, true, true, true] },
-  { label: "Local Schema Implementation", icon: Globe, values: [false, true, true, true] },
-  { label: "Geo-Focused Content", icon: MapPin, values: [false, "Standard", "Advanced", "High-Frequency"] },
-  { label: "Backlink Authority Building", icon: Link2, values: [false, "Standard", "Higher", "Aggressive"] },
-  { label: "Press Releases", icon: Megaphone, values: [false, false, "Semi-Annual", "Quarterly"] },
-  { label: "Build Fee (one-time)", icon: DollarSign, values: ["$400", "$500", "$500", "$500"] },
-  { label: "Monthly Management", icon: BarChart3, values: ["$300/mo", "$750/mo", "$1,350/mo", "$2,250/mo"] },
+  { label: "GBP Optimization", icon: Globe, values: [true, true, true] },
+  { label: "Reputation Management", icon: Star, values: [true, true, true] },
+  { label: "Citation Building", icon: Link2, values: [true, true, true] },
+  { label: "Monthly Profile Updates", icon: FileText, values: [true, true, true] },
+  { label: "SEO Keywords Targeted", icon: Search, values: ["5", "10", "15"] },
+  { label: "On-Page Optimization", icon: MapPin, values: [true, true, true] },
+  { label: "Local Schema Implementation", icon: Globe, values: [true, true, true] },
+  { label: "Geo-Focused Content", icon: MapPin, values: ["Standard", "Advanced", "High-Frequency"] },
+  { label: "Backlink Authority Building", icon: Link2, values: ["Standard", "Higher", "Aggressive"] },
+  { label: "Press Releases", icon: Megaphone, values: [false, "Semi-Annual", "Quarterly"] },
+  { label: "Build Fee (one-time)", icon: DollarSign, values: ["$500", "$500", "$500"] },
+  { label: "Monthly Management", icon: BarChart3, values: ["$750/mo", "$1,350/mo", "$2,250/mo"] },
 ];
 
 const fmt = (n: number) => `$${n.toLocaleString()}`;
@@ -164,7 +152,7 @@ const Pricing = () => {
         </div>
 
         {/* Pricing cards */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-6xl mx-auto">
           {seoTiers.map((tier, i) => (
             <motion.div
               key={tier.name}
