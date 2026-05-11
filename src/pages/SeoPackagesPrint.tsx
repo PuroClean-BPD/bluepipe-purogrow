@@ -561,7 +561,7 @@ const SeoPackagesPrint = () => {
                 <span style={{ color: PURO_RED }}>●</span>
                 <span>BluePipeDigital.com · Market Expansion System for PuroClean Franchises</span>
               </div>
-              <div>Page 2 of 2 · PipeLine Plus</div>
+              <div>Page 3 of 3 · PipeLine Plus</div>
             </div>
           </div>
         </section>
