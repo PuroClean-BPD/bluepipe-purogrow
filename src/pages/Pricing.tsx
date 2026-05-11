@@ -29,28 +29,16 @@ import {
 /* ─── SEO TIER DATA ─── */
 const seoTiers = [
   {
-    name: "Managed GBP",
-    tagline: "Foundation visibility",
-    buildFee: 400,
-    monthly: 300,
-    firstMonth: 700,
-    features: [
-      "Full Google Business Profile optimization",
-      "Reputation management system",
-      "Citation building",
-      "Monthly profile updates",
-    ],
-    keywords: null,
-    featured: false,
-  },
-  {
     name: "Builder SEO",
     tagline: "Targeted local growth",
     buildFee: 500,
     monthly: 750,
     firstMonth: 1250,
     features: [
-      "Everything in Managed GBP",
+      "Full Google Business Profile optimization",
+      "Reputation management system",
+      "Citation building",
+      "Monthly profile updates",
       "5 keyword SEO targeting",
       "On-page optimization",
       "Local schema implementation",
