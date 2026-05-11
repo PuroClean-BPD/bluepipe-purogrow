@@ -109,6 +109,11 @@ const comparisonRows: {
   { label: "Geo-Focused Content", icon: MapPin, values: ["Standard", "Advanced", "High-Frequency"] },
   { label: "Backlink Authority Building", icon: Link2, values: ["Standard", "Higher", "Aggressive"] },
   { label: "Press Releases", icon: Megaphone, values: [false, "Semi-Annual", "Quarterly"] },
+  {
+    label: "PipeLine Plus Lead Generation",
+    icon: Rocket,
+    values: [false, "1 City (up to 50K pop.)", "Up to 3 Cities (150K total pop.)"],
+  },
   { label: "Build Fee (one-time)", icon: DollarSign, values: ["$500", "$500", "$500"] },
   { label: "Monthly Management", icon: BarChart3, values: ["$750/mo", "$1,350/mo", "$2,250/mo"] },
 ];
