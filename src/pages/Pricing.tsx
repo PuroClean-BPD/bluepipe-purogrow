@@ -24,6 +24,9 @@ import {
   TrendingUp,
   Target,
   DollarSign,
+  Rocket,
+  Users,
+  Building2,
 } from "lucide-react";
 
 /* ─── SEO TIER DATA ─── */
@@ -61,6 +64,7 @@ const seoTiers = [
       "Advanced geo-focused content",
       "Higher authority backlinks",
       "Semi-annual press releases",
+      "Includes PipeLine Plus Lead Generation for 1 city up to 50K population",
     ],
     keywords: 10,
     featured: true,
@@ -78,6 +82,7 @@ const seoTiers = [
       "High-frequency geo content",
       "Aggressive backlink strategy",
       "Quarterly press releases",
+      "Includes PipeLine Plus Lead Generation for up to 3 cities totaling up to 150K population",
     ],
     keywords: 15,
     featured: false,
@@ -107,6 +112,11 @@ const comparisonRows: {
   { label: "Geo-Focused Content", icon: MapPin, values: ["Standard", "Advanced", "High-Frequency"] },
   { label: "Backlink Authority Building", icon: Link2, values: ["Standard", "Higher", "Aggressive"] },
   { label: "Press Releases", icon: Megaphone, values: [false, "Semi-Annual", "Quarterly"] },
+  {
+    label: "PipeLine Plus Lead Generation",
+    icon: Rocket,
+    values: [false, "1 City (up to 50K pop.)", "Up to 3 Cities (150K total pop.)"],
+  },
   { label: "Build Fee (one-time)", icon: DollarSign, values: ["$500", "$500", "$500"] },
   { label: "Monthly Management", icon: BarChart3, values: ["$750/mo", "$1,350/mo", "$2,250/mo"] },
 ];
@@ -253,6 +263,90 @@ const Pricing = () => {
             </table>
           </div>
         </motion.div>
+      </SectionWrapper>
+
+      {/* ═══════════════════════════════════════════ */}
+      {/* PIPELINE PLUS ADD-ON                        */}
+      {/* ═══════════════════════════════════════════ */}
+      <SectionWrapper>
+        <div className="relative">
+          <div className="absolute inset-0 -z-10 rounded-3xl bg-gradient-to-br from-primary/10 via-transparent to-primary/5 blur-2xl" />
+          <div className="text-center mb-10">
+            <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5 text-xs font-semibold text-primary mb-4">
+              <Rocket size={14} />
+              Add-On
+            </div>
+            <h2 className="text-foreground font-bold mb-3">Expand Your Market Reach with PipeLine Plus</h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto text-sm lg:text-base leading-relaxed">
+              Add additional high-intent lead generation markets to your Booster or Dominator SEO package.
+            </p>
+          </div>
+
+          <div className="max-w-3xl mx-auto mb-10 rounded-2xl border bg-gradient-to-br from-primary/5 to-transparent p-6">
+            <p className="text-sm lg:text-base text-foreground/80 leading-relaxed text-center">
+              <span className="font-semibold text-foreground">PipeLine Plus</span> allows PuroClean franchise owners to expand visibility and lead generation into additional surrounding markets using advanced local SEO and market-targeted growth strategies.
+            </p>
+          </div>
+
+          <motion.div
+            className="max-w-4xl mx-auto rounded-2xl border bg-card overflow-hidden shadow-[0_8px_32px_-12px_hsla(210,100%,50%,0.15)]"
+            initial={{ opacity: 0, y: 8 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            <div className="p-6 border-b bg-gradient-to-r from-primary/5 to-transparent">
+              <h3 className="text-lg font-bold text-foreground flex items-center gap-2">
+                <TrendingUp size={18} className="text-primary" />
+                Market Expansion Pricing
+              </h3>
+              <p className="text-sm text-muted-foreground mt-1">Pricing scales with the target market population.</p>
+            </div>
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="border-b bg-secondary/50">
+                    <th className="text-left py-3 px-5 font-semibold text-foreground">Market Size</th>
+                    <th className="text-right py-3 px-5 font-semibold text-foreground">Monthly Price</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    { size: "Under 25K Population", price: "$299/month", icon: Users },
+                    { size: "25K – 50K Population", price: "$499/month", icon: Users },
+                    { size: "50K – 100K Population", price: "$749/month", icon: MapPin },
+                    { size: "100K – 150K Population", price: "$999/month", icon: MapPin },
+                    { size: "150K – 250K Population", price: "$1,299/month", icon: Building2 },
+                    { size: "250K – 500K Population", price: "$1,799/month", icon: Building2 },
+                    { size: "500K – 750K Population", price: "$2,499/month", icon: TrendingUp },
+                    { size: "750K – 1M Population", price: "$3,499/month", icon: TrendingUp },
+                    { size: "1M+ Population", price: "Custom Quote", icon: Rocket },
+                  ].map((row, i) => {
+                    const Icon = row.icon;
+                    return (
+                      <tr key={row.size} className={i % 2 === 0 ? "" : "bg-secondary/30"}>
+                        <td className="py-3 px-5 flex items-center gap-2.5 text-foreground font-medium">
+                          <Icon size={15} className="text-primary shrink-0" />
+                          {row.size}
+                        </td>
+                        <td className="text-right py-3 px-5 text-foreground font-semibold">{row.price}</td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+          </motion.div>
+
+          <div className="text-center mt-10">
+            <Button variant="gradient" size="lg" asChild>
+              <Link to="/free-audit">
+                Request a Market Expansion Audit
+                <ArrowRight size={16} className="ml-1" />
+              </Link>
+            </Button>
+          </div>
+        </div>
       </SectionWrapper>
 
       {/* ═══════════════════════════════════════════ */}
