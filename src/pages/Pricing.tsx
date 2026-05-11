@@ -27,6 +27,10 @@ import {
   Rocket,
   Users,
   Building2,
+  Sparkles,
+  ArrowDown,
+  Compass,
+  Zap,
 } from "lucide-react";
 
 /* ─── SEO TIER DATA ─── */
@@ -266,48 +270,264 @@ const Pricing = () => {
       </SectionWrapper>
 
       {/* ═══════════════════════════════════════════ */}
-      {/* PIPELINE PLUS ADD-ON                        */}
+      {/* PIPELINE PLUS — MARKET EXPANSION SYSTEM     */}
       {/* ═══════════════════════════════════════════ */}
-      <SectionWrapper>
-        <div className="relative">
-          <div className="absolute inset-0 -z-10 rounded-3xl bg-gradient-to-br from-primary/10 via-transparent to-primary/5 blur-2xl" />
-          <div className="text-center mb-10">
-            <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5 text-xs font-semibold text-primary mb-4">
-              <Rocket size={14} />
-              Add-On
+      <section className="relative overflow-hidden section-dark">
+        {/* Ambient gradient backdrop */}
+        <div className="absolute inset-0 -z-10">
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[80%] h-[60%] bg-gradient-to-br from-primary/25 via-primary/10 to-transparent blur-3xl rounded-full" />
+          <div className="absolute bottom-0 right-0 w-[40%] h-[50%] bg-gradient-to-tl from-primary/20 to-transparent blur-3xl rounded-full" />
+          <div
+            className="absolute inset-0 opacity-[0.04]"
+            style={{
+              backgroundImage:
+                "linear-gradient(hsl(var(--dark-surface-foreground)) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--dark-surface-foreground)) 1px, transparent 1px)",
+              backgroundSize: "48px 48px",
+            }}
+          />
+        </div>
+
+        <motion.div
+          className="container-main py-24 lg:py-32"
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.5 }}
+        >
+          {/* ── HEADER ── */}
+          <div className="text-center mb-16 max-w-3xl mx-auto">
+            <div
+              className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-semibold mb-5 border"
+              style={{
+                background: "hsl(var(--dark-surface-foreground) / 0.06)",
+                borderColor: "hsl(var(--dark-surface-foreground) / 0.15)",
+                color: "hsl(var(--dark-surface-foreground))",
+              }}
+            >
+              <Sparkles size={14} className="text-primary" />
+              PipeLine Plus — Market Expansion System
             </div>
-            <h2 className="text-foreground font-bold mb-3">Expand Your Market Reach with PipeLine Plus</h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto text-sm lg:text-base leading-relaxed">
-              Add additional high-intent lead generation markets to your Booster or Dominator SEO package.
+            <h2
+              className="font-bold mb-4"
+              style={{ color: "hsl(var(--dark-surface-foreground))" }}
+            >
+              A Scalable Local Market Expansion System
+            </h2>
+            <p
+              className="text-base lg:text-lg leading-relaxed"
+              style={{ color: "hsl(var(--dark-surface-foreground) / 0.7)" }}
+            >
+              Designed to help PuroClean franchise owners grow visibility and lead generation
+              <span style={{ color: "hsl(var(--dark-surface-foreground))" }} className="font-semibold"> beyond their primary territory</span>.
             </p>
           </div>
 
-          <div className="max-w-3xl mx-auto mb-10 rounded-2xl border bg-gradient-to-br from-primary/5 to-transparent p-6">
-            <p className="text-sm lg:text-base text-foreground/80 leading-relaxed text-center">
-              <span className="font-semibold text-foreground">PipeLine Plus</span> allows PuroClean franchise owners to expand visibility and lead generation into additional surrounding markets using advanced local SEO and market-targeted growth strategies.
-            </p>
+          {/* ── HIGHLIGHTED CALLOUT + EXPANSION DIAGRAM ── */}
+          <div className="grid lg:grid-cols-5 gap-6 mb-16 max-w-6xl mx-auto">
+            {/* Callout */}
+            <motion.div
+              className="lg:col-span-3 rounded-2xl p-8 border relative overflow-hidden"
+              style={{
+                background:
+                  "linear-gradient(135deg, hsl(var(--primary) / 0.18), hsl(var(--dark-surface-foreground) / 0.04))",
+                borderColor: "hsl(var(--primary) / 0.35)",
+              }}
+              initial={{ opacity: 0, x: -10 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+            >
+              <div className="absolute -top-12 -right-12 w-48 h-48 rounded-full bg-primary/20 blur-3xl" />
+              <div className="relative">
+                <div className="w-12 h-12 rounded-xl bg-primary/20 flex items-center justify-center mb-5 border border-primary/30">
+                  <Compass size={22} className="text-primary" />
+                </div>
+                <h3
+                  className="text-xl lg:text-2xl font-bold mb-3"
+                  style={{ color: "hsl(var(--dark-surface-foreground))" }}
+                >
+                  Strategic Territory Expansion
+                </h3>
+                <p
+                  className="text-sm lg:text-base leading-relaxed"
+                  style={{ color: "hsl(var(--dark-surface-foreground) / 0.75)" }}
+                >
+                  <span className="font-semibold" style={{ color: "hsl(var(--dark-surface-foreground))" }}>PipeLine Plus</span> helps PuroClean franchise owners strategically expand into surrounding service areas using advanced local SEO and market-targeted lead generation systems.
+                </p>
+
+                <div className="grid grid-cols-3 gap-3 mt-7">
+                  {[
+                    { icon: Target, label: "Targeted SEO" },
+                    { icon: TrendingUp, label: "Lead Growth" },
+                    { icon: Zap, label: "Fast Activation" },
+                  ].map(({ icon: Icon, label }) => (
+                    <div
+                      key={label}
+                      className="rounded-xl border p-3 text-center"
+                      style={{
+                        background: "hsl(var(--dark-surface-foreground) / 0.04)",
+                        borderColor: "hsl(var(--dark-surface-foreground) / 0.1)",
+                      }}
+                    >
+                      <Icon size={16} className="text-primary mx-auto mb-1.5" />
+                      <span
+                        className="text-[11px] font-medium"
+                        style={{ color: "hsl(var(--dark-surface-foreground) / 0.85)" }}
+                      >
+                        {label}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Expansion diagram */}
+            <motion.div
+              className="lg:col-span-2 rounded-2xl p-6 border flex flex-col"
+              style={{
+                background: "hsl(var(--dark-surface-foreground) / 0.04)",
+                borderColor: "hsl(var(--dark-surface-foreground) / 0.12)",
+              }}
+              initial={{ opacity: 0, x: 10 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+            >
+              <p
+                className="text-[11px] font-semibold tracking-wider uppercase mb-4 text-center"
+                style={{ color: "hsl(var(--dark-surface-foreground) / 0.5)" }}
+              >
+                Territory Expansion Flow
+              </p>
+
+              <div className="flex flex-col items-center gap-2 flex-1 justify-center">
+                {[
+                  { label: "Primary Market", sub: "Your core territory", icon: MapPin, tone: "primary" },
+                  { label: "Secondary Market", sub: "Adjacent service area", icon: Building2, tone: "mid" },
+                  { label: "Expansion Territory", sub: "New growth markets", icon: Rocket, tone: "accent" },
+                ].map((node, i, arr) => {
+                  const Icon = node.icon;
+                  return (
+                    <div key={node.label} className="w-full flex flex-col items-center">
+                      <motion.div
+                        className="w-full rounded-xl border px-4 py-3 flex items-center gap-3"
+                        style={{
+                          background:
+                            node.tone === "accent"
+                              ? "linear-gradient(90deg, hsl(var(--primary) / 0.22), hsl(var(--primary) / 0.08))"
+                              : node.tone === "mid"
+                              ? "hsl(var(--primary) / 0.1)"
+                              : "hsl(var(--dark-surface-foreground) / 0.06)",
+                          borderColor:
+                            node.tone === "accent"
+                              ? "hsl(var(--primary) / 0.5)"
+                              : "hsl(var(--dark-surface-foreground) / 0.15)",
+                        }}
+                        initial={{ opacity: 0, y: 6 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.35, delay: 0.15 + i * 0.12 }}
+                      >
+                        <div className="w-9 h-9 rounded-lg bg-primary/20 border border-primary/30 flex items-center justify-center shrink-0">
+                          <Icon size={16} className="text-primary" />
+                        </div>
+                        <div className="text-left">
+                          <p
+                            className="text-sm font-semibold leading-tight"
+                            style={{ color: "hsl(var(--dark-surface-foreground))" }}
+                          >
+                            {node.label}
+                          </p>
+                          <p
+                            className="text-[11px] leading-tight"
+                            style={{ color: "hsl(var(--dark-surface-foreground) / 0.55)" }}
+                          >
+                            {node.sub}
+                          </p>
+                        </div>
+                      </motion.div>
+                      {i < arr.length - 1 && (
+                        <div className="py-1.5">
+                          <ArrowDown size={16} className="text-primary/70" />
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            </motion.div>
           </div>
 
+          {/* ── PRICING TABLE ── */}
           <motion.div
-            className="max-w-4xl mx-auto rounded-2xl border bg-card overflow-hidden shadow-[0_8px_32px_-12px_hsla(210,100%,50%,0.15)]"
+            className="max-w-4xl mx-auto rounded-2xl border overflow-hidden"
+            style={{
+              background: "hsl(var(--dark-surface-foreground) / 0.04)",
+              borderColor: "hsl(var(--dark-surface-foreground) / 0.12)",
+              boxShadow: "0 20px 60px -20px hsla(210,100%,50%,0.35)",
+            }}
             initial={{ opacity: 0, y: 8 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            <div className="p-6 border-b bg-gradient-to-r from-primary/5 to-transparent">
-              <h3 className="text-lg font-bold text-foreground flex items-center gap-2">
-                <TrendingUp size={18} className="text-primary" />
-                Market Expansion Pricing
-              </h3>
-              <p className="text-sm text-muted-foreground mt-1">Pricing scales with the target market population.</p>
+            <div
+              className="p-6 border-b flex items-start justify-between gap-4 flex-wrap"
+              style={{
+                background:
+                  "linear-gradient(90deg, hsl(var(--primary) / 0.15), transparent)",
+                borderColor: "hsl(var(--dark-surface-foreground) / 0.1)",
+              }}
+            >
+              <div>
+                <h3
+                  className="text-lg font-bold flex items-center gap-2"
+                  style={{ color: "hsl(var(--dark-surface-foreground))" }}
+                >
+                  <TrendingUp size={18} className="text-primary" />
+                  Market Expansion Pricing
+                </h3>
+                <p
+                  className="text-sm mt-1"
+                  style={{ color: "hsl(var(--dark-surface-foreground) / 0.6)" }}
+                >
+                  Scales with target market population — add as many territories as you need.
+                </p>
+              </div>
+              <div
+                className="text-[11px] font-semibold px-3 py-1.5 rounded-full border"
+                style={{
+                  color: "hsl(var(--dark-surface-foreground))",
+                  background: "hsl(var(--primary) / 0.15)",
+                  borderColor: "hsl(var(--primary) / 0.35)",
+                }}
+              >
+                Booster &amp; Dominator Add-On
+              </div>
             </div>
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="border-b bg-secondary/50">
-                    <th className="text-left py-3 px-5 font-semibold text-foreground">Market Size</th>
-                    <th className="text-right py-3 px-5 font-semibold text-foreground">Monthly Price</th>
+                  <tr
+                    className="border-b"
+                    style={{
+                      background: "hsl(var(--dark-surface-foreground) / 0.04)",
+                      borderColor: "hsl(var(--dark-surface-foreground) / 0.1)",
+                    }}
+                  >
+                    <th
+                      className="text-left py-3 px-5 font-semibold"
+                      style={{ color: "hsl(var(--dark-surface-foreground))" }}
+                    >
+                      Market Size
+                    </th>
+                    <th
+                      className="text-right py-3 px-5 font-semibold"
+                      style={{ color: "hsl(var(--dark-surface-foreground))" }}
+                    >
+                      Monthly Price
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
@@ -324,12 +544,32 @@ const Pricing = () => {
                   ].map((row, i) => {
                     const Icon = row.icon;
                     return (
-                      <tr key={row.size} className={i % 2 === 0 ? "" : "bg-secondary/30"}>
-                        <td className="py-3 px-5 flex items-center gap-2.5 text-foreground font-medium">
-                          <Icon size={15} className="text-primary shrink-0" />
-                          {row.size}
+                      <tr
+                        key={row.size}
+                        className="border-b last:border-0 transition-colors hover:bg-primary/5"
+                        style={{
+                          borderColor: "hsl(var(--dark-surface-foreground) / 0.06)",
+                          background:
+                            i % 2 === 0
+                              ? "transparent"
+                              : "hsl(var(--dark-surface-foreground) / 0.025)",
+                        }}
+                      >
+                        <td className="py-3.5 px-5">
+                          <div
+                            className="flex items-center gap-2.5 font-medium"
+                            style={{ color: "hsl(var(--dark-surface-foreground))" }}
+                          >
+                            <Icon size={15} className="text-primary shrink-0" />
+                            {row.size}
+                          </div>
                         </td>
-                        <td className="text-right py-3 px-5 text-foreground font-semibold">{row.price}</td>
+                        <td
+                          className="text-right py-3.5 px-5 font-semibold"
+                          style={{ color: "hsl(var(--dark-surface-foreground))" }}
+                        >
+                          {row.price}
+                        </td>
                       </tr>
                     );
                   })}
@@ -338,16 +578,72 @@ const Pricing = () => {
             </div>
           </motion.div>
 
-          <div className="text-center mt-10">
-            <Button variant="gradient" size="lg" asChild>
-              <Link to="/free-audit">
-                Request a Market Expansion Audit
-                <ArrowRight size={16} className="ml-1" />
-              </Link>
-            </Button>
-          </div>
-        </div>
-      </SectionWrapper>
+          {/* ── GROWTH MESSAGING ── */}
+          <motion.div
+            className="max-w-3xl mx-auto mt-16 text-center"
+            initial={{ opacity: 0, y: 8 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            <div
+              className="inline-flex items-center gap-2 rounded-full px-3 py-1 text-[11px] font-semibold mb-4 border"
+              style={{
+                background: "hsl(var(--primary) / 0.12)",
+                borderColor: "hsl(var(--primary) / 0.3)",
+                color: "hsl(var(--dark-surface-foreground))",
+              }}
+            >
+              <TrendingUp size={12} className="text-primary" />
+              Growth Insight
+            </div>
+            <p
+              className="text-base lg:text-lg leading-relaxed"
+              style={{ color: "hsl(var(--dark-surface-foreground) / 0.8)" }}
+            >
+              Many restoration companies dominate their core territory but miss opportunities in surrounding markets.
+              <span style={{ color: "hsl(var(--dark-surface-foreground))" }} className="font-semibold"> PipeLine Plus</span> helps franchise owners strategically expand visibility where additional high-intent restoration leads already exist.
+            </p>
+          </motion.div>
+
+          {/* ── FINAL CTA BLOCK ── */}
+          <motion.div
+            className="max-w-3xl mx-auto mt-12 rounded-2xl p-8 lg:p-10 text-center border relative overflow-hidden"
+            style={{
+              background:
+                "linear-gradient(135deg, hsl(var(--primary) / 0.22), hsl(var(--primary) / 0.06))",
+              borderColor: "hsl(var(--primary) / 0.4)",
+            }}
+            initial={{ opacity: 0, y: 8 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            <div className="absolute -top-16 -left-16 w-56 h-56 rounded-full bg-primary/25 blur-3xl" />
+            <div className="absolute -bottom-16 -right-16 w-56 h-56 rounded-full bg-primary/20 blur-3xl" />
+            <div className="relative">
+              <h3
+                className="text-2xl lg:text-3xl font-bold mb-3"
+                style={{ color: "hsl(var(--dark-surface-foreground))" }}
+              >
+                Ready to Expand Into More Local Markets?
+              </h3>
+              <p
+                className="text-sm lg:text-base max-w-xl mx-auto mb-7 leading-relaxed"
+                style={{ color: "hsl(var(--dark-surface-foreground) / 0.7)" }}
+              >
+                See where your next growth opportunities exist with a custom market expansion audit.
+              </p>
+              <Button variant="gradient" size="lg" asChild>
+                <Link to="/free-audit">
+                  Request a Market Expansion Audit
+                  <ArrowRight size={16} className="ml-1" />
+                </Link>
+              </Button>
+            </div>
+          </motion.div>
+        </motion.div>
+      </section>
 
       {/* ═══════════════════════════════════════════ */}
       {/* SECTION 2 — SOCIAL MEDIA                   */}
