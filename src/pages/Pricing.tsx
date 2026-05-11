@@ -79,6 +79,7 @@ const seoTiers = [
       "High-frequency geo content",
       "Aggressive backlink strategy",
       "Quarterly press releases",
+      "Includes PipeLine Plus Lead Generation for up to 3 cities totaling up to 150K population",
     ],
     keywords: 15,
     featured: false,
