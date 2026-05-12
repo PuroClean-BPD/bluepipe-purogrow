@@ -26,6 +26,8 @@ import aprilWaterImg from "@/assets/april-water.jpg";
 import mayWaterImg from "@/assets/may-water.jpg";
 import marchMoldImg from "@/assets/march-mold.jpg";
 import mayMoldImg from "@/assets/may-mold.jpg";
+import marchFireImg from "@/assets/march-fire.jpg";
+import mayFireImg from "@/assets/may-fire.jpg";
 
 /* =====================================================
    REUSABLE LOCAL SEO VISIBILITY DASHBOARD TEMPLATE
@@ -260,22 +262,52 @@ const SERVICE_VISIBILITY = [
     name: "Fire Damage Restoration",
     icon: Flame,
     seed: 11,
-    aprilScore: "61%",
-    mayScore: "76%",
-    aprilCaption: "Baseline fire damage visibility prior to emergency-intent title rollout.",
-    mayCaption: "Stronger 24/7 emergency intent coverage and improved GBP signals.",
-    summary: [
-      "Improved local map rankings month-over-month for fire damage queries",
-      "Increased Top 3 visibility coverage across emergency-intent searches",
-      "Expanded market consistency through new city-targeted landing pages",
-      "Stronger Google Business Profile engagement signals improved local ranking performance",
-    ],
-    kpis: [
-      { label: "Average Position", value: "3.1", delta: "+1.5" },
-      { label: "Top 3 Coverage", value: "68%", delta: "+16%" },
-      { label: "Visibility Gain", value: "+15%", delta: "MoM" },
-      { label: "Best Performing Market", value: "Fairview Hts.", delta: "Pos. 1.6" },
-    ],
+    periodALabel: "Mar 2026",
+    periodBLabel: "May 2026",
+    aprilScore: "97.08%",
+    mayScore: "97%",
+    aprilImage: marchFireImg,
+    mayImage: mayFireImg,
+    aprilCardLabel: "March 2026 Fire Damage Visibility",
+    mayCardLabel: "May 2026 Fire Damage Visibility",
+    aprilCardPeriod: "Fire Damage Restoration · March 2026",
+    mayCardPeriod: "Fire Damage Restoration · May 2026",
+    aprilCaption: "March 2026 geo-grid snapshot · 97.08% Top 3 visibility · 100% market share.",
+    mayCaption: "May 2026 geo-grid snapshot · 97% Top 3 visibility · 100% market share.",
+    leaderBadge: {
+      title: "#1 Fire Damage Visibility Leader",
+      subtitle: "Sustained category dominance across the Caseyville geo-grid",
+    },
+    monthlyKpis: [
+      { label: "Average Ranking", april: "1.69", aprilNote: "#1", may: "1.72", mayNote: "#1", delta: "+0.03", deltaTone: "neutral" },
+      { label: "Top 3 Visibility", april: "97.08%", aprilNote: "#1", may: "97%", mayNote: "#1", delta: "-0.08%", deltaTone: "neutral" },
+      { label: "Market Share", april: "100%", aprilNote: "#1", may: "100%", mayNote: "#1", delta: "Held", deltaTone: "up" },
+      { label: "Local Rank", april: "#1", may: "#1", delta: "Held", deltaTone: "up" },
+    ] as MonthlyKpi[],
+    dominance: {
+      title: "Fire Damage Market Dominance",
+      items: [
+        "#1 Average Ranking",
+        "97%+ Top 3 Visibility",
+        "100% Market Share",
+        "Exceptional Geo-Grid Consistency",
+        "Strong Google Trust Signals",
+      ],
+    },
+    analysis: {
+      title: "Fire Damage Visibility Analysis",
+      bullets: [
+        "PuroClean Caseyville maintained dominant #1 local visibility across nearly the entire geo-grid.",
+        "Rankings remained highly stable month-over-month with exceptional Top 3 market penetration.",
+        "Fire damage restoration visibility continues outperforming local competitors across core Illinois service markets.",
+        "Strong review engagement, Google Business Profile authority, and local relevance signals are reinforcing sustained ranking leadership.",
+        "Visibility remains strongest throughout Caseyville, Fairview Heights, Collinsville, Swansea, and East St. Louis markets.",
+        "The consistency of #1 and #2 rankings across the grid indicates strong local algorithm trust and high topical authority.",
+      ],
+    },
+    callout: "PuroClean Caseyville continues to demonstrate elite local visibility performance across fire damage restoration searches throughout the Illinois service region.",
+    summary: [],
+    kpis: [],
   },
 ];
 const KpiCard = ({ kpi }: { kpi: typeof KPIS[number] }) => {
