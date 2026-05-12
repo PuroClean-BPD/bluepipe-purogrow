@@ -37,6 +37,8 @@ import gbpAprilDirections from "@/assets/gbp-april-directions.jpg";
 import gbpAprilWebsite from "@/assets/gbp-april-website.jpg";
 import { Navigation, MousePointerClick, Sparkles, MessageSquare, ThumbsUp } from "lucide-react";
 import mayReviewsImg from "@/assets/may-reviews.jpg";
+import stlouisWaterImg from "@/assets/stlouis-waterdamagepro.jpg";
+import stlouisPurocleanImg from "@/assets/stlouis-puroclean.jpg";
 import LightboxProvider from "@/components/LightboxProvider";
 
 /* =====================================================
@@ -160,10 +162,10 @@ const TIER2_LINKS = [
 ];
 
 const INSIGHTS = [
-  { icon: TrendingUp, title: "Visibility Gains", body: "Map pack visibility climbed from 66% to 78% across the 22-city service area, driven by geo-content expansion and GBP optimization." },
-  { icon: Award, title: "Authority Growth", body: "22 new authority links acquired across Tier 1 editorials and Tier 2 contextual placements, strengthening topical authority for restoration intents." },
-  { icon: Zap, title: "Engagement Improvements", body: "GBP profile views, calls, and direction requests increased 38% month-over-month with stronger weekend conversion patterns." },
-  { icon: Target, title: "Next Strategic Focus", body: "Expand into underperforming markets (Madison, Venice, Brooklyn) with dedicated city pages and review velocity campaigns." },
+  { icon: TrendingUp, title: "Visibility Gains", body: "Map pack visibility strengthened across the primary service city through GBP engagement growth, review velocity improvements, and geo-relevance optimization." },
+  { icon: Award, title: "Authority Growth", body: "Authority growth continued through Tier 1 editorial placements and Tier 2 contextual support links designed to strengthen topical relevance for restoration-related searches." },
+  { icon: Zap, title: "Engagement Improvements", body: "Google Business Profile engagement continued improving through increased website clicks, review growth, and stronger customer interaction signals." },
+  { icon: Target, title: "Next Strategic Focus", body: "Next strategic growth initiatives depend on PuroClean corporate deployment of expanded Service Area Pages and FAQ-enhanced location content. Once implemented, BluePipe Digital can deploy deeper geo-content optimization, internal linking enhancements, and advanced local schema improvements.", status: "Pending Corporate Deployment" },
 ];
 
 type MonthlyKpi = { label: string; april: string; aprilNote?: string; may: string; mayNote?: string; delta: string; deltaTone: "up" | "down" | "neutral" };
@@ -1332,14 +1334,180 @@ const LocalSeoDashboard = () => {
                     <div className="icon-box">
                       <Icon size={20} className="text-primary" />
                     </div>
-                    <div>
-                      <div className="font-bold text-lg mb-1.5">{insight.title}</div>
+                    <div className="flex-1">
+                      <div className="flex items-center justify-between gap-3 mb-1.5 flex-wrap">
+                        <div className="font-bold text-lg">{insight.title}</div>
+                        {(insight as any).status && (
+                          <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold px-2.5 py-1 rounded-full bg-amber-500/10 text-amber-700 border border-amber-500/20">
+                            <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse" />
+                            {(insight as any).status}
+                          </span>
+                        )}
+                      </div>
                       <p className="text-sm text-muted-foreground leading-relaxed">{insight.body}</p>
                     </div>
                   </div>
                 </div>
               );
             })}
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION 8 — PIPELINE PLUS EXPANSION ANALYSIS */}
+      <section className="section-muted">
+        <div className="container-main py-20">
+          <SectionHeader
+            eyebrow="Section 08 · Pipeline Plus"
+            title="Pipeline Plus Expansion Opportunity"
+            description="Extended market visibility analysis and service area expansion recommendations."
+          />
+
+          <div className="grid lg:grid-cols-2 gap-6">
+            {/* LEFT — Population Table */}
+            <div className="card-elevated p-6">
+              <div className="flex items-center gap-3 mb-5">
+                <div className="icon-box"><MapPin size={20} className="text-primary" /></div>
+                <div>
+                  <div className="font-bold text-lg">Extended Market Population Reference</div>
+                  <div className="text-xs text-muted-foreground">St. Louis metro service area · ranked by population</div>
+                </div>
+              </div>
+              <div className="overflow-hidden rounded-xl border border-border">
+                <table className="w-full text-sm">
+                  <thead className="bg-secondary/60 text-xs uppercase tracking-wide text-muted-foreground">
+                    <tr>
+                      <th className="px-4 py-3 text-left font-semibold w-12">#</th>
+                      <th className="px-4 py-3 text-left font-semibold">City</th>
+                      <th className="px-4 py-3 text-right font-semibold">Population</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {[
+                      ["Saint Louis, MO", "301,578"],
+                      ["Belleville, IL", "42,404"],
+                      ["Edwardsville, IL", "26,808"],
+                      ["East Saint Louis, IL", "18,401"],
+                      ["Fairview Heights, IL", "16,706"],
+                      ["Cahokia, IL", "16,391"],
+                      ["Swansea, IL", "14,386"],
+                      ["Centreville, IL", "5,951"],
+                      ["Caseyville, IL", "4,400"],
+                      ["Dupo, IL", "3,996"],
+                      ["Madison, IL", "3,171"],
+                      ["Alorton, IL", "2,749"],
+                      ["Washington Park, IL", "2,592"],
+                      ["Fairmont City, IL", "2,265"],
+                      ["Venice, IL", "1,498"],
+                      ["Brooklyn, IL", "649"],
+                      ["East Carondelet, IL", "390"],
+                      ["Sauget, IL", "141"],
+                    ].map(([city, pop], i) => {
+                      const isCaseyville = city === "Caseyville, IL";
+                      const isEdwardsville = city === "Edwardsville, IL";
+                      return (
+                        <tr key={city} className={`${i % 2 === 0 ? "bg-white" : "bg-secondary/30"} ${isCaseyville ? "bg-primary/5" : ""} ${isEdwardsville ? "bg-emerald-500/5" : ""} hover:bg-primary/10 transition-colors`}>
+                          <td className="px-4 py-2.5 text-muted-foreground font-mono text-xs">{i + 1}</td>
+                          <td className="px-4 py-2.5 font-medium flex items-center gap-2">
+                            <MapPin size={12} className="text-primary/60" />
+                            {city}
+                            {isCaseyville && <span className="text-[10px] px-1.5 py-0.5 rounded bg-primary/15 text-primary font-semibold">Current</span>}
+                            {isEdwardsville && <span className="text-[10px] px-1.5 py-0.5 rounded bg-emerald-500/15 text-emerald-700 font-semibold">Target</span>}
+                          </td>
+                          <td className="px-4 py-2.5 text-right font-mono font-semibold">{pop}</td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
+              <p className="text-xs text-muted-foreground italic mt-4 leading-relaxed">
+                Unincorporated communities including French Village, Hollywood Heights, Oak Hills, Signal Hill, and Stolle are not represented separately in census reporting.
+              </p>
+            </div>
+
+            {/* RIGHT — Pipeline Plus Insights */}
+            <div className="space-y-5">
+              <div className="card-elevated p-6">
+                <div className="flex items-center gap-3 mb-5">
+                  <div className="icon-box"><BarChart3 size={20} className="text-primary" /></div>
+                  <div>
+                    <div className="font-bold text-lg">Pipeline Plus Market Expansion Analysis</div>
+                    <div className="text-xs text-muted-foreground">St. Louis core market visibility benchmarks</div>
+                  </div>
+                </div>
+
+                <div className="grid sm:grid-cols-2 gap-4">
+                  {[
+                    { brand: "St Louis Water Damage Pro", img: "/src/assets/stlouis-waterdamagepro.jpg", avg: "12.67", avgRank: "#9", top3: "8.28%", top3Rank: "#10", share: "16.08%", shareRank: "#10" },
+                    { brand: "St Louis PuroClean", img: "/src/assets/stlouis-puroclean.jpg", avg: "13.67", avgRank: "#9", top3: "8.28%", top3Rank: "#10", share: "16.08%", shareRank: "#10" },
+                  ].map((b) => (
+                    <div key={b.brand} className="rounded-xl border border-border bg-secondary/30 p-4">
+                      <div className="text-[11px] font-semibold uppercase tracking-wide text-primary mb-3">{b.brand}</div>
+                      <div className="space-y-2.5 text-sm">
+                        <div className="flex items-baseline justify-between gap-2 pb-2 border-b border-border/60">
+                          <span className="text-xs text-muted-foreground">Avg Ranking</span>
+                          <span className="font-mono font-bold">{b.avg} <span className="text-[10px] text-muted-foreground">({b.avgRank})</span></span>
+                        </div>
+                        <div className="flex items-baseline justify-between gap-2 pb-2 border-b border-border/60">
+                          <span className="text-xs text-muted-foreground">Top 3 Visibility</span>
+                          <span className="font-mono font-bold">{b.top3} <span className="text-[10px] text-muted-foreground">({b.top3Rank})</span></span>
+                        </div>
+                        <div className="flex items-baseline justify-between gap-2">
+                          <span className="text-xs text-muted-foreground">Market Share</span>
+                          <span className="font-mono font-bold">{b.share} <span className="text-[10px] text-muted-foreground">({b.shareRank})</span></span>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="grid sm:grid-cols-2 gap-3 mt-4">
+                  <img src={stlouisWaterImg} alt="St Louis Water Damage Pro geo-grid visibility heat map" className="rounded-lg border border-border w-full" />
+                  <img src={stlouisPurocleanImg} alt="St Louis PuroClean geo-grid visibility heat map" className="rounded-lg border border-border w-full" />
+                </div>
+
+                <p className="text-sm text-muted-foreground leading-relaxed mt-5">
+                  Current visibility within the St. Louis market remains limited, with minimal Top 3 map pack penetration inside the city core. This creates a significant opportunity for Pipeline Plus expansion targeting higher-population service areas.
+                </p>
+              </div>
+
+              <div className="rounded-xl border border-emerald-500/30 bg-gradient-to-br from-emerald-500/10 to-emerald-500/5 p-5">
+                <div className="flex items-start gap-3">
+                  <div className="w-10 h-10 rounded-lg bg-emerald-500/15 flex items-center justify-center shrink-0">
+                    <TrendingUp size={18} className="text-emerald-700" />
+                  </div>
+                  <div>
+                    <div className="text-xs font-semibold uppercase tracking-wide text-emerald-700 mb-1">Expansion Candidate</div>
+                    <p className="text-sm text-foreground leading-relaxed">
+                      <span className="font-bold">Edwardsville (Population 26,808)</span> falls within the Pipeline Plus 25k–50k pricing tier, making it a strong candidate for expansion testing.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* CTA Card */}
+          <div className="mt-8 rounded-2xl section-dark p-8 lg:p-10 relative overflow-hidden">
+            <div className="absolute inset-0 opacity-[0.06]" style={{
+              backgroundImage: 'linear-gradient(to right, hsl(var(--dark-surface-foreground)) 1px, transparent 1px), linear-gradient(to bottom, hsl(var(--dark-surface-foreground)) 1px, transparent 1px)',
+              backgroundSize: '40px 40px',
+            }} />
+            <div className="relative z-10 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+              <div>
+                <h3 className="text-2xl font-bold text-white mb-2">Explore Pipeline Plus Expansion</h3>
+                <p className="text-sm max-w-xl" style={{ color: "hsl(var(--dark-surface-foreground) / 0.7)" }}>
+                  Review extended service-area growth opportunities and pricing options for larger market visibility campaigns.
+                </p>
+              </div>
+              <Button variant="gradient" size="xl" asChild>
+                <a href="https://bluepipe-purogrow.lovable.app/pricing" target="_blank" rel="noreferrer">
+                  View Pipeline Plus Pricing
+                  <ArrowRight size={18} className="ml-1" />
+                </a>
+              </Button>
+            </div>
           </div>
         </div>
       </section>
