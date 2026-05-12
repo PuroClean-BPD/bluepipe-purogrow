@@ -386,7 +386,7 @@ const HeatMapCard = ({ label, period, score, caption, seed = 0, variant = "previ
   </div>
 );
 
-const MonthAccordion = ({ month, items, defaultOpen = false }: { month: string; items: { label: string; detail: string }[]; defaultOpen?: boolean }) => {
+const MonthAccordion = ({ month, items, defaultOpen = false }: { month: string; items: { label: string; detail: string; status?: string }[]; defaultOpen?: boolean }) => {
   const [open, setOpen] = useState(defaultOpen);
   return (
     <div className="rounded-2xl border border-border bg-card overflow-hidden">
@@ -403,7 +403,22 @@ const MonthAccordion = ({ month, items, defaultOpen = false }: { month: string; 
         <div className="px-6 pb-6 grid md:grid-cols-2 gap-4">
           {items.map((item) => (
             <div key={item.label} className="rounded-xl bg-secondary/40 p-4 border border-border/60">
-              <div className="text-sm font-bold mb-1.5">{item.label}</div>
+              <div className="flex items-center justify-between gap-2 mb-1.5">
+                <div className="text-sm font-bold">{item.label}</div>
+                {item.status && (
+                  <span
+                    className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider border"
+                    style={{
+                      background: "hsl(var(--muted) / 0.6)",
+                      color: "hsl(var(--muted-foreground))",
+                      borderColor: "hsl(var(--border))",
+                    }}
+                  >
+                    <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse" />
+                    {item.status}
+                  </span>
+                )}
+              </div>
               <p className="text-sm text-muted-foreground leading-relaxed">{item.detail}</p>
             </div>
           ))}
