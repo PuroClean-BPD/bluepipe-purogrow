@@ -181,7 +181,7 @@ const SectionHeader = ({ eyebrow, title, description }: { eyebrow: string; title
   </div>
 );
 
-const HeatMapCard = ({ label, period, score, caption }: { label: string; period: string; score: string; caption: string }) => (
+const HeatMapCard = ({ label, period, score, caption, seed = 0, variant = "previous" }: { label: string; period: string; score: string; caption: string; seed?: number; variant?: "previous" | "current" }) => (
   <div className="rounded-2xl border border-border bg-card overflow-hidden card-elevated">
     <div className="px-5 py-4 border-b border-border flex items-center justify-between">
       <div>
@@ -198,14 +198,13 @@ const HeatMapCard = ({ label, period, score, caption }: { label: string; period:
         backgroundImage: 'linear-gradient(to right, rgba(0,0,0,0.06) 1px, transparent 1px), linear-gradient(to bottom, rgba(0,0,0,0.06) 1px, transparent 1px)',
         backgroundSize: '40px 40px',
       }} />
-      {/* Heat dots */}
       <div className="absolute inset-0 grid grid-cols-7 grid-rows-5 gap-2 p-6">
         {Array.from({ length: 35 }).map((_, i) => {
-          const seed = (i * 13 + label.length) % 10;
-          const isCurrent = label.toLowerCase().includes("current");
+          const s = (i * 13 + seed + label.length) % 10;
+          const isCurrent = variant === "current";
           const rank = isCurrent
-            ? (seed < 5 ? 1 + (seed % 3) : 4 + (seed % 4))
-            : (seed < 3 ? 2 + (seed % 3) : 6 + (seed % 5));
+            ? (s < 5 ? 1 + (s % 3) : 4 + (s % 4))
+            : (s < 3 ? 2 + (s % 3) : 6 + (s % 5));
           const color = rank <= 3 ? "#16a34a" : rank <= 6 ? "#eab308" : "#dc2626";
           return (
             <div key={i} className="flex items-center justify-center">
