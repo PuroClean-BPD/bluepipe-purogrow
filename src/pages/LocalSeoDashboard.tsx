@@ -20,6 +20,8 @@ import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import { Droplets, Flame, Bug } from "lucide-react";
 
 /* =====================================================
    REUSABLE LOCAL SEO VISIBILITY DASHBOARD TEMPLATE
