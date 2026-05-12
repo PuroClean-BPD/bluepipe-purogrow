@@ -366,32 +366,88 @@ const LocalSeoDashboard = () => {
         </div>
       </section>
 
-      {/* SECTION 1 — HEAT MAP */}
+      {/* SECTION 1 — SERVICE VISIBILITY COMPARISONS */}
       <section className="section-light">
         <div className="container-main py-20">
           <SectionHeader
-            eyebrow="Section 01 · Heat Map Visibility"
-            title="Geo-Grid Visibility Comparison"
-            description="Side-by-side heat maps showing local pack ranking shifts across the Caseyville service area."
+            eyebrow="Section 01 · Service Visibility Comparisons"
+            title="Service Visibility Comparisons"
+            description="Month-over-month local map visibility tracking across core restoration service categories."
           />
-          <div className="grid md:grid-cols-2 gap-6">
-            <HeatMapCard label="Previous Heat Map" period="March 2026" score="66%" caption="Baseline visibility prior to the latest geo-content and GBP optimization sprint." />
-            <HeatMapCard label="Current Heat Map" period="April 2026" score="78%" caption="Post-optimization snapshot showing stronger 3-pack saturation across core markets." />
-          </div>
-          <div className="mt-8 rounded-2xl p-6 border border-border" style={{ background: "hsl(var(--primary) / 0.05)" }}>
-            <div className="flex items-start gap-4">
-              <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0" style={{ background: "hsl(var(--primary) / 0.15)" }}>
-                <TrendingUp size={18} className="text-primary" />
-              </div>
-              <div>
-                <div className="font-bold mb-1">Visibility Movement Summary</div>
-                <p className="text-sm text-muted-foreground">
-                  Average map pack ranking improved <span className="font-bold text-foreground">from 4.6 to 3.2</span>, with 12 new grid points entering the top 3.
-                  Strongest gains observed in Belleville, Fairview Heights, and East Saint Louis — driven by city-page expansion and review velocity.
-                </p>
-              </div>
-            </div>
-          </div>
+
+          <Tabs defaultValue={SERVICE_VISIBILITY[0].id} className="w-full">
+            <TabsList className="bg-secondary/60 p-1.5 rounded-full h-auto flex flex-wrap gap-1 mb-8">
+              {SERVICE_VISIBILITY.map((svc) => {
+                const Icon = svc.icon;
+                return (
+                  <TabsTrigger
+                    key={svc.id}
+                    value={svc.id}
+                    className="rounded-full px-5 py-2.5 text-sm font-semibold data-[state=active]:bg-white data-[state=active]:shadow-md data-[state=active]:text-primary flex items-center gap-2"
+                  >
+                    <Icon size={16} />
+                    {svc.name}
+                  </TabsTrigger>
+                );
+              })}
+            </TabsList>
+
+            {SERVICE_VISIBILITY.map((svc) => (
+              <TabsContent key={svc.id} value={svc.id} className="mt-0 space-y-6">
+                <div className="grid md:grid-cols-2 gap-6">
+                  <HeatMapCard
+                    label="April 2026 Visibility Snapshot"
+                    period={`${svc.name} · April 2026`}
+                    score={svc.aprilScore}
+                    caption={svc.aprilCaption}
+                    seed={svc.seed}
+                    variant="previous"
+                  />
+                  <HeatMapCard
+                    label="May 2026 Visibility Snapshot"
+                    period={`${svc.name} · May 2026`}
+                    score={svc.mayScore}
+                    caption={svc.mayCaption}
+                    seed={svc.seed + 1}
+                    variant="current"
+                  />
+                </div>
+
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                  {svc.kpis.map((kpi) => (
+                    <div key={kpi.label} className="card-elevated p-5 rounded-2xl">
+                      <div className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-2">{kpi.label}</div>
+                      <div className="flex items-baseline gap-2">
+                        <div className="text-2xl font-bold">{kpi.value}</div>
+                        <span className="text-xs font-bold px-2 py-0.5 rounded-full" style={{ background: "hsl(var(--primary) / 0.1)", color: "hsl(var(--primary))" }}>
+                          {kpi.delta}
+                        </span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="rounded-2xl p-6 border border-border" style={{ background: "hsl(var(--primary) / 0.05)" }}>
+                  <div className="flex items-start gap-4">
+                    <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0" style={{ background: "hsl(var(--primary) / 0.15)" }}>
+                      <TrendingUp size={18} className="text-primary" />
+                    </div>
+                    <div>
+                      <div className="font-bold mb-2">Visibility Movement Summary — {svc.name}</div>
+                      <ul className="space-y-1.5">
+                        {svc.summary.map((item) => (
+                          <li key={item} className="text-sm text-muted-foreground flex gap-2">
+                            <span className="text-primary mt-1">•</span>
+                            <span>{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </TabsContent>
+            ))}
+          </Tabs>
         </div>
       </section>
 
