@@ -37,6 +37,7 @@ import gbpAprilDirections from "@/assets/gbp-april-directions.jpg";
 import gbpAprilWebsite from "@/assets/gbp-april-website.jpg";
 import { Navigation, MousePointerClick, Sparkles, MessageSquare, ThumbsUp } from "lucide-react";
 import mayReviewsImg from "@/assets/may-reviews.jpg";
+import LightboxProvider from "@/components/LightboxProvider";
 
 /* =====================================================
    REUSABLE LOCAL SEO VISIBILITY DASHBOARD TEMPLATE
@@ -418,7 +419,7 @@ const MonthAccordion = ({ month, items, defaultOpen = false }: { month: string; 
 
 const LocalSeoDashboard = () => {
   return (
-    <>
+    <LightboxProvider>
       <Navbar />
 
       {/* HERO */}
@@ -1267,7 +1268,7 @@ const LocalSeoDashboard = () => {
       </section>
 
       <Footer />
-    </>
+    </LightboxProvider>
   );
 };
 
