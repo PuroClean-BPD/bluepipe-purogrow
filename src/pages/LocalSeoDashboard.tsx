@@ -21,9 +21,11 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import { Droplets, Flame, Bug, Users, Lightbulb } from "lucide-react";
+import { Droplets, Flame, Bug, Users, Lightbulb, Crown, ShieldCheck } from "lucide-react";
 import aprilWaterImg from "@/assets/april-water.jpg";
 import mayWaterImg from "@/assets/may-water.jpg";
+import marchMoldImg from "@/assets/march-mold.jpg";
+import mayMoldImg from "@/assets/may-mold.jpg";
 
 /* =====================================================
    REUSABLE LOCAL SEO VISIBILITY DASHBOARD TEMPLATE
