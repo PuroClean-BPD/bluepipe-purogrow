@@ -1488,6 +1488,93 @@ const LocalSeoDashboard = () => {
             </div>
           </div>
 
+          {/* Expansion Candidates */}
+          <div className="mt-10">
+            <div className="flex items-center justify-between mb-5">
+              <div>
+                <div className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground mb-1">Recommended Expansion Markets</div>
+                <h3 className="text-xl lg:text-2xl font-bold">Pipeline Plus Expansion Candidates</h3>
+              </div>
+              <span className="hidden md:inline-flex text-[11px] px-2.5 py-1 rounded-full bg-primary/10 text-primary font-semibold uppercase tracking-wide">3 Target Markets</span>
+            </div>
+            <div className="grid md:grid-cols-3 gap-5">
+              {[
+                {
+                  city: "St. Louis, MO",
+                  population: "301,578",
+                  tier: "Major Metro Expansion",
+                  badge: "Major Market",
+                  badgeClass: "bg-amber-400/15 text-amber-300 border-amber-400/30",
+                  pipelineTier: "250k–500k Tier",
+                  note: "Largest nearby market with substantial emergency restoration search demand. Current map pack penetration remains low, creating a major long-term Pipeline Plus growth opportunity.",
+                },
+                {
+                  city: "Belleville, IL",
+                  population: "42,404",
+                  tier: "High-Priority Expansion",
+                  badge: "High Opportunity",
+                  badgeClass: "bg-emerald-400/15 text-emerald-300 border-emerald-400/30",
+                  pipelineTier: "Under 50k Tier",
+                  note: "Strong nearby population center with high local search potential and favorable proximity relevance for restoration-related services.",
+                },
+                {
+                  city: "Fairview Heights, IL",
+                  population: "16,706",
+                  tier: "Local Dominance Opportunity",
+                  badge: "Local Growth",
+                  badgeClass: "bg-sky-400/15 text-sky-300 border-sky-400/30",
+                  pipelineTier: "Under 25k Tier",
+                  note: "High commercial activity and strong residential density make Fairview Heights a valuable local expansion target for additional map pack visibility.",
+                },
+              ].map((m) => (
+                <div
+                  key={m.city}
+                  className="group relative rounded-2xl section-dark p-6 overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-primary/20"
+                >
+                  <div className="absolute inset-0 opacity-[0.06] pointer-events-none" style={{
+                    backgroundImage: 'linear-gradient(to right, hsl(var(--dark-surface-foreground)) 1px, transparent 1px), linear-gradient(to bottom, hsl(var(--dark-surface-foreground)) 1px, transparent 1px)',
+                    backgroundSize: '32px 32px',
+                  }} />
+                  <div className="absolute -top-16 -right-16 w-44 h-44 rounded-full bg-primary/20 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <div className="relative z-10">
+                    <div className="flex items-start justify-between mb-4">
+                      <div className="flex items-center gap-2.5">
+                        <div className="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center">
+                          <MapPin size={16} className="text-white" />
+                        </div>
+                        <div>
+                          <div className="text-[10px] uppercase tracking-wider text-white/50 font-semibold">Expansion Candidate</div>
+                          <div className="text-base font-bold text-white leading-tight">{m.city}</div>
+                        </div>
+                      </div>
+                      <span className={`text-[10px] px-2 py-0.5 rounded-full border font-semibold uppercase tracking-wide ${m.badgeClass}`}>{m.badge}</span>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-3 mb-4">
+                      <div className="rounded-lg bg-white/5 border border-white/10 p-3">
+                        <div className="text-[10px] uppercase tracking-wider text-white/50 mb-1">Population</div>
+                        <div className="text-lg font-bold text-white">{m.population}</div>
+                      </div>
+                      <div className="rounded-lg bg-white/5 border border-white/10 p-3">
+                        <div className="text-[10px] uppercase tracking-wider text-white/50 mb-1">Market Tier</div>
+                        <div className="text-xs font-semibold text-white leading-snug">{m.tier}</div>
+                      </div>
+                    </div>
+
+                    <p className="text-[13px] leading-relaxed mb-4" style={{ color: "hsl(var(--dark-surface-foreground) / 0.75)" }}>
+                      {m.note}
+                    </p>
+
+                    <div className="flex items-center justify-between pt-3 border-t border-white/10">
+                      <div className="text-[10px] uppercase tracking-wider text-white/50 font-semibold">Recommended Tier</div>
+                      <div className="text-xs font-bold text-primary-foreground bg-primary px-2.5 py-1 rounded-full">{m.pipelineTier}</div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
           {/* CTA Card */}
           <div className="mt-8 rounded-2xl section-dark p-8 lg:p-10 relative overflow-hidden">
             <div className="absolute inset-0 opacity-[0.06]" style={{
