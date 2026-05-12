@@ -1404,15 +1404,16 @@ const LocalSeoDashboard = () => {
                       ["Sauget, IL", "141"],
                     ].map(([city, pop], i) => {
                       const isCaseyville = city === "Caseyville, IL";
-                      const isEdwardsville = city === "Edwardsville, IL";
+                      const targetCities = ["Saint Louis, MO", "Belleville, IL", "Edwardsville, IL", "Fairview Heights, IL"];
+                      const isTarget = targetCities.includes(city);
                       return (
-                        <tr key={city} className={`${i % 2 === 0 ? "bg-white" : "bg-secondary/30"} ${isCaseyville ? "bg-primary/5" : ""} ${isEdwardsville ? "bg-emerald-500/5" : ""} hover:bg-primary/10 transition-colors`}>
+                        <tr key={city} className={`${i % 2 === 0 ? "bg-white" : "bg-secondary/30"} ${isCaseyville ? "bg-primary/5" : ""} ${isTarget ? "bg-emerald-500/5" : ""} hover:bg-primary/10 transition-colors`}>
                           <td className="px-4 py-2.5 text-muted-foreground font-mono text-xs">{i + 1}</td>
                           <td className="px-4 py-2.5 font-medium flex items-center gap-2">
                             <MapPin size={12} className="text-primary/60" />
                             {city}
                             {isCaseyville && <span className="text-[10px] px-1.5 py-0.5 rounded bg-primary/15 text-primary font-semibold">Current</span>}
-                            {isEdwardsville && <span className="text-[10px] px-1.5 py-0.5 rounded bg-emerald-500/15 text-emerald-700 font-semibold">Target</span>}
+                            {isTarget && <span className="text-[10px] px-1.5 py-0.5 rounded bg-emerald-500/15 text-emerald-700 font-semibold">Target</span>}
                           </td>
                           <td className="px-4 py-2.5 text-right font-mono font-semibold">{pop}</td>
                         </tr>
