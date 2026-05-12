@@ -154,7 +154,74 @@ const INSIGHTS = [
   { icon: Target, title: "Next Strategic Focus", body: "Expand into underperforming markets (Madison, Venice, Brooklyn) with dedicated city pages and review velocity campaigns." },
 ];
 
-// ---- COMPONENTS ----
+const SERVICE_VISIBILITY = [
+  {
+    id: "water",
+    name: "Water Damage Restoration",
+    icon: Droplets,
+    seed: 3,
+    aprilScore: "64%",
+    mayScore: "79%",
+    aprilCaption: "Baseline visibility for water damage queries across the 22-city service area.",
+    mayCaption: "Post-optimization snapshot — stronger 3-pack saturation in priority markets.",
+    summary: [
+      "Improved local map rankings month-over-month across water damage intents",
+      "Increased Top 3 visibility coverage in Belleville, Caseyville, and Fairview Heights",
+      "Expanded market consistency across all 22 target cities",
+      "Stronger Google Business Profile engagement signals improved local ranking performance",
+    ],
+    kpis: [
+      { label: "Average Position", value: "2.9", delta: "+1.6" },
+      { label: "Top 3 Coverage", value: "71%", delta: "+18%" },
+      { label: "Visibility Gain", value: "+15%", delta: "MoM" },
+      { label: "Best Performing Market", value: "Belleville", delta: "Pos. 1.4" },
+    ],
+  },
+  {
+    id: "mold",
+    name: "Mold Removal",
+    icon: Bug,
+    seed: 7,
+    aprilScore: "58%",
+    mayScore: "72%",
+    aprilCaption: "Baseline mold remediation visibility prior to FAQ schema and city-page rollout.",
+    mayCaption: "Improved coverage following silo restructuring and review velocity campaigns.",
+    summary: [
+      "Improved local map rankings month-over-month for mold removal queries",
+      "Increased Top 3 visibility coverage across Metro East markets",
+      "Expanded market consistency into previously underperforming zones",
+      "Stronger Google Business Profile engagement signals improved local ranking performance",
+    ],
+    kpis: [
+      { label: "Average Position", value: "3.4", delta: "+1.2" },
+      { label: "Top 3 Coverage", value: "63%", delta: "+14%" },
+      { label: "Visibility Gain", value: "+14%", delta: "MoM" },
+      { label: "Best Performing Market", value: "Caseyville", delta: "Pos. 1.8" },
+    ],
+  },
+  {
+    id: "fire",
+    name: "Fire Damage Restoration",
+    icon: Flame,
+    seed: 11,
+    aprilScore: "61%",
+    mayScore: "76%",
+    aprilCaption: "Baseline fire damage visibility prior to emergency-intent title rollout.",
+    mayCaption: "Stronger 24/7 emergency intent coverage and improved GBP signals.",
+    summary: [
+      "Improved local map rankings month-over-month for fire damage queries",
+      "Increased Top 3 visibility coverage across emergency-intent searches",
+      "Expanded market consistency through new city-targeted landing pages",
+      "Stronger Google Business Profile engagement signals improved local ranking performance",
+    ],
+    kpis: [
+      { label: "Average Position", value: "3.1", delta: "+1.5" },
+      { label: "Top 3 Coverage", value: "68%", delta: "+16%" },
+      { label: "Visibility Gain", value: "+15%", delta: "MoM" },
+      { label: "Best Performing Market", value: "Fairview Hts.", delta: "Pos. 1.6" },
+    ],
+  },
+];
 const KpiCard = ({ kpi }: { kpi: typeof KPIS[number] }) => {
   const Icon = kpi.icon;
   return (
