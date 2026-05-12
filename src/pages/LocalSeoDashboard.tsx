@@ -160,10 +160,10 @@ const TIER2_LINKS = [
 ];
 
 const INSIGHTS = [
-  { icon: TrendingUp, title: "Visibility Gains", body: "Map pack visibility climbed from 66% to 78% across the 22-city service area, driven by geo-content expansion and GBP optimization." },
-  { icon: Award, title: "Authority Growth", body: "22 new authority links acquired across Tier 1 editorials and Tier 2 contextual placements, strengthening topical authority for restoration intents." },
-  { icon: Zap, title: "Engagement Improvements", body: "GBP profile views, calls, and direction requests increased 38% month-over-month with stronger weekend conversion patterns." },
-  { icon: Target, title: "Next Strategic Focus", body: "Expand into underperforming markets (Madison, Venice, Brooklyn) with dedicated city pages and review velocity campaigns." },
+  { icon: TrendingUp, title: "Visibility Gains", body: "Map pack visibility strengthened across the primary service city through GBP engagement growth, review velocity improvements, and geo-relevance optimization." },
+  { icon: Award, title: "Authority Growth", body: "Authority growth continued through Tier 1 editorial placements and Tier 2 contextual support links designed to strengthen topical relevance for restoration-related searches." },
+  { icon: Zap, title: "Engagement Improvements", body: "Google Business Profile engagement continued improving through increased website clicks, review growth, and stronger customer interaction signals." },
+  { icon: Target, title: "Next Strategic Focus", body: "Next strategic growth initiatives depend on PuroClean corporate deployment of expanded Service Area Pages and FAQ-enhanced location content. Once implemented, BluePipe Digital can deploy deeper geo-content optimization, internal linking enhancements, and advanced local schema improvements.", status: "Pending Corporate Deployment" },
 ];
 
 type MonthlyKpi = { label: string; april: string; aprilNote?: string; may: string; mayNote?: string; delta: string; deltaTone: "up" | "down" | "neutral" };
