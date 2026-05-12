@@ -28,6 +28,14 @@ import marchMoldImg from "@/assets/march-mold.jpg";
 import mayMoldImg from "@/assets/may-mold.jpg";
 import marchFireImg from "@/assets/march-fire.jpg";
 import mayFireImg from "@/assets/may-fire.jpg";
+import gbpMarchOverview from "@/assets/gbp-march-overview.jpg";
+import gbpMarchCalls from "@/assets/gbp-march-calls.jpg";
+import gbpMarchDirections from "@/assets/gbp-march-directions.jpg";
+import gbpMarchWebsite from "@/assets/gbp-march-website.jpg";
+import gbpAprilCalls from "@/assets/gbp-april-calls.jpg";
+import gbpAprilDirections from "@/assets/gbp-april-directions.jpg";
+import gbpAprilWebsite from "@/assets/gbp-april-website.jpg";
+import { Navigation, MousePointerClick, Sparkles } from "lucide-react";
 
 /* =====================================================
    REUSABLE LOCAL SEO VISIBILITY DASHBOARD TEMPLATE
@@ -705,30 +713,192 @@ const LocalSeoDashboard = () => {
         </div>
       </section>
 
-      {/* SECTION 3 — PERFORMANCE */}
+      {/* SECTION 3 — GOOGLE BUSINESS PROFILE PERFORMANCE INTELLIGENCE */}
       <section className="section-light">
         <div className="container-main py-20">
           <SectionHeader
-            eyebrow="Section 03 · SEO Performance Summary"
-            title="Monthly Performance Metrics"
-            description="Key analytics across rankings, engagement, and lead generation for the report period."
+            eyebrow="Section 03 · Google Business Profile Intelligence"
+            title="Google Business Profile Performance Intelligence"
+            description="Monthly engagement analytics and customer interaction trends across Google Business Profile visibility channels."
           />
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {PERFORMANCE.map((metric) => {
-              const Icon = metric.icon;
+
+          {/* ROW 1 — KPI COMPARISON CARDS (March vs April 2026) */}
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-10">
+            {[
+              { label: "Total Interactions", icon: BarChart3, mar: "224", apr: "222", delta: "−0.9% MoM", tone: "neutral", note: "+13.1% YoY (Mar)" },
+              { label: "Calls Generated", icon: Phone, mar: "19", apr: "21", delta: "+10.5% MoM", tone: "up", note: "Direct phone actions" },
+              { label: "Direction Requests", icon: Navigation, mar: "173", apr: "154", delta: "−11.0% MoM", tone: "down", note: "+24.5% YoY (Mar) · +2.0% YoY (Apr)" },
+              { label: "Website Clicks", icon: MousePointerClick, mar: "32", apr: "47", delta: "+46.9% MoM", tone: "up", note: "+30.6% YoY (Apr)" },
+            ].map((k) => {
+              const Icon = k.icon;
+              const toneClass =
+                k.tone === "up" ? "text-emerald-600 bg-emerald-50 border-emerald-200" :
+                k.tone === "down" ? "text-rose-600 bg-rose-50 border-rose-200" :
+                "text-muted-foreground bg-muted border-border";
               return (
-                <div key={metric.label} className="card-elevated p-6">
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="icon-box-sm">
-                      <Icon size={18} className="text-primary" />
-                    </div>
-                    <div className="text-sm font-semibold text-muted-foreground">{metric.label}</div>
+                <div key={k.label} className="card-elevated p-6 flex flex-col">
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="icon-box-sm"><Icon size={18} className="text-primary" /></div>
+                    <span className={`text-[11px] font-semibold px-2.5 py-1 rounded-full border ${toneClass}`}>{k.delta}</span>
                   </div>
-                  <div className="text-4xl font-bold mb-1">{metric.value}</div>
-                  <div className="text-sm text-primary font-semibold">{metric.trend}</div>
+                  <div className="text-xs uppercase tracking-wider font-semibold text-muted-foreground mb-3">{k.label}</div>
+                  <div className="grid grid-cols-2 gap-3 mb-3">
+                    <div className="rounded-lg bg-muted/40 px-3 py-2">
+                      <div className="text-[10px] font-semibold text-muted-foreground uppercase tracking-wider">March</div>
+                      <div className="text-2xl font-bold leading-tight">{k.mar}</div>
+                    </div>
+                    <div className="rounded-lg bg-gradient-to-br from-primary/10 to-primary/5 border border-primary/20 px-3 py-2">
+                      <div className="text-[10px] font-semibold text-primary uppercase tracking-wider">April</div>
+                      <div className="text-2xl font-bold leading-tight">{k.apr}</div>
+                    </div>
+                  </div>
+                  <div className="text-[11px] text-muted-foreground mt-auto">{k.note}</div>
                 </div>
               );
             })}
+          </div>
+
+          {/* SECONDARY SIGNALS */}
+          <div className="grid sm:grid-cols-3 gap-5 mb-12">
+            {[
+              { label: "Engagement Growth", value: "+13.1%", note: "Business Profile Interactions YoY", icon: TrendingUp },
+              { label: "Local Visibility Signals", value: "Strong", note: "Consistent map pack presence across 22 cities", icon: Activity },
+              { label: "Buyer Intent Actions", value: "+46.9%", note: "Website clicks MoM growth", icon: Sparkles },
+            ].map((m) => {
+              const Icon = m.icon;
+              return (
+                <div key={m.label} className="card-elevated p-6">
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="icon-box-sm"><Icon size={18} className="text-primary" /></div>
+                    <div className="text-sm font-semibold text-muted-foreground">{m.label}</div>
+                  </div>
+                  <div className="text-3xl font-bold mb-1 bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">{m.value}</div>
+                  <div className="text-xs text-muted-foreground">{m.note}</div>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* ROW 2 — TREND CHARTS (March + April screenshots) */}
+          <div className="space-y-8 mb-12">
+            {[
+              {
+                month: "March 2026",
+                accent: "Baseline reporting period",
+                charts: [
+                  { title: "Business Profile Interactions", value: "224", trend: "+13.1% vs Mar 2025", img: gbpMarchOverview, tone: "up" },
+                  { title: "Calls", value: "19", trend: "−29.6% vs Mar 2025", img: gbpMarchCalls, tone: "down" },
+                  { title: "Direction Requests", value: "173", trend: "+24.5% vs Mar 2025", img: gbpMarchDirections, tone: "up" },
+                  { title: "Website Clicks", value: "32", trend: "+0.0% vs Mar 2025", img: gbpMarchWebsite, tone: "neutral" },
+                ],
+              },
+              {
+                month: "April 2026",
+                accent: "Current reporting period",
+                charts: [
+                  { title: "Calls", value: "21", trend: "−36.4% vs Apr 2025", img: gbpAprilCalls, tone: "down" },
+                  { title: "Direction Requests", value: "154", trend: "+2.0% vs Apr 2025", img: gbpAprilDirections, tone: "up" },
+                  { title: "Website Clicks", value: "47", trend: "+30.6% vs Apr 2025", img: gbpAprilWebsite, tone: "up" },
+                ],
+              },
+            ].map((block) => (
+              <div key={block.month} className="rounded-2xl border border-border card-elevated overflow-hidden">
+                <div className="flex items-center justify-between px-6 py-4 bg-gradient-to-r from-primary/10 via-primary/5 to-transparent border-b border-border">
+                  <div className="flex items-center gap-3">
+                    <div className="h-9 w-9 rounded-lg bg-primary/15 flex items-center justify-center">
+                      <BarChart3 size={18} className="text-primary" />
+                    </div>
+                    <div>
+                      <div className="text-base font-bold">{block.month}</div>
+                      <div className="text-xs text-muted-foreground">{block.accent}</div>
+                    </div>
+                  </div>
+                  <span className="text-[11px] font-semibold uppercase tracking-wider text-primary">GBP Insights</span>
+                </div>
+                <div className={`grid gap-5 p-6 ${block.charts.length === 4 ? "md:grid-cols-2 xl:grid-cols-4" : "md:grid-cols-2 xl:grid-cols-3"}`}>
+                  {block.charts.map((c) => {
+                    const tc =
+                      c.tone === "up" ? "text-emerald-600" :
+                      c.tone === "down" ? "text-rose-600" :
+                      "text-muted-foreground";
+                    return (
+                      <div key={c.title} className="rounded-xl border border-border bg-card overflow-hidden hover:shadow-lg transition-shadow">
+                        <div className="px-4 pt-4 pb-2">
+                          <div className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">{c.title}</div>
+                          <div className="flex items-baseline gap-2 mt-1">
+                            <div className="text-2xl font-bold">{c.value}</div>
+                            <div className={`text-xs font-semibold ${tc}`}>{c.trend}</div>
+                          </div>
+                        </div>
+                        <div className="bg-[#0b1220] mx-4 mb-4 mt-2 rounded-lg overflow-hidden border border-border/40">
+                          <img src={c.img} alt={`${block.month} ${c.title} trend chart`} className="w-full h-auto block" loading="lazy" />
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* INSIGHT + SIGNALS GRID */}
+          <div className="grid lg:grid-cols-2 gap-6">
+            {/* Strategic Insight */}
+            <div className="rounded-2xl card-elevated overflow-hidden">
+              <div className="px-6 py-4 bg-gradient-to-r from-primary to-primary/80 text-white flex items-center gap-3">
+                <Lightbulb size={18} />
+                <div>
+                  <div className="text-base font-bold">Google Engagement Analysis</div>
+                  <div className="text-xs opacity-90">Strategic visibility commentary · April 2026</div>
+                </div>
+              </div>
+              <ul className="p-6 space-y-3">
+                {[
+                  "Google Business Profile engagement remained strong throughout the reporting period.",
+                  "Website click activity increased month-over-month, indicating stronger buyer intent from local search users.",
+                  "Direction requests continued showing strong local brand recognition and trust signals.",
+                  "User engagement patterns suggest growing visibility for restoration-related search terms throughout the Caseyville market.",
+                  "Continued review acquisition and profile activity are helping reinforce local algorithm trust.",
+                ].map((line) => (
+                  <li key={line} className="flex gap-3 text-sm text-foreground/85 leading-relaxed">
+                    <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-primary flex-shrink-0" />
+                    <span>{line}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Trust & Engagement Signals */}
+            <div className="rounded-2xl card-elevated overflow-hidden">
+              <div className="px-6 py-4 bg-gradient-to-r from-[#0b1d3a] to-[#1a2f5c] text-white flex items-center gap-3">
+                <ShieldCheck size={18} />
+                <div>
+                  <div className="text-base font-bold">Google Trust & Engagement Signals</div>
+                  <div className="text-xs opacity-90">Local algorithm reinforcement indicators</div>
+                </div>
+              </div>
+              <div className="p-6 grid sm:grid-cols-2 gap-4">
+                {[
+                  { label: "Review Activity", value: "Active", icon: Star, tone: "up" },
+                  { label: "Call Actions", value: "21 / mo", icon: Phone, tone: "up" },
+                  { label: "Navigation Requests", value: "154 / mo", icon: Navigation, tone: "up" },
+                  { label: "Website Visit Activity", value: "47 / mo", icon: MousePointerClick, tone: "up" },
+                  { label: "Customer Interaction Growth", value: "+13.1% YoY", icon: TrendingUp, tone: "up" },
+                  { label: "Profile Activity Consistency", value: "Stable", icon: Activity, tone: "up" },
+                ].map((s) => {
+                  const Icon = s.icon;
+                  return (
+                    <div key={s.label} className="rounded-xl border border-border bg-card p-4 hover:border-primary/40 transition-colors">
+                      <div className="flex items-center gap-2 mb-2">
+                        <Icon size={16} className="text-primary" />
+                        <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">{s.label}</div>
+                      </div>
+                      <div className="text-lg font-bold">{s.value}</div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
           </div>
         </div>
       </section>
