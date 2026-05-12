@@ -628,6 +628,21 @@ const LocalSeoDashboard = () => {
                   </div>
                 )}
 
+                {svc.callout && (
+                  <div className="relative overflow-hidden rounded-2xl border border-primary/30 p-5 card-elevated" style={{ background: "linear-gradient(135deg, hsl(var(--primary) / 0.08), hsl(var(--primary) / 0.02))" }}>
+                    <div className="absolute -top-12 -left-12 w-40 h-40 rounded-full blur-3xl opacity-30" style={{ background: "var(--gradient-primary)" }} />
+                    <div className="relative flex items-start gap-4">
+                      <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 shadow-md" style={{ background: "var(--gradient-primary)" }}>
+                        <Award size={18} className="text-white" />
+                      </div>
+                      <div className="flex-1">
+                        <div className="text-xs font-bold uppercase tracking-wider mb-1" style={{ color: "hsl(var(--primary))" }}>Local Authority Insight</div>
+                        <p className="text-sm sm:text-base font-semibold leading-snug">{svc.callout}</p>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
                 {!hasMonthly && svc.kpis && svc.kpis.length > 0 && (
                   <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
                     {svc.kpis.map((kpi: any) => (
