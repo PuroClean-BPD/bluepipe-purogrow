@@ -421,8 +421,67 @@ const LocalSeoDashboard = () => {
               })}
             </TabsList>
 
-            {SERVICE_VISIBILITY.map((svc) => (
+            {SERVICE_VISIBILITY.map((svc: any) => {
+              const hasMonthly = Array.isArray(svc.monthlyKpis) && svc.monthlyKpis.length > 0;
+              return (
               <TabsContent key={svc.id} value={svc.id} className="mt-0 space-y-6">
+                {hasMonthly ? (
+                  <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                    {svc.monthlyKpis.map((kpi: MonthlyKpi) => {
+                      const toneBg = kpi.deltaTone === "up" ? "rgba(22,163,74,0.12)" : kpi.deltaTone === "down" ? "rgba(220,38,38,0.10)" : "hsl(var(--primary) / 0.10)";
+                      const toneFg = kpi.deltaTone === "up" ? "#16a34a" : kpi.deltaTone === "down" ? "#dc2626" : "hsl(var(--primary))";
+                      return (
+                        <div key={kpi.label} className="card-elevated p-5 rounded-2xl">
+                          <div className="flex items-center justify-between mb-3">
+                            <div className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">{kpi.label}</div>
+                            <span className="text-[10px] font-bold px-2 py-0.5 rounded-full" style={{ background: toneBg, color: toneFg }}>
+                              {kpi.delta}
+                            </span>
+                          </div>
+                          <div className="grid grid-cols-2 gap-3">
+                            <div className="rounded-lg bg-secondary/50 px-3 py-2">
+                              <div className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">Apr 2026</div>
+                              <div className="flex items-baseline gap-1.5">
+                                <div className="text-lg font-bold">{kpi.april}</div>
+                                {kpi.aprilNote && <div className="text-[11px] text-muted-foreground">{kpi.aprilNote}</div>}
+                              </div>
+                            </div>
+                            <div className="rounded-lg px-3 py-2" style={{ background: "hsl(var(--primary) / 0.08)" }}>
+                              <div className="text-[10px] font-semibold uppercase tracking-wider" style={{ color: "hsl(var(--primary))" }}>May 2026</div>
+                              <div className="flex items-baseline gap-1.5">
+                                <div className="text-lg font-bold">{kpi.may}</div>
+                                {kpi.mayNote && <div className="text-[11px] text-muted-foreground">{kpi.mayNote}</div>}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                ) : null}
+
+                {svc.competitors && (
+                  <div className="rounded-2xl border border-border bg-card p-6 card-elevated">
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="w-9 h-9 rounded-xl flex items-center justify-center" style={{ background: "hsl(var(--primary) / 0.12)" }}>
+                        <Users size={16} className="text-primary" />
+                      </div>
+                      <div>
+                        <div className="font-bold">Primary Local Competitors</div>
+                        <div className="text-xs text-muted-foreground">Top tracked competitors in the {svc.name.toLowerCase()} market</div>
+                      </div>
+                    </div>
+                    <div className="flex flex-wrap gap-2.5">
+                      {svc.competitors.map((c: Competitor) => (
+                        <div key={c.name} className="flex items-center gap-2 px-4 py-2 rounded-full bg-secondary/60 border border-border text-sm font-semibold hover:border-primary/40 transition-all">
+                          <span className="w-2.5 h-2.5 rounded-full shrink-0" style={{ background: c.color }} />
+                          {c.name}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
                 <div className="grid md:grid-cols-2 gap-6">
                   <HeatMapCard
                     label="April 2026 Visibility Snapshot"
@@ -431,6 +490,7 @@ const LocalSeoDashboard = () => {
                     caption={svc.aprilCaption}
                     seed={svc.seed}
                     variant="previous"
+                    image={svc.aprilImage}
                   />
                   <HeatMapCard
                     label="May 2026 Visibility Snapshot"
@@ -439,43 +499,70 @@ const LocalSeoDashboard = () => {
                     caption={svc.mayCaption}
                     seed={svc.seed + 1}
                     variant="current"
+                    image={svc.mayImage}
                   />
                 </div>
 
-                <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-                  {svc.kpis.map((kpi) => (
-                    <div key={kpi.label} className="card-elevated p-5 rounded-2xl">
-                      <div className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-2">{kpi.label}</div>
-                      <div className="flex items-baseline gap-2">
-                        <div className="text-2xl font-bold">{kpi.value}</div>
-                        <span className="text-xs font-bold px-2 py-0.5 rounded-full" style={{ background: "hsl(var(--primary) / 0.1)", color: "hsl(var(--primary))" }}>
-                          {kpi.delta}
-                        </span>
+                {svc.analysis && (
+                  <div className="rounded-2xl p-6 border border-border bg-card card-elevated">
+                    <div className="flex items-start gap-4">
+                      <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0" style={{ background: "hsl(var(--primary) / 0.15)" }}>
+                        <Lightbulb size={18} className="text-primary" />
+                      </div>
+                      <div className="flex-1">
+                        <div className="font-bold text-lg mb-2">{svc.analysis.title}</div>
+                        <ul className="space-y-1.5">
+                          {svc.analysis.bullets.map((item: string) => (
+                            <li key={item} className="text-sm text-muted-foreground flex gap-2">
+                              <span className="text-primary mt-1">•</span>
+                              <span>{item}</span>
+                            </li>
+                          ))}
+                        </ul>
                       </div>
                     </div>
-                  ))}
-                </div>
+                  </div>
+                )}
 
-                <div className="rounded-2xl p-6 border border-border" style={{ background: "hsl(var(--primary) / 0.05)" }}>
-                  <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0" style={{ background: "hsl(var(--primary) / 0.15)" }}>
-                      <TrendingUp size={18} className="text-primary" />
-                    </div>
-                    <div>
-                      <div className="font-bold mb-2">Visibility Movement Summary — {svc.name}</div>
-                      <ul className="space-y-1.5">
-                        {svc.summary.map((item) => (
-                          <li key={item} className="text-sm text-muted-foreground flex gap-2">
-                            <span className="text-primary mt-1">•</span>
-                            <span>{item}</span>
-                          </li>
-                        ))}
-                      </ul>
+                {!hasMonthly && svc.kpis && svc.kpis.length > 0 && (
+                  <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                    {svc.kpis.map((kpi: any) => (
+                      <div key={kpi.label} className="card-elevated p-5 rounded-2xl">
+                        <div className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-2">{kpi.label}</div>
+                        <div className="flex items-baseline gap-2">
+                          <div className="text-2xl font-bold">{kpi.value}</div>
+                          <span className="text-xs font-bold px-2 py-0.5 rounded-full" style={{ background: "hsl(var(--primary) / 0.1)", color: "hsl(var(--primary))" }}>
+                            {kpi.delta}
+                          </span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                {!svc.analysis && (
+                  <div className="rounded-2xl p-6 border border-border" style={{ background: "hsl(var(--primary) / 0.05)" }}>
+                    <div className="flex items-start gap-4">
+                      <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0" style={{ background: "hsl(var(--primary) / 0.15)" }}>
+                        <TrendingUp size={18} className="text-primary" />
+                      </div>
+                      <div>
+                        <div className="font-bold mb-2">Visibility Movement Summary — {svc.name}</div>
+                        <ul className="space-y-1.5">
+                          {svc.summary.map((item: string) => (
+                            <li key={item} className="text-sm text-muted-foreground flex gap-2">
+                              <span className="text-primary mt-1">•</span>
+                              <span>{item}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
                     </div>
                   </div>
-                </div>
+                )}
               </TabsContent>
-            ))}
+              );
+            })}
           </Tabs>
         </div>
       </section>
