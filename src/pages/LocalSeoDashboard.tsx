@@ -1496,15 +1496,15 @@ const LocalSeoDashboard = () => {
                 <div className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground mb-1">Recommended Expansion Markets</div>
                 <h3 className="text-xl lg:text-2xl font-bold">Pipeline Plus Expansion Candidates</h3>
               </div>
-              <span className="hidden md:inline-flex text-[11px] px-2.5 py-1 rounded-full bg-primary/10 text-primary font-semibold uppercase tracking-wide">3 Target Markets</span>
+              <span className="hidden md:inline-flex text-[11px] px-2.5 py-1 rounded-full bg-primary/10 text-primary font-semibold uppercase tracking-wide">4 Target Markets</span>
             </div>
-            <div className="grid md:grid-cols-3 gap-5">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
               {[
                 {
-                  city: "St. Louis, MO",
+                  city: "Saint Louis, MO",
                   population: "301,578",
-                  tier: "Major Metro Expansion",
-                  badge: "Major Market",
+                  tier: "250K–500K Tier",
+                  badge: "Major Market Expansion",
                   badgeClass: "bg-amber-400/15 text-amber-300 border-amber-400/30",
                   pipelineTier: "250k–500k Tier",
                   note: "Largest nearby market with substantial emergency restoration search demand. Current map pack penetration remains low, creating a major long-term Pipeline Plus growth opportunity.",
@@ -1512,17 +1512,26 @@ const LocalSeoDashboard = () => {
                 {
                   city: "Belleville, IL",
                   population: "42,404",
-                  tier: "High-Priority Expansion",
-                  badge: "High Opportunity",
+                  tier: "Under 50K Tier",
+                  badge: "High-Priority Expansion",
                   badgeClass: "bg-emerald-400/15 text-emerald-300 border-emerald-400/30",
                   pipelineTier: "Under 50k Tier",
                   note: "Strong nearby population center with high local search potential and favorable proximity relevance for restoration-related services.",
                 },
                 {
+                  city: "Edwardsville, IL",
+                  population: "26,808",
+                  tier: "Under 50K Tier",
+                  badge: "High-Value Expansion",
+                  badgeClass: "bg-cyan-400/15 text-cyan-300 border-cyan-400/30",
+                  pipelineTier: "Under 50k Tier",
+                  note: "Edwardsville is a strong nearby growth market with meaningful population density and favorable Pipeline Plus pricing alignment.",
+                },
+                {
                   city: "Fairview Heights, IL",
                   population: "16,706",
-                  tier: "Local Dominance Opportunity",
-                  badge: "Local Growth",
+                  tier: "Under 25K Tier",
+                  badge: "Local Dominance Opportunity",
                   badgeClass: "bg-sky-400/15 text-sky-300 border-sky-400/30",
                   pipelineTier: "Under 25k Tier",
                   note: "High commercial activity and strong residential density make Fairview Heights a valuable local expansion target for additional map pack visibility.",
