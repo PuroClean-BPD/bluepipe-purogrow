@@ -39,6 +39,8 @@ import { Navigation, MousePointerClick, Sparkles, MessageSquare, ThumbsUp } from
 import mayReviewsImg from "@/assets/may-reviews.jpg";
 import stlouisWaterImg from "@/assets/stlouis-waterdamagepro.jpg";
 import stlouisPurocleanImg from "@/assets/stlouis-puroclean.jpg";
+import edwardsvilleWaterImg from "@/assets/edwardsville-waterdamagepro.jpg";
+import edwardsvillePurocleanImg from "@/assets/edwardsville-puroclean.jpg";
 import LightboxProvider from "@/components/LightboxProvider";
 
 /* =====================================================
@@ -1473,18 +1475,48 @@ const LocalSeoDashboard = () => {
                 </p>
               </div>
 
-              <div className="rounded-xl border border-emerald-500/30 bg-gradient-to-br from-emerald-500/10 to-emerald-500/5 p-5">
-                <div className="flex items-start gap-3">
-                  <div className="w-10 h-10 rounded-lg bg-emerald-500/15 flex items-center justify-center shrink-0">
-                    <TrendingUp size={18} className="text-emerald-700" />
-                  </div>
+              <div className="card-elevated p-6">
+                <div className="flex items-center gap-3 mb-5">
+                  <div className="icon-box"><BarChart3 size={20} className="text-primary" /></div>
                   <div>
-                    <div className="text-xs font-semibold uppercase tracking-wide text-emerald-700 mb-1">Expansion Candidate</div>
-                    <p className="text-sm text-foreground leading-relaxed">
-                      <span className="font-bold">Edwardsville (Population 26,808)</span> falls within the Pipeline Plus 25k–50k pricing tier, making it a strong candidate for expansion testing.
-                    </p>
+                    <div className="font-bold text-lg">Pipeline Plus Market Expansion Analysis — Edwardsville, IL</div>
+                    <div className="text-xs text-muted-foreground">Edwardsville market visibility benchmarks</div>
                   </div>
                 </div>
+
+                <div className="grid sm:grid-cols-2 gap-4">
+                  {[
+                    { brand: "Water Damage Pro — Edwardsville", avg: "3.8", avgRank: "#3", top3: "52.07%", top3Rank: "#3", share: "57.14%", shareRank: "#3" },
+                    { brand: "PuroClean — Edwardsville", avg: "7.96", avgRank: "#6", top3: "4.73%", top3Rank: "#8", share: "5.19%", shareRank: "#8" },
+                  ].map((b) => (
+                    <div key={b.brand} className="rounded-xl border border-border bg-secondary/30 p-4">
+                      <div className="text-[11px] font-semibold uppercase tracking-wide text-primary mb-3">{b.brand}</div>
+                      <div className="space-y-2.5 text-sm">
+                        <div className="flex items-baseline justify-between gap-2 pb-2 border-b border-border/60">
+                          <span className="text-xs text-muted-foreground">Avg Ranking</span>
+                          <span className="font-mono font-bold">{b.avg} <span className="text-[10px] text-muted-foreground">({b.avgRank})</span></span>
+                        </div>
+                        <div className="flex items-baseline justify-between gap-2 pb-2 border-b border-border/60">
+                          <span className="text-xs text-muted-foreground">Top 3 Visibility</span>
+                          <span className="font-mono font-bold">{b.top3} <span className="text-[10px] text-muted-foreground">({b.top3Rank})</span></span>
+                        </div>
+                        <div className="flex items-baseline justify-between gap-2">
+                          <span className="text-xs text-muted-foreground">Market Share</span>
+                          <span className="font-mono font-bold">{b.share} <span className="text-[10px] text-muted-foreground">({b.shareRank})</span></span>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="grid sm:grid-cols-2 gap-3 mt-4">
+                  <img src={edwardsvilleWaterImg} alt="Water Damage Pro Edwardsville geo-grid visibility heat map" className="rounded-lg border border-border w-full" />
+                  <img src={edwardsvillePurocleanImg} alt="PuroClean Edwardsville geo-grid visibility heat map" className="rounded-lg border border-border w-full" />
+                </div>
+
+                <p className="text-sm text-muted-foreground leading-relaxed mt-5">
+                  Edwardsville shows strong expansion potential. Water Damage Pro is already demonstrating meaningful Top 3 penetration and market share, while PuroClean has significant room to improve visibility. This makes Edwardsville a strong candidate for Pipeline Plus testing within the 25K–50K population tier.
+                </p>
               </div>
             </div>
           </div>
