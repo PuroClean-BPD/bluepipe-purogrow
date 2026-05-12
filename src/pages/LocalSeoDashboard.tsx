@@ -457,6 +457,24 @@ const LocalSeoDashboard = () => {
               const hasMonthly = Array.isArray(svc.monthlyKpis) && svc.monthlyKpis.length > 0;
               return (
               <TabsContent key={svc.id} value={svc.id} className="mt-0 space-y-6">
+                {svc.leaderBadge && (
+                  <div className="relative overflow-hidden rounded-2xl border border-primary/30 p-5 card-elevated" style={{ background: "linear-gradient(135deg, hsl(var(--primary) / 0.10), hsl(var(--primary) / 0.02))" }}>
+                    <div className="absolute -top-16 -right-16 w-56 h-56 rounded-full blur-3xl opacity-40" style={{ background: "var(--gradient-primary)" }} />
+                    <div className="relative flex items-center gap-4">
+                      <div className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0 shadow-md" style={{ background: "var(--gradient-primary)" }}>
+                        <Crown size={22} className="text-white" />
+                      </div>
+                      <div className="flex-1">
+                        <div className="text-base sm:text-lg font-bold leading-tight">{svc.leaderBadge.title}</div>
+                        <div className="text-sm text-muted-foreground mt-0.5">{svc.leaderBadge.subtitle}</div>
+                      </div>
+                      <span className="hidden sm:inline-flex items-center gap-1.5 text-xs font-bold px-3 py-1.5 rounded-full" style={{ background: "rgba(209, 34, 41, 0.10)", color: "#d12229" }}>
+                        <Award size={14} /> Category Leader
+                      </span>
+                    </div>
+                  </div>
+                )}
+
                 {hasMonthly ? (
                   <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
                     {svc.monthlyKpis.map((kpi: MonthlyKpi) => {
@@ -472,14 +490,14 @@ const LocalSeoDashboard = () => {
                           </div>
                           <div className="grid grid-cols-2 gap-3">
                             <div className="rounded-lg bg-secondary/50 px-3 py-2">
-                              <div className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">Apr 2026</div>
+                              <div className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">{svc.periodALabel || "Apr 2026"}</div>
                               <div className="flex items-baseline gap-1.5">
                                 <div className="text-lg font-bold">{kpi.april}</div>
                                 {kpi.aprilNote && <div className="text-[11px] text-muted-foreground">{kpi.aprilNote}</div>}
                               </div>
                             </div>
                             <div className="rounded-lg px-3 py-2" style={{ background: "hsl(var(--primary) / 0.08)" }}>
-                              <div className="text-[10px] font-semibold uppercase tracking-wider" style={{ color: "hsl(var(--primary))" }}>May 2026</div>
+                              <div className="text-[10px] font-semibold uppercase tracking-wider" style={{ color: "hsl(var(--primary))" }}>{svc.periodBLabel || "May 2026"}</div>
                               <div className="flex items-baseline gap-1.5">
                                 <div className="text-lg font-bold">{kpi.may}</div>
                                 {kpi.mayNote && <div className="text-[11px] text-muted-foreground">{kpi.mayNote}</div>}
@@ -491,6 +509,28 @@ const LocalSeoDashboard = () => {
                     })}
                   </div>
                 ) : null}
+
+                {svc.dominance && (
+                  <div className="rounded-2xl border border-border bg-card p-6 card-elevated">
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="w-9 h-9 rounded-xl flex items-center justify-center" style={{ background: "hsl(var(--primary) / 0.12)" }}>
+                        <ShieldCheck size={16} className="text-primary" />
+                      </div>
+                      <div>
+                        <div className="font-bold">{svc.dominance.title}</div>
+                        <div className="text-xs text-muted-foreground">Snapshot of category leadership signals for {svc.name.toLowerCase()}</div>
+                      </div>
+                    </div>
+                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2.5">
+                      {svc.dominance.items.map((item: string) => (
+                        <div key={item} className="flex items-center gap-2 px-3 py-2.5 rounded-xl bg-secondary/50 border border-border text-sm font-semibold">
+                          <span className="w-2 h-2 rounded-full shrink-0" style={{ background: "hsl(var(--primary))" }} />
+                          {item}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
 
                 {svc.competitors && (
                   <div className="rounded-2xl border border-border bg-card p-6 card-elevated">
@@ -516,8 +556,8 @@ const LocalSeoDashboard = () => {
 
                 <div className="grid md:grid-cols-2 gap-6">
                   <HeatMapCard
-                    label="April 2026 Visibility Snapshot"
-                    period={`${svc.name} · April 2026`}
+                    label={svc.aprilCardLabel || "April 2026 Visibility Snapshot"}
+                    period={svc.aprilCardPeriod || `${svc.name} · April 2026`}
                     score={svc.aprilScore}
                     caption={svc.aprilCaption}
                     seed={svc.seed}
@@ -525,8 +565,8 @@ const LocalSeoDashboard = () => {
                     image={svc.aprilImage}
                   />
                   <HeatMapCard
-                    label="May 2026 Visibility Snapshot"
-                    period={`${svc.name} · May 2026`}
+                    label={svc.mayCardLabel || "May 2026 Visibility Snapshot"}
+                    period={svc.mayCardPeriod || `${svc.name} · May 2026`}
                     score={svc.mayScore}
                     caption={svc.mayCaption}
                     seed={svc.seed + 1}
