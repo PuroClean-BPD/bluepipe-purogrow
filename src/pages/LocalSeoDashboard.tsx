@@ -35,7 +35,7 @@ import gbpMarchWebsite from "@/assets/gbp-march-website.jpg";
 import gbpAprilCalls from "@/assets/gbp-april-calls.jpg";
 import gbpAprilDirections from "@/assets/gbp-april-directions.jpg";
 import gbpAprilWebsite from "@/assets/gbp-april-website.jpg";
-import { Phone as PhoneIcon, Navigation, MousePointerClick, Sparkles, ShieldCheck as ShieldCheckIcon } from "lucide-react";
+import { Navigation, MousePointerClick, Sparkles } from "lucide-react";
 
 /* =====================================================
    REUSABLE LOCAL SEO VISIBILITY DASHBOARD TEMPLATE
