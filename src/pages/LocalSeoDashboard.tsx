@@ -21,7 +21,9 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import { Droplets, Flame, Bug } from "lucide-react";
+import { Droplets, Flame, Bug, Users, Lightbulb } from "lucide-react";
+import aprilWaterImg from "@/assets/april-water.jpg";
+import mayWaterImg from "@/assets/may-water.jpg";
 
 /* =====================================================
    REUSABLE LOCAL SEO VISIBILITY DASHBOARD TEMPLATE
@@ -154,28 +156,50 @@ const INSIGHTS = [
   { icon: Target, title: "Next Strategic Focus", body: "Expand into underperforming markets (Madison, Venice, Brooklyn) with dedicated city pages and review velocity campaigns." },
 ];
 
+type MonthlyKpi = { label: string; april: string; aprilNote?: string; may: string; mayNote?: string; delta: string; deltaTone: "up" | "down" | "neutral" };
+type Competitor = { name: string; color: string };
+
 const SERVICE_VISIBILITY = [
   {
     id: "water",
     name: "Water Damage Restoration",
     icon: Droplets,
     seed: 3,
-    aprilScore: "64%",
-    mayScore: "79%",
-    aprilCaption: "Baseline visibility for water damage queries across the 22-city service area.",
-    mayCaption: "Post-optimization snapshot — stronger 3-pack saturation in priority markets.",
+    aprilScore: "37.87%",
+    mayScore: "36.69%",
+    aprilImage: aprilWaterImg,
+    mayImage: mayWaterImg,
+    aprilCaption: "April 2026 geo-grid snapshot · 37.87% Top 3 visibility · 48.48% market share.",
+    mayCaption: "May 2026 geo-grid snapshot · 36.69% Top 3 visibility · 51.67% market share.",
+    monthlyKpis: [
+      { label: "Average Ranking", april: "4.43", aprilNote: "#2", may: "4.63", mayNote: "#2", delta: "+0.20", deltaTone: "neutral" },
+      { label: "Top 3 Visibility", april: "37.87%", aprilNote: "#4", may: "36.69%", mayNote: "#4", delta: "-1.18%", deltaTone: "down" },
+      { label: "Market Share", april: "48.48%", aprilNote: "#4", may: "51.67%", mayNote: "#4", delta: "+3.19%", deltaTone: "up" },
+      { label: "Local Rank", april: "#2", may: "#2", delta: "Held", deltaTone: "neutral" },
+    ] as MonthlyKpi[],
+    competitors: [
+      { name: "RCC Restoration", color: "#3b82f6" },
+      { name: "SERVPRO Collinsville", color: "#f59e0b" },
+      { name: "Rainbow Restoration", color: "#10b981" },
+      { name: "Five Star Water Damage", color: "#d12229" },
+    ] as Competitor[],
+    analysis: {
+      title: "Water Damage Visibility Analysis",
+      bullets: [
+        "PuroClean Caseyville maintained strong Top 3 visibility throughout core Illinois service zones.",
+        "Market share increased month-over-month despite heightened local competition.",
+        "Visibility remains strongest throughout Caseyville, Fairview Heights, Swansea, and Belleville.",
+        "Competitive pressure remains strongest in western St. Louis markets.",
+        "Continued Google Business Profile engagement and authority-building efforts are improving local search stability.",
+      ],
+    },
     summary: [
-      "Improved local map rankings month-over-month across water damage intents",
-      "Increased Top 3 visibility coverage in Belleville, Caseyville, and Fairview Heights",
-      "Expanded market consistency across all 22 target cities",
-      "Stronger Google Business Profile engagement signals improved local ranking performance",
+      "Top 3 visibility held steady across core Illinois service zones",
+      "Market share grew +3.19% MoM despite competitive pressure",
+      "Strongest coverage in Caseyville, Fairview Heights, Swansea, Belleville",
+      "GBP engagement and authority-building stabilizing local rank",
     ],
-    kpis: [
-      { label: "Average Position", value: "2.9", delta: "+1.6" },
-      { label: "Top 3 Coverage", value: "71%", delta: "+18%" },
-      { label: "Visibility Gain", value: "+15%", delta: "MoM" },
-      { label: "Best Performing Market", value: "Belleville", delta: "Pos. 1.4" },
-    ],
+    kpis: [],
   },
   {
     id: "mold",
@@ -248,7 +272,7 @@ const SectionHeader = ({ eyebrow, title, description }: { eyebrow: string; title
   </div>
 );
 
-const HeatMapCard = ({ label, period, score, caption, seed = 0, variant = "previous" }: { label: string; period: string; score: string; caption: string; seed?: number; variant?: "previous" | "current" }) => (
+const HeatMapCard = ({ label, period, score, caption, seed = 0, variant = "previous", image }: { label: string; period: string; score: string; caption: string; seed?: number; variant?: "previous" | "current"; image?: string }) => (
   <div className="rounded-2xl border border-border bg-card overflow-hidden card-elevated">
     <div className="px-5 py-4 border-b border-border flex items-center justify-between">
       <div>
@@ -256,33 +280,38 @@ const HeatMapCard = ({ label, period, score, caption, seed = 0, variant = "previ
         <div className="text-sm font-bold mt-0.5">{period}</div>
       </div>
       <span className="text-xs font-bold px-3 py-1 rounded-full" style={{ background: "hsl(var(--primary) / 0.1)", color: "hsl(var(--primary))" }}>
-        Visibility {score}
+        Top 3 · {score}
       </span>
     </div>
-    {/* Stylized heat map placeholder */}
-    <div className="relative aspect-[4/3] bg-gradient-to-br from-slate-100 to-slate-200 overflow-hidden">
-      <div className="absolute inset-0" style={{
-        backgroundImage: 'linear-gradient(to right, rgba(0,0,0,0.06) 1px, transparent 1px), linear-gradient(to bottom, rgba(0,0,0,0.06) 1px, transparent 1px)',
-        backgroundSize: '40px 40px',
-      }} />
-      <div className="absolute inset-0 grid grid-cols-7 grid-rows-5 gap-2 p-6">
-        {Array.from({ length: 35 }).map((_, i) => {
-          const s = (i * 13 + seed + label.length) % 10;
-          const isCurrent = variant === "current";
-          const rank = isCurrent
-            ? (s < 5 ? 1 + (s % 3) : 4 + (s % 4))
-            : (s < 3 ? 2 + (s % 3) : 6 + (s % 5));
-          const color = rank <= 3 ? "#16a34a" : rank <= 6 ? "#eab308" : "#dc2626";
-          return (
-            <div key={i} className="flex items-center justify-center">
-              <div className="w-7 h-7 rounded-full text-white text-[10px] font-bold flex items-center justify-center shadow-md" style={{ background: color }}>
-                {rank}
-              </div>
-            </div>
-          );
-        })}
+    {image ? (
+      <div className="relative aspect-[4/3] bg-slate-100 overflow-hidden">
+        <img src={image} alt={`${period} geo-grid heat map`} className="w-full h-full object-cover" loading="lazy" />
       </div>
-    </div>
+    ) : (
+      <div className="relative aspect-[4/3] bg-gradient-to-br from-slate-100 to-slate-200 overflow-hidden">
+        <div className="absolute inset-0" style={{
+          backgroundImage: 'linear-gradient(to right, rgba(0,0,0,0.06) 1px, transparent 1px), linear-gradient(to bottom, rgba(0,0,0,0.06) 1px, transparent 1px)',
+          backgroundSize: '40px 40px',
+        }} />
+        <div className="absolute inset-0 grid grid-cols-7 grid-rows-5 gap-2 p-6">
+          {Array.from({ length: 35 }).map((_, i) => {
+            const s = (i * 13 + seed + label.length) % 10;
+            const isCurrent = variant === "current";
+            const rank = isCurrent
+              ? (s < 5 ? 1 + (s % 3) : 4 + (s % 4))
+              : (s < 3 ? 2 + (s % 3) : 6 + (s % 5));
+            const color = rank <= 3 ? "#16a34a" : rank <= 6 ? "#eab308" : "#dc2626";
+            return (
+              <div key={i} className="flex items-center justify-center">
+                <div className="w-7 h-7 rounded-full text-white text-[10px] font-bold flex items-center justify-center shadow-md" style={{ background: color }}>
+                  {rank}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    )}
     <div className="px-5 py-3 text-xs text-muted-foreground border-t border-border">{caption}</div>
   </div>
 );
