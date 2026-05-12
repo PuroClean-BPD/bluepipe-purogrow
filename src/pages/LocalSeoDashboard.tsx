@@ -764,7 +764,7 @@ const LocalSeoDashboard = () => {
           <div className="grid sm:grid-cols-3 gap-5 mb-12">
             {[
               { label: "Engagement Growth", value: "+13.1%", note: "Business Profile Interactions YoY", icon: TrendingUp },
-              { label: "Local Visibility Signals", value: "Strong", note: "Consistent map pack presence across 22 cities", icon: Activity },
+              { label: "Local Visibility Signals", value: "Strong", note: "Consistent map pack presence across the main service city", icon: Activity },
               { label: "Buyer Intent Actions", value: "+46.9%", note: "Website clicks MoM growth", icon: Sparkles },
             ].map((m) => {
               const Icon = m.icon;
