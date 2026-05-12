@@ -93,12 +93,8 @@ const MONTHLY_UPDATES = [
   {
     month: "April 2026 Updates",
     items: [
-      { label: "Title Tag Updates", detail: "Rolled out emergency-intent title tags across fire and biohazard pages with 24/7 modifiers." },
-      { label: "Schema Improvements", detail: "Added FAQPage and Review schema to top 6 service pages." },
-      { label: "Internal Linking", detail: "Built silo structure linking blog content into service hubs and GBP landing page." },
-      { label: "Geo-Content Additions", detail: "Published Belleville, Swansea, and Cahokia city pages with localized testimonials." },
-      { label: "Service Page Optimizations", detail: "Enhanced commercial restoration page with case studies and trust indicators." },
-      { label: "Technical SEO", detail: "Compressed media library, deployed lazy-loading, and refreshed XML sitemap." },
+      { label: "Content Status", detail: "No content added yet. Waiting for PuroClean corporate to update the website.", status: "Pending" },
+      { label: "Schema Status", detail: "Local schema file not updated yet. Pending BluePipe Digital Rank Math Pro license to be added to the account by PuroClean corporate.", status: "In Progress" },
     ],
   },
 ];
@@ -390,7 +386,7 @@ const HeatMapCard = ({ label, period, score, caption, seed = 0, variant = "previ
   </div>
 );
 
-const MonthAccordion = ({ month, items, defaultOpen = false }: { month: string; items: { label: string; detail: string }[]; defaultOpen?: boolean }) => {
+const MonthAccordion = ({ month, items, defaultOpen = false }: { month: string; items: { label: string; detail: string; status?: string }[]; defaultOpen?: boolean }) => {
   const [open, setOpen] = useState(defaultOpen);
   return (
     <div className="rounded-2xl border border-border bg-card overflow-hidden">
@@ -407,7 +403,22 @@ const MonthAccordion = ({ month, items, defaultOpen = false }: { month: string; 
         <div className="px-6 pb-6 grid md:grid-cols-2 gap-4">
           {items.map((item) => (
             <div key={item.label} className="rounded-xl bg-secondary/40 p-4 border border-border/60">
-              <div className="text-sm font-bold mb-1.5">{item.label}</div>
+              <div className="flex items-center justify-between gap-2 mb-1.5">
+                <div className="text-sm font-bold">{item.label}</div>
+                {item.status && (
+                  <span
+                    className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider border"
+                    style={{
+                      background: "hsl(var(--muted) / 0.6)",
+                      color: "hsl(var(--muted-foreground))",
+                      borderColor: "hsl(var(--border))",
+                    }}
+                  >
+                    <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse" />
+                    {item.status}
+                  </span>
+                )}
+              </div>
               <p className="text-sm text-muted-foreground leading-relaxed">{item.detail}</p>
             </div>
           ))}
