@@ -37,6 +37,8 @@ import gbpAprilDirections from "@/assets/gbp-april-directions.jpg";
 import gbpAprilWebsite from "@/assets/gbp-april-website.jpg";
 import { Navigation, MousePointerClick, Sparkles, MessageSquare, ThumbsUp } from "lucide-react";
 import mayReviewsImg from "@/assets/may-reviews.jpg";
+import stlouisWaterImg from "@/assets/stlouis-waterdamagepro.jpg";
+import stlouisPurocleanImg from "@/assets/stlouis-puroclean.jpg";
 import LightboxProvider from "@/components/LightboxProvider";
 
 /* =====================================================
