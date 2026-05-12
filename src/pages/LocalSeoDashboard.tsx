@@ -329,7 +329,8 @@ const KpiCard = ({ kpi }: { kpi: typeof KPIS[number] }) => {
         </span>
       </div>
       <div className="text-2xl font-bold text-white">{kpi.value}</div>
-      <div className="text-xs text-white/60 mt-1">{kpi.label}</div>
+      <div className="text-sm font-semibold text-white/90 mt-1">{kpi.title}</div>
+      <div className="text-[11px] text-white/55 mt-1 leading-snug">{kpi.label}</div>
     </div>
   );
 };
