@@ -901,6 +901,224 @@ const LocalSeoDashboard = () => {
               </div>
             </div>
           </div>
+
+          {/* SUBSECTION — REPUTATION & REVIEW GROWTH */}
+          <div className="mt-20">
+            <div className="flex items-center gap-3 mb-3">
+              <span className="h-px flex-1 bg-gradient-to-r from-transparent to-border" />
+              <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-primary px-3 py-1 rounded-full bg-primary/10 border border-primary/20">
+                03b · Reputation Intelligence
+              </span>
+              <span className="h-px flex-1 bg-gradient-to-l from-transparent to-border" />
+            </div>
+            <div className="text-center max-w-2xl mx-auto mb-10">
+              <h3 className="text-3xl md:text-4xl font-bold tracking-tight mb-3">Reputation &amp; Review Growth</h3>
+              <p className="text-muted-foreground">
+                Month-over-month review velocity, Google rating progression, and trust signal expansion across the Caseyville profile.
+              </p>
+            </div>
+
+            {/* TIMELINE CARDS */}
+            <div className="grid md:grid-cols-3 gap-5 mb-10">
+              {[
+                { month: "March 2026", rating: 4.4, total: 123, growth: null, label: "Baseline", highlight: false },
+                { month: "April 2026", rating: 4.6, total: 150, growth: "+27 reviews", pct: "+22.0%", label: "Acceleration", highlight: true },
+                { month: "May 2026", rating: 4.6, total: 158, growth: "+8 reviews", pct: "+5.3%", label: "Sustained Growth", highlight: false },
+              ].map((m) => {
+                const filled = Math.floor(m.rating);
+                const half = m.rating - filled >= 0.25 && m.rating - filled < 0.75;
+                return (
+                  <div
+                    key={m.month}
+                    className={`card-elevated p-6 relative overflow-hidden ${m.highlight ? "ring-2 ring-primary/30" : ""}`}
+                  >
+                    {m.highlight && (
+                      <span className="absolute top-4 right-4 text-[10px] font-bold uppercase tracking-wider text-primary bg-primary/10 border border-primary/20 px-2 py-1 rounded-full">
+                        Peak Velocity
+                      </span>
+                    )}
+                    <div className="text-xs uppercase tracking-wider font-semibold text-muted-foreground mb-1">{m.label}</div>
+                    <div className="text-lg font-bold mb-4">{m.month}</div>
+
+                    <div className="flex items-center gap-2 mb-3">
+                      <div className="flex items-center gap-0.5">
+                        {[0, 1, 2, 3, 4].map((i) => (
+                          <Star
+                            key={i}
+                            size={18}
+                            className={
+                              i < filled
+                                ? "fill-amber-400 text-amber-400"
+                                : i === filled && half
+                                ? "fill-amber-400/60 text-amber-400"
+                                : "text-muted-foreground/30"
+                            }
+                          />
+                        ))}
+                      </div>
+                      <span className="text-2xl font-bold leading-none">{m.rating.toFixed(1)}</span>
+                    </div>
+
+                    <div className="rounded-lg bg-muted/40 px-4 py-3 mb-3">
+                      <div className="text-[10px] font-semibold text-muted-foreground uppercase tracking-wider">Total Reviews</div>
+                      <div className="flex items-baseline gap-2">
+                        <div className="text-3xl font-bold bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
+                          {m.total}
+                        </div>
+                        {m.pct && (
+                          <span className="text-xs font-semibold text-emerald-600 inline-flex items-center gap-1">
+                            <TrendingUp size={12} /> {m.pct}
+                          </span>
+                        )}
+                      </div>
+                    </div>
+
+                    {m.growth ? (
+                      <div className="flex items-center gap-2 text-xs font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200 rounded-full px-3 py-1.5 w-fit">
+                        <ThumbsUp size={12} /> {m.growth}
+                      </div>
+                    ) : (
+                      <div className="text-xs text-muted-foreground">Baseline reporting period</div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* TREND VISUALIZATION + SCREENSHOT */}
+            <div className="grid lg:grid-cols-3 gap-6 mb-10">
+              <div className="lg:col-span-2 card-elevated rounded-2xl overflow-hidden">
+                <div className="px-6 py-4 bg-gradient-to-r from-primary/10 via-primary/5 to-transparent border-b border-border flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <div className="h-9 w-9 rounded-lg bg-primary/15 flex items-center justify-center">
+                      <TrendingUp size={18} className="text-primary" />
+                    </div>
+                    <div>
+                      <div className="text-base font-bold">Reputation Trend Visualization</div>
+                      <div className="text-xs text-muted-foreground">Total review count progression · Mar → May 2026</div>
+                    </div>
+                  </div>
+                  <span className="text-[11px] font-semibold uppercase tracking-wider text-emerald-600 bg-emerald-50 border border-emerald-200 px-2.5 py-1 rounded-full">
+                    +35 reviews in 60 days
+                  </span>
+                </div>
+                <div className="p-8">
+                  {(() => {
+                    const points = [
+                      { m: "Mar", v: 123 },
+                      { m: "Apr", v: 150 },
+                      { m: "May", v: 158 },
+                    ];
+                    const max = 170;
+                    return (
+                      <div className="flex items-end justify-around gap-6 h-56">
+                        {points.map((p) => {
+                          const h = (p.v / max) * 100;
+                          return (
+                            <div key={p.m} className="flex-1 flex flex-col items-center gap-3">
+                              <div className="text-sm font-bold">{p.v}</div>
+                              <div className="w-full max-w-[80px] flex-1 flex items-end">
+                                <div
+                                  className="w-full rounded-t-lg bg-gradient-to-t from-primary to-primary/60 shadow-md transition-all"
+                                  style={{ height: `${h}%` }}
+                                />
+                              </div>
+                              <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">{p.m}</div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    );
+                  })()}
+                </div>
+              </div>
+
+              <div className="card-elevated rounded-2xl overflow-hidden">
+                <div className="px-6 py-4 bg-gradient-to-r from-[#0b1d3a] to-[#1a2f5c] text-white flex items-center gap-3">
+                  <Star size={18} className="fill-amber-400 text-amber-400" />
+                  <div>
+                    <div className="text-base font-bold">Live Google Profile</div>
+                    <div className="text-xs opacity-90">May 2026 snapshot</div>
+                  </div>
+                </div>
+                <div className="p-4">
+                  <img
+                    src={mayReviewsImg}
+                    alt="PuroClean Caseyville Google Business Profile showing 4.6 rating and 158 reviews"
+                    className="w-full h-auto rounded-lg border border-border"
+                    loading="lazy"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* TRUST SIGNAL CHIPS */}
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
+              {[
+                { label: "Google Rating", value: "4.6 ★", icon: Star, note: "Up from 4.4" },
+                { label: "Total Reviews", value: "158", icon: MessageSquare, note: "+35 in 60 days" },
+                { label: "Review Velocity", value: "High", icon: TrendingUp, note: "Mar → Apr surge" },
+                { label: "Sentiment Stability", value: "Strong", icon: ShieldCheck, note: "Diversified base" },
+              ].map((s) => {
+                const Icon = s.icon;
+                return (
+                  <div key={s.label} className="card-elevated p-5 flex items-center gap-4">
+                    <div className="h-11 w-11 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center flex-shrink-0">
+                      <Icon size={20} className="text-primary" />
+                    </div>
+                    <div className="min-w-0">
+                      <div className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">{s.label}</div>
+                      <div className="text-xl font-bold leading-tight">{s.value}</div>
+                      <div className="text-[11px] text-emerald-600 font-semibold">{s.note}</div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* INSIGHTS GRID */}
+            <div className="grid lg:grid-cols-3 gap-6">
+              <div className="lg:col-span-2 rounded-2xl card-elevated overflow-hidden">
+                <div className="px-6 py-4 bg-gradient-to-r from-primary to-primary/80 text-white flex items-center gap-3">
+                  <Lightbulb size={18} />
+                  <div>
+                    <div className="text-base font-bold">Reputation Signal Analysis</div>
+                    <div className="text-xs opacity-90">Strategic commentary · Mar – May 2026</div>
+                  </div>
+                </div>
+                <ul className="p-6 space-y-3">
+                  {[
+                    "Review velocity increased significantly between March and April, with +27 new reviews acquired in a single reporting period.",
+                    "Google rating strength improved from 4.4 to 4.6 stars, signaling a meaningful jump in customer satisfaction perception.",
+                    "The business continues generating strong positive customer sentiment month over month.",
+                    "Increased review activity is directly strengthening local ranking authority and trust signals across the Caseyville map pack.",
+                    "Despite receiving a recent 1-star review in May, overall profile sentiment remained highly stable due to strong review diversification and a positive engagement history.",
+                    "This type of reputation consistency helps protect local rankings against isolated negative sentiment and short-term volatility.",
+                  ].map((line) => (
+                    <li key={line} className="flex gap-3 text-sm text-foreground/85 leading-relaxed">
+                      <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-primary flex-shrink-0" />
+                      <span>{line}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="rounded-2xl card-elevated overflow-hidden bg-gradient-to-br from-amber-50 via-white to-primary/5 border border-amber-200/60">
+                <div className="px-6 py-4 border-b border-amber-200/60 flex items-center gap-3">
+                  <div className="h-9 w-9 rounded-lg bg-amber-400/20 border border-amber-300 flex items-center justify-center">
+                    <Award size={18} className="text-amber-600" />
+                  </div>
+                  <div>
+                    <div className="text-base font-bold">Why This Matters</div>
+                    <div className="text-xs text-muted-foreground">Google trust signal commentary</div>
+                  </div>
+                </div>
+                <div className="p-6 text-sm text-foreground/85 leading-relaxed">
+                  Google increasingly uses engagement and reputation signals as ranking factors inside the Local Map Pack. Strong review growth, consistent customer sentiment, and active engagement behavior help reinforce visibility stability and local search authority.
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
