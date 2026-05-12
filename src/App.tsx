@@ -9,6 +9,7 @@ import Newsletter from "./pages/Newsletter.tsx";
 import FreeAudit from "./pages/FreeAudit.tsx";
 import Pricing from "./pages/Pricing.tsx";
 import SeoPackagesPrint from "./pages/SeoPackagesPrint.tsx";
+import LocalSeoDashboard from "./pages/LocalSeoDashboard.tsx";
 import About from "./pages/About.tsx";
 import Contact from "./pages/Contact.tsx";
 import NotFound from "./pages/NotFound.tsx";
@@ -28,6 +29,8 @@ const App = () => (
           <Route path="/free-audit" element={<FreeAudit />} />
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/seo-packages-print" element={<SeoPackagesPrint />} />
+          <Route path="/reports/caseyville-il" element={<LocalSeoDashboard />} />
+          <Route path="/local-seo-dashboard" element={<LocalSeoDashboard />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="*" element={<NotFound />} />
