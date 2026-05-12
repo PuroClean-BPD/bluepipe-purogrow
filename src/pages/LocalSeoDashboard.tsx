@@ -20,6 +20,8 @@ import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import { Droplets, Flame, Bug } from "lucide-react";
 
 /* =====================================================
    REUSABLE LOCAL SEO VISIBILITY DASHBOARD TEMPLATE
@@ -152,7 +154,74 @@ const INSIGHTS = [
   { icon: Target, title: "Next Strategic Focus", body: "Expand into underperforming markets (Madison, Venice, Brooklyn) with dedicated city pages and review velocity campaigns." },
 ];
 
-// ---- COMPONENTS ----
+const SERVICE_VISIBILITY = [
+  {
+    id: "water",
+    name: "Water Damage Restoration",
+    icon: Droplets,
+    seed: 3,
+    aprilScore: "64%",
+    mayScore: "79%",
+    aprilCaption: "Baseline visibility for water damage queries across the 22-city service area.",
+    mayCaption: "Post-optimization snapshot — stronger 3-pack saturation in priority markets.",
+    summary: [
+      "Improved local map rankings month-over-month across water damage intents",
+      "Increased Top 3 visibility coverage in Belleville, Caseyville, and Fairview Heights",
+      "Expanded market consistency across all 22 target cities",
+      "Stronger Google Business Profile engagement signals improved local ranking performance",
+    ],
+    kpis: [
+      { label: "Average Position", value: "2.9", delta: "+1.6" },
+      { label: "Top 3 Coverage", value: "71%", delta: "+18%" },
+      { label: "Visibility Gain", value: "+15%", delta: "MoM" },
+      { label: "Best Performing Market", value: "Belleville", delta: "Pos. 1.4" },
+    ],
+  },
+  {
+    id: "mold",
+    name: "Mold Removal",
+    icon: Bug,
+    seed: 7,
+    aprilScore: "58%",
+    mayScore: "72%",
+    aprilCaption: "Baseline mold remediation visibility prior to FAQ schema and city-page rollout.",
+    mayCaption: "Improved coverage following silo restructuring and review velocity campaigns.",
+    summary: [
+      "Improved local map rankings month-over-month for mold removal queries",
+      "Increased Top 3 visibility coverage across Metro East markets",
+      "Expanded market consistency into previously underperforming zones",
+      "Stronger Google Business Profile engagement signals improved local ranking performance",
+    ],
+    kpis: [
+      { label: "Average Position", value: "3.4", delta: "+1.2" },
+      { label: "Top 3 Coverage", value: "63%", delta: "+14%" },
+      { label: "Visibility Gain", value: "+14%", delta: "MoM" },
+      { label: "Best Performing Market", value: "Caseyville", delta: "Pos. 1.8" },
+    ],
+  },
+  {
+    id: "fire",
+    name: "Fire Damage Restoration",
+    icon: Flame,
+    seed: 11,
+    aprilScore: "61%",
+    mayScore: "76%",
+    aprilCaption: "Baseline fire damage visibility prior to emergency-intent title rollout.",
+    mayCaption: "Stronger 24/7 emergency intent coverage and improved GBP signals.",
+    summary: [
+      "Improved local map rankings month-over-month for fire damage queries",
+      "Increased Top 3 visibility coverage across emergency-intent searches",
+      "Expanded market consistency through new city-targeted landing pages",
+      "Stronger Google Business Profile engagement signals improved local ranking performance",
+    ],
+    kpis: [
+      { label: "Average Position", value: "3.1", delta: "+1.5" },
+      { label: "Top 3 Coverage", value: "68%", delta: "+16%" },
+      { label: "Visibility Gain", value: "+15%", delta: "MoM" },
+      { label: "Best Performing Market", value: "Fairview Hts.", delta: "Pos. 1.6" },
+    ],
+  },
+];
 const KpiCard = ({ kpi }: { kpi: typeof KPIS[number] }) => {
   const Icon = kpi.icon;
   return (
@@ -179,7 +248,7 @@ const SectionHeader = ({ eyebrow, title, description }: { eyebrow: string; title
   </div>
 );
 
-const HeatMapCard = ({ label, period, score, caption }: { label: string; period: string; score: string; caption: string }) => (
+const HeatMapCard = ({ label, period, score, caption, seed = 0, variant = "previous" }: { label: string; period: string; score: string; caption: string; seed?: number; variant?: "previous" | "current" }) => (
   <div className="rounded-2xl border border-border bg-card overflow-hidden card-elevated">
     <div className="px-5 py-4 border-b border-border flex items-center justify-between">
       <div>
@@ -196,14 +265,13 @@ const HeatMapCard = ({ label, period, score, caption }: { label: string; period:
         backgroundImage: 'linear-gradient(to right, rgba(0,0,0,0.06) 1px, transparent 1px), linear-gradient(to bottom, rgba(0,0,0,0.06) 1px, transparent 1px)',
         backgroundSize: '40px 40px',
       }} />
-      {/* Heat dots */}
       <div className="absolute inset-0 grid grid-cols-7 grid-rows-5 gap-2 p-6">
         {Array.from({ length: 35 }).map((_, i) => {
-          const seed = (i * 13 + label.length) % 10;
-          const isCurrent = label.toLowerCase().includes("current");
+          const s = (i * 13 + seed + label.length) % 10;
+          const isCurrent = variant === "current";
           const rank = isCurrent
-            ? (seed < 5 ? 1 + (seed % 3) : 4 + (seed % 4))
-            : (seed < 3 ? 2 + (seed % 3) : 6 + (seed % 5));
+            ? (s < 5 ? 1 + (s % 3) : 4 + (s % 4))
+            : (s < 3 ? 2 + (s % 3) : 6 + (s % 5));
           const color = rank <= 3 ? "#16a34a" : rank <= 6 ? "#eab308" : "#dc2626";
           return (
             <div key={i} className="flex items-center justify-center">
@@ -298,32 +366,88 @@ const LocalSeoDashboard = () => {
         </div>
       </section>
 
-      {/* SECTION 1 — HEAT MAP */}
+      {/* SECTION 1 — SERVICE VISIBILITY COMPARISONS */}
       <section className="section-light">
         <div className="container-main py-20">
           <SectionHeader
-            eyebrow="Section 01 · Heat Map Visibility"
-            title="Geo-Grid Visibility Comparison"
-            description="Side-by-side heat maps showing local pack ranking shifts across the Caseyville service area."
+            eyebrow="Section 01 · Service Visibility Comparisons"
+            title="Service Visibility Comparisons"
+            description="Month-over-month local map visibility tracking across core restoration service categories."
           />
-          <div className="grid md:grid-cols-2 gap-6">
-            <HeatMapCard label="Previous Heat Map" period="March 2026" score="66%" caption="Baseline visibility prior to the latest geo-content and GBP optimization sprint." />
-            <HeatMapCard label="Current Heat Map" period="April 2026" score="78%" caption="Post-optimization snapshot showing stronger 3-pack saturation across core markets." />
-          </div>
-          <div className="mt-8 rounded-2xl p-6 border border-border" style={{ background: "hsl(var(--primary) / 0.05)" }}>
-            <div className="flex items-start gap-4">
-              <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0" style={{ background: "hsl(var(--primary) / 0.15)" }}>
-                <TrendingUp size={18} className="text-primary" />
-              </div>
-              <div>
-                <div className="font-bold mb-1">Visibility Movement Summary</div>
-                <p className="text-sm text-muted-foreground">
-                  Average map pack ranking improved <span className="font-bold text-foreground">from 4.6 to 3.2</span>, with 12 new grid points entering the top 3.
-                  Strongest gains observed in Belleville, Fairview Heights, and East Saint Louis — driven by city-page expansion and review velocity.
-                </p>
-              </div>
-            </div>
-          </div>
+
+          <Tabs defaultValue={SERVICE_VISIBILITY[0].id} className="w-full">
+            <TabsList className="bg-secondary/60 p-1.5 rounded-full h-auto flex flex-wrap gap-1 mb-8">
+              {SERVICE_VISIBILITY.map((svc) => {
+                const Icon = svc.icon;
+                return (
+                  <TabsTrigger
+                    key={svc.id}
+                    value={svc.id}
+                    className="rounded-full px-5 py-2.5 text-sm font-semibold data-[state=active]:bg-white data-[state=active]:shadow-md data-[state=active]:text-primary flex items-center gap-2"
+                  >
+                    <Icon size={16} />
+                    {svc.name}
+                  </TabsTrigger>
+                );
+              })}
+            </TabsList>
+
+            {SERVICE_VISIBILITY.map((svc) => (
+              <TabsContent key={svc.id} value={svc.id} className="mt-0 space-y-6">
+                <div className="grid md:grid-cols-2 gap-6">
+                  <HeatMapCard
+                    label="April 2026 Visibility Snapshot"
+                    period={`${svc.name} · April 2026`}
+                    score={svc.aprilScore}
+                    caption={svc.aprilCaption}
+                    seed={svc.seed}
+                    variant="previous"
+                  />
+                  <HeatMapCard
+                    label="May 2026 Visibility Snapshot"
+                    period={`${svc.name} · May 2026`}
+                    score={svc.mayScore}
+                    caption={svc.mayCaption}
+                    seed={svc.seed + 1}
+                    variant="current"
+                  />
+                </div>
+
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                  {svc.kpis.map((kpi) => (
+                    <div key={kpi.label} className="card-elevated p-5 rounded-2xl">
+                      <div className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-2">{kpi.label}</div>
+                      <div className="flex items-baseline gap-2">
+                        <div className="text-2xl font-bold">{kpi.value}</div>
+                        <span className="text-xs font-bold px-2 py-0.5 rounded-full" style={{ background: "hsl(var(--primary) / 0.1)", color: "hsl(var(--primary))" }}>
+                          {kpi.delta}
+                        </span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="rounded-2xl p-6 border border-border" style={{ background: "hsl(var(--primary) / 0.05)" }}>
+                  <div className="flex items-start gap-4">
+                    <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0" style={{ background: "hsl(var(--primary) / 0.15)" }}>
+                      <TrendingUp size={18} className="text-primary" />
+                    </div>
+                    <div>
+                      <div className="font-bold mb-2">Visibility Movement Summary — {svc.name}</div>
+                      <ul className="space-y-1.5">
+                        {svc.summary.map((item) => (
+                          <li key={item} className="text-sm text-muted-foreground flex gap-2">
+                            <span className="text-primary mt-1">•</span>
+                            <span>{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </TabsContent>
+            ))}
+          </Tabs>
         </div>
       </section>
 
