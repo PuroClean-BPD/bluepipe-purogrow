@@ -48,16 +48,16 @@ import LightboxProvider from "@/components/LightboxProvider";
 const LOCATION = {
   name: "Caseyville, IL",
   business: "PuroClean Emergency Restoration Services",
-  reportPeriod: "April 2026",
+  reportPeriod: "May 2026",
 };
 
 const KPIS = [
-  { label: "Avg Map Pack Position", value: "3.2", delta: "+1.4", icon: Target },
-  { label: "Visibility Score", value: "78%", delta: "+12%", icon: Activity },
-  { label: "Reviews Added", value: "14", delta: "+6", icon: Star },
-  { label: "Authority Links Built", value: "22", delta: "+9", icon: Link2 },
-  { label: "GBP Engagement", value: "1,284", delta: "+38%", icon: BarChart3 },
-  { label: "Service Area Coverage", value: "22", delta: "cities", icon: MapPin },
+  { title: "Avg Map Pack Position", label: "Blended average across Water Damage, Mold Removal, and Fire Damage visibility grids", value: "2.79", delta: "May", icon: Target },
+  { title: "Visibility Score", label: "Blended Top 3 visibility across tracked service categories", value: "74.7%", delta: "Top 3", icon: Activity },
+  { title: "Reviews Added", label: "May review growth", value: "+8", delta: "May", icon: Star },
+  { title: "Authority Links Built", label: "March–April authority links", value: "9", delta: "Mar–Apr", icon: Link2 },
+  { title: "GBP Engagement", label: "April business profile interactions", value: "222", delta: "April", icon: BarChart3 },
+  { title: "Service Area Coverage", label: "Primary visibility focus area", value: "Main Service City", delta: "Primary", icon: MapPin },
 ];
 
 const SERVICE_AREAS = [
