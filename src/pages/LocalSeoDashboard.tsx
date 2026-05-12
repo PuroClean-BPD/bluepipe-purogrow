@@ -1003,31 +1003,123 @@ const LocalSeoDashboard = () => {
                     +35 reviews in 60 days
                   </span>
                 </div>
-                <div className="p-8">
+                <div className="p-6">
                   {(() => {
                     const points = [
-                      { m: "Mar", v: 123 },
-                      { m: "Apr", v: 150 },
-                      { m: "May", v: 158 },
+                      { m: "March 2026", short: "Mar", v: 123, delta: null as string | null, peak: false },
+                      { m: "April 2026", short: "Apr", v: 150, delta: "+27", peak: true },
+                      { m: "May 2026", short: "May", v: 158, delta: "+8", peak: false },
                     ];
-                    const max = 170;
+                    const W = 600, H = 180, PAD_X = 40, PAD_Y = 30;
+                    const min = 110, max = 165;
+                    const xs = points.map((_, i) => PAD_X + (i * (W - PAD_X * 2)) / (points.length - 1));
+                    const ys = points.map((p) => H - PAD_Y - ((p.v - min) / (max - min)) * (H - PAD_Y * 2));
+                    // Smooth curve via cubic bezier
+                    const path = xs.reduce((acc, x, i) => {
+                      if (i === 0) return `M ${x} ${ys[i]}`;
+                      const cx = (xs[i - 1] + x) / 2;
+                      return `${acc} C ${cx} ${ys[i - 1]}, ${cx} ${ys[i]}, ${x} ${ys[i]}`;
+                    }, "");
+                    const area = `${path} L ${xs[xs.length - 1]} ${H - PAD_Y} L ${xs[0]} ${H - PAD_Y} Z`;
                     return (
-                      <div className="flex items-end justify-around gap-6 h-56">
-                        {points.map((p) => {
-                          const h = (p.v / max) * 100;
-                          return (
-                            <div key={p.m} className="flex-1 flex flex-col items-center gap-3">
-                              <div className="text-sm font-bold">{p.v}</div>
-                              <div className="w-full max-w-[80px] flex-1 flex items-end">
-                                <div
-                                  className="w-full rounded-t-lg bg-gradient-to-t from-primary to-primary/60 shadow-md transition-all"
-                                  style={{ height: `${h}%` }}
-                                />
+                      <div>
+                        <svg viewBox={`0 0 ${W} ${H}`} className="w-full h-48 overflow-visible" data-lightbox="false">
+                          <defs>
+                            <linearGradient id="repAreaGrad" x1="0" x2="0" y1="0" y2="1">
+                              <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0.35" />
+                              <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="0" />
+                            </linearGradient>
+                            <linearGradient id="repLineGrad" x1="0" x2="1" y1="0" y2="0">
+                              <stop offset="0%" stopColor="hsl(var(--primary))" />
+                              <stop offset="100%" stopColor="hsl(var(--primary))" />
+                            </linearGradient>
+                            <filter id="repGlow" x="-50%" y="-50%" width="200%" height="200%">
+                              <feGaussianBlur stdDeviation="3" result="b" />
+                              <feMerge><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge>
+                            </filter>
+                          </defs>
+                          {/* gridlines */}
+                          {[0, 0.5, 1].map((t) => (
+                            <line
+                              key={t}
+                              x1={PAD_X}
+                              x2={W - PAD_X}
+                              y1={PAD_Y + t * (H - PAD_Y * 2)}
+                              y2={PAD_Y + t * (H - PAD_Y * 2)}
+                              stroke="hsl(var(--border))"
+                              strokeDasharray="3 4"
+                              strokeWidth="1"
+                            />
+                          ))}
+                          {/* area */}
+                          <path d={area} fill="url(#repAreaGrad)">
+                            <animate attributeName="opacity" from="0" to="1" dur="0.9s" fill="freeze" />
+                          </path>
+                          {/* line */}
+                          <path
+                            d={path}
+                            fill="none"
+                            stroke="url(#repLineGrad)"
+                            strokeWidth="3"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            filter="url(#repGlow)"
+                            style={{ strokeDasharray: 800, strokeDashoffset: 0 }}
+                          >
+                            <animate attributeName="stroke-dashoffset" from="800" to="0" dur="1.2s" fill="freeze" />
+                          </path>
+                          {/* deltas between points */}
+                          {points.map((p, i) => {
+                            if (!p.delta || i === 0) return null;
+                            const mx = (xs[i - 1] + xs[i]) / 2;
+                            const my = (ys[i - 1] + ys[i]) / 2 - 14;
+                            return (
+                              <g key={`d-${i}`}>
+                                <rect x={mx - 22} y={my - 11} width="44" height="20" rx="10" fill="hsl(var(--primary))" opacity="0.12" />
+                                <text x={mx} y={my + 3} textAnchor="middle" fontSize="11" fontWeight="700" fill="hsl(var(--primary))">
+                                  {p.delta}
+                                </text>
+                              </g>
+                            );
+                          })}
+                          {/* points */}
+                          {points.map((p, i) => (
+                            <g key={p.m}>
+                              <circle cx={xs[i]} cy={ys[i]} r="10" fill="hsl(var(--primary))" opacity="0.18">
+                                <animate attributeName="r" values="8;12;8" dur="2.4s" repeatCount="indefinite" begin={`${i * 0.3}s`} />
+                              </circle>
+                              <circle cx={xs[i]} cy={ys[i]} r="5" fill="hsl(var(--background))" stroke="hsl(var(--primary))" strokeWidth="2.5" />
+                              <text x={xs[i]} y={ys[i] - 18} textAnchor="middle" fontSize="13" fontWeight="800" fill="hsl(var(--foreground))">
+                                {p.v}
+                              </text>
+                              <text x={xs[i]} y={H - 8} textAnchor="middle" fontSize="11" fontWeight="600" fill="hsl(var(--muted-foreground))" className="uppercase tracking-wider">
+                                {p.short}
+                              </text>
+                            </g>
+                          ))}
+                        </svg>
+                        <div className="mt-4 grid grid-cols-3 gap-3">
+                          {points.map((p) => (
+                            <div
+                              key={p.m}
+                              className={`rounded-xl border px-3 py-2.5 flex items-center justify-between transition-all ${
+                                p.peak
+                                  ? "border-primary/30 bg-primary/5"
+                                  : "border-border bg-muted/30"
+                              }`}
+                            >
+                              <div>
+                                <div className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">{p.m}</div>
+                                <div className="text-sm font-bold">{p.v} reviews</div>
                               </div>
-                              <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">{p.m}</div>
+                              {p.peak && (
+                                <span className="text-[9px] font-bold uppercase tracking-wider text-primary bg-primary/10 px-2 py-0.5 rounded-full">
+                                  Peak
+                                </span>
+                              )}
                             </div>
-                          );
-                        })}
+                          ))}
+                        </div>
                       </div>
                     );
                   })()}
