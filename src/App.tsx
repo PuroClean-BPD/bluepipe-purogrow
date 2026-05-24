@@ -12,6 +12,7 @@ import SeoPackagesPrint from "./pages/SeoPackagesPrint.tsx";
 import LocalSeoDashboard from "./pages/LocalSeoDashboard.tsx";
 import About from "./pages/About.tsx";
 import Contact from "./pages/Contact.tsx";
+import Explainer from "./pages/Explainer.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
@@ -33,6 +34,7 @@ const App = () => (
           <Route path="/local-seo-dashboard" element={<LocalSeoDashboard />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/explainer" element={<Explainer />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
