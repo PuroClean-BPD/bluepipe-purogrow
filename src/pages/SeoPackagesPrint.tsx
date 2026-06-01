@@ -27,7 +27,7 @@ const seoPackages = [
     label: "FOUNDATION GROWTH",
     name: "Builder SEO",
     price: "850",
-    setup: "$500 one-time setup fee",
+    setup: "$500 one-time build fee",
     firstMonth: "$1,350",
     featured: false,
     features: [
@@ -46,7 +46,7 @@ const seoPackages = [
     label: "MOST POPULAR",
     name: "Booster SEO",
     price: "1,350",
-    setup: "$500 one-time setup fee",
+    setup: "$500 one-time build fee",
     firstMonth: "$1,850",
     featured: true,
     features: [
@@ -65,7 +65,7 @@ const seoPackages = [
     label: "MARKET DOMINANCE",
     name: "Dominator SEO",
     price: "2,250",
-    setup: "$500 one-time setup fee",
+    setup: "$500 one-time build fee",
     firstMonth: "$2,750",
     featured: false,
     features: [
