@@ -172,21 +172,21 @@ const SeoPackagesPrint = () => {
           <div className="absolute -top-32 -right-32 w-80 h-80 rounded-full bg-primary/20 blur-3xl pointer-events-none" />
           <div className="absolute -bottom-32 -left-32 w-80 h-80 rounded-full bg-blue-600/15 blur-3xl pointer-events-none" />
 
-          <div className="relative max-w-[1400px] mx-auto px-8 py-5">
+          <div className="relative max-w-[1400px] mx-auto px-8 py-6 flex flex-col h-full min-h-[8in]">
             {/* Header */}
-            <div className="flex items-start justify-between mb-4">
+            <div className="flex items-start justify-between mb-5">
               <div className="max-w-3xl">
-                <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-white/10 border border-white/15 mb-2">
+                <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-white/10 border border-white/15 mb-2.5">
                   <span className="w-1.5 h-1.5 rounded-full bg-primary" />
                   <span className="text-[10px] tracking-[0.18em] font-semibold text-white/80 uppercase">
                     Strategic Digital Marketing Solutions for PuroClean Franchises
                   </span>
                 </div>
-                <h1 className="text-white font-bold leading-[1.05] text-[2rem]">
+                <h1 className="text-white font-bold leading-[1.05] text-[2.25rem]">
                   Local Visibility &amp; <span className="gradient-text">Growth Solutions</span> for{" "}
                   <span style={{ color: PURO_RED }}>PuroClean</span> Franchise Owners
                 </h1>
-                <p className="mt-2 text-white/65 text-[15px] max-w-3xl leading-snug">
+                <p className="mt-3 text-white/65 text-[15px] max-w-3xl leading-snug">
                   BluePipe Digital helps PuroClean franchise owners increase local visibility, generate more
                   qualified restoration leads, and expand market authority using proven digital marketing systems.
                 </p>
@@ -195,18 +195,18 @@ const SeoPackagesPrint = () => {
                 <img
                   src={bluepipeLogo}
                   alt="BluePipe Digital"
-                  className="h-16 w-auto object-contain"
+                  className="h-20 w-auto object-contain"
                 />
-                <div className="mt-1.5 text-white/40 text-[10px]">BluePipeDigital.com</div>
+                <div className="mt-2 text-white/40 text-[10px]">BluePipeDigital.com</div>
               </div>
             </div>
 
             {/* Pricing cards */}
-            <div className="grid grid-cols-3 gap-4 mt-2">
+            <div className="grid grid-cols-3 gap-5 mt-3 flex-1">
               {seoPackages.map((pkg) => (
                 <div
                   key={pkg.name}
-                  className={`relative rounded-xl p-4 flex flex-col ${
+                  className={`relative rounded-xl p-5 flex flex-col ${
                     pkg.featured
                       ? "bg-gradient-to-br from-primary/20 via-blue-600/10 to-transparent border-2 border-primary/60 shadow-[0_0_30px_-10px_hsl(var(--primary)/0.6)]"
                       : "bg-white/[0.04] border border-white/10"
@@ -217,21 +217,21 @@ const SeoPackagesPrint = () => {
                       ★ MOST POPULAR
                     </div>
                   )}
-                  <div className="text-[10px] tracking-[0.18em] font-bold text-primary mb-1">
+                  <div className="text-[10px] tracking-[0.18em] font-bold text-primary mb-1.5">
                     {pkg.featured ? "AGGRESSIVE GROWTH" : pkg.label}
                   </div>
-                  <h3 className="text-white text-lg font-bold">{pkg.name}</h3>
-                  <div className="mt-1.5 flex items-baseline gap-1">
-                    <span className="text-white text-3xl font-bold leading-none">${pkg.price}</span>
+                  <h3 className="text-white text-xl font-bold">{pkg.name}</h3>
+                  <div className="mt-2 flex items-baseline gap-1">
+                    <span className="text-white text-[2.25rem] font-bold leading-none">${pkg.price}</span>
                     <span className="text-white/50 text-sm">/month</span>
                   </div>
-                  <div className="text-white/55 text-[12.5px] mt-1">{pkg.setup}</div>
-                  <div className="mt-1.5 inline-flex items-center gap-1 px-2 py-0.5 rounded bg-white/5 border border-white/10 w-fit">
+                  <div className="text-white/55 text-[12.5px] mt-1.5">{pkg.setup}</div>
+                  <div className="mt-2 inline-flex items-center gap-1 px-2 py-1 rounded bg-white/5 border border-white/10 w-fit">
                     <span className="text-white/60 text-[11.5px]">First month:</span>
                     <span className="text-white text-[12.5px] font-bold">{pkg.firstMonth}</span>
                   </div>
 
-                  <ul className="mt-3 space-y-1.5 flex-1">
+                  <ul className="mt-4 space-y-2 flex-1">
                     {pkg.features.map((f) => (
                       <li key={f} className="flex items-start gap-2">
                         <Check className="w-3.5 h-3.5 text-primary mt-[3px] shrink-0" strokeWidth={3} />
@@ -240,8 +240,8 @@ const SeoPackagesPrint = () => {
                     ))}
                   </ul>
 
-                  <div className="mt-3 pt-2 border-t border-white/10">
-                    <div className="text-[10px] tracking-wider font-semibold text-white/40 uppercase mb-0.5">
+                  <div className="mt-4 pt-3 border-t border-white/10">
+                    <div className="text-[10px] tracking-wider font-semibold text-white/40 uppercase mb-1">
                       Best for
                     </div>
                     <p className="text-white/70 text-[12.5px] leading-snug">{pkg.bestFor}</p>
@@ -252,7 +252,7 @@ const SeoPackagesPrint = () => {
 
 
             {/* Footer strip */}
-            <div className="mt-3 pt-2 border-t border-white/10 flex items-center justify-between text-white/40 text-[10px]">
+            <div className="mt-4 pt-2 border-t border-white/10 flex items-center justify-between text-white/40 text-[10px]">
               <div className="flex items-center gap-2">
                 <span style={{ color: PURO_RED }}>●</span>
                 <span>BluePipe Digital × PuroClean — Strategic Marketing Partner</span>
