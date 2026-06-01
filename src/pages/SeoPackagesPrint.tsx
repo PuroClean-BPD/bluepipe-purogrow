@@ -429,7 +429,7 @@ const SeoPackagesPrint = () => {
 
                 {/* Benefits */}
                 <div className="flex-1 flex flex-col">
-                  <h3 className="text-white text-base font-bold mb-2.5">Why PipeLine Plus Works</h3>
+                  <h3 className="text-white text-lg font-bold mb-2.5">Why PipeLine Plus Works</h3>
                   <div className="grid grid-cols-3 gap-3 flex-1">
                     {[
                       { icon: Globe, title: "Expand Visibility", body: "Reach surrounding markets where customers are actively searching for restoration services." },
@@ -442,8 +442,8 @@ const SeoPackagesPrint = () => {
                           <div className="w-10 h-10 rounded-lg bg-primary/15 border border-primary/30 flex items-center justify-center mb-2.5">
                             <Icon className="w-5 h-5 text-primary" />
                           </div>
-                          <div className="text-white text-[13px] font-bold">{b.title}</div>
-                          <p className="text-white/60 text-[11.5px] leading-snug mt-1">{b.body}</p>
+                          <div className="text-white text-[15px] font-bold">{b.title}</div>
+                          <p className="text-white/65 text-[13px] leading-snug mt-1">{b.body}</p>
                         </div>
                       );
                     })}
