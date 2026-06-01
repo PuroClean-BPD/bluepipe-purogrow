@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import bluepipeLogo from "@/assets/bluepipe-logo.png";
 import {
   Check,
   X,
@@ -190,12 +191,12 @@ const SeoPackagesPrint = () => {
                   qualified restoration leads, and expand market authority using proven digital marketing systems.
                 </p>
               </div>
-              <div className="shrink-0 text-right">
-                <Button variant="gradient" size="sm" asChild>
-                  <Link to="/free-audit">
-                    REQUEST A FREE AUDIT <ArrowRight className="ml-1.5 w-3.5 h-3.5" />
-                  </Link>
-                </Button>
+              <div className="shrink-0 flex flex-col items-center justify-center pl-6">
+                <img
+                  src={bluepipeLogo}
+                  alt="BluePipe Digital"
+                  className="h-16 w-auto object-contain"
+                />
                 <div className="mt-1.5 text-white/40 text-[10px]">BluePipeDigital.com</div>
               </div>
             </div>
@@ -249,24 +250,6 @@ const SeoPackagesPrint = () => {
               ))}
             </div>
 
-            {/* CTA banner */}
-            <div className="mt-5 rounded-xl bg-gradient-to-r from-[hsl(var(--dark-surface))] via-primary/35 to-[hsl(var(--dark-surface))] p-4 flex items-center justify-between relative overflow-hidden border border-white/10">
-              <div className="absolute inset-0 opacity-10" style={{
-                backgroundImage: 'linear-gradient(to right, white 1px, transparent 1px)',
-                backgroundSize: '40px 40px',
-              }} />
-              <div className="relative">
-                <h3 className="text-white text-lg font-bold">Not Sure Which Package Fits Your Market?</h3>
-                <p className="text-white/75 text-[12px] mt-0.5">
-                  Schedule a complimentary marketing audit and we'll recommend the right growth strategy.
-                </p>
-              </div>
-              <Button variant="gradient" size="sm" asChild className="relative shrink-0">
-                <Link to="/free-audit">
-                  REQUEST A FREE AUDIT <ArrowRight className="ml-1.5 w-3.5 h-3.5" />
-                </Link>
-              </Button>
-            </div>
 
             {/* Footer strip */}
             <div className="mt-3 pt-2 border-t border-white/10 flex items-center justify-between text-white/40 text-[10px]">
@@ -364,24 +347,6 @@ const SeoPackagesPrint = () => {
               </table>
             </div>
 
-            {/* CTA banner */}
-            <div className="mt-4 rounded-xl bg-gradient-to-r from-primary via-blue-600 to-primary p-3.5 flex items-center justify-between relative overflow-hidden">
-              <div className="absolute inset-0 opacity-15" style={{
-                backgroundImage: 'linear-gradient(to right, white 1px, transparent 1px)',
-                backgroundSize: '32px 32px',
-              }} />
-              <div className="relative">
-                <h3 className="text-white text-base font-bold">Ready to Grow Your Market Visibility?</h3>
-                <p className="text-white/85 text-[11px] mt-0.5">
-                  Schedule a complimentary marketing audit and discover where your next growth opportunities exist.
-                </p>
-              </div>
-              <Button variant="hero-secondary" size="sm" asChild className="relative shrink-0 bg-white text-primary hover:bg-white/90">
-                <Link to="/free-audit">
-                  REQUEST A FREE AUDIT <ArrowRight className="ml-1.5 w-3.5 h-3.5" />
-                </Link>
-              </Button>
-            </div>
 
             {/* Footer */}
             <div className="mt-3 pt-2 border-t border-white/10 flex items-center justify-between text-white/40 text-[10px]">
@@ -537,24 +502,6 @@ const SeoPackagesPrint = () => {
               </div>
             </div>
 
-            {/* Final CTA */}
-            <div className="mt-5 rounded-xl bg-gradient-to-r from-primary via-blue-600 to-primary p-5 flex items-center justify-between relative overflow-hidden">
-              <div className="absolute inset-0 opacity-15" style={{
-                backgroundImage: 'linear-gradient(to right, white 1px, transparent 1px)',
-                backgroundSize: '32px 32px',
-              }} />
-              <div className="relative">
-                <h3 className="text-white text-lg font-bold">Ready to Expand Into More Local Markets?</h3>
-                <p className="text-white/85 text-[12.5px] mt-1">
-                  See where your next growth opportunities exist with a custom market expansion audit.
-                </p>
-              </div>
-              <Button variant="hero-secondary" size="sm" asChild className="relative shrink-0 bg-white text-primary hover:bg-white/90">
-                <Link to="/free-audit">
-                  REQUEST A MARKET EXPANSION AUDIT <ArrowRight className="ml-1.5 w-3.5 h-3.5" />
-                </Link>
-              </Button>
-            </div>
 
             <div className="mt-3 pt-2 border-t border-white/10 flex items-center justify-between text-white/40 text-[10px]">
               <div className="flex items-center gap-2">
