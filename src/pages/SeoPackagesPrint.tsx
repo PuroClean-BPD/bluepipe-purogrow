@@ -186,7 +186,7 @@ const SeoPackagesPrint = () => {
                   Local Visibility &amp; <span className="gradient-text">Growth Solutions</span> for{" "}
                   <span style={{ color: PURO_RED }}>PuroClean</span> Franchise Owners
                 </h1>
-                <p className="mt-2 text-white/65 text-[13px] max-w-3xl leading-snug">
+                <p className="mt-2 text-white/65 text-[15px] max-w-3xl leading-snug">
                   BluePipe Digital helps PuroClean franchise owners increase local visibility, generate more
                   qualified restoration leads, and expand market authority using proven digital marketing systems.
                 </p>
