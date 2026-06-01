@@ -300,15 +300,15 @@ const SeoPackagesPrint = () => {
               <table className="w-full">
                 <thead>
                   <tr className="bg-gradient-to-r from-[hsl(var(--dark-surface))] to-[hsl(var(--dark-surface-muted))] text-white">
-                    <th className="text-left text-[11px] font-semibold tracking-wider uppercase px-5 py-3 w-[34%]">
+                    <th className="text-left text-[12.5px] font-semibold tracking-wider uppercase px-5 py-3 w-[34%]">
                       Feature
                     </th>
-                    <th className="text-center text-[11px] font-semibold px-3 py-3">Builder SEO</th>
-                    <th className="text-center text-[11px] font-semibold px-3 py-3 bg-primary/30 relative">
+                    <th className="text-center text-[12.5px] font-semibold px-3 py-3">Builder SEO</th>
+                    <th className="text-center text-[12.5px] font-semibold px-3 py-3 bg-primary/30 relative">
                       <div className="absolute top-0 inset-x-0 h-0.5 bg-gradient-to-r from-transparent via-primary to-transparent" />
                       Booster SEO ★
                     </th>
-                    <th className="text-center text-[11px] font-semibold px-3 py-3">Dominator SEO</th>
+                    <th className="text-center text-[12.5px] font-semibold px-3 py-3">Dominator SEO</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -321,7 +321,7 @@ const SeoPackagesPrint = () => {
                             <div className="w-7 h-7 rounded-lg bg-primary/10 flex items-center justify-center">
                               <Icon className="w-3.5 h-3.5 text-primary" />
                             </div>
-                            <span className="text-[12.5px] font-medium text-foreground">{row.label}</span>
+                            <span className="text-[14px] font-medium text-foreground">{row.label}</span>
                           </div>
                         </td>
                         {row.values.map((v, j) => (
@@ -336,12 +336,12 @@ const SeoPackagesPrint = () => {
                     );
                   })}
                   <tr className="bg-gradient-to-r from-secondary/60 to-secondary/30">
-                    <td className="px-5 py-3 text-[12.5px] font-bold text-foreground">First Month Total</td>
-                    <td className="text-center px-3 py-3 text-[12.5px] font-bold">$1,350</td>
-                    <td className="text-center px-3 py-3 text-[12.5px] font-bold bg-primary/10 text-primary">
+                    <td className="px-5 py-3 text-[14px] font-bold text-foreground">First Month Total</td>
+                    <td className="text-center px-3 py-3 text-[14px] font-bold">$1,350</td>
+                    <td className="text-center px-3 py-3 text-[14px] font-bold bg-primary/10 text-primary">
                       $1,850
                     </td>
-                    <td className="text-center px-3 py-3 text-[12.5px] font-bold">$2,750</td>
+                    <td className="text-center px-3 py-3 text-[14px] font-bold">$2,750</td>
                   </tr>
                 </tbody>
               </table>
