@@ -191,7 +191,6 @@ const SeoPackagesPrint = () => {
                   alt="BluePipe Digital"
                   className="h-20 w-auto object-contain"
                 />
-                <div className="mt-2 text-white/40 text-[10px]">BluePipeDigital.com</div>
               </div>
             </div>
 
