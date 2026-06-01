@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import bluepipeLogo from "@/assets/bluepipe-logo.png";
 import {
   Check,
   X,
