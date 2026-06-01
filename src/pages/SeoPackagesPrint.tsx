@@ -250,24 +250,6 @@ const SeoPackagesPrint = () => {
               ))}
             </div>
 
-            {/* CTA banner */}
-            <div className="mt-5 rounded-xl bg-gradient-to-r from-[hsl(var(--dark-surface))] via-primary/35 to-[hsl(var(--dark-surface))] p-4 flex items-center justify-between relative overflow-hidden border border-white/10">
-              <div className="absolute inset-0 opacity-10" style={{
-                backgroundImage: 'linear-gradient(to right, white 1px, transparent 1px)',
-                backgroundSize: '40px 40px',
-              }} />
-              <div className="relative">
-                <h3 className="text-white text-lg font-bold">Not Sure Which Package Fits Your Market?</h3>
-                <p className="text-white/75 text-[12px] mt-0.5">
-                  Schedule a complimentary marketing audit and we'll recommend the right growth strategy.
-                </p>
-              </div>
-              <Button variant="gradient" size="sm" asChild className="relative shrink-0">
-                <Link to="/free-audit">
-                  REQUEST A FREE AUDIT <ArrowRight className="ml-1.5 w-3.5 h-3.5" />
-                </Link>
-              </Button>
-            </div>
 
             {/* Footer strip */}
             <div className="mt-3 pt-2 border-t border-white/10 flex items-center justify-between text-white/40 text-[10px]">
