@@ -457,8 +457,8 @@ const SeoPackagesPrint = () => {
                       <Sparkles className="w-5 h-5 text-white" />
                     </div>
                     <div>
-                      <div className="text-white font-bold text-[14px]">More Than an Add-On — A Market Expansion System</div>
-                      <p className="text-white/70 text-[12px] mt-1 leading-snug">
+                      <div className="text-white font-bold text-[16px]">More Than an Add-On — A Market Expansion System</div>
+                      <p className="text-white/70 text-[13.5px] mt-1 leading-snug">
                         PipeLine Plus helps PuroClean franchise owners strategically expand into surrounding
                         markets with advanced local SEO, territory-focused visibility strategies, and scalable
                         lead generation systems.
