@@ -284,7 +284,7 @@ const SeoPackagesPrint = () => {
                 <h1 className="text-white font-bold leading-[1.05] text-[2rem]">
                   Compare <span className="gradient-text">SEO Growth Packages</span>
                 </h1>
-                <p className="mt-2 text-white/65 text-[13px] max-w-3xl leading-snug">
+                <p className="mt-2 text-white/65 text-[15px] max-w-3xl leading-snug">
                   Find the right visibility and expansion strategy for your market goals. Each package
                   scales from foundational local SEO to full multi-market dominance.
                 </p>
