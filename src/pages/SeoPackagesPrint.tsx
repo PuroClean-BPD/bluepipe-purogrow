@@ -111,7 +111,7 @@ const pipelineTiers = [
 const Cell = ({ v }: { v: string | boolean }) => {
   if (v === true) return <Check className="w-4 h-4 mx-auto text-primary" strokeWidth={3} />;
   if (v === false) return <X className="w-3.5 h-3.5 mx-auto opacity-30" />;
-  return <span className="text-[11px] font-semibold">{v}</span>;
+  return <span className="text-[13px] font-semibold">{v}</span>;
 };
 
 const SeoPackagesPrint = () => {
@@ -186,7 +186,7 @@ const SeoPackagesPrint = () => {
                   Local Visibility &amp; <span className="gradient-text">Growth Solutions</span> for{" "}
                   <span style={{ color: PURO_RED }}>PuroClean</span> Franchise Owners
                 </h1>
-                <p className="mt-2 text-white/65 text-[13px] max-w-3xl leading-snug">
+                <p className="mt-2 text-white/65 text-[15px] max-w-3xl leading-snug">
                   BluePipe Digital helps PuroClean franchise owners increase local visibility, generate more
                   qualified restoration leads, and expand market authority using proven digital marketing systems.
                 </p>
@@ -225,26 +225,26 @@ const SeoPackagesPrint = () => {
                     <span className="text-white text-3xl font-bold leading-none">${pkg.price}</span>
                     <span className="text-white/50 text-sm">/month</span>
                   </div>
-                  <div className="text-white/50 text-[11px] mt-1">{pkg.setup}</div>
+                  <div className="text-white/55 text-[12.5px] mt-1">{pkg.setup}</div>
                   <div className="mt-1.5 inline-flex items-center gap-1 px-2 py-0.5 rounded bg-white/5 border border-white/10 w-fit">
-                    <span className="text-white/60 text-[10px]">First month:</span>
-                    <span className="text-white text-[11px] font-bold">{pkg.firstMonth}</span>
+                    <span className="text-white/60 text-[11.5px]">First month:</span>
+                    <span className="text-white text-[12.5px] font-bold">{pkg.firstMonth}</span>
                   </div>
 
                   <ul className="mt-3 space-y-1.5 flex-1">
                     {pkg.features.map((f) => (
                       <li key={f} className="flex items-start gap-2">
                         <Check className="w-3.5 h-3.5 text-primary mt-[3px] shrink-0" strokeWidth={3} />
-                        <span className="text-white/85 text-[11.5px] leading-snug">{f}</span>
+                        <span className="text-white/85 text-[13.5px] leading-snug">{f}</span>
                       </li>
                     ))}
                   </ul>
 
                   <div className="mt-3 pt-2 border-t border-white/10">
-                    <div className="text-[9px] tracking-wider font-semibold text-white/40 uppercase mb-0.5">
+                    <div className="text-[10px] tracking-wider font-semibold text-white/40 uppercase mb-0.5">
                       Best for
                     </div>
-                    <p className="text-white/70 text-[10.5px] leading-snug">{pkg.bestFor}</p>
+                    <p className="text-white/70 text-[12.5px] leading-snug">{pkg.bestFor}</p>
                   </div>
                 </div>
               ))}
@@ -284,7 +284,7 @@ const SeoPackagesPrint = () => {
                 <h1 className="text-white font-bold leading-[1.05] text-[2rem]">
                   Compare <span className="gradient-text">SEO Growth Packages</span>
                 </h1>
-                <p className="mt-2 text-white/65 text-[13px] max-w-3xl leading-snug">
+                <p className="mt-2 text-white/65 text-[15px] max-w-3xl leading-snug">
                   Find the right visibility and expansion strategy for your market goals. Each package
                   scales from foundational local SEO to full multi-market dominance.
                 </p>
@@ -300,15 +300,15 @@ const SeoPackagesPrint = () => {
               <table className="w-full">
                 <thead>
                   <tr className="bg-gradient-to-r from-[hsl(var(--dark-surface))] to-[hsl(var(--dark-surface-muted))] text-white">
-                    <th className="text-left text-[11px] font-semibold tracking-wider uppercase px-5 py-3 w-[34%]">
+                    <th className="text-left text-[12.5px] font-semibold tracking-wider uppercase px-5 py-3 w-[34%]">
                       Feature
                     </th>
-                    <th className="text-center text-[11px] font-semibold px-3 py-3">Builder SEO</th>
-                    <th className="text-center text-[11px] font-semibold px-3 py-3 bg-primary/30 relative">
+                    <th className="text-center text-[12.5px] font-semibold px-3 py-3">Builder SEO</th>
+                    <th className="text-center text-[12.5px] font-semibold px-3 py-3 bg-primary/30 relative">
                       <div className="absolute top-0 inset-x-0 h-0.5 bg-gradient-to-r from-transparent via-primary to-transparent" />
                       Booster SEO ★
                     </th>
-                    <th className="text-center text-[11px] font-semibold px-3 py-3">Dominator SEO</th>
+                    <th className="text-center text-[12.5px] font-semibold px-3 py-3">Dominator SEO</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -321,7 +321,7 @@ const SeoPackagesPrint = () => {
                             <div className="w-7 h-7 rounded-lg bg-primary/10 flex items-center justify-center">
                               <Icon className="w-3.5 h-3.5 text-primary" />
                             </div>
-                            <span className="text-[12.5px] font-medium text-foreground">{row.label}</span>
+                            <span className="text-[14px] font-medium text-foreground">{row.label}</span>
                           </div>
                         </td>
                         {row.values.map((v, j) => (
@@ -336,12 +336,12 @@ const SeoPackagesPrint = () => {
                     );
                   })}
                   <tr className="bg-gradient-to-r from-secondary/60 to-secondary/30">
-                    <td className="px-5 py-3 text-[12.5px] font-bold text-foreground">First Month Total</td>
-                    <td className="text-center px-3 py-3 text-[12.5px] font-bold">$1,350</td>
-                    <td className="text-center px-3 py-3 text-[12.5px] font-bold bg-primary/10 text-primary">
+                    <td className="px-5 py-3 text-[14px] font-bold text-foreground">First Month Total</td>
+                    <td className="text-center px-3 py-3 text-[14px] font-bold">$1,350</td>
+                    <td className="text-center px-3 py-3 text-[14px] font-bold bg-primary/10 text-primary">
                       $1,850
                     </td>
-                    <td className="text-center px-3 py-3 text-[12.5px] font-bold">$2,750</td>
+                    <td className="text-center px-3 py-3 text-[14px] font-bold">$2,750</td>
                   </tr>
                 </tbody>
               </table>
@@ -381,7 +381,7 @@ const SeoPackagesPrint = () => {
                 <h1 className="text-white font-bold leading-[1.05] text-[2rem]">
                   Expand Beyond Your <span className="gradient-text">Core Territory</span>
                 </h1>
-                <p className="mt-2 text-white/65 text-[13px] max-w-3xl leading-snug">
+                <p className="mt-2 text-white/65 text-[15px] max-w-3xl leading-snug">
                   PipeLine Plus helps PuroClean franchise owners strategically expand visibility into surrounding
                   high-intent markets using advanced local SEO and lead generation systems.
                 </p>
@@ -413,8 +413,8 @@ const SeoPackagesPrint = () => {
                             <div className="relative inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-primary to-blue-600 shadow-[0_0_24px_-4px_hsl(var(--primary))]">
                               <Icon className="w-6 h-6 text-white" />
                             </div>
-                            <div className="text-white text-[13px] font-bold mt-2">{node.label}</div>
-                            <div className="text-white/45 text-[11px]">{node.sub}</div>
+                            <div className="text-white text-[15px] font-bold mt-2">{node.label}</div>
+                            <div className="text-white/45 text-[12.5px]">{node.sub}</div>
                           </div>
                           {i < arr.length - 1 && (
                             <div className="flex items-center px-1">
@@ -429,7 +429,7 @@ const SeoPackagesPrint = () => {
 
                 {/* Benefits */}
                 <div className="flex-1 flex flex-col">
-                  <h3 className="text-white text-base font-bold mb-2.5">Why PipeLine Plus Works</h3>
+                  <h3 className="text-white text-lg font-bold mb-2.5">Why PipeLine Plus Works</h3>
                   <div className="grid grid-cols-3 gap-3 flex-1">
                     {[
                       { icon: Globe, title: "Expand Visibility", body: "Reach surrounding markets where customers are actively searching for restoration services." },
@@ -442,8 +442,8 @@ const SeoPackagesPrint = () => {
                           <div className="w-10 h-10 rounded-lg bg-primary/15 border border-primary/30 flex items-center justify-center mb-2.5">
                             <Icon className="w-5 h-5 text-primary" />
                           </div>
-                          <div className="text-white text-[13px] font-bold">{b.title}</div>
-                          <p className="text-white/60 text-[11.5px] leading-snug mt-1">{b.body}</p>
+                          <div className="text-white text-[15px] font-bold">{b.title}</div>
+                          <p className="text-white/65 text-[13px] leading-snug mt-1">{b.body}</p>
                         </div>
                       );
                     })}
@@ -457,8 +457,8 @@ const SeoPackagesPrint = () => {
                       <Sparkles className="w-5 h-5 text-white" />
                     </div>
                     <div>
-                      <div className="text-white font-bold text-[14px]">More Than an Add-On — A Market Expansion System</div>
-                      <p className="text-white/70 text-[12px] mt-1 leading-snug">
+                      <div className="text-white font-bold text-[16px]">More Than an Add-On — A Market Expansion System</div>
+                      <p className="text-white/70 text-[13.5px] mt-1 leading-snug">
                         PipeLine Plus helps PuroClean franchise owners strategically expand into surrounding
                         markets with advanced local SEO, territory-focused visibility strategies, and scalable
                         lead generation systems.
@@ -475,8 +475,8 @@ const SeoPackagesPrint = () => {
                     <div className="text-[10px] tracking-wider font-bold text-primary uppercase">
                       PipeLine Plus
                     </div>
-                    <div className="text-white font-bold text-base">Expansion Pricing</div>
-                    <div className="text-white/50 text-[11px]">Priced by target city population</div>
+                    <div className="text-white font-bold text-lg">Expansion Pricing</div>
+                    <div className="text-white/55 text-[12.5px]">Priced by target city population</div>
                   </div>
                   <table className="w-full flex-1">
                     <tbody>
@@ -485,13 +485,13 @@ const SeoPackagesPrint = () => {
                           key={t.range}
                           className={`border-b border-white/5 ${i % 2 === 0 ? "bg-white/[0.01]" : ""}`}
                         >
-                          <td className="px-5 py-2.5 text-white/85 text-[12.5px]">
+                          <td className="px-5 py-2.5 text-white/85 text-[14px]">
                             <span className="inline-flex items-center gap-2">
-                              <Target className="w-3 h-3 text-primary/70" />
+                              <Target className="w-3.5 h-3.5 text-primary/70" />
                               {t.range}
                             </span>
                           </td>
-                          <td className="px-5 py-2.5 text-right text-white font-bold text-[12.5px]">
+                          <td className="px-5 py-2.5 text-right text-white font-bold text-[14px]">
                             {t.price}
                           </td>
                         </tr>
