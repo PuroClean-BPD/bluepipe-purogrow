@@ -347,24 +347,6 @@ const SeoPackagesPrint = () => {
               </table>
             </div>
 
-            {/* CTA banner */}
-            <div className="mt-4 rounded-xl bg-gradient-to-r from-primary via-blue-600 to-primary p-3.5 flex items-center justify-between relative overflow-hidden">
-              <div className="absolute inset-0 opacity-15" style={{
-                backgroundImage: 'linear-gradient(to right, white 1px, transparent 1px)',
-                backgroundSize: '32px 32px',
-              }} />
-              <div className="relative">
-                <h3 className="text-white text-base font-bold">Ready to Grow Your Market Visibility?</h3>
-                <p className="text-white/85 text-[11px] mt-0.5">
-                  Schedule a complimentary marketing audit and discover where your next growth opportunities exist.
-                </p>
-              </div>
-              <Button variant="hero-secondary" size="sm" asChild className="relative shrink-0 bg-white text-primary hover:bg-white/90">
-                <Link to="/free-audit">
-                  REQUEST A FREE AUDIT <ArrowRight className="ml-1.5 w-3.5 h-3.5" />
-                </Link>
-              </Button>
-            </div>
 
             {/* Footer */}
             <div className="mt-3 pt-2 border-t border-white/10 flex items-center justify-between text-white/40 text-[10px]">
