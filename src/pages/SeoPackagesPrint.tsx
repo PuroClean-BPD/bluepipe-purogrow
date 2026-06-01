@@ -225,26 +225,26 @@ const SeoPackagesPrint = () => {
                     <span className="text-white text-3xl font-bold leading-none">${pkg.price}</span>
                     <span className="text-white/50 text-sm">/month</span>
                   </div>
-                  <div className="text-white/50 text-[11px] mt-1">{pkg.setup}</div>
+                  <div className="text-white/55 text-[12.5px] mt-1">{pkg.setup}</div>
                   <div className="mt-1.5 inline-flex items-center gap-1 px-2 py-0.5 rounded bg-white/5 border border-white/10 w-fit">
-                    <span className="text-white/60 text-[10px]">First month:</span>
-                    <span className="text-white text-[11px] font-bold">{pkg.firstMonth}</span>
+                    <span className="text-white/60 text-[11.5px]">First month:</span>
+                    <span className="text-white text-[12.5px] font-bold">{pkg.firstMonth}</span>
                   </div>
 
                   <ul className="mt-3 space-y-1.5 flex-1">
                     {pkg.features.map((f) => (
                       <li key={f} className="flex items-start gap-2">
                         <Check className="w-3.5 h-3.5 text-primary mt-[3px] shrink-0" strokeWidth={3} />
-                        <span className="text-white/85 text-[11.5px] leading-snug">{f}</span>
+                        <span className="text-white/85 text-[13.5px] leading-snug">{f}</span>
                       </li>
                     ))}
                   </ul>
 
                   <div className="mt-3 pt-2 border-t border-white/10">
-                    <div className="text-[9px] tracking-wider font-semibold text-white/40 uppercase mb-0.5">
+                    <div className="text-[10px] tracking-wider font-semibold text-white/40 uppercase mb-0.5">
                       Best for
                     </div>
-                    <p className="text-white/70 text-[10.5px] leading-snug">{pkg.bestFor}</p>
+                    <p className="text-white/70 text-[12.5px] leading-snug">{pkg.bestFor}</p>
                   </div>
                 </div>
               ))}
