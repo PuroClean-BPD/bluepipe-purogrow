@@ -191,12 +191,12 @@ const SeoPackagesPrint = () => {
                   qualified restoration leads, and expand market authority using proven digital marketing systems.
                 </p>
               </div>
-              <div className="shrink-0 text-right">
-                <Button variant="gradient" size="sm" asChild>
-                  <Link to="/free-audit">
-                    REQUEST A FREE AUDIT <ArrowRight className="ml-1.5 w-3.5 h-3.5" />
-                  </Link>
-                </Button>
+              <div className="shrink-0 flex flex-col items-center justify-center pl-6">
+                <img
+                  src={bluepipeLogo}
+                  alt="BluePipe Digital"
+                  className="h-16 w-auto object-contain"
+                />
                 <div className="mt-1.5 text-white/40 text-[10px]">BluePipeDigital.com</div>
               </div>
             </div>
