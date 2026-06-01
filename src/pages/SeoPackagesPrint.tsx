@@ -174,15 +174,9 @@ const SeoPackagesPrint = () => {
 
           <div className="relative max-w-[1400px] mx-auto px-8 py-6 flex flex-col h-full min-h-[8in]">
             {/* Header */}
-            <div className="flex items-start justify-between mb-5">
-              <div className="max-w-3xl">
-                <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-white/10 border border-white/15 mb-2.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-primary" />
-                  <span className="text-[10px] tracking-[0.18em] font-semibold text-white/80 uppercase">
-                    Strategic Digital Marketing Solutions for PuroClean Franchises
-                  </span>
-                </div>
-                <h1 className="text-white font-bold leading-[1.05] text-[2.25rem]">
+            <div className="flex items-start justify-between gap-6 mb-5">
+              <div className="max-w-4xl">
+                <h1 className="text-white font-bold leading-[1.03] text-[2.75rem]">
                   Local Visibility &amp; <span className="gradient-text">Growth Solutions</span> for{" "}
                   <span style={{ color: PURO_RED }}>PuroClean</span> Franchise Owners
                 </h1>
@@ -191,7 +185,7 @@ const SeoPackagesPrint = () => {
                   qualified restoration leads, and expand market authority using proven digital marketing systems.
                 </p>
               </div>
-              <div className="shrink-0 flex flex-col items-center justify-center pl-6">
+              <div className="shrink-0 flex flex-col items-center justify-center">
                 <img
                   src={bluepipeLogo}
                   alt="BluePipe Digital"
