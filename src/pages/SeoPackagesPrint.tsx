@@ -413,8 +413,8 @@ const SeoPackagesPrint = () => {
                             <div className="relative inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-primary to-blue-600 shadow-[0_0_24px_-4px_hsl(var(--primary))]">
                               <Icon className="w-6 h-6 text-white" />
                             </div>
-                            <div className="text-white text-[13px] font-bold mt-2">{node.label}</div>
-                            <div className="text-white/45 text-[11px]">{node.sub}</div>
+                            <div className="text-white text-[15px] font-bold mt-2">{node.label}</div>
+                            <div className="text-white/45 text-[12.5px]">{node.sub}</div>
                           </div>
                           {i < arr.length - 1 && (
                             <div className="flex items-center px-1">
