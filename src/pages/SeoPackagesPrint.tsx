@@ -176,7 +176,7 @@ const SeoPackagesPrint = () => {
             <div className="flex items-start justify-between gap-6 mb-5">
               <div className="max-w-4xl">
                 <h1 className="text-white font-bold leading-[1.03] text-[2.75rem]">
-                  Local Visibility &amp; <span className="gradient-text">Growth Solutions</span> for{" "}
+                  Local Visibility &amp; <span style={{ color: '#3b82f6', textDecoration: 'none', borderBottom: 'none', backgroundImage: 'none' }}>Growth Solutions</span> for{" "}
                   <span style={{ color: PURO_RED }}>PuroClean</span> Franchise Owners
                 </h1>
                 <p className="mt-3 text-white/65 text-[15px] max-w-3xl leading-snug">
