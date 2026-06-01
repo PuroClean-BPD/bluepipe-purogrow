@@ -274,7 +274,7 @@ const SeoPackagesPrint = () => {
                 <span style={{ color: PURO_RED }}>●</span>
                 <span>BluePipe Digital × PuroClean — Strategic Marketing Partner</span>
               </div>
-              <div>Page 1 of 3 · SEO Growth Packages</div>
+              
             </div>
           </div>
         </section>
@@ -389,7 +389,7 @@ const SeoPackagesPrint = () => {
                 <span style={{ color: PURO_RED }}>●</span>
                 <span>BluePipeDigital.com · Strategic Marketing Partner for PuroClean</span>
               </div>
-              <div>Page 2 of 3 · Comparison Chart</div>
+              
             </div>
           </div>
         </section>
@@ -561,7 +561,7 @@ const SeoPackagesPrint = () => {
                 <span style={{ color: PURO_RED }}>●</span>
                 <span>BluePipeDigital.com · Market Expansion System for PuroClean Franchises</span>
               </div>
-              <div>Page 3 of 3 · PipeLine Plus</div>
+              
             </div>
           </div>
         </section>
