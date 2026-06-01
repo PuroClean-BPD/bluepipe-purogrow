@@ -111,7 +111,7 @@ const pipelineTiers = [
 const Cell = ({ v }: { v: string | boolean }) => {
   if (v === true) return <Check className="w-4 h-4 mx-auto text-primary" strokeWidth={3} />;
   if (v === false) return <X className="w-3.5 h-3.5 mx-auto opacity-30" />;
-  return <span className="text-[11px] font-semibold">{v}</span>;
+  return <span className="text-[13px] font-semibold">{v}</span>;
 };
 
 const SeoPackagesPrint = () => {
