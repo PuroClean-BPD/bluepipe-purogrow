@@ -502,24 +502,6 @@ const SeoPackagesPrint = () => {
               </div>
             </div>
 
-            {/* Final CTA */}
-            <div className="mt-5 rounded-xl bg-gradient-to-r from-primary via-blue-600 to-primary p-5 flex items-center justify-between relative overflow-hidden">
-              <div className="absolute inset-0 opacity-15" style={{
-                backgroundImage: 'linear-gradient(to right, white 1px, transparent 1px)',
-                backgroundSize: '32px 32px',
-              }} />
-              <div className="relative">
-                <h3 className="text-white text-lg font-bold">Ready to Expand Into More Local Markets?</h3>
-                <p className="text-white/85 text-[12.5px] mt-1">
-                  See where your next growth opportunities exist with a custom market expansion audit.
-                </p>
-              </div>
-              <Button variant="hero-secondary" size="sm" asChild className="relative shrink-0 bg-white text-primary hover:bg-white/90">
-                <Link to="/free-audit">
-                  REQUEST A MARKET EXPANSION AUDIT <ArrowRight className="ml-1.5 w-3.5 h-3.5" />
-                </Link>
-              </Button>
-            </div>
 
             <div className="mt-3 pt-2 border-t border-white/10 flex items-center justify-between text-white/40 text-[10px]">
               <div className="flex items-center gap-2">
