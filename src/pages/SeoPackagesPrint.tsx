@@ -111,7 +111,7 @@ const pipelineTiers = [
 const Cell = ({ v }: { v: string | boolean }) => {
   if (v === true) return <Check className="w-4 h-4 mx-auto text-primary" strokeWidth={3} />;
   if (v === false) return <X className="w-3.5 h-3.5 mx-auto opacity-30" />;
-  return <span className="text-[13px] font-semibold">{v}</span>;
+  return <span className="text-[14px] font-semibold">{v}</span>;
 };
 
 const SeoPackagesPrint = () => {
@@ -179,7 +179,7 @@ const SeoPackagesPrint = () => {
                   Local Visibility &amp; <span style={{ color: '#3b82f6', textDecoration: 'none', borderBottom: 'none', backgroundImage: 'none' }}>Growth Solutions</span> for{" "}
                   <span style={{ color: PURO_RED }}>PuroClean</span> Franchise Owners
                 </h1>
-                <p className="mt-3 text-white/65 text-[15px] max-w-3xl leading-snug">
+                <p className="mt-3 text-white/90 text-[16px] max-w-3xl leading-snug">
                   BluePipe Digital helps PuroClean franchise owners increase local visibility, generate more
                   qualified restoration leads, and expand market authority using proven digital marketing systems.
                 </p>
@@ -215,28 +215,28 @@ const SeoPackagesPrint = () => {
                   <h3 className="text-white text-xl font-bold">{pkg.name}</h3>
                   <div className="mt-2 flex items-baseline gap-1">
                     <span className="text-white text-[2.25rem] font-bold leading-none">${pkg.price}</span>
-                    <span className="text-white/50 text-sm">/month</span>
+                    <span className="text-white/80 text-sm">/month</span>
                   </div>
-                  <div className="text-white/55 text-[12.5px] mt-1.5">{pkg.setup}</div>
+                  <div className="text-white/90 text-[13.5px] mt-1.5">{pkg.setup}</div>
                   <div className="mt-2 inline-flex items-center gap-1 px-2 py-1 rounded bg-white/5 border border-white/10 w-fit">
-                    <span className="text-white/60 text-[11.5px]">First month:</span>
-                    <span className="text-white text-[12.5px] font-bold">{pkg.firstMonth}</span>
+                    <span className="text-white/85 text-[12.5px]">First month:</span>
+                    <span className="text-white text-[13.5px] font-bold">{pkg.firstMonth}</span>
                   </div>
 
                   <ul className="mt-4 space-y-2 flex-1">
                     {pkg.features.map((f) => (
                       <li key={f} className="flex items-start gap-2">
                         <Check className="w-3.5 h-3.5 text-primary mt-[3px] shrink-0" strokeWidth={3} />
-                        <span className="text-white/85 text-[13.5px] leading-snug">{f}</span>
+                        <span className="text-white text-[14.5px] leading-snug">{f}</span>
                       </li>
                     ))}
                   </ul>
 
                   <div className="mt-4 pt-3 border-t border-white/10">
-                    <div className="text-[10px] tracking-wider font-semibold text-white/40 uppercase mb-1">
+                    <div className="text-[10.5px] tracking-wider font-semibold text-white/75 uppercase mb-1">
                       Best for
                     </div>
-                    <p className="text-white/70 text-[12.5px] leading-snug">{pkg.bestFor}</p>
+                    <p className="text-white/90 text-[13.5px] leading-snug">{pkg.bestFor}</p>
                   </div>
                 </div>
               ))}
@@ -244,7 +244,7 @@ const SeoPackagesPrint = () => {
 
 
             {/* Footer strip */}
-            <div className="mt-4 pt-2 border-t border-white/10 flex items-center justify-between text-white/40 text-[10px]">
+            <div className="mt-4 pt-2 border-t border-white/10 flex items-center justify-between text-white/80 text-[11px]">
               <div className="flex items-center gap-2">
                 <span style={{ color: PURO_RED }}>●</span>
                 <span>BluePipe Digital × PuroClean — Strategic Marketing Partner</span>
@@ -276,13 +276,13 @@ const SeoPackagesPrint = () => {
                 <h1 className="text-white font-bold leading-[1.05] text-[2rem]">
                   Compare <span className="gradient-text">SEO Growth Packages</span>
                 </h1>
-                <p className="mt-2 text-white/65 text-[15px] max-w-3xl leading-snug">
+                <p className="mt-2 text-white/90 text-[16px] max-w-3xl leading-snug">
                   Find the right visibility and expansion strategy for your market goals. Each package
                   scales from foundational local SEO to full multi-market dominance.
                 </p>
               </div>
               <div className="shrink-0 text-right">
-                <div className="text-white/40 text-[10px] tracking-wider uppercase">Powered by</div>
+                <div className="text-white/75 text-[11px] tracking-wider uppercase">Powered by</div>
                 <div className="text-white font-bold">BluePipe Digital</div>
               </div>
             </div>
@@ -292,15 +292,15 @@ const SeoPackagesPrint = () => {
               <table className="w-full">
                 <thead>
                   <tr className="bg-gradient-to-r from-[hsl(var(--dark-surface))] to-[hsl(var(--dark-surface-muted))] text-white">
-                    <th className="text-left text-[12.5px] font-semibold tracking-wider uppercase px-5 py-3 w-[34%]">
+                    <th className="text-left text-[13.5px] font-semibold tracking-wider uppercase px-5 py-3 w-[34%]">
                       Feature
                     </th>
-                    <th className="text-center text-[12.5px] font-semibold px-3 py-3">Builder SEO</th>
-                    <th className="text-center text-[12.5px] font-semibold px-3 py-3 bg-primary/30 relative">
+                    <th className="text-center text-[13.5px] font-semibold px-3 py-3">Builder SEO</th>
+                    <th className="text-center text-[13.5px] font-semibold px-3 py-3 bg-primary/30 relative">
                       <div className="absolute top-0 inset-x-0 h-0.5 bg-gradient-to-r from-transparent via-primary to-transparent" />
                       Booster SEO ★
                     </th>
-                    <th className="text-center text-[12.5px] font-semibold px-3 py-3">Dominator SEO</th>
+                    <th className="text-center text-[13.5px] font-semibold px-3 py-3">Dominator SEO</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -313,7 +313,7 @@ const SeoPackagesPrint = () => {
                             <div className="w-7 h-7 rounded-lg bg-primary/10 flex items-center justify-center">
                               <Icon className="w-3.5 h-3.5 text-primary" />
                             </div>
-                            <span className="text-[14px] font-medium text-foreground">{row.label}</span>
+                            <span className="text-[15px] font-medium text-foreground">{row.label}</span>
                           </div>
                         </td>
                         {row.values.map((v, j) => (
@@ -328,12 +328,12 @@ const SeoPackagesPrint = () => {
                     );
                   })}
                   <tr className="bg-gradient-to-r from-secondary/60 to-secondary/30">
-                    <td className="px-5 py-3 text-[14px] font-bold text-foreground">First Month Total</td>
-                    <td className="text-center px-3 py-3 text-[14px] font-bold">$1,350</td>
-                    <td className="text-center px-3 py-3 text-[14px] font-bold bg-primary/10 text-primary">
+                    <td className="px-5 py-3 text-[15px] font-bold text-foreground">First Month Total</td>
+                    <td className="text-center px-3 py-3 text-[15px] font-bold">$1,350</td>
+                    <td className="text-center px-3 py-3 text-[15px] font-bold bg-primary/10 text-primary">
                       $1,850
                     </td>
-                    <td className="text-center px-3 py-3 text-[14px] font-bold">$2,750</td>
+                    <td className="text-center px-3 py-3 text-[15px] font-bold">$2,750</td>
                   </tr>
                 </tbody>
               </table>
@@ -341,7 +341,7 @@ const SeoPackagesPrint = () => {
 
 
             {/* Footer */}
-            <div className="mt-3 pt-2 border-t border-white/10 flex items-center justify-between text-white/40 text-[10px]">
+            <div className="mt-3 pt-2 border-t border-white/10 flex items-center justify-between text-white/80 text-[11px]">
               <div className="flex items-center gap-2">
                 <span style={{ color: PURO_RED }}>●</span>
                 <span>BluePipeDigital.com · Strategic Marketing Partner for PuroClean</span>
@@ -373,13 +373,13 @@ const SeoPackagesPrint = () => {
                 <h1 className="text-white font-bold leading-[1.05] text-[2rem]">
                   Expand Beyond Your <span className="gradient-text">Core Territory</span>
                 </h1>
-                <p className="mt-2 text-white/65 text-[15px] max-w-3xl leading-snug">
+                <p className="mt-2 text-white/90 text-[16px] max-w-3xl leading-snug">
                   PipeLine Plus helps PuroClean franchise owners strategically expand visibility into surrounding
                   high-intent markets using advanced local SEO and lead generation systems.
                 </p>
               </div>
               <div className="text-right shrink-0">
-                <div className="text-white/40 text-[10px] tracking-wider uppercase">PipeLine Plus</div>
+                <div className="text-white/75 text-[11px] tracking-wider uppercase">PipeLine Plus</div>
                 <div className="text-white font-bold text-base">Expansion System</div>
               </div>
             </div>
@@ -389,7 +389,7 @@ const SeoPackagesPrint = () => {
               <div className="col-span-7 flex flex-col gap-4">
                 {/* Expansion diagram */}
                 <div className="rounded-xl bg-white/[0.04] border border-white/10 p-5">
-                  <div className="text-[10px] tracking-wider font-bold text-white/50 uppercase mb-4">
+                  <div className="text-[11px] tracking-wider font-bold text-white/80 uppercase mb-4">
                     Territory Expansion Flow
                   </div>
                   <div className="flex items-center justify-between gap-2">
@@ -405,8 +405,8 @@ const SeoPackagesPrint = () => {
                             <div className="relative inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-primary to-blue-600 shadow-[0_0_24px_-4px_hsl(var(--primary))]">
                               <Icon className="w-6 h-6 text-white" />
                             </div>
-                            <div className="text-white text-[15px] font-bold mt-2">{node.label}</div>
-                            <div className="text-white/45 text-[12.5px]">{node.sub}</div>
+                            <div className="text-white text-[16px] font-bold mt-2">{node.label}</div>
+                            <div className="text-white/85 text-[13.5px]">{node.sub}</div>
                           </div>
                           {i < arr.length - 1 && (
                             <div className="flex items-center px-1">
@@ -434,8 +434,8 @@ const SeoPackagesPrint = () => {
                           <div className="w-10 h-10 rounded-lg bg-primary/15 border border-primary/30 flex items-center justify-center mb-2.5">
                             <Icon className="w-5 h-5 text-primary" />
                           </div>
-                          <div className="text-white text-[15px] font-bold">{b.title}</div>
-                          <p className="text-white/65 text-[13px] leading-snug mt-1">{b.body}</p>
+                          <div className="text-white text-[16px] font-bold">{b.title}</div>
+                          <p className="text-white/90 text-[14px] leading-snug mt-1">{b.body}</p>
                         </div>
                       );
                     })}
@@ -449,8 +449,8 @@ const SeoPackagesPrint = () => {
                       <Sparkles className="w-5 h-5 text-white" />
                     </div>
                     <div>
-                      <div className="text-white font-bold text-[16px]">More Than an Add-On — A Market Expansion System</div>
-                      <p className="text-white/70 text-[13.5px] mt-1 leading-snug">
+                      <div className="text-white font-bold text-[17px]">More Than an Add-On — A Market Expansion System</div>
+                      <p className="text-white/90 text-[14.5px] mt-1 leading-snug">
                         PipeLine Plus helps PuroClean franchise owners strategically expand into surrounding
                         markets with advanced local SEO, territory-focused visibility strategies, and scalable
                         lead generation systems.
@@ -464,11 +464,11 @@ const SeoPackagesPrint = () => {
               <div className="col-span-5 flex flex-col">
                 <div className="rounded-xl bg-white/[0.04] border border-white/10 overflow-hidden flex flex-col flex-1">
                   <div className="px-5 py-3.5 border-b border-white/10 bg-gradient-to-r from-primary/20 to-transparent">
-                    <div className="text-[10px] tracking-wider font-bold text-primary uppercase">
+                    <div className="text-[11px] tracking-wider font-bold text-primary uppercase">
                       PipeLine Plus
                     </div>
                     <div className="text-white font-bold text-lg">Expansion Pricing</div>
-                    <div className="text-white/55 text-[12.5px]">Priced by target city population</div>
+                    <div className="text-white/90 text-[13.5px]">Priced by target city population</div>
                   </div>
                   <table className="w-full flex-1">
                     <tbody>
@@ -477,13 +477,13 @@ const SeoPackagesPrint = () => {
                           key={t.range}
                           className={`border-b border-white/5 ${i % 2 === 0 ? "bg-white/[0.01]" : ""}`}
                         >
-                          <td className="px-5 py-2.5 text-white/85 text-[14px]">
+                          <td className="px-5 py-2.5 text-white text-[15px]">
                             <span className="inline-flex items-center gap-2">
                               <Target className="w-3.5 h-3.5 text-primary/70" />
                               {t.range}
                             </span>
                           </td>
-                          <td className="px-5 py-2.5 text-right text-white font-bold text-[14px]">
+                          <td className="px-5 py-2.5 text-right text-white font-bold text-[15px]">
                             {t.price}
                           </td>
                         </tr>
@@ -495,7 +495,7 @@ const SeoPackagesPrint = () => {
             </div>
 
 
-            <div className="mt-3 pt-2 border-t border-white/10 flex items-center justify-between text-white/40 text-[10px]">
+            <div className="mt-3 pt-2 border-t border-white/10 flex items-center justify-between text-white/80 text-[11px]">
               <div className="flex items-center gap-2">
                 <span style={{ color: PURO_RED }}>●</span>
                 <span>BluePipeDigital.com · Market Expansion System for PuroClean Franchises</span>
