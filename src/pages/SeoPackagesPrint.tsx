@@ -371,7 +371,7 @@ const SeoPackagesPrint = () => {
                   </span>
                 </div>
                 <h1 className="text-white font-bold leading-[1.05] text-[2rem]">
-                  Expand Beyond Your <span className="gradient-text">Core Territory</span>
+                  Expand Beyond Your Core Territory
                 </h1>
                 <p className="mt-2 text-white/90 text-[16px] max-w-3xl leading-snug">
                   PipeLine Plus helps PuroClean franchise owners strategically expand visibility into surrounding
