@@ -227,7 +227,7 @@ const SeoPackagesPrint = () => {
                     {pkg.features.map((f) => (
                       <li key={f} className="flex items-start gap-2">
                         <Check className="w-3.5 h-3.5 text-primary mt-[3px] shrink-0" strokeWidth={3} />
-                        <span className="text-[14.5px] leading-snug" style={{ color: "#FFFFFF" }}>{f}</span>
+                        <span className="text-[14.5px] leading-snug font-bold" style={{ color: "#FFFFFF" }}>{f}</span>
                       </li>
                     ))}
                   </ul>
