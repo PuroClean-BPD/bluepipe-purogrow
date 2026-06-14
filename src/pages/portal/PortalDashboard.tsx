@@ -93,8 +93,11 @@ const PortalDashboard = () => {
       .map((w) => (w.length ? w[0].toUpperCase() + w.slice(1) : w))
       .join(" ");
 
-  const displayName = (r: typeof selectedReport) =>
-    r?.leadsnap?.gbp?.name ?? (clientSlug ? formatSlug(clientSlug) : "");
+  const displayName = (r: typeof selectedReport) => {
+    const gbpName = r?.leadsnap?.gbp?.name?.trim();
+    if (gbpName) return gbpName;
+    return clientSlug ? formatSlug(clientSlug) : "";
+  };
 
   if (loading) {
     return (
