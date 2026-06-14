@@ -4,7 +4,7 @@ import { createClient } from "@supabase/supabase-js";
 
 const EXTERNAL_SUPABASE_URL = "https://clikjnwgfiipvapjezhb.supabase.co";
 const EXTERNAL_SUPABASE_ANON_KEY =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNsaWtqbndnZmlpcHZhcGplemhiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODEyOTU4MDAsImV4cCI6MjA5Njg3MTgwMH0.dHtjdIPQswGhBkwI1ZwLUroTfPz95OFmu3zBHL771JA";
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNsaWtqbndnZmlpcHZhcGplemhiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODEyOTU4MDAsImV4cCI6MjA5Njg3MTgwMH0.gHONsPN4xsRCGCGREbAIZxIFHMaOXBW0j2QlPMCnrRs";
 
 export const externalSupabase = createClient(
   EXTERNAL_SUPABASE_URL,
