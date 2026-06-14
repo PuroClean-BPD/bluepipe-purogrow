@@ -11,6 +11,8 @@ import Pricing from "./pages/Pricing.tsx";
 import SeoPackagesPrint from "./pages/SeoPackagesPrint.tsx";
 import LocalSeoDashboard from "./pages/LocalSeoDashboard.tsx";
 import About from "./pages/About.tsx";
+import PortalLogin from "./pages/portal/PortalLogin.tsx";
+import PortalDashboard from "./pages/portal/PortalDashboard.tsx";
 import Contact from "./pages/Contact.tsx";
 import Explainer from "./pages/Explainer.tsx";
 import NotFound from "./pages/NotFound.tsx";
@@ -33,6 +35,8 @@ const App = () => (
           <Route path="/reports/caseyville-il" element={<LocalSeoDashboard />} />
           <Route path="/local-seo-dashboard" element={<LocalSeoDashboard />} />
           <Route path="/about" element={<About />} />
+          <Route path="/portal" element={<PortalLogin />} />
+          <Route path="/portal/dashboard" element={<PortalDashboard />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/explainer" element={<Explainer />} />
           <Route path="*" element={<NotFound />} />

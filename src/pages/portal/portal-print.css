@@ -1,0 +1,8 @@
+@media print {
+  .portal-no-print { display: none !important; }
+  body { background: white !important; }
+  .portal-print-root { background: white !important; color: #0A1628 !important; }
+  .portal-card { break-inside: avoid; page-break-inside: avoid; }
+  nav, header { display: none !important; }
+  @page { margin: 0.5in; }
+}
