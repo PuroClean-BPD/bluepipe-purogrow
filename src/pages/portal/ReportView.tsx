@@ -142,6 +142,79 @@ const formatCwv = (metric: string, val: number | string | undefined): string => 
   return `${Math.round(val)} ms`;
 };
 
+const CWV_META: Record<string, { name: string; explain: string; benchmark: string; fix: string }> = {
+  FCP: {
+    name: "First Contentful Paint",
+    explain: "How quickly the first text or image appears on screen when someone visits your site.",
+    benchmark: "Good: under 1.8s",
+    fix: "Images may be too large or the server is slow to respond.",
+  },
+  LCP: {
+    name: "Largest Contentful Paint",
+    explain: "How long it takes for the main content of your page to fully load.",
+    benchmark: "Good: under 2.5s",
+    fix: "Large images or videos are slowing down your page load time.",
+  },
+  TBT: {
+    name: "Total Blocking Time",
+    explain: "How long your page is unresponsive to clicks while it loads.",
+    benchmark: "Good: under 200ms",
+    fix: "Too many scripts are running at once, freezing the page temporarily.",
+  },
+  CLS: {
+    name: "Cumulative Layout Shift",
+    explain: "How much the page layout jumps around while loading (annoying to users).",
+    benchmark: "Good: under 0.1",
+    fix: "Images or ads without set dimensions are causing content to shift.",
+  },
+};
+
+const SEVERITY_LABEL: Record<Severity, string> = {
+  ok: "Good",
+  warn: "Needs Improvement",
+  crit: "Poor",
+};
+
+const CwvTile = ({ metric, value }: { metric: "FCP" | "LCP" | "TBT" | "CLS"; value: number | string | undefined }) => {
+  const sev = cwvSeverity(metric, value);
+  const meta = CWV_META[metric];
+  const s = severityStyle[sev];
+  const showFix = sev !== "ok";
+  return (
+    <div
+      className="portal-card rounded-xl p-5 border flex flex-col gap-3"
+      style={{ backgroundColor: s.bg, borderColor: s.border, borderWidth: 2 }}
+    >
+      <div className="flex items-start justify-between gap-2">
+        <div>
+          <div className="text-xs uppercase tracking-wide text-white/60">{metric}</div>
+          <div className="text-sm font-semibold text-white mt-0.5">{meta.name}</div>
+        </div>
+        <span
+          className="text-[10px] uppercase tracking-wider font-semibold px-2 py-1 rounded-full whitespace-nowrap"
+          style={{ backgroundColor: s.bg, color: s.text, border: `1px solid ${s.border}` }}
+        >
+          {SEVERITY_LABEL[sev]}
+        </span>
+      </div>
+      <div className="text-3xl font-bold" style={{ color: s.text }}>
+        {formatCwv(metric, value)}
+      </div>
+      <p className="text-xs text-white/70 leading-relaxed">{meta.explain}</p>
+      <div className="text-[11px] text-white/50 uppercase tracking-wide">{meta.benchmark}</div>
+      {showFix && (
+        <div
+          className="mt-1 text-xs rounded-lg px-3 py-2 border"
+          style={{ borderColor: s.border, backgroundColor: "rgba(0,0,0,0.25)", color: s.text }}
+        >
+          <span className="font-semibold">How to fix: </span>
+          <span className="text-white/80">{meta.fix}</span>
+        </div>
+      )}
+    </div>
+  );
+};
+
 const StarRow = ({ rating }: { rating: number }) => {
   const full = Math.floor(rating);
   const half = rating - full >= 0.5;
@@ -375,13 +448,13 @@ const ReportView = ({ report, businessName, reportDate }: Props) => {
           <Gauge label="SEO" value={ps.seo} />
           <Gauge label="Accessibility" value={ps.accessibility} />
         </div>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {(["FCP", "LCP", "TBT", "CLS"] as const).map((m) => {
             const val =
               m === "FCP" ? ps.fcp :
               m === "LCP" ? ps.lcp :
               m === "TBT" ? ps.tbt : ps.cls;
-            return <MetricCard key={m} label={m} value={formatCwv(m, val)} severity={cwvSeverity(m, val)} />;
+            return <CwvTile key={m} metric={m} value={val} />;
           })}
         </div>
       </section>
