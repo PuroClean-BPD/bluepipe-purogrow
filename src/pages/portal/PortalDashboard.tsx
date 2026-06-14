@@ -79,6 +79,15 @@ const PortalDashboard = () => {
     return new Date(d).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
   };
 
+  const formatSlug = (slug: string) =>
+    slug
+      .split("-")
+      .map((w) => (w.length ? w[0].toUpperCase() + w.slice(1) : w))
+      .join(" ");
+
+  const displayName = (r: typeof selectedReport) =>
+    r?.leadsnap?.gbp?.name ?? (clientSlug ? formatSlug(clientSlug) : "");
+
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: "#0A1628" }}>
@@ -137,7 +146,7 @@ const PortalDashboard = () => {
             <div className="portal-no-print flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
               <div>
                 <h1 className="text-2xl md:text-3xl font-bold text-white">
-                  {selectedReport.leadsnap?.gbp?.name ?? clientSlug}
+                  {displayName(selectedReport)}
                 </h1>
                 <p className="text-white/60 mt-1">
                   Monthly SEO Report · {formatDate(selectedReport.processed_at ?? selectedReport.created_at)}
@@ -165,7 +174,7 @@ const PortalDashboard = () => {
               </div>
             </div>
 
-            <ReportView report={selectedReport} businessName={selectedReport.leadsnap?.gbp?.name ?? clientSlug} reportDate={formatDate(selectedReport.processed_at ?? selectedReport.created_at)} />
+            <ReportView report={selectedReport} businessName={displayName(selectedReport)} reportDate={formatDate(selectedReport.processed_at ?? selectedReport.created_at)} />
           </>
         )}
       </main>
