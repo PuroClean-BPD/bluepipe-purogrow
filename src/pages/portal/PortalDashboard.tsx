@@ -79,6 +79,15 @@ const PortalDashboard = () => {
     return new Date(d).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
   };
 
+  const formatSlug = (slug: string) =>
+    slug
+      .split("-")
+      .map((w) => (w.length ? w[0].toUpperCase() + w.slice(1) : w))
+      .join(" ");
+
+  const displayName = (r: typeof selectedReport) =>
+    r?.leadsnap?.gbp?.name ?? (clientSlug ? formatSlug(clientSlug) : "");
+
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: "#0A1628" }}>
