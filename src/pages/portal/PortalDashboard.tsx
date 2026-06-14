@@ -56,6 +56,14 @@ const PortalDashboard = () => {
       if (rErr) {
         setError(rErr.message);
       } else if (runs) {
+        // Debug: inspect raw audit_runs records to verify field shape
+        console.log("[Portal] audit_runs raw:", runs);
+        if (runs[0]) {
+          console.log("[Portal] first record keys:", Object.keys(runs[0] as any));
+          console.log("[Portal] report_narrative:", (runs[0] as any).report_narrative);
+          console.log("[Portal] pagespeed:", (runs[0] as any).pagespeed);
+          console.log("[Portal] leadsnap.gbp:", (runs[0] as any).leadsnap?.gbp);
+        }
         setReports(runs as AuditRun[]);
         if (runs.length > 0) setSelectedId((runs[0] as AuditRun).id);
       }
