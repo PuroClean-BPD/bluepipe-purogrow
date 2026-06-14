@@ -174,7 +174,7 @@ const PortalDashboard = () => {
               </div>
             </div>
 
-            <ReportView report={selectedReport} businessName={selectedReport.leadsnap?.gbp?.name ?? clientSlug} reportDate={formatDate(selectedReport.processed_at ?? selectedReport.created_at)} />
+            <ReportView report={selectedReport} businessName={displayName(selectedReport)} reportDate={formatDate(selectedReport.processed_at ?? selectedReport.created_at)} />
           </>
         )}
       </main>
