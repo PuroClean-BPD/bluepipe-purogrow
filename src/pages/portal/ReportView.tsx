@@ -448,13 +448,13 @@ const ReportView = ({ report, businessName, reportDate }: Props) => {
           <Gauge label="SEO" value={ps.seo} />
           <Gauge label="Accessibility" value={ps.accessibility} />
         </div>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {(["FCP", "LCP", "TBT", "CLS"] as const).map((m) => {
             const val =
               m === "FCP" ? ps.fcp :
               m === "LCP" ? ps.lcp :
               m === "TBT" ? ps.tbt : ps.cls;
-            return <MetricCard key={m} label={m} value={formatCwv(m, val)} severity={cwvSeverity(m, val)} />;
+            return <CwvTile key={m} metric={m} value={val} />;
           })}
         </div>
       </section>
