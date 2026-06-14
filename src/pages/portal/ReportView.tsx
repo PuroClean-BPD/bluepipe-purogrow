@@ -1,4 +1,6 @@
+import { useState } from "react";
 import { AuditRun } from "@/integrations/external-supabase/client";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 
 interface Props {
   report: AuditRun;
@@ -42,13 +44,39 @@ const severityStyle: Record<Severity, { bg: string; text: string; border: string
   crit: { bg: "rgba(239,68,68,0.10)",   text: "#fca5a5", border: "rgba(239,68,68,0.35)" },
 };
 
-const MetricCard = ({ label, value, severity = "ok" }: { label: string; value: number | string; severity?: Severity }) => {
+const MetricCard = ({
+  label,
+  value,
+  severity = "ok",
+  onClick,
+  count,
+}: {
+  label: string;
+  value: number | string;
+  severity?: Severity;
+  onClick?: () => void;
+  count?: number;
+}) => {
   const s = severityStyle[severity];
+  const clickable = !!onClick && (count ?? 0) > 0;
   return (
-    <div className="portal-card rounded-xl p-4 border" style={{ backgroundColor: s.bg, borderColor: s.border }}>
-      <div className="text-xs uppercase tracking-wide text-white/60 mb-2">{label}</div>
+    <button
+      type="button"
+      onClick={clickable ? onClick : undefined}
+      disabled={!clickable}
+      className={`portal-card rounded-xl p-4 border text-left w-full transition ${
+        clickable ? "hover:brightness-125 cursor-pointer" : "cursor-default"
+      }`}
+      style={{ backgroundColor: s.bg, borderColor: s.border }}
+    >
+      <div className="flex items-center justify-between mb-2">
+        <div className="text-xs uppercase tracking-wide text-white/60">{label}</div>
+        {clickable && (
+          <span className="text-[10px] uppercase tracking-wider text-white/50">View →</span>
+        )}
+      </div>
       <div className="text-2xl font-bold" style={{ color: s.text }}>{value}</div>
-    </div>
+    </button>
   );
 };
 
@@ -72,19 +100,37 @@ const Gauge = ({ label, value }: { label: string; value: number | undefined }) =
   );
 };
 
-const cwvSeverity = (metric: string, val: number | undefined): Severity => {
-  if (typeof val !== "number") return "ok";
+// Parse "2.7 s", "670 ms", "0.058", number -> { ms or unitless }
+const parseCwv = (val: number | string | undefined): { ms?: number; cls?: number } => {
+  if (val === undefined || val === null) return {};
+  if (typeof val === "number") return { ms: val };
+  const cleaned = String(val).replace(/\u00a0/g, " ").trim().toLowerCase();
+  const num = parseFloat(cleaned);
+  if (Number.isNaN(num)) return {};
+  if (cleaned.includes("ms")) return { ms: num };
+  if (cleaned.includes("s")) return { ms: num * 1000 };
+  return { cls: num };
+};
+
+const cwvSeverity = (metric: string, val: number | string | undefined): Severity => {
+  const { ms, cls } = parseCwv(val);
+  if (metric === "CLS") {
+    const c = cls ?? ms;
+    if (c === undefined) return "ok";
+    return c <= 0.1 ? "ok" : c <= 0.25 ? "warn" : "crit";
+  }
+  if (ms === undefined) return "ok";
   switch (metric) {
-    case "FCP": return val <= 1800 ? "ok" : val <= 3000 ? "warn" : "crit";
-    case "LCP": return val <= 2500 ? "ok" : val <= 4000 ? "warn" : "crit";
-    case "TBT": return val <= 200 ? "ok" : val <= 600 ? "warn" : "crit";
-    case "CLS": return val <= 0.1 ? "ok" : val <= 0.25 ? "warn" : "crit";
+    case "FCP": return ms <= 1800 ? "ok" : ms <= 3000 ? "warn" : "crit";
+    case "LCP": return ms <= 2500 ? "ok" : ms <= 4000 ? "warn" : "crit";
+    case "TBT": return ms <= 200 ? "ok" : ms <= 600 ? "warn" : "crit";
     default: return "ok";
   }
 };
 
-const formatCwv = (metric: string, val: number | undefined): string => {
-  if (typeof val !== "number") return "—";
+const formatCwv = (metric: string, val: number | string | undefined): string => {
+  if (val === undefined || val === null || val === "") return "—";
+  if (typeof val === "string") return val.replace(/\u00a0/g, " ");
   if (metric === "CLS") return val.toFixed(2);
   if (val >= 1000) return `${(val / 1000).toFixed(2)} s`;
   return `${Math.round(val)} ms`;
@@ -107,25 +153,178 @@ const StarRow = ({ rating }: { rating: number }) => {
   );
 };
 
+// ============================================================
+// Drilldown rendering
+// ============================================================
+
+type IssueKey =
+  | "broken" | "redirects"
+  | "missingTitle" | "longTitle" | "duplicateTitle"
+  | "missingMeta" | "longMeta" | "duplicateMeta"
+  | "missingH1" | "multipleH1"
+  | "nonIndexable" | "thinContent";
+
+const urlOf = (item: any): string => (typeof item === "string" ? item : item?.url ?? "");
+
+const groupByKey = (items: any[], key: "title" | "meta") => {
+  const map = new Map<string, string[]>();
+  for (const it of items) {
+    const k = it?.[key] ?? "(empty)";
+    const arr = map.get(k) ?? [];
+    arr.push(it?.url ?? "");
+    map.set(k, arr);
+  }
+  return Array.from(map.entries()).filter(([, urls]) => urls.length > 1);
+};
+
+const Th = ({ children, className = "" }: { children: React.ReactNode; className?: string }) => (
+  <th className={`py-2 px-3 text-xs uppercase tracking-wide text-white/50 font-medium ${className}`}>{children}</th>
+);
+const Td = ({ children, className = "" }: { children: React.ReactNode; className?: string }) => (
+  <td className={`py-2 px-3 text-sm text-white/85 align-top ${className}`}>{children}</td>
+);
+
+const UrlCell = ({ url }: { url: string }) => (
+  <a href={url} target="_blank" rel="noopener noreferrer" className="text-orange-300 hover:text-orange-200 underline break-all">
+    {url}
+  </a>
+);
+
+const IssueTable = ({ issueKey, items }: { issueKey: IssueKey; items: any[] }) => {
+  if (!items || items.length === 0) {
+    return <p className="text-white/60">No items.</p>;
+  }
+
+  if (issueKey === "broken" || issueKey === "redirects") {
+    return (
+      <table className="w-full">
+        <thead><tr className="border-b border-white/10"><Th>URL</Th><Th className="w-24">Status</Th></tr></thead>
+        <tbody>{items.map((it, i) => (
+          <tr key={i} className="border-b border-white/5"><Td><UrlCell url={urlOf(it)} /></Td><Td>{it.status ?? "—"}</Td></tr>
+        ))}</tbody>
+      </table>
+    );
+  }
+  if (issueKey === "missingTitle" || issueKey === "missingMeta" || issueKey === "missingH1") {
+    return (
+      <table className="w-full">
+        <thead><tr className="border-b border-white/10"><Th>URL</Th></tr></thead>
+        <tbody>{items.map((it, i) => (
+          <tr key={i} className="border-b border-white/5"><Td><UrlCell url={urlOf(it)} /></Td></tr>
+        ))}</tbody>
+      </table>
+    );
+  }
+  if (issueKey === "longTitle") {
+    return (
+      <table className="w-full">
+        <thead><tr className="border-b border-white/10"><Th>URL</Th><Th>Title</Th><Th className="w-20">Chars</Th></tr></thead>
+        <tbody>{items.map((it, i) => (
+          <tr key={i} className="border-b border-white/5"><Td><UrlCell url={it.url} /></Td><Td>{it.title}</Td><Td>{it.length}</Td></tr>
+        ))}</tbody>
+      </table>
+    );
+  }
+  if (issueKey === "longMeta") {
+    return (
+      <table className="w-full">
+        <thead><tr className="border-b border-white/10"><Th>URL</Th><Th>Meta</Th><Th className="w-20">Chars</Th></tr></thead>
+        <tbody>{items.map((it, i) => (
+          <tr key={i} className="border-b border-white/5"><Td><UrlCell url={it.url} /></Td><Td>{it.meta}</Td><Td>{it.length}</Td></tr>
+        ))}</tbody>
+      </table>
+    );
+  }
+  if (issueKey === "duplicateTitle" || issueKey === "duplicateMeta") {
+    const key = issueKey === "duplicateTitle" ? "title" : "meta";
+    const groups = groupByKey(items, key);
+    if (groups.length === 0) {
+      // fall back to flat list
+      return (
+        <table className="w-full">
+          <thead><tr className="border-b border-white/10"><Th>URL</Th><Th>{key === "title" ? "Title" : "Meta"}</Th></tr></thead>
+          <tbody>{items.map((it, i) => (
+            <tr key={i} className="border-b border-white/5"><Td><UrlCell url={it.url} /></Td><Td>{it[key]}</Td></tr>
+          ))}</tbody>
+        </table>
+      );
+    }
+    return (
+      <div className="space-y-4">
+        {groups.map(([val, urls], i) => (
+          <div key={i} className="rounded-lg border border-white/10 p-4 bg-white/[0.02]">
+            <div className="text-xs uppercase tracking-wide text-white/50 mb-2">{key === "title" ? "Title" : "Meta"}</div>
+            <div className="text-white mb-3">{val}</div>
+            <div className="text-xs uppercase tracking-wide text-white/50 mb-1">URLs ({urls.length})</div>
+            <ul className="space-y-1">{urls.map((u, j) => <li key={j}><UrlCell url={u} /></li>)}</ul>
+          </div>
+        ))}
+      </div>
+    );
+  }
+  if (issueKey === "multipleH1") {
+    return (
+      <table className="w-full">
+        <thead><tr className="border-b border-white/10"><Th>URL</Th><Th>H1</Th><Th>H1 (2)</Th></tr></thead>
+        <tbody>{items.map((it, i) => (
+          <tr key={i} className="border-b border-white/5"><Td><UrlCell url={it.url} /></Td><Td>{it.h1}</Td><Td>{it.h1_2}</Td></tr>
+        ))}</tbody>
+      </table>
+    );
+  }
+  if (issueKey === "nonIndexable") {
+    return (
+      <table className="w-full">
+        <thead><tr className="border-b border-white/10"><Th>URL</Th><Th>Reason</Th></tr></thead>
+        <tbody>{items.map((it, i) => (
+          <tr key={i} className="border-b border-white/5"><Td><UrlCell url={it.url} /></Td><Td>{it.reason ?? "—"}</Td></tr>
+        ))}</tbody>
+      </table>
+    );
+  }
+  if (issueKey === "thinContent") {
+    return (
+      <table className="w-full">
+        <thead><tr className="border-b border-white/10"><Th>URL</Th><Th className="w-28">Word count</Th></tr></thead>
+        <tbody>{items.map((it, i) => (
+          <tr key={i} className="border-b border-white/5"><Td><UrlCell url={it.url} /></Td><Td>{it.wordCount ?? "—"}</Td></tr>
+        ))}</tbody>
+      </table>
+    );
+  }
+  return null;
+};
+
 const ReportView = ({ report, businessName, reportDate }: Props) => {
   const sf = report.screaming_frog?.summary ?? {};
+  const issues = report.screaming_frog?.issues ?? {};
   const ps = report.pagespeed ?? {};
   const gbp = report.leadsnap?.gbp;
   const grid = report.leadsnap?.grid;
   const dm = report.domain_metrics;
   const keywords = report.top_keywords ?? [];
 
-  const techMetrics: Array<{ label: string; value: number; severity: Severity }> = [
-    { label: "Broken Links",     value: sf.broken ?? 0,         severity: (sf.broken ?? 0) > 0 ? "crit" : "ok" },
-    { label: "Redirects",        value: sf.redirects ?? 0,      severity: (sf.redirects ?? 0) > 5 ? "warn" : "ok" },
-    { label: "Missing Titles",   value: sf.missingTitle ?? 0,   severity: (sf.missingTitle ?? 0) > 0 ? "crit" : "ok" },
-    { label: "Long Titles",      value: sf.longTitle ?? 0,      severity: (sf.longTitle ?? 0) > 10 ? "warn" : "ok" },
-    { label: "Duplicate Titles", value: sf.duplicateTitle ?? 0, severity: (sf.duplicateTitle ?? 0) > 0 ? "crit" : "ok" },
-    { label: "Missing Meta",     value: sf.missingMeta ?? 0,    severity: (sf.missingMeta ?? 0) > 0 ? "crit" : "ok" },
-    { label: "Missing H1",       value: sf.missingH1 ?? 0,      severity: (sf.missingH1 ?? 0) > 0 ? "crit" : "ok" },
-    { label: "Non-Indexable",    value: sf.nonIndexable ?? 0,   severity: (sf.nonIndexable ?? 0) > 5 ? "warn" : "ok" },
-    { label: "Thin Content",     value: sf.thinContent ?? 0,    severity: (sf.thinContent ?? 0) > 0 ? "warn" : "ok" },
+  const [drilldown, setDrilldown] = useState<{ key: IssueKey; label: string } | null>(null);
+
+  const issueCount = (k: IssueKey): number => (issues as any)?.[k]?.length ?? 0;
+
+  const techMetrics: Array<{ key: IssueKey; label: string; value: number; severity: Severity }> = [
+    { key: "broken",         label: "Broken Links",     value: sf.broken ?? issueCount("broken"),                 severity: (sf.broken ?? issueCount("broken")) > 0 ? "crit" : "ok" },
+    { key: "redirects",      label: "Redirects",        value: sf.redirects ?? issueCount("redirects"),           severity: (sf.redirects ?? issueCount("redirects")) > 5 ? "warn" : "ok" },
+    { key: "missingTitle",   label: "Missing Titles",   value: sf.missingTitle ?? issueCount("missingTitle"),     severity: (sf.missingTitle ?? issueCount("missingTitle")) > 0 ? "crit" : "ok" },
+    { key: "longTitle",      label: "Long Titles",      value: sf.longTitle ?? issueCount("longTitle"),           severity: (sf.longTitle ?? issueCount("longTitle")) > 10 ? "warn" : "ok" },
+    { key: "duplicateTitle", label: "Duplicate Titles", value: sf.duplicateTitle ?? issueCount("duplicateTitle"), severity: (sf.duplicateTitle ?? issueCount("duplicateTitle")) > 0 ? "crit" : "ok" },
+    { key: "missingMeta",    label: "Missing Meta",     value: sf.missingMeta ?? issueCount("missingMeta"),       severity: (sf.missingMeta ?? issueCount("missingMeta")) > 0 ? "crit" : "ok" },
+    { key: "longMeta",       label: "Long Meta",        value: sf.longMeta ?? issueCount("longMeta"),             severity: (sf.longMeta ?? issueCount("longMeta")) > 10 ? "warn" : "ok" },
+    { key: "duplicateMeta",  label: "Duplicate Meta",   value: sf.duplicateMeta ?? issueCount("duplicateMeta"),   severity: (sf.duplicateMeta ?? issueCount("duplicateMeta")) > 0 ? "crit" : "ok" },
+    { key: "missingH1",      label: "Missing H1",       value: sf.missingH1 ?? issueCount("missingH1"),           severity: (sf.missingH1 ?? issueCount("missingH1")) > 0 ? "crit" : "ok" },
+    { key: "multipleH1",     label: "Multiple H1s",     value: sf.multipleH1 ?? issueCount("multipleH1"),         severity: (sf.multipleH1 ?? issueCount("multipleH1")) > 0 ? "warn" : "ok" },
+    { key: "nonIndexable",   label: "Non-Indexable",    value: sf.nonIndexable ?? issueCount("nonIndexable"),     severity: (sf.nonIndexable ?? issueCount("nonIndexable")) > 5 ? "warn" : "ok" },
+    { key: "thinContent",    label: "Thin Content",     value: sf.thinContent ?? issueCount("thinContent"),       severity: (sf.thinContent ?? issueCount("thinContent")) > 0 ? "warn" : "ok" },
   ];
+
+  const narrative = report.report_narrative;
+  const hasNarrative = typeof narrative === "string" && narrative.trim().length > 0;
 
   return (
     <div className="portal-print-root space-y-10">
@@ -139,7 +338,7 @@ const ReportView = ({ report, businessName, reportDate }: Props) => {
       <section>
         <SectionTitle>Executive Summary</SectionTitle>
         <Card>
-          {report.report_narrative ? renderMarkdown(report.report_narrative) : (
+          {hasNarrative ? renderMarkdown(narrative!) : (
             <p className="text-white/50">No narrative available for this report.</p>
           )}
         </Card>
@@ -150,7 +349,14 @@ const ReportView = ({ report, businessName, reportDate }: Props) => {
         <SectionTitle>Technical Health</SectionTitle>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">
           {techMetrics.map((m) => (
-            <MetricCard key={m.label} label={m.label} value={m.value} severity={m.severity} />
+            <MetricCard
+              key={m.label}
+              label={m.label}
+              value={m.value}
+              severity={m.severity}
+              count={issueCount(m.key)}
+              onClick={() => setDrilldown({ key: m.key, label: m.label })}
+            />
           ))}
         </div>
       </section>
@@ -265,6 +471,27 @@ const ReportView = ({ report, businessName, reportDate }: Props) => {
           )}
         </Card>
       </section>
+
+      {/* Drilldown modal */}
+      <Dialog open={!!drilldown} onOpenChange={(o) => !o && setDrilldown(null)}>
+        <DialogContent className="max-w-4xl max-h-[85vh] overflow-y-auto bg-[#0A1628] border-white/10 text-white">
+          <DialogHeader>
+            <DialogTitle className="text-white">
+              {drilldown?.label}
+              {drilldown && (
+                <span className="ml-2 text-white/50 text-sm font-normal">
+                  ({issueCount(drilldown.key)} {issueCount(drilldown.key) === 1 ? "item" : "items"})
+                </span>
+              )}
+            </DialogTitle>
+          </DialogHeader>
+          {drilldown && (
+            <div className="mt-2">
+              <IssueTable issueKey={drilldown.key} items={(issues as any)[drilldown.key] ?? []} />
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
