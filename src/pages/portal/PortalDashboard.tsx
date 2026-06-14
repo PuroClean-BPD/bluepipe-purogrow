@@ -146,7 +146,7 @@ const PortalDashboard = () => {
             <div className="portal-no-print flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
               <div>
                 <h1 className="text-2xl md:text-3xl font-bold text-white">
-                  {selectedReport.leadsnap?.gbp?.name ?? clientSlug}
+                  {displayName(selectedReport)}
                 </h1>
                 <p className="text-white/60 mt-1">
                   Monthly SEO Report · {formatDate(selectedReport.processed_at ?? selectedReport.created_at)}
