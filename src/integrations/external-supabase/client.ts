@@ -42,6 +42,22 @@ export interface AuditRun {
       nonIndexable?: number;
       thinContent?: number;
     };
+    issues?: {
+      broken?: Array<{ url: string; status?: number }>;
+      redirects?: Array<{ url: string; status?: number }>;
+      missingTitle?: Array<string | { url: string }>;
+      longTitle?: Array<{ url: string; title?: string; length?: number }>;
+      shortTitle?: Array<{ url: string; title?: string; length?: number }>;
+      duplicateTitle?: Array<{ url: string; title?: string }>;
+      missingMeta?: Array<string | { url: string }>;
+      longMeta?: Array<{ url: string; meta?: string; length?: number }>;
+      shortMeta?: Array<{ url: string; meta?: string; length?: number }>;
+      duplicateMeta?: Array<{ url: string; meta?: string }>;
+      missingH1?: Array<string | { url: string }>;
+      multipleH1?: Array<{ url: string; h1?: string; h1_2?: string }>;
+      nonIndexable?: Array<{ url: string; reason?: string }>;
+      thinContent?: Array<{ url: string; wordCount?: number }>;
+    };
   } | null;
   leadsnap: {
     gbp?: {
@@ -68,11 +84,11 @@ export interface AuditRun {
     accessibility?: number;
     bestPractices?: number;
     seo?: number;
-    fcp?: number;
-    lcp?: number;
-    tbt?: number;
-    cls?: number;
-    speedIndex?: number;
+    fcp?: number | string;
+    lcp?: number | string;
+    tbt?: number | string;
+    cls?: number | string;
+    speedIndex?: number | string;
   } | null;
   domain_metrics: {
     organicTraffic?: number;
