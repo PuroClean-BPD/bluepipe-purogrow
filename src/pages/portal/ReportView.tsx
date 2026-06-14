@@ -80,8 +80,14 @@ const MetricCard = ({
   );
 };
 
-const Gauge = ({ label, value }: { label: string; value: number | undefined }) => {
-  const v = typeof value === "number" ? Math.max(0, Math.min(100, Math.round(value))) : null;
+const Gauge = ({ label, value }: { label: string; value: number | string | undefined | null }) => {
+  const num =
+    typeof value === "number"
+      ? value
+      : typeof value === "string" && value.trim() !== ""
+      ? parseFloat(value)
+      : NaN;
+  const v = Number.isFinite(num) ? Math.max(0, Math.min(100, Math.round(num))) : null;
   const color = v === null ? "#6b7280" : v >= 90 ? "#22c55e" : v >= 50 ? "#eab308" : "#ef4444";
   const circumference = 2 * Math.PI * 42;
   const dash = v === null ? 0 : (v / 100) * circumference;
