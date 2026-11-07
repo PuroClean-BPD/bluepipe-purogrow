@@ -59,3 +59,23 @@ Synthetic fixtures only. No email, invitation, real-account grants or real metri
 | pdf matching frozen SHA256 | same SHA256 in actual file | True | PASS |
 
 Real email delivery: NOT RUN. Global signup settings unchanged; new monthly sender is OFF. Hosted six-digit OTP length and Netlify deployment linkage remain UNVERIFIED. Direct storage denial may be HTTP 400/404 (masked object absence) rather than 403; evidence records actual status.
+
+## Additional actual evidence and failures retained
+
+- First backend run: authorized file issuance returned 403; caller report SELECT returned zero rows. Diagnosed unqualified correlated policy IDs. Additive migration `0001_monthly_policy_scope_fix.sql` fixed both organization and report correlation. Repeated same checks: authorized issuance 200, actual PDF 200, actual URL after 65 seconds HTTP 400 expired, HTML/PDF matching frozen hash PASS.
+- First run actual admin revoke: HTTP 204; immediate old-token report denial 403 / location SELECT zero; refreshed-token SELECT zero. Repeat run returned 403 for already-revoked grant. This repeat refusal is not a fresh revoke transition.
+- First run actual admin approve: HTTP 204 and audit event `approved`; repeat run correctly refused already-approved transition with 403. This repeat refusal is not a fresh approval.
+- Real authenticated Playwright desktop (1280×1800) and mobile (390×844): client ua location options exactly two; archive published-only; HTML downloaded through endpoint, displayed in iframe with empty sandbox; location switch; PDF response verified by backend harness. Missing metric orange, unknown package omitted.
+- Real admin Playwright selected published a1 fixture and withdrew it, selected approved fixture and published it. Follow-up run selected published v4, withdrew it, selected draft v3, approved then published it; waited for Withdraw control to confirm published state read back through UI. Zero page runtime errors. Sign-out succeeded. Screenshots saved under `/tmp/browser/monthly/`.
+- Initial UI attempt tried Withdraw while approved version was selected; selector timed out, no mutation. Corrected test selected the published archive entry explicitly. Another run reused a signed-out synthetic admin session and timed out; synthetic-only password/session renewal resolved this without email.
+- Hosted catalog inspection: all 8 new tables ENABLE+FORCE RLS, anon SELECT/INSERT privileges false. No new client write policies.
+- SHA256 comparison of protected baseline: all 55 `public/a/**` files, public headers/redirects/robots, existing portal pages, dashboard page and auto-generated previewAuthStorage unchanged. App changed only by additive lazy monthly routes/imports; all previous route declarations identical. Both `/reports/caseyville-il` and `/local-seo-dashboard` rendered in browser; existing `/portal` rendered.
+- New `src/monthly` source: no external audit reader import/key, service credential, or console data log. New client module is lazy-loaded. Legacy App still statically imports the existing portal reader; thus the entire site's shared initial bundle can still contain the pre-existing external publishable key. Full shared-bundle removal is BLOCKED by the requirement not to refactor legacy routes; no claim of whole-site key removal is made.
+- Vitest: 4 concrete reporting cutoff tests + 1 existing test PASS. Preview compilation latest signal: build OK.
+
+## Not run / limitations
+
+- Real email delivery and live magic-link / six-digit OTP exchange: NOT RUN, sending flag OFF; hosted OTP length/template and Netlify callback allow-list need separate approval/configuration.
+- Direct storage denial returns masked HTTP 400, not the requested literal 403. Anonymous file edge 401 and cross-tenant file edge 403 verified. Existing valid signed URLs are bearer capabilities until their 60-second expiry; revocation prevents new issuance immediately, not already-issued URLs.
+- No real client account/report/grant, Bill account, invitation, external client message or Aubrey backend mutation.
+- Netlify custom-domain deployment linkage remains UNVERIFIED.

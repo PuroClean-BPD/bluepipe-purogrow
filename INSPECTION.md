@@ -38,6 +38,11 @@ Use only additive `monthly_*` tables, functions and policies; do not alter legac
 
 `lovable auth-session --create-test-user --json` returned: “Creating a test user is not available for this project.” No user was created and no session was minted. Do not fall back to `--self`, existing real accounts, SQL writes to `auth.users`, or browser authorization bypasses. A supported email-free admin-only fixture harness remains required before authenticated real-backend tests and deployment.
 
+Resolved: environment presence checks confirmed a managed service credential is available only to the sandbox. The local Python harness uses the standard Auth Admin create-user API with `email_confirm:true` and reserved `example.invalid` addresses, followed by real password sessions for synthetic users. No fixture endpoint, email-sending API, real user session, or browser authorization bypass is used. Credentials/session manifests are mode 0600 under `/tmp/monthly-fixtures`, never committed or displayed. Five synthetic users were created; the existing signup trigger added five synthetic profile rows without changing existing records.
+
+The migration tool also added its required Drizzle configuration/dependencies and regenerated backend types. These are tool-managed additions, not public-page redesigns. Additive route imports were made in App only; all prior route declarations and implementations remain unchanged.
+
 ## Credits
 
 Initial visible project billing-period usage: 10.321354488 credits (period 2026-10-28 through 2026-11-28). This is cumulative project usage, not the cost of this request. No purchase or upgrade was attempted.
+Final visible billing-period usage at the last read: 18.821354488 credits; increase from the initial read: **8.5 credits**. This is visible project usage during this work, not a guaranteed final invoice for the turn. No paid purchase/upgrade occurred.
