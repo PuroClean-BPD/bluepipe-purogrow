@@ -1,0 +1,2 @@
+ALTER POLICY monthly_org_select ON public.monthly_organizations USING (public.monthly_staff_role() IS NOT NULL OR EXISTS (SELECT 1 FROM public.monthly_clients c WHERE c.org_id = monthly_organizations.id AND public.monthly_can_client(c.id)));
+ALTER POLICY monthly_report_select ON public.monthly_reports USING (public.monthly_staff_role() IS NOT NULL OR (public.monthly_can_client(client_id) AND EXISTS (SELECT 1 FROM public.monthly_report_versions v WHERE v.report_id = monthly_reports.id AND v.state = 'published')));

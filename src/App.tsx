@@ -1,3 +1,4 @@
+import { lazy, Suspense } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Toaster as Sonner } from "@/components/ui/sonner";
@@ -17,6 +18,9 @@ import Contact from "./pages/Contact.tsx";
 import Explainer from "./pages/Explainer.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
+const MonthlyPortal = lazy(() => import("./monthly/MonthlyPortal"));
+const MonthlyCallback = lazy(() => import("./monthly/MonthlyCallback"));
+
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -35,6 +39,8 @@ const App = () => (
           <Route path="/reports/caseyville-il" element={<LocalSeoDashboard />} />
           <Route path="/local-seo-dashboard" element={<LocalSeoDashboard />} />
           <Route path="/about" element={<About />} />
+          <Route path="/portal/monthly" element={<Suspense fallback={null}><MonthlyPortal /></Suspense>} />
+          <Route path="/portal/callback" element={<Suspense fallback={null}><MonthlyCallback /></Suspense>} />
           <Route path="/portal" element={<PortalLogin />} />
           <Route path="/portal/dashboard" element={<PortalDashboard />} />
           <Route path="/contact" element={<Contact />} />

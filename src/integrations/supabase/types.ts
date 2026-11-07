@@ -14,6 +14,266 @@ export type Database = {
   }
   public: {
     Tables: {
+      monthly_audit_log: {
+        Row: {
+          action: string
+          actor: string | null
+          at: string
+          client_id: string | null
+          detail: Json
+          id: string
+          ip: unknown
+          target_id: string | null
+          target_table: string
+        }
+        Insert: {
+          action: string
+          actor?: string | null
+          at?: string
+          client_id?: string | null
+          detail?: Json
+          id?: string
+          ip?: unknown
+          target_id?: string | null
+          target_table: string
+        }
+        Update: {
+          action?: string
+          actor?: string | null
+          at?: string
+          client_id?: string | null
+          detail?: Json
+          id?: string
+          ip?: unknown
+          target_id?: string | null
+          target_table?: string
+        }
+        Relationships: []
+      }
+      monthly_clients: {
+        Row: {
+          created_at: string
+          display_name: string
+          id: string
+          org_id: string
+          package: string | null
+          slug: string
+          status: string
+        }
+        Insert: {
+          created_at?: string
+          display_name: string
+          id?: string
+          org_id: string
+          package?: string | null
+          slug: string
+          status?: string
+        }
+        Update: {
+          created_at?: string
+          display_name?: string
+          id?: string
+          org_id?: string
+          package?: string | null
+          slug?: string
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "monthly_clients_org_id_fkey"
+            columns: ["org_id"]
+            isOneToOne: false
+            referencedRelation: "monthly_organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      monthly_memberships: {
+        Row: {
+          client_id: string
+          grant_source: string
+          granted_at: string
+          granted_by: string
+          id: string
+          revoked_at: string | null
+          role: string
+          user_id: string
+        }
+        Insert: {
+          client_id: string
+          grant_source: string
+          granted_at?: string
+          granted_by: string
+          id?: string
+          revoked_at?: string | null
+          role: string
+          user_id: string
+        }
+        Update: {
+          client_id?: string
+          grant_source?: string
+          granted_at?: string
+          granted_by?: string
+          id?: string
+          revoked_at?: string | null
+          role?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "monthly_memberships_client_id_fkey"
+            columns: ["client_id"]
+            isOneToOne: false
+            referencedRelation: "monthly_clients"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      monthly_organizations: {
+        Row: {
+          created_at: string
+          id: string
+          name: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          name: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          name?: string
+        }
+        Relationships: []
+      }
+      monthly_report_versions: {
+        Row: {
+          approved_at: string | null
+          approved_by: string | null
+          created_by: string
+          dataset: Json
+          dataset_sha256: string
+          html_path: string
+          id: string
+          notes: string | null
+          pdf_path: string
+          published_at: string | null
+          published_by: string | null
+          report_id: string
+          state: string
+          version: number
+        }
+        Insert: {
+          approved_at?: string | null
+          approved_by?: string | null
+          created_by: string
+          dataset: Json
+          dataset_sha256: string
+          html_path: string
+          id?: string
+          notes?: string | null
+          pdf_path: string
+          published_at?: string | null
+          published_by?: string | null
+          report_id: string
+          state?: string
+          version: number
+        }
+        Update: {
+          approved_at?: string | null
+          approved_by?: string | null
+          created_by?: string
+          dataset?: Json
+          dataset_sha256?: string
+          html_path?: string
+          id?: string
+          notes?: string | null
+          pdf_path?: string
+          published_at?: string | null
+          published_by?: string | null
+          report_id?: string
+          state?: string
+          version?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "monthly_report_versions_report_id_fkey"
+            columns: ["report_id"]
+            isOneToOne: false
+            referencedRelation: "monthly_reports"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      monthly_reports: {
+        Row: {
+          client_id: string
+          created_at: string
+          id: string
+          kind: string
+          period_end: string
+          period_label: string
+          period_start: string
+        }
+        Insert: {
+          client_id: string
+          created_at?: string
+          id?: string
+          kind: string
+          period_end: string
+          period_label: string
+          period_start: string
+        }
+        Update: {
+          client_id?: string
+          created_at?: string
+          id?: string
+          kind?: string
+          period_end?: string
+          period_label?: string
+          period_start?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "monthly_reports_client_id_fkey"
+            columns: ["client_id"]
+            isOneToOne: false
+            referencedRelation: "monthly_clients"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      monthly_settings: {
+        Row: {
+          auth_sending_enabled: boolean
+          id: boolean
+        }
+        Insert: {
+          auth_sending_enabled?: boolean
+          id?: boolean
+        }
+        Update: {
+          auth_sending_enabled?: boolean
+          id?: boolean
+        }
+        Relationships: []
+      }
+      monthly_staff: {
+        Row: {
+          role: string
+          user_id: string
+        }
+        Insert: {
+          role: string
+          user_id: string
+        }
+        Update: {
+          role?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           client_slug: string | null
@@ -46,7 +306,18 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      monthly_can_client: { Args: { cid: string }; Returns: boolean }
+      monthly_can_version: { Args: { vid: string }; Returns: boolean }
+      monthly_grant: {
+        Args: { cid: string; mrole: string; source: string; uid: string }
+        Returns: string
+      }
+      monthly_revoke: { Args: { mid: string }; Returns: undefined }
+      monthly_staff_role: { Args: never; Returns: string }
+      monthly_transition: {
+        Args: { next_state: string; vid: string }
+        Returns: undefined
+      }
     }
     Enums: {
       [_ in never]: never

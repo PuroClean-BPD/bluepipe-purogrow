@@ -1,0 +1,20 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1794011178555,
+      "tag": "0000_monthly_portal_v1",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1794011466724,
+      "tag": "0001_monthly_policy_scope_fix",
+      "breakpoints": true
+    }
+  ]
+}

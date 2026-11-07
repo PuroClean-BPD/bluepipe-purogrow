@@ -1,0 +1,7 @@
+.monthly-portal { --background:220 40% 10%; --foreground:220 20% 96%; --card:220 32% 15%; --card-foreground:220 20% 96%; --popover:220 32% 15%; --popover-foreground:220 20% 96%; --muted:220 28% 20%; --muted-foreground:218 20% 73%; --secondary:220 28% 20%; --secondary-foreground:220 20% 96%; --border:220 25% 27%; --input:220 25% 27%; --warning:28 100% 65%; background:hsl(var(--background));color:hsl(var(--foreground));min-height:100vh;letter-spacing:0; }
+.monthly-portal h1,.monthly-portal h2,.monthly-portal h3 {letter-spacing:0;}
+.monthly-warning {color:hsl(var(--warning));}
+.monthly-portal .metric-card {border:1px solid hsl(var(--border));background:hsl(var(--card));border-radius:8px;padding:24px;}
+.monthly-portal input,.monthly-portal select {background:hsl(var(--muted));color:hsl(var(--foreground));border:1px solid hsl(var(--border));border-radius:8px;padding:12px;max-width:100%;}
+.monthly-portal .report-preview {width:100%;height:660px;background:hsl(var(--foreground));border:1px solid hsl(var(--border));border-radius:8px;}
+@media(max-width:640px){.monthly-portal .report-preview{height:540px;}}
