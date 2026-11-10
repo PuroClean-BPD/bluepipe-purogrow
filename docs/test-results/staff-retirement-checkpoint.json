@@ -1,0 +1,122 @@
+{
+  "baseline": "47ed92e",
+  "tests": [
+    {
+      "test": "monthly_can_client genuine admin",
+      "status": "PASS",
+      "mode": "HOSTED",
+      "expected": true,
+      "actual": true,
+      "at_chicago": "2026-11-10T13:59:21.653662-06:00"
+    },
+    {
+      "test": "monthly_can_version genuine admin",
+      "status": "PASS",
+      "mode": "HOSTED",
+      "expected": true,
+      "actual": true,
+      "at_chicago": "2026-11-10T13:59:21.918078-06:00"
+    },
+    {
+      "test": "staff file signer remains reachable",
+      "status": "PASS",
+      "mode": "HOSTED",
+      "expected": "genuine admin gets 60s file response",
+      "actual": {
+        "http": 200,
+        "expires_in": 60
+      },
+      "at_chicago": "2026-11-10T13:59:25.427256-06:00"
+    },
+    {
+      "test": "owner JWT membership bypass",
+      "status": "PASS",
+      "mode": "UNIT plus live readback",
+      "expected": "membership alone denied by RLS/helpers",
+      "actual": "local disposable SQL regression denied; live policies fresh-read staff-only",
+      "at_chicago": "2026-11-10T13:59:25.427276-06:00"
+    },
+    {
+      "test": "approver approval/editor denial",
+      "status": "PASS",
+      "mode": "UNIT",
+      "expected": "approver approves only; editor cannot approve/publish",
+      "actual": "3 local SQL tests passed; no live roles changed",
+      "at_chicago": "2026-11-10T13:59:25.427280-06:00"
+    },
+    {
+      "test": "fresh staff entry and owner default",
+      "status": "PASS",
+      "mode": "UI public-entry",
+      "expected": "staff password entry reachable; owner default unchanged",
+      "actual": "browser entry observed; no password submitted",
+      "at_chicago": "2026-11-10T13:59:25.427283-06:00"
+    },
+    {
+      "test": "password staff role check",
+      "status": "PASS",
+      "mode": "UNIT",
+      "expected": "nonstaff or failed role read cannot enter",
+      "actual": "3 mocked auth unit tests passed",
+      "at_chicago": "2026-11-10T13:59:25.427286-06:00"
+    },
+    {
+      "test": "broker all-method routing",
+      "status": "PASS",
+      "mode": "UNIT",
+      "expected": "unfiltered function path; GET/OPTIONS/PUT 405",
+      "actual": "config and handler UNIT checked; Netlify not deployed",
+      "at_chicago": "2026-11-10T13:59:25.427288-06:00"
+    },
+    {
+      "test": "genuine owner/editor JWT runtime",
+      "status": "BLOCKED",
+      "mode": "HOSTED",
+      "expected": "real approved runtime proof",
+      "actual": "unavailable; no mint/retry/spoof or live synthetic role substitution",
+      "at_chicago": "2026-11-10T13:59:25.427293-06:00"
+    },
+    {
+      "test": "fresh native staff password sign-in end-to-end",
+      "status": "BLOCKED",
+      "mode": "HOSTED",
+      "expected": "real approved runtime proof",
+      "actual": "no approved password identity supplied; not created or submitted",
+      "at_chicago": "2026-11-10T13:59:25.427297-06:00"
+    },
+    {
+      "test": "hosted forced expiry/audit failure injection",
+      "status": "BLOCKED",
+      "mode": "HOSTED",
+      "expected": "real approved runtime proof",
+      "actual": "available operator mutation tool lacks caller auth.uid; no existing audited fixture-only RPC. No global trigger, permanent fixture endpoint, privilege bypass or direct mutation added",
+      "at_chicago": "2026-11-10T13:59:25.427299-06:00"
+    },
+    {
+      "test": "Netlify method routing live",
+      "status": "BLOCKED",
+      "mode": "HOSTED",
+      "expected": "real approved runtime proof",
+      "actual": "frontend/function deployment withheld",
+      "at_chicago": "2026-11-10T13:59:25.427301-06:00"
+    },
+    {
+      "test": "legacy protected sources",
+      "status": "PASS",
+      "mode": "STATIC",
+      "expected": "byte-identical",
+      "actual": "71 protected files unchanged",
+      "at_chicago": "2026-11-10T13:59:27.190462-06:00"
+    }
+  ],
+  "synthetic_fixture_ids": {
+    "client": "1a1dccf2-9c76-47fd-92fc-6306323823d3",
+    "version": "b623b8dc-79e1-4ab4-816b-25f650171373",
+    "admin": "76a43a8c-0fc9-4a59-9bfc-7b7b7efb89d5"
+  },
+  "no_frontend_deploy": true,
+  "no_roles_changed": true,
+  "no_real_access": true,
+  "matrix_rerun": false,
+  "get_report_file_source_sha256": "c05826476f931b9cebb91aa3c7133c72e23d98eaff714b506e32e071d2f54d0d"
+}

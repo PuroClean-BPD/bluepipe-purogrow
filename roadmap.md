@@ -18,3 +18,5 @@
 - [ ] Controlled Netlify deploy of cookie broker and owner screen — blocked: coordinator review and separate deploy authorization.
 
 - [x] Correction checkpoint: reservations, dates/order, frozen hashes, bounded broker/Cloud, staged real credentials, expanded hosted file matrix and review documentation; no frontend deploy.
+
+- [x] Small correction: retire membership JWT reads/signing; fresh staff password entry; approver transition guard; all-method broker denial; targeted evidence.

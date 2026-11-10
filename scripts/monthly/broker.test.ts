@@ -133,3 +133,21 @@ test("unexpected upstream session and error fields never reach browser", async (
   globalThis.fetch = async () => Response.json(null);
   expect((await handler(req({ action: "archive" }))).status).toBe(503);
 });
+test("API path routes all methods and handler rejects GET OPTIONS PUT without upstream calls", async () => {
+  const { config } = await import("../../netlify/functions/monthly-owner.mts");
+  expect(config).toEqual({ path: "/portal/api/owner" });
+  let calls = 0;
+  globalThis.fetch = async () => {
+    calls++;
+    return Response.json({});
+  };
+  for (const method of ["GET", "OPTIONS", "PUT"])
+    expect(
+      (
+        await handler(
+          new Request("https://example.invalid/portal/api/owner", { method }),
+        )
+      ).status,
+    ).toBe(405);
+  expect(calls).toBe(0);
+});

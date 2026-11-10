@@ -1,0 +1,22 @@
+{
+  "baseline": "47ed92e",
+  "files": {
+    "AGENTS.md": "925bca7fdfd18778a0155da66c3e9b282f50064794df484578cb596ff7a2887a",
+    "docs/test-results/staff-retirement-checkpoint.json": "b352214b600b4341e0830e8d2032b417134ef7f69d504ad0cb7076487b8284ab",
+    "docs/test-results/staff-retirement-checkpoint.md": "3481ca698bbcccdade7f97749dc7cb8697443d5fa9e099cef135349e0c6dfff3",
+    "drizzle/migrations/0009_monthly_staff_only_jwt.sql": "7f0fdf18b49d3e1e12c09300ffce4153727b816c33347a14d304bfee8e3b0255",
+    "drizzle/migrations/meta/0009_snapshot.json": "a2a44777d12cb0b0065795ace165cf9f36285e77bccc3c4ae9a2752fd096304c",
+    "drizzle/migrations/meta/_journal.json": "677ce6281d3f7c618ef8e9422b125f1817267d602cc451e04d1d48d56da2b582",
+    "netlify/functions/monthly-owner.mts": "4ad5c341554d08aed40570bf3722a7e0e2200290c4cadc853512d42ab00c1203",
+    "roadmap.md": "dc9c05d5ae07762c47a17e190d6001ab8115d6c7ddb1fbed2fa839a2abb38214",
+    "scripts/monthly/broker.test.ts": "6ea7b58e1cc83f7fdfdedfbe88b507f4528e6e55d2a30246be306ea66dbb1d27",
+    "scripts/monthly/staff-retirement.test.ts": "5a5059c305c1c04d160dd32b1f0fb386a1b02a9630d1d0408b42c60a6f32b0cf",
+    "src/monthly/MonthlyPortal.tsx": "69f0baf8c916adc96d814df2bbee651df038f0d6aff686b03be0b6c30c5c765a",
+    "src/monthly/MonthlyStaffPortal.tsx": "90a034a5410d813d3e62a530147d6698d7102a6ad50f63654a5ca387247593ab",
+    "src/monthly/MonthlyStaffSignIn.tsx": "46895682c8cd9ddda6130654ed96f7077ad41b5e3e8b6a82b2216e9576e181c7",
+    "src/monthly/staff-auth.test.ts": "7b20bd3937a11ab5c57293da67a362d85a99ac0e34ba4e9ad6df2068432463e7",
+    "src/monthly/staff-auth.ts": "25812aaa438b6ecbb6a118229df03557c8d75352769471c18a2428ae97956cc4",
+    "supabase/functions/get-report-file/index.ts": "f6b71eabdf8dd5187e567f4c0d1c9727d09306f79fc52c807eaa81215535b064"
+  },
+  "frontend_deployed": false
+}
