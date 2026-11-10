@@ -522,6 +522,10 @@ export type Database = {
         Args: { p_bytes: Json; p_sums: Json }
         Returns: string
       }
+      monthly_stage_payload_ok: {
+        Args: { p_bytes: Json; p_sums: Json }
+        Returns: boolean
+      }
       monthly_transition: {
         Args: { next_state: string; vid: string }
         Returns: undefined

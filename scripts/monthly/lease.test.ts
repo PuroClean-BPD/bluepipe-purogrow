@@ -18,6 +18,7 @@ beforeAll(async () => {
    CREATE SCHEMA storage; CREATE TABLE storage.objects(bucket_id text); ALTER TABLE storage.objects ENABLE ROW LEVEL SECURITY;`);
   for (const f of ['0000_monthly_portal_v1.sql', '0001_monthly_policy_scope_fix.sql', '0002_monthly_admin_atomic.sql', '0003_monthly_admin_tighten_grants.sql']) await db.exec(readFileSync(root + f, 'utf8').replaceAll('--> statement-breakpoint', ''));
   await db.exec(readFileSync(LEASE_SQL, 'utf8'));
+  if (process.env.GUARD_SQL) await db.exec(readFileSync(process.env.GUARD_SQL, "utf8"));
   await db.exec(`INSERT INTO monthly_staff VALUES('${ADMIN}','admin'); SELECT set_config('test.uid','${ADMIN}',false);`);
   const org = (await db.query<any>(`SELECT monthly_admin_create_org('Synthetic') id`)).rows[0].id;
   const c = (await db.query<any>(`SELECT monthly_admin_create_client($1,'syn-l1','Syn',null) id`, [org])).rows[0].id;

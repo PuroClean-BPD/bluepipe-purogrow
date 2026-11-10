@@ -108,3 +108,10 @@ Live anon: new RPCs 404, staging 401, monthly-admin 401. public/ unchanged vs 67
 NOT RUN: every authenticated hosted test (synthetic admin session mint refused; see below).
 Mint attempt (once, 16:37 UTC): "Minting a session as a specific auth user requires user approval, which is
 unavailable in this context." No approval card or event was returned. Not retried.
+
+## 0005 NULL fail-closed guards (2026-11-10)
+Fix: commit/release guards rewritten in positive form `(...all conditions...) IS NOT TRUE → reject`; acquire rejects NULL ids, NULL/out-of-range lease seconds, and any NULL/malformed sum (must be 64 lowercase hex) or byte count (positive integer within per-kind limit); NULL `p_fatal` defaults to terminal failure. Applied to hosted DB; hosted readback confirms new bodies, anon has no EXECUTE.
+Disposable local PGlite UNIT SIMULATION (auth.uid() stub; NOT hosted authenticated runtime), `scripts/monthly/null_guard.test.ts`:
+- Against 0004 only (pre-fix): 5 fail / 2 pass — reproduced released reservation + NULL lease committing a version.
+- With 0005: 7/7 pass (null duration, null/malformed sums+bytes, released+NULL lease commit refused with no version created, null/unknown/expired/stale/NULL-expiry token refused, released request reacquires+commits, committed retry idempotent, non-admin refused).
+- Regression: lease 7/7, atomic 6/6 pass. Authenticated hosted runtime: NOT RUN.
