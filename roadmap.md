@@ -12,3 +12,5 @@
 - [ ] Real import of 24 locations (Rocklin excluded) from coordinator's separate 24-location package — blocked: needs Bill's real staff session and the package.
 - [ ] Explicit grants for the 24 locations incl. King of Prussia (ksunshine@puroclean.com) and Burlington (Jennifer Wine, jwine@puroclean.com) — blocked: Bill's staff session; no emails, no publication.
 - [ ] Synthetic staff-path tests — blocked: approval to mint synthetic admin session.
+
+- [ ] Code-login build (18 owner codes, 24 locations, 30-day sessions) — read-only feasibility preflight first; build blocked pending results (cap 70 credits)
