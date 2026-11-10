@@ -43,6 +43,20 @@
       "when": 1794329317270,
       "tag": "0005_monthly_stage_null_guards",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1794338261337,
+      "tag": "0006_monthly_code_login",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1794338357291,
+      "tag": "0007_monthly_code_request_budget",
+      "breakpoints": true
     }
   ]
 }

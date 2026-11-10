@@ -13,4 +13,5 @@
 - [ ] Explicit grants for the 24 locations incl. King of Prussia (ksunshine@puroclean.com) and Burlington (Jennifer Wine, jwine@puroclean.com) — blocked: Bill's staff session; no emails, no publication.
 - [ ] Synthetic staff-path tests — blocked: approval to mint synthetic admin session.
 
-- [ ] Code-login build (18 owner codes, 24 locations, 30-day sessions) — read-only feasibility preflight first; build blocked pending results (cap 70 credits)
+- [x] Code-login implementation checkpoint: secret-free broker, audited revocable sessions, owner screen, synthetic tests; real access OFF, no frontend deployment (67.3 credits remaining at start).
+- [ ] Controlled Netlify deploy of cookie broker and owner screen — blocked: coordinator review and separate deploy authorization.

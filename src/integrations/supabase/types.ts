@@ -88,6 +88,181 @@ export type Database = {
           },
         ]
       }
+      monthly_code_attempts: {
+        Row: {
+          credential_id: string | null
+          expires_at: string
+          finished: boolean
+          generation: number | null
+          id: string
+        }
+        Insert: {
+          credential_id?: string | null
+          expires_at: string
+          finished?: boolean
+          generation?: number | null
+          id?: string
+        }
+        Update: {
+          credential_id?: string | null
+          expires_at?: string
+          finished?: boolean
+          generation?: number | null
+          id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "monthly_code_attempts_credential_id_fkey"
+            columns: ["credential_id"]
+            isOneToOne: false
+            referencedRelation: "monthly_code_credentials"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      monthly_code_budget: {
+        Row: {
+          id: boolean
+          used: number
+          window_start: string
+        }
+        Insert: {
+          id?: boolean
+          used?: number
+          window_start?: string
+        }
+        Update: {
+          id?: boolean
+          used?: number
+          window_start?: string
+        }
+        Relationships: []
+      }
+      monthly_code_credentials: {
+        Row: {
+          active: boolean
+          created_by: string
+          failures: number
+          generation: number
+          id: string
+          iterations: number
+          locked_until: string | null
+          salt: string
+          selector: string
+          synthetic: boolean
+          verifier: string
+          window_start: string
+        }
+        Insert: {
+          active?: boolean
+          created_by: string
+          failures?: number
+          generation?: number
+          id?: string
+          iterations?: number
+          locked_until?: string | null
+          salt: string
+          selector: string
+          synthetic?: boolean
+          verifier: string
+          window_start?: string
+        }
+        Update: {
+          active?: boolean
+          created_by?: string
+          failures?: number
+          generation?: number
+          id?: string
+          iterations?: number
+          locked_until?: string | null
+          salt?: string
+          selector?: string
+          synthetic?: boolean
+          verifier?: string
+          window_start?: string
+        }
+        Relationships: []
+      }
+      monthly_code_request_budget: {
+        Row: {
+          id: boolean
+          used: number
+          window_start: string
+        }
+        Insert: {
+          id?: boolean
+          used?: number
+          window_start?: string
+        }
+        Update: {
+          id?: boolean
+          used?: number
+          window_start?: string
+        }
+        Relationships: []
+      }
+      monthly_code_scopes: {
+        Row: {
+          client_id: string
+          credential_id: string
+        }
+        Insert: {
+          client_id: string
+          credential_id: string
+        }
+        Update: {
+          client_id?: string
+          credential_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "monthly_code_scopes_client_id_fkey"
+            columns: ["client_id"]
+            isOneToOne: false
+            referencedRelation: "monthly_clients"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "monthly_code_scopes_credential_id_fkey"
+            columns: ["credential_id"]
+            isOneToOne: false
+            referencedRelation: "monthly_code_credentials"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      monthly_code_sessions: {
+        Row: {
+          credential_id: string
+          digest: string
+          expires_at: string
+          generation: number
+          revoked_at: string | null
+        }
+        Insert: {
+          credential_id: string
+          digest: string
+          expires_at: string
+          generation: number
+          revoked_at?: string | null
+        }
+        Update: {
+          credential_id?: string
+          digest?: string
+          expires_at?: string
+          generation?: number
+          revoked_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "monthly_code_sessions_credential_id_fkey"
+            columns: ["credential_id"]
+            isOneToOne: false
+            referencedRelation: "monthly_code_credentials"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       monthly_memberships: {
         Row: {
           client_id: string
@@ -280,14 +455,17 @@ export type Database = {
       monthly_settings: {
         Row: {
           auth_sending_enabled: boolean
+          code_real_access_enabled: boolean
           id: boolean
         }
         Insert: {
           auth_sending_enabled?: boolean
+          code_real_access_enabled?: boolean
           id?: boolean
         }
         Update: {
           auth_sending_enabled?: boolean
+          code_real_access_enabled?: boolean
           id?: boolean
         }
         Relationships: []
@@ -511,6 +689,36 @@ export type Database = {
       }
       monthly_can_client: { Args: { cid: string }; Returns: boolean }
       monthly_can_version: { Args: { vid: string }; Returns: boolean }
+      monthly_code_access: {
+        Args: {
+          p_action: string
+          p_digest: string
+          p_format?: string
+          p_version?: string
+        }
+        Returns: Json
+      }
+      monthly_code_audit: {
+        Args: { p_action: string; p_credential?: string; p_detail?: Json }
+        Returns: undefined
+      }
+      monthly_code_begin: { Args: { p_selector: string }; Returns: Json }
+      monthly_code_finish: {
+        Args: { p_attempt: string; p_digest: string; p_match: boolean }
+        Returns: Json
+      }
+      monthly_code_manage: {
+        Args: {
+          p_action: string
+          p_clients?: string[]
+          p_id?: string
+          p_salt?: string
+          p_selector?: string
+          p_verifier?: string
+        }
+        Returns: string
+      }
+      monthly_code_request_gate: { Args: never; Returns: boolean }
       monthly_grant: {
         Args: { cid: string; mrole: string; source: string; uid: string }
         Returns: string

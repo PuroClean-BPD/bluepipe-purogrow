@@ -1,0 +1,522 @@
+{
+  "mode": "REAL hosted synthetic runtime",
+  "baseline": "532d08274c0c16f0284e2e9c8a4ac9e26e06e9a2",
+  "fixtures": {
+    "tag": "syn-code-2deca612e8",
+    "admin_id": "76a43a8c-0fc9-4a59-9bfc-7b7b7efb89d5",
+    "credentials": [
+      {
+        "id": "cdae2f1d-baf5-4541-a755-69f1f801d476",
+        "client_ids": [
+          "6617128f-8f64-4331-a345-237753d25acd",
+          "3e0f8c00-5a93-496d-99ed-794454e52fb4",
+          "1277da41-fb23-4335-9bb7-0afbc5208f9c"
+        ]
+      },
+      {
+        "id": "336eac3a-9ee1-4cb7-97ed-4c23d8726793",
+        "client_ids": [
+          "b3b144cc-9ce1-4bad-83c4-10388b05f5f9",
+          "67930628-8355-40bf-b505-c25ce1b2c09f",
+          "1da7fc7c-a7c0-4e4e-a9ec-7199b5fba3b1"
+        ]
+      },
+      {
+        "id": "b1f57eaf-99db-4b27-8c07-959eacd8d12d",
+        "client_ids": [
+          "193ab354-9955-48b2-b2d3-8eafea43d2fc",
+          "ea255f4e-c405-4581-b341-30b967ccd837"
+        ]
+      },
+      {
+        "id": "8f2e7524-dac0-4735-9e71-94f37efd7302",
+        "client_ids": [
+          "99436dda-5220-4af8-99ea-283a91082114",
+          "072a70f4-21e1-484f-bec0-1d29315f1926"
+        ]
+      },
+      {
+        "id": "4922d903-b2d7-4762-bddf-21a0fc4a88a2",
+        "client_ids": [
+          "b958b7d6-3ef8-485a-8c70-141837da46ed"
+        ]
+      },
+      {
+        "id": "36fbc655-7781-4cd3-a9e7-b65710b086c6",
+        "client_ids": [
+          "462460ae-21f1-4132-80be-c8894db4030c"
+        ]
+      },
+      {
+        "id": "0393d66d-ac49-47ea-958d-d4e0744686ae",
+        "client_ids": [
+          "05bdc916-34bf-4c95-bc7e-da67705ea9ba"
+        ]
+      },
+      {
+        "id": "bbee52a6-626a-42da-9855-26303896e177",
+        "client_ids": [
+          "d02423a8-fc01-449e-a7b6-4b938042534f"
+        ]
+      },
+      {
+        "id": "6cc7b538-9b19-44cb-b716-9d8e9913c07c",
+        "client_ids": [
+          "1cd442ff-e8b7-4c9a-941e-6be14ce2f44b"
+        ]
+      },
+      {
+        "id": "56132c3b-d79b-4256-9110-831320a4c0fa",
+        "client_ids": [
+          "ff818825-c728-499e-aa0f-63e7011e516b"
+        ]
+      },
+      {
+        "id": "eaf180a2-4575-41c6-9ea7-6cf3f79dc6af",
+        "client_ids": [
+          "2935120c-2b0f-4bb9-8792-1b5eeeb8b5fa"
+        ]
+      },
+      {
+        "id": "54448f8c-f852-417b-959f-0a90af2fa746",
+        "client_ids": [
+          "ee7af095-4d68-47fe-b5c2-841160e32ff4"
+        ]
+      },
+      {
+        "id": "4ea6cbe9-5182-4ba1-91db-9b273e4779ff",
+        "client_ids": [
+          "b8f1c8df-937f-46a9-8fbc-6e8e9c9490d7"
+        ]
+      },
+      {
+        "id": "a69062cf-3195-43c6-afc0-8884cb18f7fd",
+        "client_ids": [
+          "3666a267-20bd-4314-99d0-00675d85f03e"
+        ]
+      },
+      {
+        "id": "5f75313b-9f66-4a59-bf91-0f28a60c0b8e",
+        "client_ids": [
+          "dab3896a-e8b7-4225-b118-340fc888acf1"
+        ]
+      },
+      {
+        "id": "0e631225-aca9-4516-992c-f42b398a05e1",
+        "client_ids": [
+          "7e2c5c99-3822-472c-ad51-1a74f071882e"
+        ]
+      },
+      {
+        "id": "a7c271b8-5c10-49f1-be21-6ee3ade15ee0",
+        "client_ids": [
+          "d0bdc4bc-5b77-47f3-8165-2b9e36179962"
+        ]
+      },
+      {
+        "id": "2c9452cf-66ae-41d0-a8df-1d42982dddf0",
+        "client_ids": [
+          "cb5978fb-91dd-4cc2-bfc0-19aa1cbb440a"
+        ]
+      }
+    ],
+    "clients": [
+      "6617128f-8f64-4331-a345-237753d25acd",
+      "3e0f8c00-5a93-496d-99ed-794454e52fb4",
+      "1277da41-fb23-4335-9bb7-0afbc5208f9c",
+      "b3b144cc-9ce1-4bad-83c4-10388b05f5f9",
+      "67930628-8355-40bf-b505-c25ce1b2c09f",
+      "1da7fc7c-a7c0-4e4e-a9ec-7199b5fba3b1",
+      "193ab354-9955-48b2-b2d3-8eafea43d2fc",
+      "ea255f4e-c405-4581-b341-30b967ccd837",
+      "99436dda-5220-4af8-99ea-283a91082114",
+      "072a70f4-21e1-484f-bec0-1d29315f1926",
+      "b958b7d6-3ef8-485a-8c70-141837da46ed",
+      "462460ae-21f1-4132-80be-c8894db4030c",
+      "05bdc916-34bf-4c95-bc7e-da67705ea9ba",
+      "d02423a8-fc01-449e-a7b6-4b938042534f",
+      "1cd442ff-e8b7-4c9a-941e-6be14ce2f44b",
+      "ff818825-c728-499e-aa0f-63e7011e516b",
+      "2935120c-2b0f-4bb9-8792-1b5eeeb8b5fa",
+      "ee7af095-4d68-47fe-b5c2-841160e32ff4",
+      "b8f1c8df-937f-46a9-8fbc-6e8e9c9490d7",
+      "3666a267-20bd-4314-99d0-00675d85f03e",
+      "dab3896a-e8b7-4225-b118-340fc888acf1",
+      "7e2c5c99-3822-472c-ad51-1a74f071882e",
+      "d0bdc4bc-5b77-47f3-8165-2b9e36179962",
+      "cb5978fb-91dd-4cc2-bfc0-19aa1cbb440a"
+    ],
+    "org_id": "1c4b6417-6324-4ba4-bd53-9621aaf82439",
+    "published_version_id": "38a7b48f-b0cf-484f-afdd-b3dfd9e401df",
+    "audit_ids": [
+      "8fdf3415-4c51-4a22-9b61-007d7a2942a5",
+      "cb3358c4-6fdf-4717-aa56-02a7b8ea55a2",
+      "b5b7c6b2-fedf-4c0c-a7ac-51e2fc530217",
+      "cc8a66d0-1d33-44ce-9a0e-9cf4abb69ec2",
+      "d2e7ffc4-0b2d-4176-ade6-61908dcfc455",
+      "84bdd8fa-99e3-4492-96d8-1369a9f8ebd8",
+      "92cbc637-a694-4a31-bf84-6ca996d976ae",
+      "bf654f8c-e538-47e5-8255-c80961d9b45f",
+      "c52ea944-c034-45c9-b562-f14a579f9fad",
+      "c7d33fba-49e5-435c-83e0-86995ceb8caa",
+      "78edef3d-fd3e-4425-b87b-2df6bcc0936a",
+      "75c2d755-0505-4103-9c2a-0ccbd742fe11",
+      "766cbe16-ec58-408e-a8f2-4f009a3d05db",
+      "a89c3ae3-0a87-46a6-92e7-75e26c85994e",
+      "6cbbc35b-07ca-4678-87de-7f5b32ba0ca4",
+      "5457c633-032b-4346-8e6b-de91cc97c285",
+      "3616b619-3bba-471f-8335-466126bc46d6",
+      "99963320-48de-4366-afe9-af258039c51b",
+      "fd4aba3e-a2e5-4470-bf91-7941017313c0",
+      "d88fdbec-ae92-4a8d-8249-6fe91652d7f1",
+      "01f04327-949f-40f2-824d-e45ad3e55d1f",
+      "108eb420-7d80-450e-b4d9-aae4308119c6",
+      "df3b34a1-d243-4541-8d53-267b47f53882",
+      "c3c8d63e-bc05-4d84-8ace-20bdd26f689f",
+      "42e4c461-7dc4-4bff-bfad-834e526d8444",
+      "6e59ff72-8289-419e-a66e-75baa923fa35",
+      "86f8264f-1d61-4494-a5a4-b38f5923561b",
+      "8f1ddd4a-d7cb-4a6f-9b49-73753e5bc523",
+      "b72d4d43-7e67-4bd6-843d-a2ad3b9fe765",
+      "6ffdaf5d-78c0-4f71-ab64-47b7106cdc8e",
+      "047c5551-cd88-4327-a903-c23b9a82cdb1",
+      "3682a31b-9ce7-44a7-900d-d13999dba444",
+      "f2279f92-8020-465a-a213-30bbe9430a16",
+      "d6590278-596d-4c08-8637-81c4235ebaad",
+      "a838a383-722b-4323-b9d6-f2063601d6f9",
+      "85593d07-6330-4648-a337-6e4b1eb3fe6b",
+      "a02963cc-395b-4922-a267-38cba35aea03",
+      "daaa1e5f-5321-46e5-954b-332562327061",
+      "446684fb-afd2-431a-bb33-1c923edcb659",
+      "ec0c05aa-987b-40fa-a0dd-623b11b412a0",
+      "c57cbf5d-fc13-422c-9b72-d6078950b188",
+      "798c68b1-4aff-4202-9d1a-d7687bf3cc0c",
+      "b3ac5859-5171-451c-bd1e-7df3dbb4f31d",
+      "3ac4a6a4-ddf4-4870-ba22-18c1e0518fa0",
+      "b27db6ca-7158-4b02-b5b0-b4f9f52414de",
+      "80f19857-03c1-4722-bd20-7c8657b9e246",
+      "c89dc77d-7fe5-4ae5-8de1-35cc7528ada5",
+      "d714cefa-882c-45c8-ae69-56f28b9e0d96",
+      "1ebefa33-4a3f-4a1b-a17c-605ffb1e3326",
+      "5f58c9cd-1238-4361-b131-fe1abc7389ab",
+      "6d43775f-4405-4f11-96dc-a71de3c10024",
+      "25cebccd-9e11-4383-b7b6-a68ff946e606",
+      "9aa90381-9b1d-44cf-9156-70a89b9789fc",
+      "710f7657-61ef-4cf7-9bf3-aa9b66fc5a12",
+      "856405b5-86b7-4e51-af4e-5f8217b400d5",
+      "6f513a68-f7ae-4847-8bfb-9f00a5e17fef",
+      "598f7f64-f724-4c65-9118-807b7a3deaa6",
+      "546b9e6b-c4e1-4a52-8790-2f7c82480e09",
+      "4367bf05-5b9c-499d-bc4d-3ac5b8ee30e2",
+      "9686bd8c-9cc9-4349-8323-a476fd9fa24f",
+      "5f1b83b8-a9b1-4791-b2c0-32c485a1c331",
+      "eb451a12-7044-4239-b0d0-d8ec5ac3f5e2",
+      "0d6052b5-5ad5-4607-8f4b-b42a1ce0201d",
+      "f1ab2c4b-79f3-4249-ab17-eae40409b77a",
+      "24f8208d-a39a-47a4-be88-9a91edc054bc",
+      "8b32fad1-3b32-45c6-9fb8-b884fed51a8f",
+      "96b424f3-c45a-4c86-a3a6-5d91462d0ca8",
+      "6ebd05a2-bc7b-49e5-9e12-4b04183e833c",
+      "b636d114-fc0a-4e8d-b7ce-9b7a012f950a",
+      "5ab65900-3a52-442f-be8c-073fc982b509",
+      "eed8ccab-a760-4b63-bad0-680f174c13d7",
+      "d718ccdd-fb29-4ea1-ad5e-995c2424736b",
+      "9ddd77d1-c3c2-475d-ab5f-30108c8d6916",
+      "ce31f2e9-cd5d-4698-9b70-8b32af1e77cf",
+      "a1d0958a-0f79-4a58-8b3f-881e64530d6e",
+      "40dfac1b-7cb6-475b-b083-e8c15d2fa402",
+      "94f45879-8d99-4188-9ad0-5258033e7cf3",
+      "2f5bc4ea-1362-4fb2-999c-30e80e69f693",
+      "a6c5d9dd-3d5f-4cce-a0a5-5fb2b3e24578",
+      "66245107-e212-4e6e-9cef-2164a77c6a3f",
+      "0c41d5b7-127e-4244-8fcd-bd8954803f23",
+      "2cb30447-0ba1-44fc-83a0-80a86a3548cf",
+      "2b3f8b17-1620-46fd-89d7-ad8202b3d19d",
+      "1257f331-cac4-4ded-a422-4327bc81242e",
+      "8f97db5a-eafe-4c77-a62e-c24c4d5daeed",
+      "c15d0cfc-5426-48e4-8ed4-4032aa42600f",
+      "0a61b6e7-6e14-453a-b346-c7d94b3aef2a",
+      "5dcce0a2-e2d3-4cb5-af94-38550fda1e69",
+      "d61c81a9-2c01-46ac-8961-fe263b7195ac",
+      "535a41ca-d9ad-452b-b3b5-3503eca82c94",
+      "73832be4-c4b6-4287-b077-52857b66db13",
+      "92ef1fa0-be59-463c-acc4-601cb67539d7",
+      "9dfabfbd-a922-4411-8e3f-a3b8c36cd6d7",
+      "26a42336-551e-4a23-8bf9-08d2f60477ee",
+      "bab6ef6e-a3cb-4a33-99f7-49ed8a350bd8",
+      "2674fe01-8ba3-4656-b8e7-d744cc431e00",
+      "51ba68f8-8fe1-497c-aa62-4db01f204245",
+      "5f5a0c5b-1425-44ee-8a91-cf340b367160",
+      "67b8fec1-8541-4b64-8249-5b5129bd0457",
+      "c624565f-08de-411b-8f48-af456ad2ba55",
+      "5ab48c4e-81e0-4a3f-b1c8-73fbbbf10bd6",
+      "eab36422-dca3-45b8-b148-4b48a9c8dd4f",
+      "6bfb24ed-a38e-4065-8053-597e7b2685fc",
+      "241cc4d0-41b1-435e-81d9-07f807535ad8",
+      "9340ec9a-95c4-4ba7-88c0-4c9dd197fec8",
+      "e805382b-db47-4cb4-9122-8bf8d590d371",
+      "eaa4427d-076b-4c0b-b8cc-c72f5c938e83",
+      "8d6df653-3adc-4d2e-a524-ab270f9179c9",
+      "970a7328-0721-49f2-a998-2b870900f040",
+      "a0d27cb8-60db-490a-8804-72358a4c3e37",
+      "bcdccb55-aef1-481f-a27d-c350ca428342",
+      "e8e87dc6-b847-4515-9129-c2a49ce28058",
+      "e598fa7a-0cfd-44fa-b796-bd1474a3d086",
+      "0080c41b-c7c7-4ef1-a321-5f901892d1f5",
+      "4dd9e303-2f95-4d1d-910f-51fe81f20c3a",
+      "e7aa6488-05a5-4a1d-bc7c-d27e4be1488d",
+      "843579e6-d857-4e8f-90af-11a2ea578477",
+      "132a20e7-83ab-4f52-a266-5256851fa288",
+      "4d3f0e3f-0ebe-461d-953d-f183850a38a2",
+      "db6b4a1a-6b10-4e5f-bf77-217beb5a26e3",
+      "b5ed253b-db31-4d2d-8581-37a8caabc35c",
+      "9982ce99-0b8e-4acd-85a7-3ccca56d66cd",
+      "ae6c3e3c-3980-48b5-b32e-50e5cd1569cd",
+      "225f5f90-0649-4048-97fd-21a82e4edede",
+      "c7f613dc-1296-4da5-9b26-90161ae1713d",
+      "6316ff42-c762-4de9-8e6e-db8a0ae9fa79",
+      "72e2005b-fa7c-4516-8819-939fc1133328",
+      "79ddd733-1388-4e66-b910-d7d5e95f2be2",
+      "be6ddc25-c729-4f51-96f6-2eff9590584b",
+      "780bc8c0-9932-4dcb-b3c3-da0d26eaa8fe",
+      "200fb4b4-16a4-4492-88b0-0ea3877bb7e4",
+      "5d14e403-d833-4ac6-ac0c-94d4d7be7236",
+      "08b8c874-1124-4050-9a51-455981d2c903",
+      "1866fb39-c0bd-4054-80b1-0315eb6cc7a6",
+      "16be2d52-bec9-46da-9b11-ad61b85450ef",
+      "9f5f2f15-b1a8-4f50-8623-c9cadeb7d175",
+      "fe62b64d-2490-4b11-84c9-7182e85437d2",
+      "9fa6c4e8-5bfc-4457-b72d-fa8d8f62d2f3",
+      "49c0b2e7-fcbd-478c-bcd6-9b7331fc9cf8",
+      "4dbdf87a-3932-4c58-aa6d-8f61011f9164",
+      "1578f4f4-7311-4492-a52c-8dfc266d0737",
+      "07bf1ae5-819f-45e5-a6cd-0f3751d468ce",
+      "4aafe72e-d0c0-4a92-8cce-52a33ad7c6f3",
+      "e50b9d44-2dd8-4801-9ec4-70892a0fadbb",
+      "e5f6e0bf-e6f0-4c6f-a655-fded9fa24f4c",
+      "559c5f08-a2b8-490c-af2b-0411363d4035",
+      "6163dc99-deb7-430d-aa5e-764dddc23d5b",
+      "2a278ca1-89da-499a-9351-2f6ea27753eb",
+      "872c0dce-283a-4b28-a0c1-89a3cc23fe54",
+      "6ca67ced-675c-4871-b650-925dedf1bfaa",
+      "ae2b9614-2670-4dca-894c-4818d62f824b",
+      "7226c725-d28e-4857-8df1-1b0cee7285ef",
+      "ca9f380e-7467-4fa4-9cea-5073f21d7a1b",
+      "96afe7f0-f714-4c67-8344-0f5eeb9e3517",
+      "491df227-35f8-4e35-8d5b-3232594b49ad",
+      "0a0e6c1d-d9d5-44f0-914b-c37579cc215b",
+      "d1d24cfa-d1fa-4683-b70d-ed7f92ae0b30",
+      "f97eec61-a6f2-47b4-8a7a-36253bdbd8ee",
+      "f7f0188f-c02c-4e9c-9830-83f1fa9b30bf",
+      "6a97f7e1-98d8-4eb9-b43b-3c72b1ec61d0"
+    ]
+  },
+  "tests": [
+    {
+      "test": "genuine existing admin JWT",
+      "expected": "admin",
+      "actual": "admin",
+      "status": "PASS"
+    },
+    {
+      "test": "anonymous table credentials",
+      "expected": "denied",
+      "actual": "HTTP 401",
+      "status": "PASS"
+    },
+    {
+      "test": "anonymous table scopes",
+      "expected": "denied",
+      "actual": "HTTP 401",
+      "status": "PASS"
+    },
+    {
+      "test": "anonymous table sessions",
+      "expected": "denied",
+      "actual": "HTTP 401",
+      "status": "PASS"
+    },
+    {
+      "test": "anonymous table attempts",
+      "expected": "denied",
+      "actual": "HTTP 401",
+      "status": "PASS"
+    },
+    {
+      "test": "anonymous table budget",
+      "expected": "denied",
+      "actual": "HTTP 401",
+      "status": "PASS"
+    },
+    {
+      "test": "anonymous table request_budget",
+      "expected": "denied",
+      "actual": "HTTP 401",
+      "status": "PASS"
+    },
+    {
+      "test": "direct forged session",
+      "expected": "401",
+      "actual": "401",
+      "status": "PASS"
+    },
+    {
+      "test": "unknown code generic denial",
+      "expected": "401 no account API",
+      "actual": "401",
+      "status": "PASS"
+    },
+    {
+      "test": "18 synthetic code logins direct backend",
+      "expected": "18 valid opaque sessions",
+      "actual": "18",
+      "status": "PASS"
+    },
+    {
+      "test": "18 x 24 scope matrix",
+      "expected": "432 exact cells, shapes 3/3/2/2/14 singles",
+      "actual": "432",
+      "status": "PASS"
+    },
+    {
+      "test": "owner html download",
+      "expected": "200 frozen bytes",
+      "actual": {
+        "http": 200,
+        "bytes": 1290,
+        "sha256": "f26af76c4771a23b89346e66589dab27cbf865d207e2338de30c8f5d32f792ee"
+      },
+      "status": "PASS"
+    },
+    {
+      "test": "owner pdf download",
+      "expected": "200 frozen bytes",
+      "actual": {
+        "http": 200,
+        "bytes": 2067,
+        "sha256": "5e2184ce49513d86a550c119c1a0b9980373c15217a13c4915b03ef5e39da112"
+      },
+      "status": "PASS"
+    },
+    {
+      "test": "cross-owner known version",
+      "expected": "401",
+      "actual": "401",
+      "status": "PASS"
+    },
+    {
+      "test": "forged version",
+      "expected": "401",
+      "actual": "401",
+      "status": "PASS"
+    },
+    {
+      "test": "arbitrary path field",
+      "expected": "400",
+      "actual": "400",
+      "status": "PASS"
+    },
+    {
+      "test": "owner opaque token never staff JWT",
+      "expected": "401",
+      "actual": "401",
+      "status": "PASS"
+    },
+    {
+      "test": "logout replay denied instantly",
+      "expected": "401",
+      "actual": "401",
+      "status": "PASS"
+    },
+    {
+      "test": "scope removal generation invalidation",
+      "expected": "401",
+      "actual": "401",
+      "status": "PASS"
+    },
+    {
+      "test": "rotation invalidates old session",
+      "expected": "401",
+      "actual": "401",
+      "status": "PASS"
+    },
+    {
+      "test": "revocation invalidates old session",
+      "expected": "401",
+      "actual": "401",
+      "status": "PASS"
+    },
+    {
+      "test": "concurrent failed attempts and forged IP lockout",
+      "expected": "all 401, valid code now locked",
+      "actual": {
+        "statuses": [
+          401,
+          401,
+          401,
+          401,
+          401,
+          401
+        ],
+        "valid_code_http": 401
+      },
+      "status": "PASS"
+    },
+    {
+      "test": "actual 60sec signed expiry",
+      "expected": "4xx after >=65sec",
+      "actual": {
+        "http": 400,
+        "elapsed_seconds": 67
+      },
+      "status": "PASS"
+    },
+    {
+      "test": "genuine editor JWT negative suite",
+      "expected": "approved editor session",
+      "actual": "no session requested or minted",
+      "status": "BLOCKED"
+    },
+    {
+      "test": "Netlify deployed cookie and Safari runtime",
+      "expected": "controlled frontend deploy",
+      "actual": "deployment prohibited at checkpoint",
+      "status": "BLOCKED"
+    },
+    {
+      "test": "real 30-day elapsed expiry",
+      "expected": "30 days elapsed",
+      "actual": "UNIT exact interval and hosted expiry receipt only",
+      "status": "BLOCKED"
+    },
+    {
+      "test": "durable queryable code audit receipts",
+      "expected": "nonempty required actions",
+      "actual": {
+        "rows": 160,
+        "actions": [
+          "code_access_denied",
+          "code_admin_create_synthetic",
+          "code_admin_remove_scope",
+          "code_admin_revoke",
+          "code_admin_rotate",
+          "code_admin_unlock",
+          "code_archive",
+          "code_attempt",
+          "code_denied",
+          "code_file",
+          "code_file_confirm",
+          "code_file_denied",
+          "code_input_denied",
+          "code_logout",
+          "code_request_received",
+          "code_session_created",
+          "code_verification_denied"
+        ]
+      },
+      "status": "PASS"
+    }
+  ],
+  "cost_credits": null,
+  "no_real_access": true
+}
