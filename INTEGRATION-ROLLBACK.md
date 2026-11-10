@@ -34,3 +34,6 @@ New backend functions and migrations are already active on this project's Cloud 
 ## Remaining release limitations
 
 The new lazy monthly module contains no external audit key/import or console data logs. The existing site's shared initial bundle still includes its original legacy portal imports; removing those would require additional legacy-route refactoring outside this isolation scope. No whole-site key-removal claim is made. Publication is withheld while the strict whole-bundle requirement is unresolved and hosted six-digit/PKCE email configuration cannot be verified without live auth sending. Backend access is safely isolated and email sending remains OFF.
+
+## Nov 10 2026
+Rollback: delete function monthly-admin; restore monthly-auth from 67c8e83. No schema/data changes.

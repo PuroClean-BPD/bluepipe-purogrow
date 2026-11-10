@@ -79,3 +79,8 @@ Real email delivery: NOT RUN. Global signup settings unchanged; new monthly send
 - Direct storage denial returns masked HTTP 400, not the requested literal 403. Anonymous file edge 401 and cross-tenant file edge 403 verified. Existing valid signed URLs are bearer capabilities until their 60-second expiry; revocation prevents new issuance immediately, not already-issued URLs.
 - No real client account/report/grant, Bill account, invitation, external client message or Aubrey backend mutation.
 - Netlify custom-domain deployment linkage remains UNVERIFIED.
+
+## Nov 10 2026 - monthly-admin build (base commit 67c8e832b9cde8a995152f722d342bae2a560a03)
+Live results this run: monthly-admin no-auth 401, anon-bearer 401; get-report-file 401/401;
+monthly-auth GET enabled:false; client-address POST generic, no send; anon SELECT on all 8 monthly tables 401. All PASS.
+NOT RUN: every staff/editor/client path (no approved synthetic session minting available; local fixture passwords not read).

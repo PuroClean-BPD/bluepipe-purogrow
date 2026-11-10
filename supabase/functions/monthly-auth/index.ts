@@ -16,9 +16,13 @@ Deno.serve(async(req)=>{
  if(!enabled)return reply(generic);
  let parsed;try{parsed=z.object({email:z.string().email().max(254),redirect:z.string().url(),code_challenge:z.string().regex(/^[A-Za-z0-9_-]{43}$/)}).strict().safeParse(await req.json());}catch{return reply(generic);}
  if(!parsed.success)return reply(generic);
- const allowed=(Deno.env.get('MONTHLY_AUTH_ORIGINS')??'').split(',').filter(Boolean);
- const redirect=new URL(parsed.data.redirect);
- if(!allowed.includes(redirect.origin)||redirect.pathname!=='/portal/callback'||redirect.search||redirect.hash)return reply(generic);
+ // Exact callbacks only; no wildcards.
+ const CALLBACKS=['https://puroclean.bluepipedigital.com/portal/callback','https://id-preview--bd1a7847-e48f-46ea-96d9-c9009a51e30b.lovable.app/portal/callback'];
+ if(!CALLBACKS.includes(parsed.data.redirect))return reply(generic);
+ // Delivery restriction: staff + reserved synthetic addresses only; every client address denied.
+ const email=parsed.data.email.toLowerCase();
+ const RECIPIENTS=['bluepipedigital@gmail.com','schultz3@gmail.com'];
+ if(!RECIPIENTS.includes(email)&&!email.endsWith('@example.invalid'))return reply(generic);
  // Auth server enforces no user creation. No lookup exposing account existence.
  await fetch(`${url}/auth/v1/otp?redirect_to=${encodeURIComponent(parsed.data.redirect)}`,{method:'POST',headers:{apikey:key,'Content-Type':'application/json'},body:JSON.stringify({email:parsed.data.email,create_user:false,code_challenge:parsed.data.code_challenge,code_challenge_method:'s256'})}).then(r=>r.text()).catch(()=>undefined);
  return reply(generic);
