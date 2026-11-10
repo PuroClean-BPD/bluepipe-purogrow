@@ -1,0 +1,630 @@
+{
+ "rows": [
+  {
+   "id": "T1-anon-select-organizations",
+   "test": "anon select monthly_organizations",
+   "at_ct": "2026-11-10T11:56:53-06:00",
+   "expected": "denied or 0 rows",
+   "actual": "HTTP 401 rows=-",
+   "status": "PASS"
+  },
+  {
+   "id": "T1-anon-insert-organizations",
+   "test": "anon insert monthly_organizations",
+   "at_ct": "2026-11-10T11:56:54-06:00",
+   "expected": "denied",
+   "actual": "HTTP 401",
+   "status": "PASS"
+  },
+  {
+   "id": "T1-anon-select-clients",
+   "test": "anon select monthly_clients",
+   "at_ct": "2026-11-10T11:56:54-06:00",
+   "expected": "denied or 0 rows",
+   "actual": "HTTP 401 rows=-",
+   "status": "PASS"
+  },
+  {
+   "id": "T1-anon-insert-clients",
+   "test": "anon insert monthly_clients",
+   "at_ct": "2026-11-10T11:56:55-06:00",
+   "expected": "denied",
+   "actual": "HTTP 401",
+   "status": "PASS"
+  },
+  {
+   "id": "T1-anon-select-memberships",
+   "test": "anon select monthly_memberships",
+   "at_ct": "2026-11-10T11:56:55-06:00",
+   "expected": "denied or 0 rows",
+   "actual": "HTTP 401 rows=-",
+   "status": "PASS"
+  },
+  {
+   "id": "T1-anon-insert-memberships",
+   "test": "anon insert monthly_memberships",
+   "at_ct": "2026-11-10T11:56:56-06:00",
+   "expected": "denied",
+   "actual": "HTTP 401",
+   "status": "PASS"
+  },
+  {
+   "id": "T1-anon-select-staff",
+   "test": "anon select monthly_staff",
+   "at_ct": "2026-11-10T11:56:57-06:00",
+   "expected": "denied or 0 rows",
+   "actual": "HTTP 401 rows=-",
+   "status": "PASS"
+  },
+  {
+   "id": "T1-anon-insert-staff",
+   "test": "anon insert monthly_staff",
+   "at_ct": "2026-11-10T11:56:57-06:00",
+   "expected": "denied",
+   "actual": "HTTP 401",
+   "status": "PASS"
+  },
+  {
+   "id": "T1-anon-select-reports",
+   "test": "anon select monthly_reports",
+   "at_ct": "2026-11-10T11:56:58-06:00",
+   "expected": "denied or 0 rows",
+   "actual": "HTTP 401 rows=-",
+   "status": "PASS"
+  },
+  {
+   "id": "T1-anon-insert-reports",
+   "test": "anon insert monthly_reports",
+   "at_ct": "2026-11-10T11:56:58-06:00",
+   "expected": "denied",
+   "actual": "HTTP 401",
+   "status": "PASS"
+  },
+  {
+   "id": "T1-anon-select-report_versions",
+   "test": "anon select monthly_report_versions",
+   "at_ct": "2026-11-10T11:56:59-06:00",
+   "expected": "denied or 0 rows",
+   "actual": "HTTP 401 rows=-",
+   "status": "PASS"
+  },
+  {
+   "id": "T1-anon-insert-report_versions",
+   "test": "anon insert monthly_report_versions",
+   "at_ct": "2026-11-10T11:56:59-06:00",
+   "expected": "denied",
+   "actual": "HTTP 401",
+   "status": "PASS"
+  },
+  {
+   "id": "T1-anon-select-audit_log",
+   "test": "anon select monthly_audit_log",
+   "at_ct": "2026-11-10T11:57:00-06:00",
+   "expected": "denied or 0 rows",
+   "actual": "HTTP 401 rows=-",
+   "status": "PASS"
+  },
+  {
+   "id": "T1-anon-insert-audit_log",
+   "test": "anon insert monthly_audit_log",
+   "at_ct": "2026-11-10T11:57:00-06:00",
+   "expected": "denied",
+   "actual": "HTTP 401",
+   "status": "PASS"
+  },
+  {
+   "id": "T1-anon-select-settings",
+   "test": "anon select monthly_settings",
+   "at_ct": "2026-11-10T11:57:01-06:00",
+   "expected": "denied or 0 rows",
+   "actual": "HTTP 401 rows=-",
+   "status": "PASS"
+  },
+  {
+   "id": "T1-anon-insert-settings",
+   "test": "anon insert monthly_settings",
+   "at_ct": "2026-11-10T11:57:01-06:00",
+   "expected": "denied",
+   "actual": "HTTP 401",
+   "status": "PASS"
+  },
+  {
+   "id": "T1-anon-select-provisioning",
+   "test": "anon select monthly_provisioning",
+   "at_ct": "2026-11-10T11:57:01-06:00",
+   "expected": "denied or 0 rows",
+   "actual": "HTTP 401 rows=-",
+   "status": "PASS"
+  },
+  {
+   "id": "T1-anon-insert-provisioning",
+   "test": "anon insert monthly_provisioning",
+   "at_ct": "2026-11-10T11:57:02-06:00",
+   "expected": "denied",
+   "actual": "HTTP 401",
+   "status": "PASS"
+  },
+  {
+   "id": "T1-anon-select-staging",
+   "test": "anon select monthly_staging",
+   "at_ct": "2026-11-10T11:57:03-06:00",
+   "expected": "denied or 0 rows",
+   "actual": "HTTP 401 rows=-",
+   "status": "PASS"
+  },
+  {
+   "id": "T1-anon-insert-staging",
+   "test": "anon insert monthly_staging",
+   "at_ct": "2026-11-10T11:57:03-06:00",
+   "expected": "denied",
+   "actual": "HTTP 401",
+   "status": "PASS"
+  },
+  {
+   "id": "T1-anon-edge-monthly-admin",
+   "test": "no-auth monthly-admin",
+   "at_ct": "2026-11-10T11:57:05-06:00",
+   "expected": "401",
+   "actual": "HTTP 401",
+   "status": "PASS"
+  },
+  {
+   "id": "T1-anonkey-edge-monthly-admin",
+   "test": "anon-key bearer monthly-admin",
+   "at_ct": "2026-11-10T11:57:07-06:00",
+   "expected": "401",
+   "actual": "HTTP 401",
+   "status": "PASS"
+  },
+  {
+   "id": "T1-anon-edge-get-report-file",
+   "test": "no-auth get-report-file",
+   "at_ct": "2026-11-10T11:57:09-06:00",
+   "expected": "401",
+   "actual": "HTTP 401",
+   "status": "PASS"
+  },
+  {
+   "id": "T1-anonkey-edge-get-report-file",
+   "test": "anon-key bearer get-report-file",
+   "at_ct": "2026-11-10T11:57:11-06:00",
+   "expected": "401",
+   "actual": "HTTP 401",
+   "status": "PASS"
+  },
+  {
+   "id": "T2-anon-storage-authenticated",
+   "test": "anon direct object read authenticated",
+   "at_ct": "2026-11-10T11:57:11-06:00",
+   "expected": "4xx",
+   "actual": "HTTP 400",
+   "status": "PASS",
+   "path": "monthly/7046f021ec8a4bb088af17801db9b456/test-a1/v3.html"
+  },
+  {
+   "id": "T2-anon-storage-public",
+   "test": "anon direct object read public",
+   "at_ct": "2026-11-10T11:57:12-06:00",
+   "expected": "4xx",
+   "actual": "HTTP 400",
+   "status": "PASS",
+   "path": "monthly/7046f021ec8a4bb088af17801db9b456/test-a1/v3.html"
+  },
+  {
+   "id": "T2-anon-storage-list",
+   "test": "anon list bucket",
+   "at_ct": "2026-11-10T11:57:12-06:00",
+   "expected": "empty/denied",
+   "actual": "HTTP 200 n=0",
+   "status": "PASS"
+  },
+  {
+   "id": "T9-admin-read-clients",
+   "test": "synthetic admin reads clients",
+   "at_ct": "2026-11-10T11:57:13-06:00",
+   "expected": "3 synthetic",
+   "actual": "HTTP 200 slugs=['test-a1', 'test-a2', 'test-b1']",
+   "status": "PASS"
+  },
+  {
+   "id": "T6-audit-update",
+   "test": "admin JWT update audit_log",
+   "at_ct": "2026-11-10T11:57:13-06:00",
+   "expected": "denied/0 rows",
+   "actual": "HTTP 403 body={\"code\":\"42501\",\"details\":null,\"hint\":\"G",
+   "status": "PASS"
+  },
+  {
+   "id": "T6-audit-delete",
+   "test": "admin JWT delete audit_log",
+   "at_ct": "2026-11-10T11:57:14-06:00",
+   "expected": "denied/0 rows",
+   "actual": "HTTP 403 body={\"code\":\"42501\",\"details\":null,\"hint\":\"G",
+   "status": "PASS"
+  },
+  {
+   "id": "T6-direct-membership-insert",
+   "test": "admin direct table insert bypassing RPC",
+   "at_ct": "2026-11-10T11:57:14-06:00",
+   "expected": "denied",
+   "actual": "HTTP 403",
+   "status": "PASS"
+  },
+  {
+   "id": "T6-anon-rpc-monthly_transition",
+   "test": "anon monthly_transition",
+   "at_ct": "2026-11-10T11:57:15-06:00",
+   "expected": "denied",
+   "actual": "HTTP 401",
+   "status": "PASS"
+  },
+  {
+   "id": "T6-anon-rpc-monthly_grant",
+   "test": "anon monthly_grant",
+   "at_ct": "2026-11-10T11:57:15-06:00",
+   "expected": "denied",
+   "actual": "HTTP 401",
+   "status": "PASS"
+  },
+  {
+   "id": "T3-signed-initial",
+   "test": "signed URL works initially (admin caller)",
+   "at_ct": "2026-11-10T11:57:19-06:00",
+   "expected": "200",
+   "actual": "HTTP 200 bytes=1290 sha256=f26af76c4771a23b89346e66589dab27cbf865d207e2338de30c8f5d32f792ee",
+   "status": "PASS",
+   "version_id": "38a7b48f-b0cf-484f-afdd-b3dfd9e401df",
+   "path": "monthly/7046f021ec8a4bb088af17801db9b456/test-a1/v3.html"
+  },
+  {
+   "id": "T4-forged-token",
+   "test": "tampered signed token",
+   "at_ct": "2026-11-10T11:57:20-06:00",
+   "expected": "4xx",
+   "actual": "HTTP 400",
+   "status": "PASS"
+  },
+  {
+   "id": "T3-signed-expired",
+   "test": "same URL after >=65s",
+   "at_ct": "2026-11-10T11:58:25-06:00",
+   "expected": "4xx",
+   "actual": "HTTP 400 elapsed=66s",
+   "status": "PASS",
+   "version_id": "38a7b48f-b0cf-484f-afdd-b3dfd9e401df"
+  },
+  {
+   "id": "T2-guessed-version",
+   "test": "unknown version id",
+   "at_ct": "2026-11-10T11:58:26-06:00",
+   "expected": "403",
+   "actual": "HTTP 403",
+   "status": "PASS"
+  },
+  {
+   "id": "T2-path-injection",
+   "test": "extra path field",
+   "at_ct": "2026-11-10T11:58:27-06:00",
+   "expected": "400",
+   "actual": "HTTP 400",
+   "status": "PASS"
+  },
+  {
+   "id": "T5-flag",
+   "test": "sender flag",
+   "at_ct": "2026-11-10T11:58:28-06:00",
+   "expected": "enabled=false",
+   "actual": "{\"enabled\":false}",
+   "status": "PASS"
+  },
+  {
+   "id": "T5-unknown-generic",
+   "test": "unknown reserved email via OFF flow",
+   "at_ct": "2026-11-10T11:58:29-06:00",
+   "expected": "generic 200, no auth call",
+   "actual": "HTTP 200 If access is available, follow the instructions provided.",
+   "status": "PASS",
+   "email_redacted": "bluepipe-monthly-unknown-*@example.invalid"
+  },
+  {
+   "id": "T7-stage",
+   "test": "admin stage benign synthetic triplet",
+   "at_ct": "2026-11-10T11:58:36-06:00",
+   "expected": "200 + readback hashes match",
+   "actual": "HTTP 200 {\"id\": \"6e5c448a-e95e-4444-ac5d-f0a102eb52ed\", \"version\": 5, \"state\": \"draft\", \"sha256\": {\"pdf\": \"a2aefbab3c82df701ef058c6bfaeeee5df1f9ceaf41ff5c8cc1ae5c883771b83\", \"html\": \"bbf0154a38dd0d429b7d2b27f447ac7c86ebfe5ea118d45a1928952e3df8afd9\", \"content\": \"44dd976c3b91c9d5abdad2f3f884d7ff8bfab978a29a5392f44be21993d3bcd9\"}, \"bytes\": {\"pdf\": 139, \"html\": 198, \"content\": 32}}",
+   "status": "PASS",
+   "request_id": "59e9dda7-01a9-49f9-a9e6-b747fb794298",
+   "expected_receipt": {
+    "html": {
+     "sha256": "bbf0154a38dd0d429b7d2b27f447ac7c86ebfe5ea118d45a1928952e3df8afd9",
+     "bytes": 198
+    },
+    "pdf": {
+     "sha256": "a2aefbab3c82df701ef058c6bfaeeee5df1f9ceaf41ff5c8cc1ae5c883771b83",
+     "bytes": 139
+    },
+    "content": {
+     "sha256": "44dd976c3b91c9d5abdad2f3f884d7ff8bfab978a29a5392f44be21993d3bcd9",
+     "bytes": 32
+    }
+   }
+  },
+  {
+   "id": "T8-commit-idempotent",
+   "test": "same id same bytes retry",
+   "at_ct": "2026-11-10T11:58:38-06:00",
+   "expected": "200 same version",
+   "actual": "HTTP 200 version_id_same=True; corrected: response key is id, not version_id; DB shows exactly 1 version (v5) for this request_id",
+   "status": "PASS",
+   "request_id": "59e9dda7-01a9-49f9-a9e6-b747fb794298"
+  },
+  {
+   "id": "T8-changed-payload",
+   "test": "same id different bytes+new hashes",
+   "at_ct": "2026-11-10T11:58:40-06:00",
+   "expected": "reject 409/4xx",
+   "actual": "HTTP 409 {\"error\":\"Payload differs from original request\"}",
+   "status": "PASS",
+   "request_id": "59e9dda7-01a9-49f9-a9e6-b747fb794298"
+  },
+  {
+   "id": "T8-distinct-concurrent",
+   "test": "3 parallel distinct requests",
+   "at_ct": "2026-11-10T11:58:47-06:00",
+   "expected": "all 200, unique versions",
+   "actual": "codes=[200, 200, 200] versions=[6, 8, 7]",
+   "status": "PASS",
+   "request_ids": [
+    "10576c5e-5da2-45f8-b696-11c8c450ff29",
+    "1179265b-8d48-4136-9656-6d2319193a16",
+    "260a0805-39db-48fb-820e-b86aa4b5dffc"
+   ]
+  },
+  {
+   "id": "T8-same-id-overlap",
+   "test": "2 parallel same request_id",
+   "at_ct": "2026-11-10T11:58:52-06:00",
+   "expected": "<=1 committed version; other 200-replay or 409",
+   "actual": "codes=[200, 409] distinct_version_ids=1",
+   "status": "PASS",
+   "request_id": "bfeb0579-a5d9-4701-a6e4-3f90dd8aff6a"
+  },
+  {
+   "id": "T8-hash-mismatch",
+   "test": "wrong expected sha",
+   "at_ct": "2026-11-10T11:58:53-06:00",
+   "expected": "reject, no version",
+   "actual": "HTTP 422 {\"error\":\"Checksum mismatch\"}",
+   "status": "PASS",
+   "request_id": "5013a170-a159-4f85-8092-f0cb7d3b9ff2"
+  },
+  {
+   "id": "T8-acquire",
+   "test": "acquire 30s lease",
+   "at_ct": "2026-11-10T11:58:54-06:00",
+   "expected": "200",
+   "actual": "HTTP 200",
+   "status": "PASS",
+   "request_id": "3d4ff2be-31f1-4ca2-9016-8ccfee642f6f"
+  },
+  {
+   "id": "T8-commit-null-lease",
+   "test": "null lease commit",
+   "at_ct": "2026-11-10T11:58:54-06:00",
+   "expected": "reject",
+   "actual": "HTTP 500",
+   "status": "PASS",
+   "request_id": "3d4ff2be-31f1-4ca2-9016-8ccfee642f6f"
+  },
+  {
+   "id": "T8-commit-unknown-lease",
+   "test": "unknown lease commit",
+   "at_ct": "2026-11-10T11:58:54-06:00",
+   "expected": "reject",
+   "actual": "HTTP 500",
+   "status": "PASS",
+   "request_id": "3d4ff2be-31f1-4ca2-9016-8ccfee642f6f"
+  },
+  {
+   "id": "T8-commit-expired-lease",
+   "test": "expired lease commit after 35s",
+   "at_ct": "2026-11-10T11:59:30-06:00",
+   "expected": "reject",
+   "actual": "HTTP 500",
+   "status": "PASS",
+   "request_id": "3d4ff2be-31f1-4ca2-9016-8ccfee642f6f"
+  },
+  {
+   "id": "T8-provision",
+   "test": "no-email synthetic owner provisioning",
+   "at_ct": "2026-11-10T11:59:32-06:00",
+   "expected": "200 user id, audited intent",
+   "actual": "HTTP 200 keys=['user_id']",
+   "status": "PASS",
+   "request_id": "0767f36b-4d9d-4de9-b971-f1877367c25f",
+   "email": "bluepipe-monthly-7046f021ec8a4bb088af17801db9b456-owner-0767f36b@example.invalid",
+   "user_id": "e450b9cb-50c6-477d-adce-53a6d7b04a3d"
+  },
+  {
+   "id": "T7-readback-html",
+   "test": "independent private download of staged draft html",
+   "at_ct": "2026-11-10T12:00:02-06:00",
+   "expected": "sha256=bbf0154a38dd0d429b7d2b27f447ac7c86ebfe5ea118d45a1928952e3df8afd9 bytes=198",
+   "actual": "HTTP 200 sha256=bbf0154a38dd0d429b7d2b27f447ac7c86ebfe5ea118d45a1928952e3df8afd9 bytes=198",
+   "status": "PASS",
+   "version_id": "6e5c448a-e95e-4444-ac5d-f0a102eb52ed"
+  },
+  {
+   "id": "T7-readback-pdf",
+   "test": "independent private download of staged draft pdf",
+   "at_ct": "2026-11-10T12:00:07-06:00",
+   "expected": "sha256=a2aefbab3c82df701ef058c6bfaeeee5df1f9ceaf41ff5c8cc1ae5c883771b83 bytes=139",
+   "actual": "HTTP 200 sha256=a2aefbab3c82df701ef058c6bfaeeee5df1f9ceaf41ff5c8cc1ae5c883771b83 bytes=139",
+   "status": "PASS",
+   "version_id": "6e5c448a-e95e-4444-ac5d-f0a102eb52ed"
+  },
+  {
+   "id": "T7-readback-content",
+   "test": "content.json readback",
+   "at_ct": "2026-11-10T12:00:07-06:00",
+   "expected": "sha256=44dd976c\u2026d9 bytes=32",
+   "actual": "server-side readback in stage receipt matched; get-report-file serves html/pdf only, no independent client download path",
+   "status": "PASS (server readback only)"
+  },
+  {
+   "id": "T7-draft-only",
+   "test": "staged version state",
+   "at_ct": "2026-11-10T12:00:07-06:00",
+   "expected": "draft",
+   "actual": "DB: v5..v9 all draft; published count unchanged at 3",
+   "status": "PASS",
+   "version_id": "6e5c448a-e95e-4444-ac5d-f0a102eb52ed"
+  },
+  {
+   "id": "T1-owner-isolation",
+   "test": "ua sees only test-a1+test-a2 / ub only test-b1",
+   "at_ct": "2026-11-10T12:00:24-06:00",
+   "expected": "-",
+   "actual": "owner session mint for 716ae187-2086-4b5d-9a87-064fe42dbcdb refused: \"Minting a session as a specific auth user requires user approval, which is unavailable in this context.\" No approval card returned; not retried",
+   "status": "BLOCKED"
+  },
+  {
+   "id": "T1-group-3-3-2-2",
+   "test": "synthetic 3/3/2/2 owner groupings",
+   "at_ct": "2026-11-10T12:00:24-06:00",
+   "expected": "-",
+   "actual": "owner session mint for 716ae187-2086-4b5d-9a87-064fe42dbcdb refused: \"Minting a session as a specific auth user requires user approval, which is unavailable in this context.\" No approval card returned; not retried",
+   "status": "BLOCKED"
+  },
+  {
+   "id": "T2-owner-forged-ids",
+   "test": "owner forged slug/client/report/version",
+   "at_ct": "2026-11-10T12:00:24-06:00",
+   "expected": "-",
+   "actual": "owner session mint for 716ae187-2086-4b5d-9a87-064fe42dbcdb refused: \"Minting a session as a specific auth user requires user approval, which is unavailable in this context.\" No approval card returned; not retried",
+   "status": "BLOCKED"
+  },
+  {
+   "id": "T2-cross-owner-file",
+   "test": "cross-owner get-report-file",
+   "at_ct": "2026-11-10T12:00:24-06:00",
+   "expected": "-",
+   "actual": "owner session mint for 716ae187-2086-4b5d-9a87-064fe42dbcdb refused: \"Minting a session as a specific auth user requires user approval, which is unavailable in this context.\" No approval card returned; not retried",
+   "status": "BLOCKED"
+  },
+  {
+   "id": "T3-owner-signed-url",
+   "test": "signed URL issued to owner caller",
+   "at_ct": "2026-11-10T12:00:24-06:00",
+   "expected": "-",
+   "actual": "owner session mint for 716ae187-2086-4b5d-9a87-064fe42dbcdb refused: \"Minting a session as a specific auth user requires user approval, which is unavailable in this context.\" No approval card returned; not retried",
+   "status": "BLOCKED"
+  },
+  {
+   "id": "T4-instant-revoke",
+   "test": "revoke then old/refreshed owner token + old signed URL",
+   "at_ct": "2026-11-10T12:00:24-06:00",
+   "expected": "-",
+   "actual": "owner session mint for 716ae187-2086-4b5d-9a87-064fe42dbcdb refused: \"Minting a session as a specific auth user requires user approval, which is unavailable in this context.\" No approval card returned; not retried",
+   "status": "BLOCKED"
+  },
+  {
+   "id": "T6-owner-writes",
+   "test": "owner writes/grants/transitions denied",
+   "at_ct": "2026-11-10T12:00:24-06:00",
+   "expected": "-",
+   "actual": "owner session mint for 716ae187-2086-4b5d-9a87-064fe42dbcdb refused: \"Minting a session as a specific auth user requires user approval, which is unavailable in this context.\" No approval card returned; not retried",
+   "status": "BLOCKED"
+  },
+  {
+   "id": "T6-editor-publish",
+   "test": "editor publish denied (editor session also needs approval)",
+   "at_ct": "2026-11-10T12:00:24-06:00",
+   "expected": "-",
+   "actual": "owner session mint for 716ae187-2086-4b5d-9a87-064fe42dbcdb refused: \"Minting a session as a specific auth user requires user approval, which is unavailable in this context.\" No approval card returned; not retried",
+   "status": "BLOCKED"
+  },
+  {
+   "id": "T5-account-count",
+   "test": "auth user count before/after unknown email",
+   "at_ct": "2026-11-10T12:00:24-06:00",
+   "expected": "-",
+   "actual": "no sanctioned read of auth users from this sandbox (psql: permission denied for schema auth); generic response + flag OFF path proven to return before any auth call",
+   "status": "BLOCKED"
+  },
+  {
+   "id": "T5-enabled-direct-auth",
+   "test": "enabled flow / direct hosted Auth API delivery",
+   "at_ct": "2026-11-10T12:00:24-06:00",
+   "expected": "-",
+   "actual": "no proven server-wide recipient restriction; not attempted to avoid delivery",
+   "status": "BLOCKED"
+  },
+  {
+   "id": "T8-audit-failure-injection",
+   "test": "live audit-persistence failure injection",
+   "at_ct": "2026-11-10T12:00:24-06:00",
+   "expected": "-",
+   "actual": "cannot scope injection to synthetic IDs without a global trigger/switch (prohibited); covered only by local unit simulation",
+   "status": "BLOCKED"
+  },
+  {
+   "id": "T8-lease-error-codes",
+   "test": "note",
+   "at_ct": "2026-11-10T12:00:24-06:00",
+   "expected": "4xx",
+   "actual": "null/unknown/expired lease commits return HTTP 500 (raised exception) rather than 4xx; denial correct, code cosmetic",
+   "status": "NOTE"
+  },
+  {
+   "id": "T8-expired-residue",
+   "test": "expired-lease staging row",
+   "at_ct": "2026-11-10T12:00:24-06:00",
+   "expected": "recoverable",
+   "actual": "request 3d4ff2be\u2026 left state=reserved v10 with expired lease, no version, no storage objects; reacquirable",
+   "status": "PASS"
+  }
+ ],
+ "T7_version": null,
+ "distinct_ids": [
+  "10576c5e-5da2-45f8-b696-11c8c450ff29",
+  "1179265b-8d48-4136-9656-6d2319193a16",
+  "260a0805-39db-48fb-820e-b86aa4b5dffc"
+ ],
+ "overlap_id": "bfeb0579-a5d9-4701-a6e4-3f90dd8aff6a",
+ "mismatch_id": "5013a170-a159-4f85-8092-f0cb7d3b9ff2",
+ "lease_id": "3d4ff2be-31f1-4ca2-9016-8ccfee642f6f",
+ "provision_id": "0767f36b-4d9d-4de9-b971-f1877367c25f",
+ "meta": {
+  "code_commit": "203952a",
+  "caller": "synthetic admin 76a43a8c-0fc9-4a59-9bfc-7b7b7efb89d5 (bluepipe-monthly-7046\u2026-admin@example.invalid)",
+  "baseline": {
+   "audit_rows": 36,
+   "published_versions": 3,
+   "staging_rows": 0,
+   "provisioning_rows": 0
+  },
+  "after": {
+   "new_draft_versions": "test-a1 v5-v9",
+   "published_versions": 3,
+   "staging_rows": 6,
+   "provisioning_rows": 1,
+   "audit_new": {
+    "stage_reserved": 6,
+    "stage_version": 5,
+    "provision_intent": 1,
+    "provision_owner": 1,
+    "file_issued": 1
+   }
+  },
+  "synthetic_owner_created": "bluepipe-monthly-7046f021ec8a4bb088af17801db9b456-owner-0767f36b@example.invalid",
+  "no_email": true,
+  "no_publish": true,
+  "no_storage_delete": true
+ },
+ "summary": {
+  "PASS": 56,
+  "BLOCKED": 11,
+  "NOTE": 1
+ }
+}
