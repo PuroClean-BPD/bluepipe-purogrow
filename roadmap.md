@@ -15,8 +15,10 @@
 - [x] Genuine approved synthetic admin runtime used; editor identity remains unavailable and must not be retried.
 
 - [x] Code-login implementation checkpoint: secret-free broker, audited revocable sessions, owner screen, synthetic tests; real access OFF, no frontend deployment (67.3 credits remaining at start).
-- [ ] Controlled Netlify deploy of cookie broker and owner screen — blocked: coordinator review and separate deploy authorization.
+- [x] Controlled Netlify deployment confirmed by coordinator: 6af37af58a30a9e9d3155135 / 87a6efe; clients OFF.
 
 - [x] Correction checkpoint: reservations, dates/order, frozen hashes, bounded broker/Cloud, staged real credentials, expanded hosted file matrix and review documentation; no frontend deploy.
 
 - [x] Small correction: retire membership JWT reads/signing; fresh staff password entry; approver transition guard; all-method broker denial; targeted evidence.
+
+- [x] Approved fresh native synthetic admin/editor/legacy sessions and deployed signed-in regression; secret-free ledger saved, all created QA codes revoked.

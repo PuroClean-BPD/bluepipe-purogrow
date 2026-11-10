@@ -1,0 +1,338 @@
+{
+  "frontend": {
+    "deploy": "6af37af58a30a9e9d3155135",
+    "source": "87a6efeb2b3ba22cdd8fc1836a3a6ce8cf08e876",
+    "confirmed_by": "coordinator"
+  },
+  "backend_source": "eb5493b126298eb95a69c922bfff46f853876408",
+  "identities": {
+    "admin": "76a43a8c-0fc9-4a59-9bfc-7b7b7efb89d5",
+    "editor": "8a44551b-923c-436c-b0a7-212b8fa2c2f3",
+    "legacy": "716ae187-2086-4b5d-9a87-064fe42dbcdb"
+  },
+  "synthetic_credential_ids": [
+    "eb65dda9-66a1-419e-b649-fb400d2af463",
+    "8aa79994-e962-4605-a462-d05fb666fb82",
+    "4c98f822-b414-439e-9948-3750e3770b92",
+    "60f6e4c4-8b2e-4b71-a446-491d9e990fa0",
+    "a7667738-9503-460f-9fca-675eceaa991d",
+    "9de26c93-9aba-4bfe-bb32-b3314af3ad93",
+    "f272c5e8-96e0-4c03-8977-2311bca373ba",
+    "c05025b4-1a62-488a-8af9-51104b14d428",
+    "17eed4a7-e089-4fd8-b628-03a2ef3abfbc",
+    "abed602b-2f54-40b8-855e-a554879b821a",
+    "bb455b54-32ce-465c-8e54-e9d0c0edb4e1",
+    "11c9371c-f4bb-4307-97ec-586cc1ba76b4",
+    "a9467278-f81a-4121-8f1e-8e2323fc5e57",
+    "0033c884-e1da-408c-9c4b-b419d5ebd535",
+    "1ba0c96d-daae-4755-aac9-6e10b8baeb03",
+    "c6b6062f-f33b-4f66-9f03-777514c9d65f",
+    "6473bc7b-9762-42e5-ab36-730fe82fe4c3",
+    "b47f4fae-c83b-4d3f-86b4-5d9b3fbb6488"
+  ],
+  "tests": [
+    {
+      "test": "three genuine approved native identities",
+      "mode": "HOSTED_AUTH",
+      "status": "PASS",
+      "at_chicago": "2026-11-10T17:11:03.915360-06:00",
+      "expected": "admin/editor/no staff role for legacy owner",
+      "actual": "3 verified; no role changes"
+    },
+    {
+      "test": "fresh settings read",
+      "mode": "HOSTED_READ",
+      "status": "BLOCKED",
+      "at_chicago": "2026-11-10T17:11:04.175705-06:00",
+      "expected": "read flags without authority bypass",
+      "actual": "JWT RLS returns empty; coordinator OFF evidence retained, no writes"
+    },
+    {
+      "test": "18 logins and 30-day host-only HttpOnly cookies",
+      "mode": "DEPLOYED_HTTP",
+      "status": "PASS",
+      "at_chicago": "2026-11-10T17:11:31.755486-06:00",
+      "expected": "18 successful safe replies; Secure/Strict/2592000s/no Domain",
+      "actual": "18/18; no session fields returned"
+    },
+    {
+      "test": "session table direct read",
+      "mode": "HOSTED_READ",
+      "status": "BLOCKED",
+      "at_chicago": "2026-11-10T17:11:32.060489-06:00",
+      "expected": "protected rows remain hidden",
+      "actual": "HTTP 400"
+    },
+    {
+      "test": "fresh backend interval read",
+      "mode": "HOSTED_READ",
+      "status": "BLOCKED",
+      "at_chicago": "2026-11-10T17:11:32.064732-06:00",
+      "expected": "independent session timestamp read",
+      "actual": "deny-default RLS hides digest-only rows; cookie 2592000s verified, earlier interval evidence unchanged"
+    },
+    {
+      "test": "archive membership matrix (not file requests)",
+      "mode": "DEPLOYED_HTTP",
+      "status": "PASS",
+      "at_chicago": "2026-11-10T17:11:41.912104-06:00",
+      "expected": "3/3/2/2+14 singles; 24 allowed/408 excluded",
+      "actual": {
+        "cells": 432,
+        "allowed": 24,
+        "excluded": 408
+      }
+    },
+    {
+      "test": "html deployed file matrix",
+      "mode": "DEPLOYED_HTTP",
+      "status": "PASS",
+      "at_chicago": "2026-11-10T17:12:30.403788-06:00",
+      "expected": "432 real broker requests: 24 independent-hash downloads/408 denied",
+      "actual": {
+        "requests": 432,
+        "allowed": 24,
+        "denied": 408,
+        "independently_verified_downloads": 24
+      }
+    },
+    {
+      "test": "pdf deployed file matrix",
+      "mode": "DEPLOYED_HTTP",
+      "status": "PASS",
+      "at_chicago": "2026-11-10T17:13:34.688932-06:00",
+      "expected": "432 real broker requests: 24 independent-hash downloads/408 denied",
+      "actual": {
+        "requests": 432,
+        "allowed": 24,
+        "denied": 408,
+        "independently_verified_downloads": 24
+      }
+    },
+    {
+      "test": "deployed browser login/reload/private cookie/report/logout",
+      "mode": "DEPLOYED_BROWSER",
+      "status": "PASS",
+      "at_chicago": "2026-11-10T17:13:58.228206-06:00",
+      "expected": "all concrete assertions satisfied",
+      "actual": "Chromium: 3 locations, persisted reload, verified report rendered; JS cannot read cookie; no browser storage; logout clears cookie"
+    },
+    {
+      "test": "forged file identifiers",
+      "mode": "DEPLOYED_HTTP",
+      "status": "PASS",
+      "at_chicago": "2026-11-10T17:14:02.228958-06:00",
+      "expected": "all concrete assertions satisfied",
+      "actual": "forged UUID 401; forged slug/path 400; cross-owner matrix separately verified"
+    },
+    {
+      "test": "actual 60-second signed-link expiry and tamper",
+      "mode": "DEPLOYED_HTTP",
+      "status": "PASS",
+      "at_chicago": "2026-11-10T17:15:09.725441-06:00",
+      "expected": "all concrete assertions satisfied",
+      "actual": {
+        "initial_http": 200,
+        "tampered": "denied",
+        "expired_http": 400,
+        "elapsed_seconds": 66
+      }
+    },
+    {
+      "test": "logout/rotation/revoke/scope removal and replay",
+      "mode": "DEPLOYED_HTTP",
+      "status": "PASS",
+      "at_chicago": "2026-11-10T17:15:16.393810-06:00",
+      "expected": "all concrete assertions satisfied",
+      "actual": "logout/scope removal/rotation/revocation: 4 old-cookie replays denied immediately"
+    },
+    {
+      "test": "success reservations/concurrent mixed failures/five-failure lockout",
+      "mode": "DEPLOYED_HTTP",
+      "status": "PASS",
+      "at_chicago": "2026-11-10T17:15:34.964809-06:00",
+      "expected": "all concrete assertions satisfied",
+      "actual": {
+        "successes": 6,
+        "mixed": [
+          200,
+          200,
+          401,
+          401
+        ],
+        "five_failures_lock": true,
+        "audited_unlock": true
+      }
+    },
+    {
+      "test": "durable scope receipts and audit immutability",
+      "mode": "HOSTED_AUTH",
+      "status": "PASS",
+      "at_chicago": "2026-11-10T17:15:43.692340-06:00",
+      "expected": "all concrete assertions satisfied",
+      "actual": {
+        "immutable_denials": 6,
+        "exact_scope_receipts": 18,
+        "observed_rows": 1000
+      }
+    },
+    {
+      "test": "forced session expiry/live audit failure injection",
+      "mode": "HOSTED_AUTH",
+      "status": "BLOCKED",
+      "at_chicago": "2026-11-10T17:15:43.692411-06:00",
+      "expected": "reviewed tightly fixture-scoped operator path",
+      "actual": "none exists; not bypassed"
+    },
+    {
+      "test": "native password entry/MFA",
+      "mode": "DEPLOYED_BROWSER",
+      "status": "BLOCKED",
+      "at_chicago": "2026-11-10T17:15:43.692425-06:00",
+      "expected": "human browser password sign-in and verified settings",
+      "actual": "native test sessions used; password flow and MFA not configured/verified"
+    },
+    {
+      "test": "elapsed 30-day observation/Safari",
+      "mode": "DEPLOYED_BROWSER",
+      "status": "NOT_RUN",
+      "at_chicago": "2026-11-10T17:15:43.692437-06:00",
+      "expected": "actual elapsed duration and Safari runtime",
+      "actual": "not observed; Chromium and exact interval separately proven"
+    },
+    {
+      "test": "synthetic code cleanup",
+      "mode": "HOSTED_AUTH",
+      "status": "PASS",
+      "at_chicago": "2026-11-10T17:15:49.210422-06:00",
+      "expected": "all new credentials durably revoked; records retained",
+      "actual": {
+        "created": 18,
+        "revoked": 18
+      }
+    },
+    {
+      "test": "genuine editor forbidden imports/transitions/staff revocation",
+      "mode": "HOSTED_AUTH",
+      "status": "PASS",
+      "at_chicago": "2026-11-10T17:17:29.881862-06:00",
+      "expected": "denied with native editor JWT",
+      "actual": "6 denial checks"
+    },
+    {
+      "test": "legacy owner membership bypass retirement",
+      "mode": "HOSTED_AUTH",
+      "status": "PASS",
+      "at_chicago": "2026-11-10T17:17:29.881915-06:00",
+      "expected": "no client/version authority, no rows, signer denied",
+      "actual": "6 checks denied with genuine native legacy JWT"
+    },
+    {
+      "test": "synthetic admin staff-revocation denial",
+      "mode": "HOSTED_AUTH",
+      "status": "PASS",
+      "at_chicago": "2026-11-10T17:17:29.881926-06:00",
+      "expected": "real admin required; no roles changed",
+      "actual": "denied"
+    },
+    {
+      "test": "targeted upload/staff denial recovery",
+      "mode": "HOSTED_AUTH",
+      "status": "PASS",
+      "at_chicago": "2026-11-10T17:17:29.888069-06:00",
+      "expected": "all assertions",
+      "actual": {
+        "synthetic_report_id": "cbacbcc1-992b-4e35-86b0-8835cac8771f",
+        "synthetic_version_id": "0d401035-614a-4147-bcec-859222493a4a",
+        "synthetic_request_id": "411d360b-b8cb-4225-883a-0d48286f7a5c",
+        "draft": true,
+        "readback_formats": 2,
+        "replay": "exact receipt",
+        "overlap_successes": 1,
+        "invalid_lease_denials": 3
+      }
+    }
+  ],
+  "no_deploy": true,
+  "no_real_setup": true,
+  "cost": {
+    "cap_credits": 6,
+    "actual_credits": null,
+    "reason": "4.1 recorded project-credit delta at latest lookup; final current-response cost not finalized yet; hard cap 6",
+    "project_recorded_usage_before": 104.223881336,
+    "recorded_project_usage_after": 108.323881336,
+    "recorded_delta_credits": 4.1
+  },
+  "targeted_credential_ids": [
+    "8e34af3d-7626-413f-bee5-4cb40cb00c3c",
+    "94d4e43d-9a7b-4763-80bd-1642e56ae414",
+    "d89d0f35-1eda-410f-980a-2fee90a8b63d",
+    "0cd1ca07-dcc8-4506-8523-749dfa07ada4"
+  ],
+  "harness_failures": [
+    {
+      "test": "fresh synthetic upload/readback/replay/atomic/null lease",
+      "mode": "HOSTED_AUTH",
+      "status": "FAIL",
+      "at_chicago": "2026-11-10T17:14:00.332471-06:00",
+      "expected": "all concrete assertions satisfied",
+      "actual": "AssertionError"
+    },
+    {
+      "test": "targeted upload/staff denial recovery",
+      "mode": "HOSTED_AUTH",
+      "status": "FAIL",
+      "at_chicago": "2026-11-10T17:16:15.498309-06:00",
+      "expected": "all assertions",
+      "actual": {
+        "error": "AssertionError",
+        "line": 199
+      }
+    },
+    {
+      "test": "targeted upload/staff denial recovery",
+      "mode": "HOSTED_AUTH",
+      "status": "FAIL",
+      "at_chicago": "2026-11-10T17:16:39.244228-06:00",
+      "expected": "all assertions",
+      "actual": {
+        "error": "AssertionError",
+        "line": 199,
+        "stage_http": "stage HTTP 415"
+      }
+    },
+    {
+      "test": "targeted upload/staff denial recovery",
+      "mode": "HOSTED_AUTH",
+      "status": "FAIL",
+      "at_chicago": "2026-11-10T17:17:03.224492-06:00",
+      "expected": "all assertions",
+      "actual": {
+        "error": "AssertionError",
+        "line": 210,
+        "stage_http": "redacted"
+      }
+    }
+  ],
+  "harness_failures_explanation": "Initial protected settings/session reads incorrectly expected visible rows; fixed to BLOCKED, no authority bypass. Upload fixture lacked <html>; HTTP 415 correctly rejected it. Changed-payload fixture also lacked <html>; corrected. Targeted upload and all role denials subsequently passed. Full matrices were not repeated after passing.",
+  "source_hashes": {
+    "scripts/monthly/deployed_signed_in.py": "4b13d071dc63223900f77ac986289da44c6a428996c720dfaa54866d7b8a245f",
+    "netlify/functions/monthly-owner.mts": "4ad5c341554d08aed40570bf3722a7e0e2200290c4cadc853512d42ab00c1203",
+    "src/monthly/MonthlyOwnerPortal.tsx": "1024c755f3087b595f4c5e998f38cd1906c2bf49e2d07fcaf492ec0f9d834222"
+  },
+  "evidence": {
+    "preview_build": "build OK 2026-11-10T23:17:30Z",
+    "harness_compile": "python py_compile PASS",
+    "protected_diff_lines": 0,
+    "no_new_deploy": true,
+    "screenshot": "sandbox-only signed-in Chromium screenshot inspected",
+    "prior_unsigned_ledger": "docs/test-results/deployed-runtime-ledger.json"
+  },
+  "summary": {
+    "PASS": 16,
+    "FAIL": 0,
+    "BLOCKED": 5,
+    "NOT_RUN": 1
+  },
+  "cleanup_notes": "72 credentials from initial full-attempt retries plus targeted test credentials retained and revoked through audited RPC; no staff role change, account creation, real data, or new fixture publication. Tiny draft QA report records retained. Sessions remain private sandbox files."
+}
