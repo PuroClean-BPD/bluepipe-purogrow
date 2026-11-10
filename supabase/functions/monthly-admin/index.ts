@@ -51,7 +51,6 @@ Deno.serve(async (req) => {
       return { error, exists };
     },
     download: async (path) => { const { data } = await store.download(path); return data ? new Uint8Array(await data.arrayBuffer()) : null; },
-    remove: async (paths) => { await store.remove(paths); },
     createUser: async (email, meta) => {
       const { data, error } = await admin.auth.admin.createUser({ email, email_confirm: true, user_metadata: meta });
       if (data?.user) return { id: data.user.id };

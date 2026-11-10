@@ -40,3 +40,6 @@ Rollback: delete function monthly-admin; restore monthly-auth from 67c8e83. No s
 
 ## Nov 10 2026 (2)
 Baseline eece788. Rollback: apply supabase/rollback/202611100001_monthly_admin_atomic.down.sql via migration tool; redeploy monthly-admin from eece788 if needed. Data retained.
+
+## Nov 10 2026 (3)
+Baseline bac8102. Rollback: apply supabase/rollback/202611100002_monthly_stage_leases.down.sql; redeploy monthly-admin from bac8102. Staging never deletes storage; orphan candidates are listed in audit detail for manual reconciliation.

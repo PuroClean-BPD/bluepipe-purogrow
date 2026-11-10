@@ -309,38 +309,56 @@ export type Database = {
       }
       monthly_staging: {
         Row: {
+          attempts: number
           base_path: string
+          bytes: Json | null
           client_id: string
           created_at: string
           created_by: string
           failure: string | null
+          fingerprint: string | null
+          lease_expires_at: string | null
+          lease_token: string | null
           report_id: string
           request_id: string
           state: string
+          sums: Json | null
           version: number
           version_id: string | null
         }
         Insert: {
+          attempts?: number
           base_path: string
+          bytes?: Json | null
           client_id: string
           created_at?: string
           created_by: string
           failure?: string | null
+          fingerprint?: string | null
+          lease_expires_at?: string | null
+          lease_token?: string | null
           report_id: string
           request_id: string
           state?: string
+          sums?: Json | null
           version: number
           version_id?: string | null
         }
         Update: {
+          attempts?: number
           base_path?: string
+          bytes?: Json | null
           client_id?: string
           created_at?: string
           created_by?: string
           failure?: string | null
+          fingerprint?: string | null
+          lease_expires_at?: string | null
+          lease_token?: string | null
           report_id?: string
           request_id?: string
           state?: string
+          sums?: Json | null
           version?: number
           version_id?: string | null
         }
@@ -454,6 +472,43 @@ export type Database = {
           version_id: string
         }[]
       }
+      monthly_admin_stage_acquire: {
+        Args: {
+          p_bytes: Json
+          p_lease_seconds?: number
+          p_report: string
+          p_request: string
+          p_sums: Json
+        }
+        Returns: {
+          base_path: string
+          bytes: Json
+          lease: string
+          state: string
+          sums: Json
+          version: number
+          version_id: string
+        }[]
+      }
+      monthly_admin_stage_commit: {
+        Args: {
+          p_dataset: Json
+          p_lease: string
+          p_notes: string
+          p_request: string
+        }
+        Returns: string
+      }
+      monthly_admin_stage_release: {
+        Args: {
+          p_fatal: boolean
+          p_lease: string
+          p_orphans: Json
+          p_reason: string
+          p_request: string
+        }
+        Returns: boolean
+      }
       monthly_can_client: { Args: { cid: string }; Returns: boolean }
       monthly_can_version: { Args: { vid: string }; Returns: boolean }
       monthly_grant: {
@@ -463,6 +518,10 @@ export type Database = {
       monthly_require_admin: { Args: never; Returns: string }
       monthly_revoke: { Args: { mid: string }; Returns: undefined }
       monthly_staff_role: { Args: never; Returns: string }
+      monthly_stage_fingerprint: {
+        Args: { p_bytes: Json; p_sums: Json }
+        Returns: string
+      }
       monthly_transition: {
         Args: { next_state: string; vid: string }
         Returns: undefined

@@ -1,118 +1,169 @@
-// Failure-injection, retry and parallel tests for monthly-admin orchestration. In-memory fakes only;
-// no network, no real records. DB atomicity of each RPC is tested separately (scripts/monthly/atomic.test.ts).
+// UNIT tests with in-memory fakes that mirror the lease/fingerprint RPC contract (the real SQL contract is
+// tested separately in scripts/monthly/lease.test.ts on a disposable local DB). No network, no real records,
+// no storage deletion. These are NOT authenticated hosted-runtime tests.
 import { assert, assertEquals } from 'https://deno.land/std@0.224.0/assert/mod.ts';
 import { type Deps, provisionOwner, sha256, stageVersion } from './core.ts';
 
 const enc = (s: string) => new TextEncoder().encode(s);
-const FILES = { html: enc('<html><body>synthetic</body></html>'), pdf: enc('%PDF-1.4 synthetic'), content: enc('{"synthetic":true}') };
-const expected = async () => ({ html: await sha256(FILES.html), pdf: await sha256(FILES.pdf), content: await sha256(FILES.content) });
+const mk = (tag: string) => ({ html: enc(`<html><body>${tag}</body></html>`), pdf: enc(`%PDF-1.4 ${tag}`), content: enc(`{"tag":"${tag}"}`) });
+const FILES = mk('synthetic');
+const sumsOf = async (f: ReturnType<typeof mk>) => ({ html: await sha256(f.html), pdf: await sha256(f.pdf), content: await sha256(f.content) });
 const REPORT = '00000000-0000-4000-8000-000000000001';
+const tick = () => new Promise((r) => setTimeout(r, 1));
 
-function fake(opts: { failUpload?: string; corrupt?: string; failCommit?: boolean; failFailAudit?: boolean; failReserve?: boolean } = {}) {
+type Row = { version: number; base_path: string; state: string; version_id: string | null; lease: string | null; exp: number; fp: string; sums: unknown; bytes: unknown };
+function backend() {
   const objects = new Map<string, Uint8Array>();
-  const staging = new Map<string, { version: number; base_path: string; state: string; version_id: string | null }>();
-  let nextVersion = 1;
-  const calls: string[] = [];
-  const removed: string[] = [];
-  const d: Deps = {
+  const staging = new Map<string, Row>();
+  const audit: { action: string; detail: Record<string, unknown> }[] = [];
+  const clock = { now: 0 };
+  let next = 1;
+  const deps = (opt: { failUpload?: string; corrupt?: string; commitLostResponse?: boolean; failRelease?: boolean; slowUploadMs?: number; beforeCommit?: () => Promise<void> } = {}): Deps => ({
     rpc: async (fn, args) => {
-      calls.push(fn);
       const req = args.p_request as string;
-      if (fn === 'monthly_admin_reserve_version') {
-        if (opts.failReserve) return { data: null, error: 'audit' };
-        if (!staging.has(req)) staging.set(req, { version: nextVersion++, base_path: `monthly/c/${args.p_report}/v${nextVersion - 1}-${req}`, state: 'reserved', version_id: null });
-        return { data: [staging.get(req)!], error: null };
+      if (fn === 'monthly_admin_stage_acquire') {
+        const fp = JSON.stringify([args.p_sums, args.p_bytes]);
+        const s = staging.get(req);
+        if (s) {
+          if (s.fp !== fp) return { data: null, error: { message: 'Payload mismatch' } };
+          if (s.state !== 'reserved') return { data: [{ ...s, lease: null }], error: null };
+          if (s.lease && s.exp > clock.now) return { data: null, error: { message: 'Busy' } };
+          s.lease = crypto.randomUUID(); s.exp = clock.now + 120;
+          return { data: [{ ...s }], error: null };
+        }
+        const v = next++;
+        const row: Row = { version: v, base_path: `monthly/c/${args.p_report}/v${v}-${req}`, state: 'reserved', version_id: null, lease: crypto.randomUUID(), exp: clock.now + 120, fp, sums: args.p_sums, bytes: args.p_bytes };
+        staging.set(req, row);
+        return { data: [{ ...row }], error: null };
       }
-      if (fn === 'monthly_admin_commit_version') {
-        if (opts.failCommit) return { data: null, error: 'audit' };
-        const s = staging.get(req)!; s.state = 'committed'; s.version_id ??= crypto.randomUUID();
-        return { data: s.version_id, error: null };
+      const s = staging.get(req)!;
+      if (fn === 'monthly_admin_stage_commit') {
+        if (opt.beforeCommit) await opt.beforeCommit();
+        if (s.state === 'committed') return { data: s.version_id, error: null };
+        if (s.lease !== args.p_lease || s.exp <= clock.now) return { data: null, error: { message: 'Lease lost' } };
+        s.state = 'committed'; s.version_id = crypto.randomUUID(); s.lease = null;
+        audit.push({ action: 'stage_version', detail: { sha256: s.sums } });
+        return opt.commitLostResponse ? { data: null, error: { message: 'network: response lost' } } : { data: s.version_id, error: null };
       }
-      if (fn === 'monthly_admin_fail_staging') {
-        if (opts.failFailAudit) return { data: null, error: 'audit' };
-        staging.get(req)!.state = 'failed'; return { data: null, error: null };
+      if (fn === 'monthly_admin_stage_release') {
+        if (opt.failRelease) return { data: null, error: 'audit' };
+        if (s.state !== 'reserved' || s.lease !== args.p_lease) return { data: false, error: null };
+        s.lease = null; if (args.p_fatal) s.state = 'failed';
+        audit.push({ action: args.p_fatal ? 'stage_failed' : 'stage_attempt_failed', detail: { orphan_candidates: args.p_orphans } });
+        return { data: true, error: null };
       }
       return { data: null, error: 'unknown' };
     },
     upload: async (path, bytes) => {
-      await new Promise((r) => setTimeout(r, Math.random() * 5));
-      if (opts.failUpload && path.endsWith(opts.failUpload)) return { error: 'boom' };
+      if (opt.slowUploadMs) await new Promise((r) => setTimeout(r, opt.slowUploadMs));
+      await tick();
+      if (opt.failUpload && path.endsWith(opt.failUpload)) return { error: 'boom' };
       if (objects.has(path)) return { error: 'exists', exists: true };
-      objects.set(path, opts.corrupt && path.endsWith(opts.corrupt) ? enc('tampered') : bytes);
+      objects.set(path, opt.corrupt && path.endsWith(opt.corrupt) ? enc('tampered') : bytes);
       return { error: null };
     },
     download: async (path) => objects.get(path) ?? null,
-    remove: async (paths) => { for (const p of paths) { removed.push(p); objects.delete(p); } },
     createUser: async () => ({ id: 'u1' }),
     findUserId: async () => null,
-  };
-  return { d, objects, staging, calls, removed };
+  });
+  return { objects, staging, audit, clock, deps };
 }
-const run = async (f: ReturnType<typeof fake>, request_id = crypto.randomUUID()) => stageVersion(f.d, { request_id, report_id: REPORT, files: FILES, expected: await expected() });
+const stage = async (d: Deps, request_id: string, files = FILES) => stageVersion(d, { request_id, report_id: REPORT, files, expected: await sumsOf(files) });
+const snapshot = (m: Map<string, Uint8Array>) => new Map(m);
+const assertPreserved = (before: Map<string, Uint8Array>, after: Map<string, Uint8Array>) => { for (const [k, v] of before) assertEquals(after.get(k), v, `object deleted/changed: ${k}`); };
 
-Deno.test('happy path stages draft with verified read-back', async () => {
-  const f = fake(); const o = await run(f);
-  assertEquals(o.status, 200); assertEquals(o.body.state, 'draft'); assertEquals(f.objects.size, 3);
+Deno.test('happy path: draft staged, returned sums are the stored ones', async () => {
+  const b = backend(); const o = await stage(b.deps(), crypto.randomUUID());
+  assertEquals(o.status, 200); assertEquals(o.body.sha256, await sumsOf(FILES)); assertEquals(b.objects.size, 3);
 });
-Deno.test('checksum mismatch rejected before any mutation', async () => {
-  const f = fake();
-  const o = await stageVersion(f.d, { request_id: crypto.randomUUID(), report_id: REPORT, files: FILES, expected: { ...(await expected()), pdf: 'f'.repeat(64) } });
-  assertEquals(o.status, 422); assertEquals(f.calls.length, 0); assertEquals(f.objects.size, 0);
+Deno.test('checksum mismatch rejected before any lease or upload', async () => {
+  const b = backend();
+  const o = await stageVersion(b.deps(), { request_id: crypto.randomUUID(), report_id: REPORT, files: FILES, expected: { ...(await sumsOf(FILES)), pdf: 'f'.repeat(64) } });
+  assertEquals(o.status, 422); assertEquals(b.staging.size, 0); assertEquals(b.objects.size, 0);
 });
-Deno.test('reservation audit failure => no uploads', async () => {
-  const f = fake({ failReserve: true }); const o = await run(f);
-  assertEquals(o.status, 403); assertEquals(f.objects.size, 0);
+Deno.test('(1) commit succeeds but response lost: nothing removed; retry returns original committed metadata', async () => {
+  const b = backend(); const id = crypto.randomUUID();
+  const o = await stage(b.deps({ commitLostResponse: true }), id);
+  assertEquals(o.status, 503);
+  assertEquals(b.objects.size, 3);
+  const before = snapshot(b.objects);
+  const r = await stage(b.deps(), id);
+  assertEquals(r.status, 200); assertEquals(r.body.idempotent, true); assertEquals(r.body.id, b.staging.get(id)!.version_id);
+  assertEquals(r.body.sha256, await sumsOf(FILES));
+  assertPreserved(before, b.objects);
 });
-Deno.test('upload failure removes only objects this request created, marks failed', async () => {
-  const f = fake({ failUpload: 'content.json' }); const o = await run(f);
-  assertEquals(o.status, 502); assertEquals(f.removed.length, 2); assertEquals(f.objects.size, 0);
-  assertEquals([...f.staging.values()][0].state, 'failed');
+Deno.test('(2) concurrent SAME request_id: second invocation refused while first holds lease; committed bytes kept', async () => {
+  const b = backend(); const id = crypto.randomUUID();
+  const first = stage(b.deps({ slowUploadMs: 15 }), id);
+  await new Promise((r) => setTimeout(r, 8));
+  assert(b.staging.get(id)?.lease, 'first invocation holds the lease');
+  const second = await stage(b.deps({ corrupt: 'report.pdf' }), id);
+  assertEquals(second.status, 409);
+  const o = await first; assertEquals(o.status, 200);
+  assertEquals(b.objects.get(`${b.staging.get(id)!.base_path}/report.pdf`), FILES.pdf);
 });
-Deno.test('read-back mismatch fails staging', async () => {
-  const f = fake({ corrupt: 'report.pdf' }); const o = await run(f);
-  assertEquals(o.status, 502); assertEquals(o.body.error, 'readback_pdf'); assertEquals(f.objects.size, 0);
+Deno.test('(2b/4) stale lease: expired holder fails after new owner commits; it deletes nothing and cannot release', async () => {
+  const b = backend(); const id = crypto.randomUUID();
+  let committedBefore = new Map<string, Uint8Array>();
+  const stale = stage(b.deps({
+    beforeCommit: async () => {
+      // Lease expires mid-flight; a new owner acquires and commits before the stale commit lands.
+      b.clock.now += 500;
+      const n = await stage(b.deps(), id);
+      assertEquals(n.status, 200);
+      committedBefore = snapshot(b.objects);
+    },
+  }), id);
+  const o = await stale;
+  assertEquals(o.status, 200); // commit RPC is idempotent on committed rows: returns the NEW owner's version
+  assertEquals(o.body.id, b.staging.get(id)!.version_id);
+  assertPreserved(committedBefore, b.objects);
 });
-Deno.test('commit (DB/audit) failure removes created objects and fails staging', async () => {
-  const f = fake({ failCommit: true }); const o = await run(f);
-  assertEquals(o.status, 502); assertEquals(f.objects.size, 0); assertEquals([...f.staging.values()][0].state, 'failed');
+Deno.test('(4) stale lease holder failing readback cannot release/fail the new owner request', async () => {
+  const b = backend(); const id = crypto.randomUUID();
+  // Stale holder A acquires, then its lease expires; B acquires and commits.
+  await b.deps().rpc('monthly_admin_stage_acquire', { p_request: id, p_report: REPORT, p_sums: await sumsOf(FILES), p_bytes: { html: FILES.html.length, pdf: FILES.pdf.length, content: FILES.content.length } });
+  const staleLease = b.staging.get(id)!.lease; b.clock.now += 500;
+  assertEquals((await stage(b.deps(), id)).status, 200);
+  const before = snapshot(b.objects);
+  const rel = await b.deps().rpc('monthly_admin_stage_release', { p_request: id, p_lease: staleLease, p_reason: 'readback_pdf', p_fatal: true, p_orphans: [] });
+  assertEquals(rel.data, false); assertEquals(b.staging.get(id)!.state, 'committed');
+  assertPreserved(before, b.objects);
 });
-Deno.test('failure audit failure is reported as recovery required, never success', async () => {
-  const f = fake({ failCommit: true, failFailAudit: true }); const o = await run(f);
-  assertEquals(o.status, 500); assertEquals([...f.staging.values()][0].state, 'reserved');
+Deno.test('(3) same request_id with different content after success is rejected; original metadata unchanged', async () => {
+  const b = backend(); const id = crypto.randomUUID();
+  assertEquals((await stage(b.deps(), id)).status, 200);
+  const before = snapshot(b.objects);
+  const o = await stage(b.deps(), id, mk('DIFFERENT'));
+  assertEquals(o.status, 409); assert(!('sha256' in o.body));
+  assertEquals(b.staging.get(id)!.sums, await sumsOf(FILES));
+  assertPreserved(before, b.objects);
 });
-Deno.test('other requests objects are never deleted on conflict/failure', async () => {
-  const f = fake(); await run(f);
-  const before = new Map(f.objects);
-  const g = { ...f, d: { ...f.d, upload: async (p: string, b: Uint8Array, m: string) => p.endsWith('content.json') ? { error: 'boom' } : f.d.upload(p, b, m) } };
-  const o = await run(g as typeof f);
-  assertEquals(o.status, 502);
-  for (const [k, v] of before) assertEquals(f.objects.get(k), v);
+Deno.test('upload failure: lease released, objects retained as audited orphan candidates, same request resumes', async () => {
+  const b = backend(); const id = crypto.randomUUID();
+  const o = await stage(b.deps({ failUpload: 'content.json' }), id);
+  assertEquals(o.status, 502); assertEquals(b.objects.size, 2);
+  assertEquals((b.audit.at(-1)!.detail.orphan_candidates as string[]).length, 2);
+  const r = await stage(b.deps(), id);
+  assertEquals(r.status, 200); assertEquals(b.objects.size, 3);
 });
-Deno.test('retry with same request_id after crash reuses identical objects without deleting them', async () => {
-  const f = fake(); const id = crypto.randomUUID();
-  const s = await f.d.rpc('monthly_admin_reserve_version', { p_request: id, p_report: REPORT });
-  const base = s.data![0].base_path;
-  f.objects.set(`${base}/report.html`, FILES.html); // left by crashed attempt
-  const o = await run(f, id);
-  assertEquals(o.status, 200); assert(f.objects.has(`${base}/report.html`));
-  const again = await run(f, id);
-  assertEquals(again.status, 200); assertEquals(again.body.idempotent, true); assertEquals(again.body.id, o.body.id);
+Deno.test('read-back mismatch: fatal, nothing deleted', async () => {
+  const b = backend(); const o = await stage(b.deps({ corrupt: 'report.pdf' }), crypto.randomUUID());
+  assertEquals(o.status, 502); assertEquals(o.body.error, 'readback_pdf'); assertEquals(b.objects.size, 2);
+  assertEquals(b.audit.at(-1)!.action, 'stage_failed');
 });
-Deno.test('retry finds tampered pre-existing object: fails without deleting it', async () => {
-  const f = fake(); const id = crypto.randomUUID();
-  const s = await f.d.rpc('monthly_admin_reserve_version', { p_request: id, p_report: REPORT });
-  const p = `${s.data![0].base_path}/report.html`; f.objects.set(p, enc('different'));
-  const o = await run(f, id);
-  assertEquals(o.status, 502); assert(f.objects.has(p)); assert(!f.removed.includes(p));
+Deno.test('release audit failure reported as recovery required, never success', async () => {
+  const b = backend(); const o = await stage(b.deps({ failUpload: 'report.pdf', failRelease: true }), crypto.randomUUID());
+  assertEquals(o.status, 500);
 });
-Deno.test('parallel distinct requests get distinct versions and disjoint objects', async () => {
-  const f = fake(); const outs = await Promise.all(Array.from({ length: 8 }, () => run(f)));
+Deno.test('parallel distinct requests: distinct versions, disjoint objects', async () => {
+  const b = backend(); const outs = await Promise.all(Array.from({ length: 8 }, () => stage(b.deps(), crypto.randomUUID())));
   assert(outs.every((o) => o.status === 200));
-  assertEquals(new Set(outs.map((o) => o.body.version)).size, 8); assertEquals(f.objects.size, 24);
+  assertEquals(new Set(outs.map((o) => o.body.version)).size, 8); assertEquals(b.objects.size, 24);
 });
-Deno.test('provision: no Auth call if intent audit fails; finish failure => recovery required', async () => {
+Deno.test('provision: no Auth call if intent audit fails; finish failure => recovery required; existing user linked', async () => {
   let created = 0;
-  const base = fake().d;
+  const base = backend().deps();
   const d1: Deps = { ...base, rpc: async () => ({ data: null, error: 'audit' }), createUser: async () => { created++; return { id: 'u' }; } };
   assertEquals((await provisionOwner(d1, { request_id: crypto.randomUUID(), email: 'a@example.invalid' })).status, 403); assertEquals(created, 0);
   const d2: Deps = { ...base, rpc: async (fn) => fn === 'monthly_admin_provision_begin' ? { data: [{ state: 'pending', user_id: null }], error: null } : { data: null, error: 'audit' }, createUser: async () => ({ id: 'u' }) };

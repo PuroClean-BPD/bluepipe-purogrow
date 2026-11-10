@@ -95,3 +95,16 @@ NOT RUN: every staff/editor/client path (no approved synthetic session minting a
 - Live anon: all 10 monthly tables 401; admin RPCs 404/401; monthly-admin no-auth 401. PASS.
 - Live parallel row-lock test against hosted DB: NOT RUN (needs staff session).
 - All authenticated runtime tests: NOT RUN (awaiting human approval of synthetic admin session).
+
+## Nov 10 2026 (3) - lease/fencing + payload binding (baseline bac8102)
+UNIT SIMULATION ONLY (not authenticated hosted runtime):
+- scripts/monthly/lease.test.ts (disposable local PGlite, applied SQL 0000-0004, local auth.uid stub): 7/7 PASS
+  busy refusal for overlapping same id; payload mismatch rejected before/after commit; committed retry returns
+  stored sums/bytes/version; stale lease cannot commit/release; expired lease cannot commit; orphan candidates audited.
+- scripts/monthly/atomic.test.ts: 6/6 PASS (unchanged).
+- monthly-admin core_test.ts (Deno fakes mirroring RPC contract): 12/12 PASS incl. commit-succeeds-response-lost,
+  concurrent same id, stale lease after new owner commit, changed content after success, no deletion anywhere.
+Live anon: new RPCs 404, staging 401, monthly-admin 401. public/ unchanged vs 67c8e83. Build OK.
+NOT RUN: every authenticated hosted test (synthetic admin session mint refused; see below).
+Mint attempt (once, 16:37 UTC): "Minting a session as a specific auth user requires user approval, which is
+unavailable in this context." No approval card or event was returned. Not retried.

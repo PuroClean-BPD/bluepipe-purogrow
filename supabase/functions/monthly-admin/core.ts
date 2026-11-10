@@ -6,7 +6,6 @@ export interface Deps {
   rpc(fn: string, args: Record<string, unknown>): Promise<R>;
   upload(path: string, bytes: Uint8Array, mime: string): Promise<{ error: unknown | null; exists?: boolean }>;
   download(path: string): Promise<Uint8Array | null>;
-  remove(paths: string[]): Promise<void>;
   createUser(email: string, meta: Record<string, string>): Promise<{ id?: string; exists?: boolean; error?: unknown }>;
   findUserId(email: string): Promise<string | null>;
 }
@@ -34,36 +33,40 @@ export async function stageVersion(d: Deps, a: { request_id: string; report_id: 
   // Rejected before any mutation: nothing to audit or clean.
   for (const k of KINDS) if (sums[k] !== a.expected[k]) return err(422, 'Checksum mismatch');
 
-  const res = await d.rpc('monthly_admin_reserve_version', { p_request: a.request_id, p_report: a.report_id });
+  const bytes = { html: f.html.length, pdf: f.pdf.length, content: f.content.length };
+  // Lease + payload fingerprint: one invocation at a time per request_id; changed bytes are rejected.
+  const res = await d.rpc('monthly_admin_stage_acquire', { p_request: a.request_id, p_report: a.report_id, p_sums: sums, p_bytes: bytes });
   const s = res.data?.[0];
-  if (res.error || !s) return err(403, 'Rejected');
-  if (s.state === 'committed') return ok({ id: s.version_id, version: s.version, state: 'draft', sha256: sums, idempotent: true });
-  if (s.state !== 'reserved') return err(409, 'Request already failed; use a new request_id');
+  if (res.error || !s) {
+    const m = String((res.error as { message?: string })?.message ?? res.error);
+    if (/Payload mismatch/.test(m)) return err(409, 'Payload differs from original request');
+    if (/Busy/.test(m)) return err(409, 'Request in progress; retry later');
+    return err(403, 'Rejected');
+  }
+  // Committed retry: return the ORIGINAL stored, verified metadata, never caller-supplied values.
+  if (s.state === 'committed') return ok({ id: s.version_id, version: s.version, state: 'draft', sha256: s.sums, bytes: s.bytes, idempotent: true });
+  if (s.state !== 'reserved' || !s.lease) return err(409, 'Request already failed; use a new request_id');
 
-  const created: string[] = []; // only objects THIS request positively created
-  const fail = async (reason: string, status = 502): Promise<Out> => {
-    if (created.length) await d.remove(created).catch(() => undefined);
-    const f2 = await d.rpc('monthly_admin_fail_staging', { p_request: a.request_id, p_reason: reason });
-    // If even the failure audit cannot be written, the reservation remains 'reserved' with its audited
-    // stage_reserved row: a durable, visible recovery state. Never reported as success.
-    return f2.error ? err(500, 'Recovery required') : err(status, reason);
+  const created: string[] = [];
+  // Definite pre-commit failure only. NEVER deletes objects: created paths are audited orphan candidates.
+  const release = async (reason: string, fatal: boolean): Promise<Out> => {
+    const r = await d.rpc('monthly_admin_stage_release', { p_request: a.request_id, p_lease: s.lease, p_reason: reason, p_fatal: fatal, p_orphans: created });
+    return r.error ? err(500, 'Recovery required') : err(502, reason);
   };
   for (const k of KINDS) {
     const path = `${s.base_path}/${NAMES[k]}`;
     const up = await d.upload(path, f[k], MIME[k]);
-    if (up.error && !up.exists) return fail(`upload_${k}`);
+    if (up.error && !up.exists) return release(`upload_${k}`, false);
     if (!up.error) created.push(path);
-    // Pre-existing object at a request-unique path can only come from an earlier attempt of this same
-    // request. Accept it only if byte-identical; never delete it.
+    // An existing object can only come from an earlier attempt of this same fingerprint-bound request.
     const back = await d.download(path);
-    if (!back || back.length !== f[k].length || (await sha256(back)) !== sums[k]) return fail(`readback_${k}`);
+    if (!back || back.length !== f[k].length || (await sha256(back)) !== sums[k]) return release(`readback_${k}`, true);
   }
-  const c = await d.rpc('monthly_admin_commit_version', {
-    p_request: a.request_id, p_dataset: dataset, p_sha: sums.content, p_notes: a.notes ?? null,
-    p_detail: { sha256: sums, bytes: { html: f.html.length, pdf: f.pdf.length, content: f.content.length } },
-  });
-  if (c.error || !c.data) return fail('commit_failed');
-  return ok({ id: c.data, version: s.version, state: 'draft', sha256: sums });
+  const c = await d.rpc('monthly_admin_stage_commit', { p_request: a.request_id, p_lease: s.lease, p_dataset: dataset, p_notes: a.notes ?? null });
+  // Ambiguous outcome (error or lost response): the commit may have succeeded. Touch nothing; the caller
+  // retries with the same request_id and receives the stored committed metadata or resumes under a new lease.
+  if (c.error || !c.data) return err(503, 'Commit outcome unknown; retry with the same request_id');
+  return ok({ id: c.data, version: s.version, state: 'draft', sha256: s.sums, bytes: s.bytes });
 }
 
 export async function provisionOwner(d: Deps, a: { request_id: string; email: string; full_name?: string }): Promise<Out> {

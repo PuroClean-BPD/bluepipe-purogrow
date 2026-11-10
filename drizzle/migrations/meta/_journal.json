@@ -29,6 +29,13 @@
       "when": 1794328682034,
       "tag": "0003_monthly_admin_tighten_grants",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1794328985784,
+      "tag": "0004_monthly_stage_leases",
+      "breakpoints": true
     }
   ]
 }
