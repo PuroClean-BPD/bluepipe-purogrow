@@ -87,4 +87,4 @@ export default async function handler(req: Request) {
     return reply({ error: "Unavailable" }, 503);
   }
 }
-export const config = { path: "/portal/api/owner", method: "POST" };
+export const config = { path: "/portal/api/owner" };
