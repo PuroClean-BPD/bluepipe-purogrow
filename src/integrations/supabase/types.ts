@@ -95,6 +95,8 @@ export type Database = {
           finished: boolean
           generation: number | null
           id: string
+          reservation_window: string | null
+          successful: boolean
         }
         Insert: {
           credential_id?: string | null
@@ -102,6 +104,8 @@ export type Database = {
           finished?: boolean
           generation?: number | null
           id?: string
+          reservation_window?: string | null
+          successful?: boolean
         }
         Update: {
           credential_id?: string | null
@@ -109,6 +113,8 @@ export type Database = {
           finished?: boolean
           generation?: number | null
           id?: string
+          reservation_window?: string | null
+          successful?: boolean
         }
         Relationships: [
           {
@@ -473,14 +479,17 @@ export type Database = {
       monthly_staff: {
         Row: {
           role: string
+          synthetic: boolean
           user_id: string
         }
         Insert: {
           role: string
+          synthetic?: boolean
           user_id: string
         }
         Update: {
           role?: string
+          synthetic?: boolean
           user_id?: string
         }
         Relationships: []
@@ -687,6 +696,10 @@ export type Database = {
         }
         Returns: boolean
       }
+      monthly_assert_import_client: {
+        Args: { p_client: string }
+        Returns: undefined
+      }
       monthly_can_client: { Args: { cid: string }; Returns: boolean }
       monthly_can_version: { Args: { vid: string }; Returns: boolean }
       monthly_code_access: {
@@ -724,6 +737,7 @@ export type Database = {
         Returns: string
       }
       monthly_require_admin: { Args: never; Returns: string }
+      monthly_require_real_admin: { Args: never; Returns: string }
       monthly_revoke: { Args: { mid: string }; Returns: undefined }
       monthly_staff_role: { Args: never; Returns: string }
       monthly_stage_fingerprint: {

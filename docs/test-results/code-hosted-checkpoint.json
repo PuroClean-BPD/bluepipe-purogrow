@@ -373,30 +373,36 @@
       "status": "PASS"
     },
     {
-      "test": "18 x 24 scope matrix",
+      "test": "18 x 24 ARCHIVE MEMBERSHIP matrix (not file requests)",
       "expected": "432 exact cells, shapes 3/3/2/2/14 singles",
       "actual": "432",
       "status": "PASS"
     },
     {
       "test": "owner html download",
-      "expected": "200 frozen bytes",
+      "expected": "Independent frozen expected hash assertion",
       "actual": {
-        "http": 200,
-        "bytes": 1290,
-        "sha256": "f26af76c4771a23b89346e66589dab27cbf865d207e2338de30c8f5d32f792ee"
+        "historical_observation": {
+          "http": 200,
+          "bytes": 1290,
+          "sha256": "f26af76c4771a23b89346e66589dab27cbf865d207e2338de30c8f5d32f792ee"
+        },
+        "review": "observed bytes only; no independent expected assertion"
       },
-      "status": "PASS"
+      "status": "NOT_RUN"
     },
     {
       "test": "owner pdf download",
-      "expected": "200 frozen bytes",
+      "expected": "Independent frozen expected hash assertion",
       "actual": {
-        "http": 200,
-        "bytes": 2067,
-        "sha256": "5e2184ce49513d86a550c119c1a0b9980373c15217a13c4915b03ef5e39da112"
+        "historical_observation": {
+          "http": 200,
+          "bytes": 2067,
+          "sha256": "5e2184ce49513d86a550c119c1a0b9980373c15217a13c4915b03ef5e39da112"
+        },
+        "review": "observed bytes only; no independent expected assertion"
       },
-      "status": "PASS"
+      "status": "NOT_RUN"
     },
     {
       "test": "cross-owner known version",
@@ -518,5 +524,6 @@
     }
   ],
   "cost_credits": null,
-  "no_real_access": true
+  "no_real_access": true,
+  "review_correction": "Historical 0b484e74 run: membership matrix is archive-only. File bytes recorded without independent expected hash assertion are NOT hash-verification proof. Corrected runtime in code-correction-hosted.json."
 }

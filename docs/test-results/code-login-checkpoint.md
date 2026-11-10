@@ -16,3 +16,7 @@ Mode: synthetic only; real access and client sending remain OFF.
 
 ## Limits
 Source-IP precision is not used for authorization; forged forwarding headers are ignored. Durable per-code lockout and global request/KDF budgets also protect direct backend calls, but a global flood can temporarily deny service.
+
+## Independent-review correction
+
+The original 432-cell result is archive **membership**, not 432 file requests. Original HTML/PDF checks recorded downloaded hashes without asserting independent fixture expected hashes; those checks are not frozen-byte verification proof. The historical ledger now marks this limitation explicitly. Superseding correction evidence: `code-correction-hosted.json`; API/staff/security limits: `code-correction-api.md`. Original result totals above are historical, not current corrected-suite totals.

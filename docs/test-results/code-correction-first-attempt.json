@@ -1,0 +1,225 @@
+{
+  "mode": "HOSTED synthetic ONLY",
+  "baseline": "0b484e74ee0090ffaa0f158091c788155342e145",
+  "fixtures": {
+    "tag": "syn-review-5512978cc5",
+    "admin_id": "76a43a8c-0fc9-4a59-9bfc-7b7b7efb89d5",
+    "clients": [
+      "dcb08834-6312-4166-849e-0582fd63bb03",
+      "89b724e8-7706-4708-8c56-64df51390397",
+      "6898c065-4a57-4cc6-b092-b9222db1af45",
+      "65c0654b-74fa-4293-b007-af6b2d88b25f",
+      "35892360-e8ce-48b0-bac5-2a8f0ba1a3f0",
+      "74e90806-e98f-41e6-8154-a593e4bb830d",
+      "6139d786-7e75-4147-8b6d-0fcfad17892d",
+      "6367d271-30e5-4fc7-a04d-71a4be88c5cc",
+      "951536c8-89a1-41b8-9401-fb853cdae66c",
+      "0edcb17c-b8c2-4f19-9379-14ae648c9772",
+      "d50cb390-83a6-42e5-8872-ab3388f23d6a",
+      "19868fc0-7c15-42bc-82af-7eacc666009c",
+      "94245455-9fef-48dc-bd5e-be2226c3a029",
+      "096c7162-a98c-4ea3-8378-a1c9dc0f8a56",
+      "3f4265ae-aa37-40c1-a396-1195dfdab5cd",
+      "ed11db95-cf64-46e3-be62-e7810982bfee",
+      "b8410b6f-583e-4f80-956e-c08c06fa01ee",
+      "532b49be-5484-450a-971f-cc610798b27f",
+      "856c2595-34b5-4739-9b26-13a8ba19f947",
+      "ae14c7a4-0d8a-43bd-af88-9d98d31aacd0",
+      "7a2578f0-feb3-4540-856c-035fd1adc1a6",
+      "233204fe-307a-49f2-b456-4038681d840d",
+      "94bba07f-c1d4-4a48-8a87-8e393abefa4d",
+      "1f6994f5-3c76-4fce-9129-b4be7e03a44e"
+    ],
+    "credentials": [
+      {
+        "id": "5dfea15a-fac4-4784-aa94-a2e131d6a35e",
+        "client_ids": [
+          "dcb08834-6312-4166-849e-0582fd63bb03",
+          "89b724e8-7706-4708-8c56-64df51390397",
+          "6898c065-4a57-4cc6-b092-b9222db1af45"
+        ]
+      },
+      {
+        "id": "8c526906-0755-4f98-b46f-ac4fd3737075",
+        "client_ids": [
+          "65c0654b-74fa-4293-b007-af6b2d88b25f",
+          "35892360-e8ce-48b0-bac5-2a8f0ba1a3f0",
+          "74e90806-e98f-41e6-8154-a593e4bb830d"
+        ]
+      },
+      {
+        "id": "2ca19e8f-21a1-4a31-b04a-4b4c8c27adaf",
+        "client_ids": [
+          "6139d786-7e75-4147-8b6d-0fcfad17892d",
+          "6367d271-30e5-4fc7-a04d-71a4be88c5cc"
+        ]
+      },
+      {
+        "id": "37ecf870-9dd5-4d33-a6e5-b09a80ea9800",
+        "client_ids": [
+          "951536c8-89a1-41b8-9401-fb853cdae66c",
+          "0edcb17c-b8c2-4f19-9379-14ae648c9772"
+        ]
+      },
+      {
+        "id": "10de2668-dd1e-463d-ad4a-66c926624bf6",
+        "client_ids": [
+          "d50cb390-83a6-42e5-8872-ab3388f23d6a"
+        ]
+      },
+      {
+        "id": "c39cd00f-bb38-41b6-9846-d73151a31aa8",
+        "client_ids": [
+          "19868fc0-7c15-42bc-82af-7eacc666009c"
+        ]
+      },
+      {
+        "id": "5f83f1fc-ed81-4672-b9de-fd01e9736997",
+        "client_ids": [
+          "94245455-9fef-48dc-bd5e-be2226c3a029"
+        ]
+      },
+      {
+        "id": "696f4d72-cd8b-4c64-9faf-e27dacb6ed4b",
+        "client_ids": [
+          "096c7162-a98c-4ea3-8378-a1c9dc0f8a56"
+        ]
+      },
+      {
+        "id": "83396698-cdd9-47ce-b178-ef71fae189f7",
+        "client_ids": [
+          "3f4265ae-aa37-40c1-a396-1195dfdab5cd"
+        ]
+      },
+      {
+        "id": "b13792b1-6842-4f4a-8294-4d0e69f10894",
+        "client_ids": [
+          "ed11db95-cf64-46e3-be62-e7810982bfee"
+        ]
+      },
+      {
+        "id": "bed8b42c-26bc-475d-887d-9c3c044d93e3",
+        "client_ids": [
+          "b8410b6f-583e-4f80-956e-c08c06fa01ee"
+        ]
+      },
+      {
+        "id": "bd68d359-6e40-4cd9-8166-3a04ba79a416",
+        "client_ids": [
+          "532b49be-5484-450a-971f-cc610798b27f"
+        ]
+      },
+      {
+        "id": "a7d491b5-df43-4132-b7c8-1096e8192eb7",
+        "client_ids": [
+          "856c2595-34b5-4739-9b26-13a8ba19f947"
+        ]
+      },
+      {
+        "id": "17b6ac78-84f1-453b-b04e-f5b1a8fcd680",
+        "client_ids": [
+          "ae14c7a4-0d8a-43bd-af88-9d98d31aacd0"
+        ]
+      },
+      {
+        "id": "d697641d-9ce7-4aec-818b-ce6d166976f0",
+        "client_ids": [
+          "7a2578f0-feb3-4540-856c-035fd1adc1a6"
+        ]
+      },
+      {
+        "id": "cf3a5579-69df-4cd9-810c-0afeab0c56fb",
+        "client_ids": [
+          "233204fe-307a-49f2-b456-4038681d840d"
+        ]
+      },
+      {
+        "id": "504bcd51-dc14-4497-a107-d9bd0a9e21e6",
+        "client_ids": [
+          "94bba07f-c1d4-4a48-8a87-8e393abefa4d"
+        ]
+      },
+      {
+        "id": "d0747d3f-148d-4b62-9222-79bd71b751a1",
+        "client_ids": [
+          "1f6994f5-3c76-4fce-9129-b4be7e03a44e"
+        ]
+      }
+    ],
+    "versions": [
+      {
+        "id": "093ffc36-ae1e-47dd-be42-fffe02e2c99a",
+        "report_id": "d38951b1-24b7-407f-a324-06ac79cb7317",
+        "client_id": "dcb08834-6312-4166-849e-0582fd63bb03",
+        "state": "published",
+        "expected_sha256": {
+          "html": "4c59041f13769dc8f22e03157ab7c37c392a4ed9b0a664b8319699ba84ab38ff",
+          "pdf": "5695ed41e10f82f9eb7d8cfc670651ba726756feb12f86d49b00741d2eee6dbb",
+          "content": "81b4f87eeb9f0f801c93f10e488d452506bad3f15cfb422b8489cc1cca42b42b"
+        },
+        "expected_bytes": {
+          "html": 87,
+          "pdf": 64,
+          "content": 78
+        }
+      }
+    ],
+    "requests": [
+      "a8e850a1-f926-4e31-a5a0-8579d567359f"
+    ],
+    "org_id": "c51367d4-454b-42e2-94ea-d13c07cccdd5"
+  },
+  "tests": [
+    {
+      "test": "existing approved genuine admin",
+      "status": "PASS",
+      "mode": "HOSTED",
+      "at_chicago": "2026-11-10T13:39:31.341344-06:00",
+      "expected": "admin JWT valid; no mint/refresh",
+      "actual": "verified"
+    },
+    {
+      "test": "Cloud strict JSON shape",
+      "status": "PASS",
+      "mode": "HOSTED",
+      "at_chicago": "2026-11-10T13:39:36.869286-06:00",
+      "expected": "null/array/primitive/unknown fields HTTP 400",
+      "actual": "4/4 rejected"
+    },
+    {
+      "test": "Cloud chunked oversized request",
+      "status": "PASS",
+      "mode": "HOSTED",
+      "at_chicago": "2026-11-10T13:39:37.786816-06:00",
+      "expected": "400 and bounded reader",
+      "actual": "HTTP 400; reader cancellation separately UNIT tested"
+    },
+    {
+      "test": "six successive successful logins",
+      "status": "PASS",
+      "mode": "HOSTED",
+      "at_chicago": "2026-11-10T13:40:09.399948-06:00",
+      "expected": "all 200 without lockout",
+      "actual": "6/6 200"
+    },
+    {
+      "test": "session expiry policy receipt",
+      "status": "PASS",
+      "mode": "HOSTED",
+      "at_chicago": "2026-11-10T13:40:32.156827-06:00",
+      "expected": "exact 30-day interval within 15s request time",
+      "actual": "24 successful login receipts checked; elapsed 30 days NOT observed"
+    },
+    {
+      "test": "suite completion",
+      "status": "FAIL",
+      "mode": "HOSTED",
+      "at_chicago": "2026-11-10T13:40:40.318189-06:00",
+      "expected": "all runnable checks complete",
+      "actual": "stopped: JSONDecodeError"
+    }
+  ],
+  "no_frontend_deploy": true,
+  "real_access_off": true,
+  "cost_credits": null
+}

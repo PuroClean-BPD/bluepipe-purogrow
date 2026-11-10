@@ -49,14 +49,14 @@ try:
   actual={x['id'] for x in r.json()['clients']};expected=set(clients[offset:offset+n]);assert actual==expected
   for c in clients:assert (c in actual)==(c in expected);cells+=1
   offset+=n
- result('18 x 24 scope matrix','432 exact cells, shapes 3/3/2/2/14 singles',str(cells),'PASS')
+ result('18 x 24 ARCHIVE MEMBERSHIP matrix (not file requests)','432 exact cells, shapes 3/3/2/2/14 singles',str(cells),'PASS')
  archive=edge({'action':'archive','session':sessions[0]}).json();assert all(isinstance(x.get('id'),str) and uuid.UUID(x['id']) for x in archive['reports'])
  if archive['reports']:
   vid=archive['reports'][0]['id'];fixtures['published_version_id']=vid
   for fmt in ['html','pdf']:
    r=edge({'action':'file','session':sessions[0],'version_id':vid,'format':fmt});assert r.ok,f'file HTTP {r.status_code}'
    signed=r.json()['url'];g=requests.get(signed,timeout=30);assert g.ok
-   result('owner '+fmt+' download','200 frozen bytes',{'http':g.status_code,'bytes':len(g.content),'sha256':hashlib.sha256(g.content).hexdigest()},'PASS')
+   result('owner '+fmt+' download observation','observed bytes only; independent expected hash NOT asserted',{'http':g.status_code,'bytes':len(g.content),'sha256':hashlib.sha256(g.content).hexdigest()},'NOTE')
    if fmt=='html':expiry_url=signed;expiry_start=time.monotonic()
   r=edge({'action':'file','session':sessions[1],'version_id':vid,'format':'html'});result('cross-owner known version','401',str(r.status_code),'PASS' if r.status_code==401 else 'FAIL')
  else:result('owner file and 60sec expiry','published synthetic fixture','none available','BLOCKED')

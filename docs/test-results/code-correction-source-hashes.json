@@ -1,0 +1,37 @@
+{
+  "baseline": "0b484e74ee0090ffaa0f158091c788155342e145",
+  "files": {
+    "AGENTS.md": "84a88b48eb36fd98ef1b9f8b04ab17d5f916a5983857abba7f3b617e0f2b6956",
+    "docs/test-results/code-correction-api.md": "ca2d0cb43b61511ae4ced1f9772884d61b2d31cf4e0edb06c068a15c82fa7b69",
+    "docs/test-results/code-correction-first-attempt.json": "7bbb9feea6a5a8755db3e503ee51e453f5fec25bbf98ee92bb1c0f4a28c54227",
+    "docs/test-results/code-correction-hosted.json": "753a2ecc580440f42137b62aec8041bd6358bfaab05ac728a62cf20f49b69d33",
+    "docs/test-results/code-hosted-checkpoint.json": "32bf5f0ee00a3cf3de619839adcfa3b6e1d73ea810c3f582db88043c3b75b336",
+    "docs/test-results/code-login-checkpoint.md": "ee6d7272ceb0caa09102c942b434891f960e4bc33b15d57007d84d1bc3d955ae",
+    "drizzle/migrations/0008_monthly_code_review_guards.sql": "0988145076943360868461b0ccc382d7b87871bf52ed5fce971ed2a13f28f304",
+    "drizzle/migrations/meta/0008_snapshot.json": "2e640c5f1d75a41c575b56f2a95abf52ea18845cd203b6460fd4defad10baddd",
+    "drizzle/migrations/meta/_journal.json": "69da147949bcd85b8f1bb1c1c344ad64525893998190a9d8097b3fdcf7256706",
+    "netlify/functions/monthly-owner.mts": "af946a4d0264b891aac0a8230e302180f6ee46bda0efd85aa15c9b377d23beca",
+    "netlify/lib/owner-contract.ts": "48e08f4a4ed0468b9f6e033a403cf3fa9a82734ee0707b50c2c762328ae84f80",
+    "roadmap.md": "3ff423e890b44115472cb104adb71319047bac8747828f04b5dce257e01ec91a",
+    "scripts/monthly/broker.test.ts": "f125a9ad560727a9aa24ac9514e7a9d9539be07e2aea38d0f2454fa6f9432742",
+    "scripts/monthly/code.test.ts": "6fd2408e993bccebfa4f6ff9187f1ba4686322b0a5c0e6a7e6284e6ed87230f3",
+    "scripts/monthly/code_correction_atomic_hosted.py": "a22c1420ef3ed1baf567f92be365d15074f07dd7760c8cfcd186127285c1e00d",
+    "scripts/monthly/code_correction_hosted.py": "a63e984991e4abf021bd3d51805d17c646036988f97c9099e38267ae65e8245e",
+    "scripts/monthly/code_correction_mixed_hosted.py": "494ff5affe3257b261584d94cc0abedde65abbffb3ec857030b11814083b36fe",
+    "scripts/monthly/code_smoke.py": "785226d79ad86648cc4b15c86b2e72f92c37a3728db612e93caa2ca34184b65b",
+    "scripts/monthly/stream.test.ts": "47411af68c61fca4bdfd42b15f6e587a34fd6fac6662e023eb9af219bc8cd987",
+    "src/integrations/supabase/types.ts": "20f26846e461cb4b821dc711132a8b529ad6ff3b18011163729bc4f78be829b4",
+    "src/monthly/MonthlyOwnerPortal.tsx": "1024c755f3087b595f4c5e998f38cd1906c2bf49e2d07fcaf492ec0f9d834222",
+    "src/monthly/owner-rules.test.ts": "be19005a16324072906a063b82a0e4c0f970fe46bde83c2b204888fb0ef2607d",
+    "src/monthly/owner-rules.ts": "82f57cfec0373678dd0e49249f2faac88037aa8ff33f1e3e23d9d832d6bb0bf5",
+    "supabase/functions/_shared/bounded-json.ts": "4bfca5d2e55db7c25c8ca2a973cbdb78e90b0963076dbee8f5c5303ae1abc935",
+    "supabase/functions/monthly-admin/index.ts": "51e0b73e054862c88e126e28de6e64ea2dc64261ec176ce25043d86668ad94fa",
+    "supabase/functions/monthly-code/crypto.ts": "4348c30619d4a1921c3fd1923b4264ea0e535bd93974c466aa6b0649821d773f",
+    "supabase/functions/monthly-code/index.ts": "ec2b990e70f14882a17f15dfef95816629a7ebd452de652f1a5c663ffb85f0aa"
+  },
+  "deployed_cloud_source_hashes": {
+    "monthly-code": "9545fbfa22af40cfe9424e7ecfcc26b7ecea8ff3a3fd2eb662929679c6a697ed",
+    "monthly-admin": "61321b54272ddaf60a298d774bf00b0fcf961d069b8f517d4a95e1c15ec1e0e6"
+  },
+  "frontend_deployed": false
+}

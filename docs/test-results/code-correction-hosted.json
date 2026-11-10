@@ -1,0 +1,929 @@
+{
+  "mode": "HOSTED synthetic ONLY",
+  "baseline": "0b484e74ee0090ffaa0f158091c788155342e145",
+  "fixtures": {
+    "tag": "syn-review-05bfc9019e",
+    "admin_id": "76a43a8c-0fc9-4a59-9bfc-7b7b7efb89d5",
+    "clients": [
+      "1a1dccf2-9c76-47fd-92fc-6306323823d3",
+      "fd580709-51c4-476a-a001-c67109f347b9",
+      "cfa7d63c-1408-4530-aecd-20ee43a8fd5a",
+      "e8d4624e-2b23-4d25-9812-7702e543be5f",
+      "75e284d6-12a8-45e6-aec0-7ddbefff5fb0",
+      "8f66353a-6f1f-4899-84f5-229d3df24562",
+      "595f721f-a0a8-4f05-b4df-49bf9a7979c8",
+      "d7086177-3bd6-4935-9348-0bf510cddaa4",
+      "2ff9842a-f4de-4fac-bf48-01c6a7611b8f",
+      "efef157d-65d6-4d93-aad2-f95fb3223d1a",
+      "44ffe850-c0f2-4b1f-97e6-ed39f31c4915",
+      "7524f259-5b09-4488-84b7-d6d86c438130",
+      "7196d841-f8b6-4bba-80d8-b57b3e91219a",
+      "ee1b21bd-2008-4612-a10a-26c8750fece8",
+      "ad4a08d1-83f3-4a39-941a-592e4d8cd2e1",
+      "0a2b2a8d-cf1c-40e4-ba07-a0bc2805758c",
+      "98e3d06e-b571-492a-a077-15a26c523b0c",
+      "84e1eeb0-96b9-4860-b500-0d103ef527f3",
+      "bf573164-9426-45ee-8054-41394e1b9fc6",
+      "524e8576-2bf5-4615-b428-e04c48a8f3af",
+      "ca53c1c3-72e7-4a6f-b6ef-75a3d9279a07",
+      "6b6e7040-6ec7-4aa6-a8f9-1e310811a4cc",
+      "93fcbca9-545d-4161-aa52-4a9673ee1a5b",
+      "86dc744b-edec-4fab-a9f7-311b400c86e9"
+    ],
+    "credentials": [
+      {
+        "id": "af6ffef7-ecd9-4a54-aea3-61ae5b392176",
+        "client_ids": [
+          "1a1dccf2-9c76-47fd-92fc-6306323823d3",
+          "fd580709-51c4-476a-a001-c67109f347b9",
+          "cfa7d63c-1408-4530-aecd-20ee43a8fd5a"
+        ]
+      },
+      {
+        "id": "72deca14-8cec-4869-8a4d-f710f1bfd8a1",
+        "client_ids": [
+          "e8d4624e-2b23-4d25-9812-7702e543be5f",
+          "75e284d6-12a8-45e6-aec0-7ddbefff5fb0",
+          "8f66353a-6f1f-4899-84f5-229d3df24562"
+        ]
+      },
+      {
+        "id": "2a981173-04e0-4c34-a9f0-d9390b99f7f1",
+        "client_ids": [
+          "595f721f-a0a8-4f05-b4df-49bf9a7979c8",
+          "d7086177-3bd6-4935-9348-0bf510cddaa4"
+        ]
+      },
+      {
+        "id": "9cf7ddb3-35ba-47da-9c45-3d92d59c00a6",
+        "client_ids": [
+          "2ff9842a-f4de-4fac-bf48-01c6a7611b8f",
+          "efef157d-65d6-4d93-aad2-f95fb3223d1a"
+        ]
+      },
+      {
+        "id": "75d3f634-7ecb-4f1a-a954-b1cd1343404e",
+        "client_ids": [
+          "44ffe850-c0f2-4b1f-97e6-ed39f31c4915"
+        ]
+      },
+      {
+        "id": "721793ea-ddf6-479c-9b49-85a49bae5fef",
+        "client_ids": [
+          "7524f259-5b09-4488-84b7-d6d86c438130"
+        ]
+      },
+      {
+        "id": "6d896b4f-d337-4aff-b7bf-ef0ba6decc4e",
+        "client_ids": [
+          "7196d841-f8b6-4bba-80d8-b57b3e91219a"
+        ]
+      },
+      {
+        "id": "1965186f-cf5d-4b1d-86be-b539c60a104e",
+        "client_ids": [
+          "ee1b21bd-2008-4612-a10a-26c8750fece8"
+        ]
+      },
+      {
+        "id": "226febcf-406a-4861-b330-586d54f99125",
+        "client_ids": [
+          "ad4a08d1-83f3-4a39-941a-592e4d8cd2e1"
+        ]
+      },
+      {
+        "id": "96d15791-5fa8-4832-9b7f-94bc92f77a2a",
+        "client_ids": [
+          "0a2b2a8d-cf1c-40e4-ba07-a0bc2805758c"
+        ]
+      },
+      {
+        "id": "c4e8fa69-3147-4139-af57-cf863a734d09",
+        "client_ids": [
+          "98e3d06e-b571-492a-a077-15a26c523b0c"
+        ]
+      },
+      {
+        "id": "968bbe99-4943-4bb0-a257-e993b81e48be",
+        "client_ids": [
+          "84e1eeb0-96b9-4860-b500-0d103ef527f3"
+        ]
+      },
+      {
+        "id": "2c6f9c24-b602-43f4-8918-61222b233161",
+        "client_ids": [
+          "bf573164-9426-45ee-8054-41394e1b9fc6"
+        ]
+      },
+      {
+        "id": "8f33bcdc-1e31-478c-bb57-fbae11b2d569",
+        "client_ids": [
+          "524e8576-2bf5-4615-b428-e04c48a8f3af"
+        ]
+      },
+      {
+        "id": "c7e9df10-3f24-4fca-ad4f-42a9fccb8d08",
+        "client_ids": [
+          "ca53c1c3-72e7-4a6f-b6ef-75a3d9279a07"
+        ]
+      },
+      {
+        "id": "d63e2a33-a40b-4093-8ec6-d60b83ec0b67",
+        "client_ids": [
+          "6b6e7040-6ec7-4aa6-a8f9-1e310811a4cc"
+        ]
+      },
+      {
+        "id": "ff37ff95-924b-44ba-9aa0-7ace398c7a02",
+        "client_ids": [
+          "93fcbca9-545d-4161-aa52-4a9673ee1a5b"
+        ]
+      },
+      {
+        "id": "00ef91b5-029a-43be-abfd-eb492f413f21",
+        "client_ids": [
+          "86dc744b-edec-4fab-a9f7-311b400c86e9"
+        ]
+      }
+    ],
+    "versions": [
+      {
+        "id": "b623b8dc-79e1-4ab4-816b-25f650171373",
+        "report_id": "001ef19d-1232-4f2e-88c6-5857178dc966",
+        "client_id": "1a1dccf2-9c76-47fd-92fc-6306323823d3",
+        "state": "published",
+        "expected_sha256": {
+          "html": "ded06612f4c6db6142ddd55909a90ff3f75aaf886b20082e943a4cd607185532",
+          "pdf": "f2472b94e00db8fa67067377b6f70c09a07d98ad2516821f26a84ccf3d35e84a",
+          "content": "a7a2d2b3f4bd5dd13c2e10f88cac3bd715aab87645cf115de3260fa46a73f3a2"
+        },
+        "expected_bytes": {
+          "html": 87,
+          "pdf": 64,
+          "content": 78
+        }
+      },
+      {
+        "id": "88af8769-d975-4032-a678-78f57bbe972c",
+        "report_id": "1a83d444-e990-4590-9d2b-e9a22668b745",
+        "client_id": "fd580709-51c4-476a-a001-c67109f347b9",
+        "state": "published",
+        "expected_sha256": {
+          "html": "f38260803e3f86e882c17754538fb40bed41c719a93d6cd3e9839bd4100df817",
+          "pdf": "3027e63a2de9cbcf780929bdc2b49f23b00048f37ba1b93c84ea40ef8c3231b0",
+          "content": "dd65a285d03c2cfd1a151d4339c0522c161a07fdf81c8d7800ba687cc8395326"
+        },
+        "expected_bytes": {
+          "html": 87,
+          "pdf": 64,
+          "content": 78
+        }
+      },
+      {
+        "id": "29352006-b2eb-495d-91da-ebfed5a0b1d8",
+        "report_id": "8462e2a0-1234-45c2-a3e1-de22a51d414d",
+        "client_id": "cfa7d63c-1408-4530-aecd-20ee43a8fd5a",
+        "state": "published",
+        "expected_sha256": {
+          "html": "53ef65ea81103fb9cbab582d95a28a23816ecea3872066b4c02b54bffaf0b73a",
+          "pdf": "da2790d7941e06d6ea78025f1f90b4dbdea405543c26b3ed03622194c19fd336",
+          "content": "773653f468c2f8a4f1fe1ecd7da0554f41e000e099ddddaaeb7e0315d1893ce0"
+        },
+        "expected_bytes": {
+          "html": 87,
+          "pdf": 64,
+          "content": 78
+        }
+      },
+      {
+        "id": "ca3d7a58-15e8-4782-8ec9-c80879da462d",
+        "report_id": "c7015a65-2ad5-429f-98fd-5a89e92def67",
+        "client_id": "e8d4624e-2b23-4d25-9812-7702e543be5f",
+        "state": "published",
+        "expected_sha256": {
+          "html": "1a303f876f19525345a279b79e36f07a6d372c00fae1ea9c18a1b42a6ec641ba",
+          "pdf": "4880d93b98641e170db2125992d3323e603ab05f1d2564512dc61e1cb93b31c3",
+          "content": "1b184c0578c749202d478160716d19f0cfc8c53066dbd9c43d021d87ea1462f9"
+        },
+        "expected_bytes": {
+          "html": 87,
+          "pdf": 64,
+          "content": 78
+        }
+      },
+      {
+        "id": "f89198a4-dcfc-4ec0-b1b1-8e65b44844a8",
+        "report_id": "0135d155-4932-410f-a1d8-7f88ca27cf50",
+        "client_id": "75e284d6-12a8-45e6-aec0-7ddbefff5fb0",
+        "state": "published",
+        "expected_sha256": {
+          "html": "e4254bc16667ae97abae542ecfa60b33042d776113e7e445f66acaf1070e3ef1",
+          "pdf": "84669d7bdbb82b975220d98c4c0e05f6eb1d3171923fc5e547822651e1834328",
+          "content": "b9423913631096bd6d5783e2e296fed7496c05ad519d7a3d1c1b956e8449734c"
+        },
+        "expected_bytes": {
+          "html": 87,
+          "pdf": 64,
+          "content": 78
+        }
+      },
+      {
+        "id": "6adcdfa6-d562-4b4e-9d23-957de9d4b7b2",
+        "report_id": "8f7b70b4-e4c0-4f6a-9705-e78add31df7d",
+        "client_id": "8f66353a-6f1f-4899-84f5-229d3df24562",
+        "state": "published",
+        "expected_sha256": {
+          "html": "ed9fc1330e1a781ac91f5602e12a876625dd5aec565c4d69ff04657e7576c4e0",
+          "pdf": "698a125230e4a5bb3d0ed208079eb0365f25a468b6e0b487497ca442d8c61b79",
+          "content": "7686301a9b01176811202f8930e7e183851835aac829c42d59c7b23a7c90ab8f"
+        },
+        "expected_bytes": {
+          "html": 87,
+          "pdf": 64,
+          "content": 78
+        }
+      },
+      {
+        "id": "12b31637-2bd6-433b-ad86-13ad5d4cb525",
+        "report_id": "192a155d-46f6-4bbf-b980-1b5efff90a54",
+        "client_id": "595f721f-a0a8-4f05-b4df-49bf9a7979c8",
+        "state": "published",
+        "expected_sha256": {
+          "html": "cc8378e9a4a601089a3ad6d298482a39dfb775f14935988644c526615b12a61d",
+          "pdf": "7a5ba9b30d56cc5bd3c5202c171593d4ea1f614da40fb75c023650f8f6f376e0",
+          "content": "f42d1c44e75a0dae472a8cabe0c1ecf5659132d3e485092c943b146707a23823"
+        },
+        "expected_bytes": {
+          "html": 87,
+          "pdf": 64,
+          "content": 78
+        }
+      },
+      {
+        "id": "223006b3-e1e1-4853-8b3d-52191fa0816d",
+        "report_id": "e66c19ab-3272-4f31-9a02-d72c6db28840",
+        "client_id": "d7086177-3bd6-4935-9348-0bf510cddaa4",
+        "state": "published",
+        "expected_sha256": {
+          "html": "060738c5739fd8c1c3549a04f2a12cbbea8531b7895fc790a42f6219a2c7bb2d",
+          "pdf": "92d686b37a88737278b7ec180b680989472036f1f7814a40d4b3ff340895bd85",
+          "content": "3b78b3e2fa5c780a8182fd4a01f3bc101fa7e0d0765f2c3387a90821e92c7762"
+        },
+        "expected_bytes": {
+          "html": 87,
+          "pdf": 64,
+          "content": 78
+        }
+      },
+      {
+        "id": "824a7ceb-17c2-44c0-9736-612aa0e6fe50",
+        "report_id": "52a31bc1-56f3-4599-869d-6d223ceb17ce",
+        "client_id": "2ff9842a-f4de-4fac-bf48-01c6a7611b8f",
+        "state": "published",
+        "expected_sha256": {
+          "html": "27091833c8422d513e94bafdef2100f02b23cb7d2234669efb553891a0d59bfb",
+          "pdf": "9c49b015a7ceee3cdec1de2c71f1edaf7a92d2c376fef36a823c03cf3d772566",
+          "content": "8cda7f004425e20a7c1f6574e235ced657539c12aaec87cd5789e9e76fafe58c"
+        },
+        "expected_bytes": {
+          "html": 87,
+          "pdf": 64,
+          "content": 78
+        }
+      },
+      {
+        "id": "2f8894a5-dcdd-488d-801e-c27c684175f7",
+        "report_id": "06f8fc75-72f5-49c6-9879-59a3cf48729e",
+        "client_id": "efef157d-65d6-4d93-aad2-f95fb3223d1a",
+        "state": "published",
+        "expected_sha256": {
+          "html": "c25d5c20dba80d5a51f4273fe817ebf6a1a01d70c9378d9a03ee5d3008d85a31",
+          "pdf": "0407fd12c0cf97a22b2164fc4dd69c49a6b3677439f335dae5d3904afaf81a77",
+          "content": "469f48a812fa557eb10a7b212919b4189e08e7074bfdf74438bcb2c9b5afa1e5"
+        },
+        "expected_bytes": {
+          "html": 87,
+          "pdf": 64,
+          "content": 78
+        }
+      },
+      {
+        "id": "5978a5d0-e8f4-486a-8a2a-080487da142e",
+        "report_id": "f9e1d27a-faa9-4c81-a99f-26570f534607",
+        "client_id": "44ffe850-c0f2-4b1f-97e6-ed39f31c4915",
+        "state": "published",
+        "expected_sha256": {
+          "html": "b760e000288b7c16a6f761151b7bc66f438664dc42a4e3d37443ae21a52fafc7",
+          "pdf": "7092a3df0a5ffe2e5963ea49918bf1cf7492e0f39698161a2193383bc8926ffa",
+          "content": "a5149430b692ec3002629c21a913d7b461d606fe0e7dbcd0420f00952f83a629"
+        },
+        "expected_bytes": {
+          "html": 87,
+          "pdf": 64,
+          "content": 78
+        }
+      },
+      {
+        "id": "e1be53ab-84e2-41e9-a113-a3a2e268cffa",
+        "report_id": "d6f1f77e-07d6-4c55-8d75-bb50bd44ba55",
+        "client_id": "7524f259-5b09-4488-84b7-d6d86c438130",
+        "state": "published",
+        "expected_sha256": {
+          "html": "30073dee010b364b208635f81298a02d06766dc056f2c5c3b294cce14174c407",
+          "pdf": "d315d59d4be7ac8c12ad2de1475ac540e0d456a3a12b86301fc515861d82980c",
+          "content": "01bb12dd94e8f1ba06c4920a51e951b431603ec1994e54427563a0098823f740"
+        },
+        "expected_bytes": {
+          "html": 87,
+          "pdf": 64,
+          "content": 78
+        }
+      },
+      {
+        "id": "cc36b1c0-0c3a-4f80-8d6f-0c64e9024358",
+        "report_id": "76f88407-c8ad-47de-9fd3-b5b9ab6cf066",
+        "client_id": "7196d841-f8b6-4bba-80d8-b57b3e91219a",
+        "state": "published",
+        "expected_sha256": {
+          "html": "3863ffaa3df2618642621ac6000213b3ced14a1daa31de774da3ac42a6c04199",
+          "pdf": "73f5f9fd7c47bdd7f98643534787cecaf223d146b5c3f4b265575ec7955b7bfb",
+          "content": "73e80bd860fbb27eec0e8cf7ce9a5febcddfac177a4ce7ae8ac50d278962e93c"
+        },
+        "expected_bytes": {
+          "html": 87,
+          "pdf": 64,
+          "content": 78
+        }
+      },
+      {
+        "id": "0cfc6222-e8dd-400e-befd-55cce11e4f9c",
+        "report_id": "44339dd8-43f2-437b-86bf-104fdee2bc61",
+        "client_id": "ee1b21bd-2008-4612-a10a-26c8750fece8",
+        "state": "published",
+        "expected_sha256": {
+          "html": "5082fd8d7e0f8dc853826ae11159e9c8a565803862583a47b6a3e308ef71c326",
+          "pdf": "36a313514b6d68b3b0f36a970e4803ac437f6a625a134d91437c300163427ff2",
+          "content": "dabcfd4ed83bb12bf8f76d0512707c77eab38e8d32974193df33a1931c760d58"
+        },
+        "expected_bytes": {
+          "html": 87,
+          "pdf": 64,
+          "content": 78
+        }
+      },
+      {
+        "id": "6a763b69-249b-442b-a3bf-cf5435ceb81e",
+        "report_id": "442fb0ca-7465-4c39-be71-4ae78d306d24",
+        "client_id": "ad4a08d1-83f3-4a39-941a-592e4d8cd2e1",
+        "state": "published",
+        "expected_sha256": {
+          "html": "0d0de4b773cf5cd401cd4fb3ebe9fa98ba0e1808ae3b77343e0ec58670f92c99",
+          "pdf": "b34735539d47c790a7f224a3cbb3d8d9304f50b121b37358e2733c605eac16f9",
+          "content": "f92feab343fcd5e364c1d887c62bf2f633cb5e61b282fd59e4801cc67cbc3043"
+        },
+        "expected_bytes": {
+          "html": 87,
+          "pdf": 64,
+          "content": 78
+        }
+      },
+      {
+        "id": "75e81e4f-ba7d-41e0-895d-45fddd988aa7",
+        "report_id": "2653b002-ac7f-4c1b-be0f-363a2cdbe04f",
+        "client_id": "0a2b2a8d-cf1c-40e4-ba07-a0bc2805758c",
+        "state": "published",
+        "expected_sha256": {
+          "html": "364455ad938bf3a12c05433ab1479b91a060928501b2eb22310d0009e7e9e680",
+          "pdf": "eac3f6f6c789396723bf29d5e7bf23c6e9bc7c924164f09d9c7de0bc66fb1b14",
+          "content": "616741d8ad66f3b74dd89b61cc248517d5f667ec85fd2f09ce07baf8140aa169"
+        },
+        "expected_bytes": {
+          "html": 87,
+          "pdf": 64,
+          "content": 78
+        }
+      },
+      {
+        "id": "8789ecfd-dddc-46b5-98ae-146ff2cef2a1",
+        "report_id": "c87a43c8-551e-4809-bc15-448ed2369982",
+        "client_id": "98e3d06e-b571-492a-a077-15a26c523b0c",
+        "state": "published",
+        "expected_sha256": {
+          "html": "3a6add20f7ae70924dc600fb414a01d3ad3dfbb10499c213bca7d1a0534ceb12",
+          "pdf": "09c87290c75f397c72a5809a4072539a3869bdb196f3d04a0e5e638cb5a30e34",
+          "content": "797be33c3fdfcff45813690aac7a4416a905d24ebf02d195379d9d94879f5d67"
+        },
+        "expected_bytes": {
+          "html": 87,
+          "pdf": 64,
+          "content": 78
+        }
+      },
+      {
+        "id": "f0378795-166a-4562-87e7-22e80900ab66",
+        "report_id": "9d67ec67-13fd-4171-bfbe-d01d41f65612",
+        "client_id": "84e1eeb0-96b9-4860-b500-0d103ef527f3",
+        "state": "published",
+        "expected_sha256": {
+          "html": "9b8bea4a60e4ebf6191c1964c6bdd16cc1525e000163bafab93815b77abf4cc2",
+          "pdf": "c1cdf63f5b83bf5c14a39d3bf63f4946d0063e9f1fd60c41736bb0b2b3c1b0cd",
+          "content": "f4df9f0048ea77342d728acd6354c68ce63663922b97ed259a68c9f675e597cd"
+        },
+        "expected_bytes": {
+          "html": 87,
+          "pdf": 64,
+          "content": 78
+        }
+      },
+      {
+        "id": "a8a4fb91-487b-4aaf-9e5b-113b62a64100",
+        "report_id": "3553e9fb-9a8b-4370-a4a8-5d8d10fe3dac",
+        "client_id": "bf573164-9426-45ee-8054-41394e1b9fc6",
+        "state": "published",
+        "expected_sha256": {
+          "html": "a898dc0f837c3e9cfc2a2be2424866f509fe6225e4656344afd0c9e22b142eb3",
+          "pdf": "b7361aa3cc21b9ab47aae8a9232da58719bec63ce2f6248d76b7cc1277938ea1",
+          "content": "4ba53b158244970b4a06ad1596c86f4622f16d5807091e0964bc571cd39d22ef"
+        },
+        "expected_bytes": {
+          "html": 87,
+          "pdf": 64,
+          "content": 78
+        }
+      },
+      {
+        "id": "4a973adc-0853-4857-9230-89d08a4b4ced",
+        "report_id": "3a32e06d-9ca9-4167-a393-a955c3db3dcd",
+        "client_id": "524e8576-2bf5-4615-b428-e04c48a8f3af",
+        "state": "published",
+        "expected_sha256": {
+          "html": "1619c669fbfc2fc7b2c1c87422aaec06e2ee43d6b9c95e196e3b321135c6103a",
+          "pdf": "1c0a3855b3ecf764fd39422ce65f9abd6c1a0840d575a0ac06ffcbadeb5f072a",
+          "content": "52487e4aa3696f2d3bd47b5fdaa40e5bba4fcf15a4b6430364c575229cdb9838"
+        },
+        "expected_bytes": {
+          "html": 87,
+          "pdf": 64,
+          "content": 78
+        }
+      },
+      {
+        "id": "8247b51e-dbf1-4854-934f-681a5575b258",
+        "report_id": "35fc0385-6646-43c5-89af-214479aee37c",
+        "client_id": "ca53c1c3-72e7-4a6f-b6ef-75a3d9279a07",
+        "state": "published",
+        "expected_sha256": {
+          "html": "dd4897fdb937f854d7c8cab578c7d4d9261a2ac508d518cd708bf6f9fcd1dbb9",
+          "pdf": "78ce6db8b8277ece41c1a0eb16c25206244474a44ac1a13d67c2acb6f8020ed8",
+          "content": "12ffa2c790171761c16fbc3aae771d13d667b240c224ead5595871d4741d6d33"
+        },
+        "expected_bytes": {
+          "html": 87,
+          "pdf": 64,
+          "content": 78
+        }
+      },
+      {
+        "id": "eb1ff357-c73b-4137-a9c4-e7baa5d6d445",
+        "report_id": "7a25e92c-fbcd-4b58-a92d-4e9d8fad6bd5",
+        "client_id": "6b6e7040-6ec7-4aa6-a8f9-1e310811a4cc",
+        "state": "published",
+        "expected_sha256": {
+          "html": "c4a09cdf84ce7687f30e3b70e188d86e296d65599e4e7bee9e262f31e37ea50d",
+          "pdf": "8b0625bcc46d17d8eb82d256a60ad8e666c5c238679b219ac7be457871d0cfe7",
+          "content": "3f9297d864c4a4894b628d019a8cdaae107ef1afe75e6200659fc1b4660b0ca0"
+        },
+        "expected_bytes": {
+          "html": 87,
+          "pdf": 64,
+          "content": 78
+        }
+      },
+      {
+        "id": "7e9d3ee3-1b46-48b1-bc09-2b322e08098f",
+        "report_id": "3555fb6b-a046-4556-8850-3ffd1c6b209e",
+        "client_id": "93fcbca9-545d-4161-aa52-4a9673ee1a5b",
+        "state": "published",
+        "expected_sha256": {
+          "html": "59310ba083e8add2e4b617f0603ac381d5c7479ded6ee4cb4a2eef70a5da11dc",
+          "pdf": "bae6a2b1d12662ac6834fc40557a2abda28710585418c0fa1db9d0b83c7cdc4a",
+          "content": "c92de1433a593249cc5fe5f960ee0c5f6317858561cf8e571c9a41dd34dd5789"
+        },
+        "expected_bytes": {
+          "html": 87,
+          "pdf": 64,
+          "content": 78
+        }
+      },
+      {
+        "id": "883ec853-45bf-4729-a47b-1b78e5efeb5e",
+        "report_id": "f43abb83-37a6-48f7-8484-8d93fe740a25",
+        "client_id": "86dc744b-edec-4fab-a9f7-311b400c86e9",
+        "state": "published",
+        "expected_sha256": {
+          "html": "743fedd9551276964a20906fb195d6e71b374c1af6b921476b2bf027a8e3e3e7",
+          "pdf": "0624e78e7824831318c346c8a619ac7fca5aa30d4c8ccc902b14dda83fecc547",
+          "content": "e6d6978c05c77e64fd36bc31819e4a650e3819567c8d8d1a93257421245aeb1e"
+        },
+        "expected_bytes": {
+          "html": 87,
+          "pdf": 64,
+          "content": 78
+        }
+      },
+      {
+        "id": "702d9273-07c8-4aa7-ba28-2c54b83c15b6",
+        "report_id": "1419f5b1-502c-42cb-85aa-eb1d69f412e4",
+        "client_id": "1a1dccf2-9c76-47fd-92fc-6306323823d3",
+        "state": "draft",
+        "expected_sha256": {
+          "html": "ded06612f4c6db6142ddd55909a90ff3f75aaf886b20082e943a4cd607185532",
+          "pdf": "f2472b94e00db8fa67067377b6f70c09a07d98ad2516821f26a84ccf3d35e84a",
+          "content": "a7a2d2b3f4bd5dd13c2e10f88cac3bd715aab87645cf115de3260fa46a73f3a2"
+        },
+        "expected_bytes": {
+          "html": 87,
+          "pdf": 64,
+          "content": 78
+        }
+      }
+    ],
+    "requests": [
+      "ee3d08ad-2d04-4c2e-9261-76f50f0b9dcf",
+      "438f1961-078c-4c2e-a6a4-0d0b3dffb74f",
+      "9b65be09-a543-405b-a74b-98f006a21792",
+      "7724156d-0c36-461b-9bef-56a23b26f951",
+      "d0066c92-2288-43c2-bed7-5da5436932fa",
+      "80622b6f-7d98-4792-bbf6-162b9b6d831f",
+      "f0156eb3-345c-488e-8388-df0130292ce2",
+      "4dc5f5f2-0682-44bb-ba22-ef746c50fd07",
+      "0f371e54-acfe-4d71-a22f-c7e14edf9a59",
+      "e851d585-636f-435e-aaa2-61a3862f6777",
+      "d1e33540-f3e2-461d-b349-4c5e73a0d887",
+      "898bf218-39d1-422f-bc38-3389d6bc5df6",
+      "81df081d-5bba-4e7c-ac78-db37bd9bf015",
+      "eceef501-24a6-43e5-8c9f-70153df0e4f8",
+      "3e6b9515-b750-46dd-9109-e55ee89b49d6",
+      "b71d826d-26f6-438d-8674-22b8c11f333e",
+      "81a9447a-0f2c-457e-ab34-8947cc601b30",
+      "70dd52e5-003f-46dc-878f-33e15d7f2385",
+      "ef712b1f-9ad2-4b63-93f3-6f0ba4e53327",
+      "35c88844-c43d-496d-a575-530185268616",
+      "218c5e79-d4ab-4258-bf50-c8ffe5777049",
+      "eb03e505-c8c3-4c29-98cb-3a5ad138fa3c",
+      "b942ad84-17b6-4461-9f00-19d92641363d",
+      "fb9cc317-dac6-4bd3-aae3-67f9a20e2266",
+      "4855a10a-d491-4a12-b7d0-947deac6de8a"
+    ],
+    "org_id": "0d67fd45-a45b-49ac-8f8d-337e611194a8",
+    "audit_ids": [
+      "cd21925c-6a6d-4805-8e56-9eda1999bfa9",
+      "14ffa1cb-6618-4313-8507-62f446b70d62",
+      "cfd80975-845a-4038-adf4-bc89716f14d1",
+      "8cf7d951-d0a5-4c68-8449-69022e049059",
+      "b4cac494-2b67-485c-8351-15d3b1cbf08d",
+      "a401fc25-16dc-4530-bfcb-5e1e7fd5e1b0",
+      "04c94d3b-de09-4d74-a91c-b0fd15c27218",
+      "15e4102f-2002-4bce-aaa1-4f1525ed0019",
+      "ad6305f5-405a-4db4-b13c-fbaa68a34ca2",
+      "8d3712fa-8b07-4a41-9312-d34ff2622922",
+      "72fb8d20-9acb-4194-a712-92382e92056c",
+      "5f0a125a-0059-4ada-baeb-7fa3a544b1f8",
+      "b2fc6473-8806-4685-83c0-98c469688130",
+      "f2b1153f-c526-4090-be60-455ae069f7c2",
+      "2eab5cd5-36fb-4f18-9e94-b1161e640995",
+      "ec442afd-8b7c-4df8-88e7-5c9872673878",
+      "713ef9d6-cf1e-4239-89dc-fae65d86cee2",
+      "8dffc9a5-cb73-4b90-a3c9-ec09f48589d4",
+      "c0127d44-cd31-4d61-852d-c88f478957de",
+      "9aa5efc5-f162-40ba-be6f-ee3937502b33",
+      "3e47841b-9375-4d3e-a663-a80132e1e219",
+      "c43438f2-0d41-42f5-91d4-3a75e3162750",
+      "37553a79-369b-48f6-937e-42b2796b97e2",
+      "067bece2-0b53-4f44-a22b-477d8068e9ed",
+      "ba0f3dce-7d48-4a47-8058-5c74c65ab65d"
+    ]
+  },
+  "tests": [
+    {
+      "test": "existing approved genuine admin",
+      "status": "PASS",
+      "mode": "HOSTED",
+      "at_chicago": "2026-11-10T13:41:33.786797-06:00",
+      "expected": "admin JWT valid; no mint/refresh",
+      "actual": "verified"
+    },
+    {
+      "test": "Cloud strict JSON shape",
+      "status": "PASS",
+      "mode": "HOSTED",
+      "at_chicago": "2026-11-10T13:41:36.752949-06:00",
+      "expected": "null/array/primitive/unknown fields HTTP 400",
+      "actual": "4/4 rejected"
+    },
+    {
+      "test": "Cloud chunked oversized request",
+      "status": "PASS",
+      "mode": "HOSTED",
+      "at_chicago": "2026-11-10T13:41:38.312362-06:00",
+      "expected": "400 and bounded reader",
+      "actual": "HTTP 400; reader cancellation separately UNIT tested"
+    },
+    {
+      "test": "six successive successful logins",
+      "status": "PASS",
+      "mode": "HOSTED",
+      "at_chicago": "2026-11-10T13:41:59.657479-06:00",
+      "expected": "all 200 without lockout",
+      "actual": "6/6 200"
+    },
+    {
+      "test": "session expiry policy receipt",
+      "status": "PASS",
+      "mode": "HOSTED",
+      "at_chicago": "2026-11-10T13:42:21.745636-06:00",
+      "expected": "exact 30-day interval within 15s request time",
+      "actual": "24 successful login receipts checked; elapsed 30 days NOT observed"
+    },
+    {
+      "test": "24 tiny synthetic published versions",
+      "status": "PASS",
+      "mode": "HOSTED",
+      "at_chicago": "2026-11-10T13:45:01.155702-06:00",
+      "expected": "audited staging/readback plus synthetic-only transitions",
+      "actual": "24 published QA versions; independent source hashes frozen"
+    },
+    {
+      "test": "committed replay and payload binding",
+      "status": "PASS",
+      "mode": "HOSTED",
+      "at_chicago": "2026-11-10T13:45:03.474632-06:00",
+      "expected": "nonnull UUID and original id/version/state/hash/bytes; changed payload 409",
+      "actual": "exact receipt stable; changed payload rejected"
+    },
+    {
+      "test": "archive membership matrix (not file requests)",
+      "status": "PASS",
+      "mode": "HOSTED",
+      "at_chicago": "2026-11-10T13:45:20.760305-06:00",
+      "expected": "432 cells; groups 3/3/2/2 plus 14 singles",
+      "actual": {
+        "cells": 432,
+        "allowed": 24,
+        "denied": 408
+      }
+    },
+    {
+      "test": "actual html file authorization matrix",
+      "status": "PASS",
+      "mode": "HOSTED",
+      "at_chicago": "2026-11-10T13:46:17.396114-06:00",
+      "expected": "432 requests: 24 allowed independent-hash downloads / 408 denied",
+      "actual": {
+        "requests": 432,
+        "allowed": 24,
+        "denied": 408,
+        "verified_downloads": 24
+      }
+    },
+    {
+      "test": "actual pdf file authorization matrix",
+      "status": "PASS",
+      "mode": "HOSTED",
+      "at_chicago": "2026-11-10T13:47:17.682850-06:00",
+      "expected": "432 requests: 24 allowed independent-hash downloads / 408 denied",
+      "actual": {
+        "requests": 432,
+        "allowed": 24,
+        "denied": 408,
+        "verified_downloads": 24
+      }
+    },
+    {
+      "test": "content hash semantics",
+      "status": "PASS",
+      "mode": "HOSTED",
+      "at_chicago": "2026-11-10T13:47:28.452785-06:00",
+      "expected": "SHA256 original UTF8 content.json bytes including whitespace, not JSONB serialization",
+      "actual": "independent expected hash and exact bytes matched"
+    },
+    {
+      "test": "forged version/slugs/paths",
+      "status": "PASS",
+      "mode": "HOSTED",
+      "at_chicago": "2026-11-10T13:47:30.194903-06:00",
+      "expected": "401 unknown version; 400 unknown slug/path fields",
+      "actual": "all denied"
+    },
+    {
+      "test": "unpublished denial across formats",
+      "status": "PASS",
+      "mode": "HOSTED",
+      "at_chicago": "2026-11-10T13:47:38.198058-06:00",
+      "expected": "draft HTML/PDF/content denied",
+      "actual": "3/3 HTTP 401"
+    },
+    {
+      "test": "owner staff endpoint and writes denied",
+      "status": "PASS",
+      "mode": "HOSTED",
+      "at_chicago": "2026-11-10T13:47:39.391696-06:00",
+      "expected": "401/403; opaque owner session is not JWT",
+      "actual": "4/4 denied"
+    },
+    {
+      "test": "private storage path bypass",
+      "status": "PASS",
+      "mode": "HOSTED",
+      "at_chicago": "2026-11-10T13:47:40.612633-06:00",
+      "expected": "direct/public URLs denied",
+      "actual": "2/2 denied"
+    },
+    {
+      "test": "anonymous private list",
+      "status": "PASS",
+      "mode": "HOSTED",
+      "at_chicago": "2026-11-10T13:47:40.873175-06:00",
+      "expected": "denied or empty",
+      "actual": "no visible objects"
+    },
+    {
+      "test": "audit immutability genuine admin",
+      "status": "PASS",
+      "mode": "HOSTED",
+      "at_chicago": "2026-11-10T13:48:06.498936-06:00",
+      "expected": "PATCH/DELETE denied",
+      "actual": "fresh audit-only verification: both HTTP 403"
+    },
+    {
+      "test": "required durable authorization audit receipts",
+      "status": "PASS",
+      "mode": "HOSTED",
+      "at_chicago": "2026-11-10T13:48:06.498936-06:00",
+      "expected": "each required action found after run start",
+      "actual": {
+        "rows": 25,
+        "actions": [
+          "code_file",
+          "code_file_confirm",
+          "code_file_denied",
+          "code_input_denied",
+          "code_session_created"
+        ]
+      }
+    },
+    {
+      "test": "mixed concurrent success/failure and true five-failure lockout",
+      "status": "PASS",
+      "mode": "HOSTED",
+      "at_chicago": "2026-11-10T13:44:56.821462-06:00",
+      "expected": "two successes release own reservations; two failures remain; three extra failures lock; audited unlock succeeds",
+      "actual": {
+        "mixed_http": [
+          200,
+          200,
+          401,
+          401
+        ],
+        "five_failure_lock": true,
+        "unlock_login_http": 200
+      },
+      "synthetic_credential_id": "d182d954-4bf2-4b99-96dd-6c123bf58b3e",
+      "synthetic_client_id": "86dc744b-edec-4fab-a9f7-311b400c86e9"
+    },
+    {
+      "test": "hosted atomic reservations overlap and NULL lease guards",
+      "status": "PASS",
+      "mode": "HOSTED",
+      "at_chicago": "2026-11-10T13:46:13.771850-06:00",
+      "expected": "3 distinct versions; exactly 1 successful overlapping lease; NULL/forged/released NULL commits denied",
+      "actual": {
+        "distinct_versions": [
+          2,
+          1,
+          3
+        ],
+        "overlap_successes": 1,
+        "denied_commit_cases": 3
+      },
+      "synthetic_client_id": "86dc744b-edec-4fab-a9f7-311b400c86e9",
+      "synthetic_report_id": "637f0f82-9f4d-4571-b278-29173027dd97",
+      "synthetic_request_ids": [
+        "d09a133b-bb17-42ba-893e-ae5e6ff3e1da",
+        "141208ad-9baf-424f-b921-e95892d35eee",
+        "07ee46aa-b681-4fd4-abac-da0cb7f9ab5a",
+        "877335a7-1271-4c97-ae68-51a33fcb9aa0"
+      ]
+    },
+    {
+      "test": "live audit failure injection",
+      "status": "BLOCKED",
+      "mode": "HOSTED",
+      "at_chicago": "2026-11-10T13:48:06.498936-06:00",
+      "expected": "safe isolated fixture hook",
+      "actual": "unavailable; global injection forbidden"
+    },
+    {
+      "test": "forced hosted expiry",
+      "status": "BLOCKED",
+      "mode": "HOSTED",
+      "at_chicago": "2026-11-10T13:48:06.498936-06:00",
+      "expected": "reviewed audited fixture expiry RPC",
+      "actual": "unavailable; exact interval hosted/expiry denial UNIT"
+    },
+    {
+      "test": "genuine editor JWT",
+      "status": "BLOCKED",
+      "mode": "HOSTED",
+      "at_chicago": "2026-11-10T13:48:06.498936-06:00",
+      "expected": "approved genuine editor identity",
+      "actual": "unavailable; no mint/retry/spoof"
+    },
+    {
+      "test": "Netlify deployed cookie / Safari runtime",
+      "status": "BLOCKED",
+      "mode": "HOSTED",
+      "at_chicago": "2026-11-10T13:48:06.498936-06:00",
+      "expected": "separate controlled deploy",
+      "actual": "frontend deployment withheld"
+    },
+    {
+      "test": "real staged verifier and import",
+      "status": "NOT_RUN",
+      "mode": "HOSTED",
+      "at_chicago": "2026-11-10T13:48:06.498936-06:00",
+      "expected": "genuine nonsynthetic staff and private manifests",
+      "actual": "not invoked; positive test UNIT only"
+    },
+    {
+      "test": "elapsed 30-day observation",
+      "status": "NOT_RUN",
+      "mode": "HOSTED",
+      "at_chicago": "2026-11-10T13:48:06.498936-06:00",
+      "expected": "actual elapsed time",
+      "actual": "not observed; distinct from interval policy"
+    },
+    {
+      "test": "local security regression suite",
+      "status": "PASS",
+      "mode": "UNIT simulation",
+      "at_chicago": "2026-11-10T13:48:06.498936-06:00",
+      "expected": "48 Bun + 7 Vitest + 12 orchestration tests pass",
+      "actual": {
+        "bun": 48,
+        "vitest": 7,
+        "deno_orchestration": 12
+      }
+    },
+    {
+      "test": "local browser flow",
+      "status": "PASS",
+      "mode": "UI simulation",
+      "at_chicago": "2026-11-10T13:48:06.498936-06:00",
+      "expected": "dates/version; verified preview; mismatch refusal; legacy routes loaded",
+      "actual": "observed; owner API mocked"
+    },
+    {
+      "test": "protected sources",
+      "status": "PASS",
+      "mode": "STATIC",
+      "at_chicago": "2026-11-10T13:48:06.498936-06:00",
+      "expected": "byte-identical public/a + App.tsx + page sources",
+      "actual": {
+        "files": 71,
+        "changed": 0
+      }
+    }
+  ],
+  "no_frontend_deploy": true,
+  "real_access_off": true,
+  "cost_credits": null,
+  "harness_failures": [
+    {
+      "test": "suite completion",
+      "status": "FAIL",
+      "mode": "HOSTED",
+      "at_chicago": "2026-11-10T13:47:41.159033-06:00",
+      "expected": "all runnable checks complete",
+      "actual": "stopped: AssertionError",
+      "diagnosis": "Raw +00:00 timestamp was not URL encoded. Corrected audit-only read with params succeeded. Newest-1000 truncation also requires action-specific receipt queries. Full fixture/file matrix was not rerun."
+    }
+  ],
+  "summary": {
+    "PASS": 23,
+    "FAIL": 0,
+    "BLOCKED": 4,
+    "NOT_RUN": 2
+  },
+  "source_hashes": {
+    "monthly-code": "9545fbfa22af40cfe9424e7ecfcc26b7ecea8ff3a3fd2eb662929679c6a697ed",
+    "monthly-admin": "61321b54272ddaf60a298d774bf00b0fcf961d069b8f517d4a95e1c15ec1e0e6"
+  },
+  "fresh_backend_readback": {
+    "real_access": false,
+    "auth_sending_flag": false,
+    "bucket_public": false,
+    "staff_admin_synthetic": true,
+    "owner_rpc_anon_execute": false
+  }
+}

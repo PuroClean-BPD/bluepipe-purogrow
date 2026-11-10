@@ -57,6 +57,13 @@
       "when": 1794338357291,
       "tag": "0007_monthly_code_request_budget",
       "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1794339390311,
+      "tag": "0008_monthly_code_review_guards",
+      "breakpoints": true
     }
   ]
 }
