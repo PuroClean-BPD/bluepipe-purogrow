@@ -84,3 +84,14 @@ Real email delivery: NOT RUN. Global signup settings unchanged; new monthly send
 Live results this run: monthly-admin no-auth 401, anon-bearer 401; get-report-file 401/401;
 monthly-auth GET enabled:false; client-address POST generic, no send; anon SELECT on all 8 monthly tables 401. All PASS.
 NOT RUN: every staff/editor/client path (no approved synthetic session minting available; local fixture passwords not read).
+
+## Nov 10 2026 (2) - atomic audit + concurrency fixes (baseline eece788)
+- DB atomicity (local throwaway PGlite, real migration SQL 0000-0002, injected audit-insert failure): 6/6 PASS
+  (non-admin denied; audit failure rolls back org/client/report/reservation/commit/provision intent; distinct
+  versions + request-unique paths; idempotent retry; provision intent before auth call; audit append-only).
+- monthly-admin orchestration (Deno, in-memory fakes): 12/12 PASS (upload/readback/commit/fail-audit
+  injection, only self-created objects removed, pre-existing objects never deleted, same-request retry,
+  8 parallel requests distinct versions/disjoint objects, provisioning recovery states).
+- Live anon: all 10 monthly tables 401; admin RPCs 404/401; monthly-admin no-auth 401. PASS.
+- Live parallel row-lock test against hosted DB: NOT RUN (needs staff session).
+- All authenticated runtime tests: NOT RUN (awaiting human approval of synthetic admin session).

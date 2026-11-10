@@ -15,6 +15,20 @@
       "when": 1794011466724,
       "tag": "0001_monthly_policy_scope_fix",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1794328538114,
+      "tag": "0002_monthly_admin_atomic",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1794328682034,
+      "tag": "0003_monthly_admin_tighten_grants",
+      "breakpoints": true
     }
   ]
 }

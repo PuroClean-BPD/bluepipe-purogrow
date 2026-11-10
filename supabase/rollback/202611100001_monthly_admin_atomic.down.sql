@@ -1,0 +1,3 @@
+-- Non-destructive rollback: revoke new admin RPC access only. Staging/provisioning rows, reports,
+-- audit log, storage objects and auth users are retained.
+REVOKE EXECUTE ON FUNCTION public.monthly_admin_create_org(text),public.monthly_admin_create_client(uuid,text,text,text),public.monthly_admin_create_report(uuid,timestamptz,timestamptz,text,text),public.monthly_admin_reserve_version(uuid,uuid),public.monthly_admin_commit_version(uuid,jsonb,text,jsonb,text),public.monthly_admin_fail_staging(uuid,text),public.monthly_admin_provision_begin(uuid,text),public.monthly_admin_provision_finish(uuid,uuid,text) FROM authenticated;

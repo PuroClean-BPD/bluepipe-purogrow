@@ -5,4 +5,4 @@
 - Keep all monthly database changes additive and retain data in down migrations; legacy production auth, public audits and existing reports must survive rollback.
 - Provision fixtures only through the local privileged test harness using reserved addresses and real Auth sessions; never expose a fixture endpoint, embed credentials, send email, or bypass browser authorization.
 - Only the server-gated monthly auth endpoint may send new monthly login emails; its database flag fails closed and existing auth semantics stay unchanged.
-- Monthly staging, owner provisioning, grants and transitions go only through admin-only `monthly-admin`, which checks staff role server-side and calls audited RPCs under the caller JWT; keeps every write audited.
+- Monthly staging, owner provisioning, grants and transitions go only through admin-only `monthly-admin`; every DB mutation runs inside an admin-checked RPC that writes its audit row in the same transaction, storage paths are request-unique, and cleanup removes only objects that request created; keeps writes audited and retries safe.

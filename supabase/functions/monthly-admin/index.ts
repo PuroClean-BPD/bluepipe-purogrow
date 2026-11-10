@@ -1,27 +1,25 @@
 import { createClient } from 'npm:@supabase/supabase-js@2';
 import { corsHeaders } from 'npm:@supabase/supabase-js@2/cors';
 import { z } from 'npm:zod@3';
+import { type Deps, provisionOwner, stageVersion } from './core.ts';
 
 // Admin-only monthly portal operations. Caller must be a real signed-in monthly_staff admin.
-// Grants, revocations and state transitions run through the audited RPCs under the caller's own JWT.
-// No arbitrary bucket/path input: storage paths are derived server-side from database IDs.
+// All DB mutations go through audited RPCs under the caller's own JWT (mutation + audit atomic).
+// The service credential is used only for private storage I/O and Auth Admin createUser.
 const BUCKET = 'reports-private';
-const LIMITS = { html: 15_000_000, pdf: 30_000_000, content: 5_000_000 };
-const MIME = { html: 'text/html; charset=utf-8', pdf: 'application/pdf', content: 'application/json' };
 const uuid = z.string().uuid();
 const b64 = z.string().min(4).max(42_000_000).regex(/^[A-Za-z0-9+/]+={0,2}$/);
+const hex = z.string().regex(/^[a-f0-9]{64}$/);
 const Action = z.discriminatedUnion('action', [
   z.object({ action: z.literal('create_org'), name: z.string().trim().min(2).max(120) }).strict(),
   z.object({ action: z.literal('create_client'), org_id: uuid, slug: z.string().regex(/^[a-z0-9][a-z0-9-]{1,62}$/), display_name: z.string().trim().min(2).max(160), package: z.string().trim().max(80).nullable().optional() }).strict(),
   z.object({ action: z.literal('create_report'), client_id: uuid, period_start: z.string().datetime({ offset: true }), period_end: z.string().datetime({ offset: true }), period_label: z.string().trim().min(3).max(80), kind: z.enum(['monthly', 'special']) }).strict(),
-  z.object({ action: z.literal('stage_version'), report_id: uuid, html_b64: b64, pdf_b64: b64, content_b64: b64, expected: z.object({ html_sha256: z.string().regex(/^[a-f0-9]{64}$/), pdf_sha256: z.string().regex(/^[a-f0-9]{64}$/), content_sha256: z.string().regex(/^[a-f0-9]{64}$/) }).strict(), notes: z.string().max(500).optional() }).strict(),
-  z.object({ action: z.literal('provision_owner'), email: z.string().email().max(254), full_name: z.string().trim().max(120).optional() }).strict(),
+  z.object({ action: z.literal('stage_version'), request_id: uuid, report_id: uuid, html_b64: b64, pdf_b64: b64, content_b64: b64, expected: z.object({ html_sha256: hex, pdf_sha256: hex, content_sha256: hex }).strict(), notes: z.string().max(500).optional() }).strict(),
+  z.object({ action: z.literal('provision_owner'), request_id: uuid, email: z.string().email().max(254), full_name: z.string().trim().max(120).optional() }).strict(),
   z.object({ action: z.literal('grant'), user_id: uuid, client_id: uuid, role: z.enum(['client_viewer', 'client_manager']), grant_source: z.string().trim().min(3).max(200) }).strict(),
   z.object({ action: z.literal('revoke'), membership_id: uuid }).strict(),
   z.object({ action: z.literal('transition'), version_id: uuid, next_state: z.enum(['approved', 'published', 'withdrawn']) }).strict(),
 ]);
-
-const hex = async (b: Uint8Array) => Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256', b))).map((x) => x.toString(16).padStart(2, '0')).join('');
 const decode = (s: string) => Uint8Array.from(atob(s), (c) => c.charCodeAt(0));
 
 Deno.serve(async (req) => {
@@ -35,86 +33,59 @@ Deno.serve(async (req) => {
   const caller = createClient(url, key, { global: { headers: { Authorization: auth } }, auth: { persistSession: false } });
   const { data: u, error: ue } = await caller.auth.getUser(auth.slice(7));
   if (ue || !u.user) return reply({ error: 'Unauthorized' }, 401);
-  // Role from the caller's own RLS-scoped read of monthly_staff; never from input or JWT metadata.
+  // Early gate only; every RPC re-checks admin role from auth.uid() in the database.
   const { data: role } = await caller.rpc('monthly_staff_role');
-  const admin = createClient(url, service, { auth: { persistSession: false } });
-  const log = (action: string, target_table: string, target_id: string | null, client_id: string | null, detail: Record<string, unknown>) =>
-    admin.from('monthly_audit_log').insert({ actor: u.user!.id, action, target_table, target_id, client_id, detail });
-  if (role !== 'admin') { await log('admin_denied', 'monthly_staff', null, null, { role: role ?? null }); return reply({ error: 'Forbidden' }, 403); }
+  if (role !== 'admin') return reply({ error: 'Forbidden' }, 403);
 
   let p;
   try { p = Action.safeParse(await req.json()); } catch { return reply({ error: 'Invalid request' }, 400); }
   if (!p.success) return reply({ error: 'Invalid request', fields: p.error.flatten().fieldErrors }, 400);
   const a = p.data;
-
-  if (a.action === 'create_org') {
-    const { data, error } = await admin.from('monthly_organizations').insert({ name: a.name }).select('id').single();
-    if (error) return reply({ error: 'Rejected' }, 409);
-    await log('create_org', 'monthly_organizations', data.id, null, { name: a.name });
-    return reply({ id: data.id });
-  }
-  if (a.action === 'create_client') {
-    const { data, error } = await admin.from('monthly_clients').insert({ org_id: a.org_id, slug: a.slug, display_name: a.display_name, package: a.package ?? null }).select('id').single();
-    if (error) return reply({ error: 'Rejected' }, 409);
-    await log('create_client', 'monthly_clients', data.id, data.id, { slug: a.slug });
-    return reply({ id: data.id });
-  }
-  if (a.action === 'create_report') {
-    if (new Date(a.period_end) <= new Date(a.period_start)) return reply({ error: 'Invalid period' }, 400);
-    const { data, error } = await admin.from('monthly_reports').insert({ client_id: a.client_id, period_start: a.period_start, period_end: a.period_end, period_label: a.period_label, kind: a.kind }).select('id').single();
-    if (error) return reply({ error: 'Rejected' }, 409);
-    await log('create_report', 'monthly_reports', data.id, a.client_id, { period_label: a.period_label });
-    return reply({ id: data.id });
-  }
-  if (a.action === 'stage_version') {
-    const { data: r } = await admin.from('monthly_reports').select('id,client_id').eq('id', a.report_id).maybeSingle();
-    if (!r) return reply({ error: 'Not found' }, 404);
-    const files = { html: decode(a.html_b64), pdf: decode(a.pdf_b64), content: decode(a.content_b64) };
-    for (const k of ['html', 'pdf', 'content'] as const) if (files[k].length === 0 || files[k].length > LIMITS[k]) return reply({ error: `Size limit: ${k}` }, 413);
-    if (new TextDecoder().decode(files.pdf.slice(0, 5)) !== '%PDF-') return reply({ error: 'Not a PDF' }, 415);
-    if (!/<html[\s>]/i.test(new TextDecoder().decode(files.html.slice(0, 4096)))) return reply({ error: 'Not HTML' }, 415);
-    let dataset: unknown;
-    try { dataset = JSON.parse(new TextDecoder('utf-8', { fatal: true }).decode(files.content)); } catch { return reply({ error: 'Not JSON' }, 415); }
-    const sums = { html: await hex(files.html), pdf: await hex(files.pdf), content: await hex(files.content) };
-    if (sums.html !== a.expected.html_sha256 || sums.pdf !== a.expected.pdf_sha256 || sums.content !== a.expected.content_sha256) {
-      await log('stage_failed', 'monthly_reports', r.id, r.client_id, { reason: 'sha256_mismatch_on_receipt' });
-      return reply({ error: 'Checksum mismatch' }, 422);
-    }
-    const { data: last } = await admin.from('monthly_report_versions').select('version').eq('report_id', r.id).order('version', { ascending: false }).limit(1).maybeSingle();
-    const version = (last?.version ?? 0) + 1;
-    const base = `monthly/${r.client_id}/${r.id}/v${version}`;
-    const paths = { html: `${base}/report.html`, pdf: `${base}/report.pdf`, content: `${base}/content.json` };
-    const cleanup = () => admin.storage.from(BUCKET).remove(Object.values(paths));
-    for (const k of ['html', 'pdf', 'content'] as const) {
-      const { error } = await admin.storage.from(BUCKET).upload(paths[k], files[k], { contentType: MIME[k], upsert: false });
-      if (error) { await cleanup(); await log('stage_failed', 'monthly_reports', r.id, r.client_id, { reason: `upload_${k}` }); return reply({ error: 'Upload failed' }, 502); }
-      const { data: back } = await admin.storage.from(BUCKET).download(paths[k]);
-      const bytes = back ? new Uint8Array(await back.arrayBuffer()) : new Uint8Array();
-      if (bytes.length !== files[k].length || (await hex(bytes)) !== sums[k]) {
-        await cleanup(); await log('stage_failed', 'monthly_reports', r.id, r.client_id, { reason: `readback_${k}` });
-        return reply({ error: 'Read-back verification failed' }, 502);
+  const admin = createClient(url, service, { auth: { persistSession: false } });
+  const store = admin.storage.from(BUCKET);
+  const deps: Deps = {
+    rpc: async (fn, args) => { const r = await caller.rpc(fn, args); return { data: r.data, error: r.error }; },
+    upload: async (path, bytes, mime) => {
+      const { error } = await store.upload(path, bytes, { contentType: mime, upsert: false });
+      const exists = !!error && /exists|duplicate/i.test(String((error as { message?: string }).message ?? ''));
+      return { error, exists };
+    },
+    download: async (path) => { const { data } = await store.download(path); return data ? new Uint8Array(await data.arrayBuffer()) : null; },
+    remove: async (paths) => { await store.remove(paths); },
+    createUser: async (email, meta) => {
+      const { data, error } = await admin.auth.admin.createUser({ email, email_confirm: true, user_metadata: meta });
+      if (data?.user) return { id: data.user.id };
+      return { error, exists: /already|registered|exists/i.test(String(error?.message ?? '')) };
+    },
+    findUserId: async (email) => {
+      for (let page = 1; page <= 20; page++) {
+        const { data } = await admin.auth.admin.listUsers({ page, perPage: 1000 });
+        const hit = data?.users.find((x) => x.email?.toLowerCase() === email);
+        if (hit) return hit.id;
+        if (!data || data.users.length < 1000) return null;
       }
+      return null;
+    },
+  };
+  const rpcOut = async (fn: string, args: Record<string, unknown>, key: string) => {
+    const { data, error } = await caller.rpc(fn, args);
+    return error ? reply({ error: 'Rejected' }, 403) : reply({ [key]: data ?? true });
+  };
+
+  switch (a.action) {
+    case 'create_org': return rpcOut('monthly_admin_create_org', { p_name: a.name }, 'id');
+    case 'create_client': return rpcOut('monthly_admin_create_client', { p_org: a.org_id, p_slug: a.slug, p_display: a.display_name, p_package: a.package ?? null }, 'id');
+    case 'create_report': return rpcOut('monthly_admin_create_report', { p_client: a.client_id, p_start: a.period_start, p_end: a.period_end, p_label: a.period_label, p_kind: a.kind }, 'id');
+    case 'grant': return rpcOut('monthly_grant', { uid: a.user_id, cid: a.client_id, mrole: a.role, source: a.grant_source }, 'membership_id');
+    case 'revoke': return rpcOut('monthly_revoke', { mid: a.membership_id }, 'ok');
+    case 'transition': return rpcOut('monthly_transition', { vid: a.version_id, next_state: a.next_state }, 'ok');
+    case 'stage_version': {
+      const o = await stageVersion(deps, { request_id: a.request_id, report_id: a.report_id, files: { html: decode(a.html_b64), pdf: decode(a.pdf_b64), content: decode(a.content_b64) }, expected: { html: a.expected.html_sha256, pdf: a.expected.pdf_sha256, content: a.expected.content_sha256 }, notes: a.notes });
+      return reply(o.body, o.status);
     }
-    const { data: v, error } = await admin.from('monthly_report_versions').insert({ report_id: r.id, version, state: 'draft', dataset, dataset_sha256: sums.content, html_path: paths.html, pdf_path: paths.pdf, created_by: u.user.id, notes: a.notes ?? null }).select('id').single();
-    if (error) { await cleanup(); return reply({ error: 'Rejected' }, 409); }
-    await log('stage_version', 'monthly_report_versions', v.id, r.client_id, { version, sha256: sums, bytes: { html: files.html.length, pdf: files.pdf.length, content: files.content.length } });
-    return reply({ id: v.id, version, state: 'draft', sha256: sums });
+    case 'provision_owner': {
+      const o = await provisionOwner(deps, { request_id: a.request_id, email: a.email, full_name: a.full_name });
+      return reply(o.body, o.status);
+    }
   }
-  if (a.action === 'provision_owner') {
-    // Auth Admin createUser: no invitation, no email, no password.
-    const { data, error } = await admin.auth.admin.createUser({ email: a.email.toLowerCase(), email_confirm: true, user_metadata: a.full_name ? { full_name: a.full_name } : {} });
-    if (error || !data.user) { await log('provision_failed', 'auth.users', null, null, {}); return reply({ error: 'Rejected' }, 409); }
-    await log('provision_owner', 'auth.users', data.user.id, null, { email_domain: a.email.split('@')[1] });
-    return reply({ user_id: data.user.id });
-  }
-  if (a.action === 'grant') {
-    const { data, error } = await caller.rpc('monthly_grant', { uid: a.user_id, cid: a.client_id, mrole: a.role, source: a.grant_source });
-    return error ? reply({ error: 'Rejected' }, 403) : reply({ membership_id: data });
-  }
-  if (a.action === 'revoke') {
-    const { error } = await caller.rpc('monthly_revoke', { mid: a.membership_id });
-    return error ? reply({ error: 'Rejected' }, 403) : reply({ ok: true });
-  }
-  const { error } = await caller.rpc('monthly_transition', { vid: a.version_id, next_state: a.next_state });
-  return error ? reply({ error: 'Rejected' }, 403) : reply({ ok: true });
 });

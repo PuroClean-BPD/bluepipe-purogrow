@@ -147,6 +147,39 @@ export type Database = {
         }
         Relationships: []
       }
+      monthly_provisioning: {
+        Row: {
+          created_at: string
+          created_by: string
+          email: string
+          failure: string | null
+          request_id: string
+          state: string
+          updated_at: string
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          created_by: string
+          email: string
+          failure?: string | null
+          request_id: string
+          state?: string
+          updated_at?: string
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          created_by?: string
+          email?: string
+          failure?: string | null
+          request_id?: string
+          state?: string
+          updated_at?: string
+          user_id?: string | null
+        }
+        Relationships: []
+      }
       monthly_report_versions: {
         Row: {
           approved_at: string | null
@@ -274,6 +307,67 @@ export type Database = {
         }
         Relationships: []
       }
+      monthly_staging: {
+        Row: {
+          base_path: string
+          client_id: string
+          created_at: string
+          created_by: string
+          failure: string | null
+          report_id: string
+          request_id: string
+          state: string
+          version: number
+          version_id: string | null
+        }
+        Insert: {
+          base_path: string
+          client_id: string
+          created_at?: string
+          created_by: string
+          failure?: string | null
+          report_id: string
+          request_id: string
+          state?: string
+          version: number
+          version_id?: string | null
+        }
+        Update: {
+          base_path?: string
+          client_id?: string
+          created_at?: string
+          created_by?: string
+          failure?: string | null
+          report_id?: string
+          request_id?: string
+          state?: string
+          version?: number
+          version_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "monthly_staging_client_id_fkey"
+            columns: ["client_id"]
+            isOneToOne: false
+            referencedRelation: "monthly_clients"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "monthly_staging_report_id_fkey"
+            columns: ["report_id"]
+            isOneToOne: false
+            referencedRelation: "monthly_reports"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "monthly_staging_version_id_fkey"
+            columns: ["version_id"]
+            isOneToOne: false
+            referencedRelation: "monthly_report_versions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       profiles: {
         Row: {
           client_slug: string | null
@@ -306,12 +400,67 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      monthly_admin_commit_version: {
+        Args: {
+          p_dataset: Json
+          p_detail: Json
+          p_notes: string
+          p_request: string
+          p_sha: string
+        }
+        Returns: string
+      }
+      monthly_admin_create_client: {
+        Args: {
+          p_display: string
+          p_org: string
+          p_package: string
+          p_slug: string
+        }
+        Returns: string
+      }
+      monthly_admin_create_org: { Args: { p_name: string }; Returns: string }
+      monthly_admin_create_report: {
+        Args: {
+          p_client: string
+          p_end: string
+          p_kind: string
+          p_label: string
+          p_start: string
+        }
+        Returns: string
+      }
+      monthly_admin_fail_staging: {
+        Args: { p_reason: string; p_request: string }
+        Returns: undefined
+      }
+      monthly_admin_provision_begin: {
+        Args: { p_email: string; p_request: string }
+        Returns: {
+          state: string
+          user_id: string
+        }[]
+      }
+      monthly_admin_provision_finish: {
+        Args: { p_failure: string; p_request: string; p_user: string }
+        Returns: undefined
+      }
+      monthly_admin_reserve_version: {
+        Args: { p_report: string; p_request: string }
+        Returns: {
+          base_path: string
+          state: string
+          version: number
+          version_id: string
+        }[]
+      }
       monthly_can_client: { Args: { cid: string }; Returns: boolean }
       monthly_can_version: { Args: { vid: string }; Returns: boolean }
       monthly_grant: {
         Args: { cid: string; mrole: string; source: string; uid: string }
         Returns: string
       }
+      monthly_require_admin: { Args: never; Returns: string }
       monthly_revoke: { Args: { mid: string }; Returns: undefined }
       monthly_staff_role: { Args: never; Returns: string }
       monthly_transition: {

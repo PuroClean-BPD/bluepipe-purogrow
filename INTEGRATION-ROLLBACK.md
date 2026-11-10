@@ -37,3 +37,6 @@ The new lazy monthly module contains no external audit key/import or console dat
 
 ## Nov 10 2026
 Rollback: delete function monthly-admin; restore monthly-auth from 67c8e83. No schema/data changes.
+
+## Nov 10 2026 (2)
+Baseline eece788. Rollback: apply supabase/rollback/202611100001_monthly_admin_atomic.down.sql via migration tool; redeploy monthly-admin from eece788 if needed. Data retained.
