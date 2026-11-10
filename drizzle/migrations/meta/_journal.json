@@ -71,6 +71,13 @@
       "when": 1794340585365,
       "tag": "0009_monthly_staff_only_jwt",
       "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1794342234757,
+      "tag": "0010_monthly_scope_audit_and_staff_revocation",
+      "breakpoints": true
     }
   ]
 }

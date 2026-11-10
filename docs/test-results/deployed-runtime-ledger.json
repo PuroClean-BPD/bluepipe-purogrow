@@ -1,0 +1,484 @@
+{
+ "frontend": {
+  "netlify_deploy": "6af37af58a30a9e9d3155135",
+  "source": "87a6efeb2b3ba22cdd8fc1836a3a6ce8cf08e876",
+  "confirmed_by": "coordinator"
+ },
+ "backend_migration": "0010_monthly_scope_audit_and_staff_revocation (additive, applied)",
+ "rows": [
+  {
+   "test": "method GET",
+   "mode": "DEPLOYED_HTTP",
+   "status": "PASS",
+   "expected": "405 JSON",
+   "actual": [
+    405,
+    "application/json"
+   ],
+   "at": "2026-11-10T14:22:51-06:00"
+  },
+  {
+   "test": "method OPTIONS",
+   "mode": "DEPLOYED_HTTP",
+   "status": "PASS",
+   "expected": "405 JSON",
+   "actual": [
+    405,
+    "application/json"
+   ],
+   "at": "2026-11-10T14:22:52-06:00"
+  },
+  {
+   "test": "method PUT",
+   "mode": "DEPLOYED_HTTP",
+   "status": "PASS",
+   "expected": "405 JSON",
+   "actual": [
+    405,
+    "application/json"
+   ],
+   "at": "2026-11-10T14:22:52-06:00"
+  },
+  {
+   "test": "method DELETE",
+   "mode": "DEPLOYED_HTTP",
+   "status": "PASS",
+   "expected": "405 JSON",
+   "actual": [
+    405,
+    "application/json"
+   ],
+   "at": "2026-11-10T14:22:53-06:00"
+  },
+  {
+   "test": "method PATCH",
+   "mode": "DEPLOYED_HTTP",
+   "status": "PASS",
+   "expected": "405 JSON",
+   "actual": [
+    405,
+    "application/json"
+   ],
+   "at": "2026-11-10T14:22:53-06:00"
+  },
+  {
+   "test": "cross Origin",
+   "mode": "DEPLOYED_HTTP",
+   "status": "PASS",
+   "expected": "403",
+   "actual": 403,
+   "at": "2026-11-10T14:22:54-06:00"
+  },
+  {
+   "test": "missing Origin",
+   "mode": "DEPLOYED_HTTP",
+   "status": "PASS",
+   "expected": "403",
+   "actual": 403,
+   "at": "2026-11-10T14:22:54-06:00"
+  },
+  {
+   "test": "missing CSRF header",
+   "mode": "DEPLOYED_HTTP",
+   "status": "PASS",
+   "expected": "403",
+   "actual": 403,
+   "at": "2026-11-10T14:22:54-06:00"
+  },
+  {
+   "test": "strict input null",
+   "mode": "DEPLOYED_HTTP",
+   "status": "PASS",
+   "expected": "400 no secrets",
+   "actual": [
+    400,
+    true
+   ],
+   "at": "2026-11-10T14:22:55-06:00"
+  },
+  {
+   "test": "strict input array",
+   "mode": "DEPLOYED_HTTP",
+   "status": "PASS",
+   "expected": "400 no secrets",
+   "actual": [
+    400,
+    true
+   ],
+   "at": "2026-11-10T14:22:55-06:00"
+  },
+  {
+   "test": "strict input number",
+   "mode": "DEPLOYED_HTTP",
+   "status": "PASS",
+   "expected": "400 no secrets",
+   "actual": [
+    400,
+    true
+   ],
+   "at": "2026-11-10T14:22:55-06:00"
+  },
+  {
+   "test": "strict input string",
+   "mode": "DEPLOYED_HTTP",
+   "status": "PASS",
+   "expected": "400 no secrets",
+   "actual": [
+    400,
+    true
+   ],
+   "at": "2026-11-10T14:22:56-06:00"
+  },
+  {
+   "test": "strict input bad json",
+   "mode": "DEPLOYED_HTTP",
+   "status": "PASS",
+   "expected": "400 no secrets",
+   "actual": [
+    400,
+    true
+   ],
+   "at": "2026-11-10T14:22:57-06:00"
+  },
+  {
+   "test": "strict input unknown action",
+   "mode": "DEPLOYED_HTTP",
+   "status": "PASS",
+   "expected": "400 no secrets",
+   "actual": [
+    400,
+    true
+   ],
+   "at": "2026-11-10T14:22:57-06:00"
+  },
+  {
+   "test": "strict input extra field",
+   "mode": "DEPLOYED_HTTP",
+   "status": "PASS",
+   "expected": "400 no secrets",
+   "actual": [
+    400,
+    true
+   ],
+   "at": "2026-11-10T14:22:57-06:00"
+  },
+  {
+   "test": "strict input extra slug",
+   "mode": "DEPLOYED_HTTP",
+   "status": "PASS",
+   "expected": "400 no secrets",
+   "actual": [
+    400,
+    true
+   ],
+   "at": "2026-11-10T14:22:58-06:00"
+  },
+  {
+   "test": "strict input forged version id",
+   "mode": "DEPLOYED_HTTP",
+   "status": "PASS",
+   "expected": "400 no secrets",
+   "actual": [
+    400,
+    true
+   ],
+   "at": "2026-11-10T14:22:58-06:00"
+  },
+  {
+   "test": "oversized body",
+   "mode": "DEPLOYED_HTTP",
+   "status": "PASS",
+   "expected": "4xx no secrets",
+   "actual": [
+    400,
+    true
+   ],
+   "at": "2026-11-10T14:22:59-06:00"
+  },
+  {
+   "test": "oversized chunked",
+   "mode": "DEPLOYED_HTTP",
+   "status": "PASS",
+   "expected": "4xx",
+   "actual": 400,
+   "at": "2026-11-10T14:23:00-06:00"
+  },
+  {
+   "test": "unknown code",
+   "mode": "DEPLOYED_HTTP",
+   "status": "PASS",
+   "expected": "401, no cookie set, generic",
+   "actual": [
+    401,
+    false,
+    {
+     "error": "Access unavailable"
+    }
+   ],
+   "at": "2026-11-10T14:23:02-06:00"
+  },
+  {
+   "test": "forged cookie archive",
+   "mode": "DEPLOYED_HTTP",
+   "status": "PASS",
+   "expected": "401 + cookie cleared",
+   "actual": [
+    401,
+    "__Host-bluepipe-owner=; Path=/"
+   ],
+   "at": "2026-11-10T14:23:03-06:00"
+  },
+  {
+   "test": "forged cookie file",
+   "mode": "DEPLOYED_HTTP",
+   "status": "PASS",
+   "expected": "401",
+   "actual": 401,
+   "at": "2026-11-10T14:23:05-06:00"
+  },
+  {
+   "test": "no cookie archive",
+   "mode": "DEPLOYED_HTTP",
+   "status": "NOTE",
+   "expected": "denied",
+   "actual": "400 generic Denied (not 401); no data, no cookie",
+   "at": "2026-11-10T14:23:06-06:00"
+  },
+  {
+   "test": "SPA shell /portal",
+   "mode": "DEPLOYED_HTTP",
+   "status": "PASS",
+   "expected": "200 html",
+   "actual": 200,
+   "at": "2026-11-10T14:23:06-06:00"
+  },
+  {
+   "test": "SPA shell /portal/dashboard",
+   "mode": "DEPLOYED_HTTP",
+   "status": "PASS",
+   "expected": "200 html",
+   "actual": 200,
+   "at": "2026-11-10T14:23:07-06:00"
+  },
+  {
+   "test": "SPA shell /portal/monthly",
+   "mode": "DEPLOYED_HTTP",
+   "status": "PASS",
+   "expected": "200 html",
+   "actual": 200,
+   "at": "2026-11-10T14:23:07-06:00"
+  },
+  {
+   "test": "SPA shell /portal/monthly?staff=1",
+   "mode": "DEPLOYED_HTTP",
+   "status": "PASS",
+   "expected": "200 html",
+   "actual": 200,
+   "at": "2026-11-10T14:23:07-06:00"
+  },
+  {
+   "test": "SPA shell /reports/caseyville-il",
+   "mode": "DEPLOYED_HTTP",
+   "status": "PASS",
+   "expected": "200 html",
+   "actual": 200,
+   "at": "2026-11-10T14:23:07-06:00"
+  },
+  {
+   "test": "SPA shell /local-seo-dashboard",
+   "mode": "DEPLOYED_HTTP",
+   "status": "PASS",
+   "expected": "200 html",
+   "actual": 200,
+   "at": "2026-11-10T14:23:07-06:00"
+  },
+  {
+   "test": "audit gate /a/chattanooga-tn-to033apm",
+   "mode": "DEPLOYED_HTTP",
+   "status": "PASS",
+   "expected": "200 byte-identical to repo",
+   "actual": [
+    200,
+    true,
+    "noindex, nofollow"
+   ],
+   "at": "2026-11-10T14:23:08-06:00"
+  },
+  {
+   "test": "audit gate /a/costa-mesa-ca-6w5hrjuv",
+   "mode": "DEPLOYED_HTTP",
+   "status": "PASS",
+   "expected": "200 byte-identical to repo",
+   "actual": [
+    200,
+    true,
+    "noindex, nofollow"
+   ],
+   "at": "2026-11-10T14:23:08-06:00"
+  },
+  {
+   "test": "audit gate /a/hilton-head-sc-8746a25c",
+   "mode": "DEPLOYED_HTTP",
+   "status": "PASS",
+   "expected": "200 byte-identical to repo",
+   "actual": [
+    200,
+    true,
+    "noindex, nofollow"
+   ],
+   "at": "2026-11-10T14:23:08-06:00"
+  },
+  {
+   "test": "audit gate /a/huntington-beach-ca-xlb31tjc",
+   "mode": "DEPLOYED_HTTP",
+   "status": "PASS",
+   "expected": "200 byte-identical to repo",
+   "actual": [
+    200,
+    true,
+    "noindex, nofollow"
+   ],
+   "at": "2026-11-10T14:23:08-06:00"
+  },
+  {
+   "test": "audit gate /a/long-beach-ca-d2fa8b96",
+   "mode": "DEPLOYED_HTTP",
+   "status": "PASS",
+   "expected": "200 byte-identical to repo",
+   "actual": [
+    200,
+    true,
+    "noindex, nofollow"
+   ],
+   "at": "2026-11-10T14:23:09-06:00"
+  },
+  {
+   "test": "direct private path anon",
+   "mode": "DEPLOYED_HTTP",
+   "status": "PASS",
+   "expected": "4xx",
+   "actual": 400,
+   "at": "2026-11-10T14:23:09-06:00"
+  },
+  {
+   "test": "18-owner 3/3/2/2+14 deployed broker scope matrix",
+   "mode": "DEPLOYED",
+   "status": "BLOCKED",
+   "reason": "approved synthetic admin session no longer exists in sandbox (sandbox restarted, /tmp cleared); not re-minted per no-new-session rule"
+  },
+  {
+   "test": "login cookie attributes HttpOnly/Secure/SameSite=Strict/host-only/30d",
+   "mode": "DEPLOYED",
+   "status": "BLOCKED",
+   "reason": "approved synthetic admin session no longer exists in sandbox (sandbox restarted, /tmp cleared); not re-minted per no-new-session rule"
+  },
+  {
+   "test": "browser cookie/reload/JS-storage proof",
+   "mode": "DEPLOYED",
+   "status": "BLOCKED",
+   "reason": "approved synthetic admin session no longer exists in sandbox (sandbox restarted, /tmp cleared); not re-minted per no-new-session rule"
+  },
+  {
+   "test": "logout/revoke/rotate/cookie replay",
+   "mode": "DEPLOYED",
+   "status": "BLOCKED",
+   "reason": "approved synthetic admin session no longer exists in sandbox (sandbox restarted, /tmp cleared); not re-minted per no-new-session rule"
+  },
+  {
+   "test": "wrong-code concurrent lockout + forged headers",
+   "mode": "DEPLOYED",
+   "status": "BLOCKED",
+   "reason": "approved synthetic admin session no longer exists in sandbox (sandbox restarted, /tmp cleared); not re-minted per no-new-session rule"
+  },
+  {
+   "test": "cross-owner / forged ID+slug / unpublished private file via broker",
+   "mode": "DEPLOYED",
+   "status": "BLOCKED",
+   "reason": "approved synthetic admin session no longer exists in sandbox (sandbox restarted, /tmp cleared); not re-minted per no-new-session rule"
+  },
+  {
+   "test": "signed URL 200 then 4xx after >=65s",
+   "mode": "DEPLOYED",
+   "status": "BLOCKED",
+   "reason": "approved synthetic admin session no longer exists in sandbox (sandbox restarted, /tmp cleared); not re-minted per no-new-session rule"
+  },
+  {
+   "test": "fresh admin tiny stage/hash readback/idempotent/atomic/NULL-lease after 0009/0010",
+   "mode": "DEPLOYED",
+   "status": "BLOCKED",
+   "reason": "approved synthetic admin session no longer exists in sandbox (sandbox restarted, /tmp cleared); not re-minted per no-new-session rule"
+  },
+  {
+   "test": "hosted synthetic-admin denial of staff revocation",
+   "mode": "DEPLOYED",
+   "status": "BLOCKED",
+   "reason": "approved synthetic admin session no longer exists in sandbox (sandbox restarted, /tmp cleared); not re-minted per no-new-session rule"
+  },
+  {
+   "test": "genuine editor JWT",
+   "mode": "DEPLOYED",
+   "status": "BLOCKED",
+   "reason": "identity unavailable; not minted/retried/spoofed"
+  },
+  {
+   "test": "old owner JWT",
+   "mode": "DEPLOYED",
+   "status": "BLOCKED",
+   "reason": "identity unavailable; not minted/retried/spoofed"
+  },
+  {
+   "test": "native password sign-in E2E",
+   "mode": "DEPLOYED",
+   "status": "BLOCKED",
+   "reason": "identity unavailable; not minted/retried/spoofed"
+  },
+  {
+   "test": "hosted forced expiry",
+   "mode": "DEPLOYED",
+   "status": "BLOCKED",
+   "reason": "no supported fixture-scoped tool"
+  },
+  {
+   "test": "live audit-failure injection",
+   "mode": "DEPLOYED",
+   "status": "BLOCKED",
+   "reason": "no supported fixture-scoped tool"
+  },
+  {
+   "test": "synthetic admin cannot revoke staff",
+   "mode": "UNIT_PGLITE",
+   "status": "PASS"
+  },
+  {
+   "test": "real admin cannot revoke self/real",
+   "mode": "UNIT_PGLITE",
+   "status": "PASS"
+  },
+  {
+   "test": "real admin revokes reserved fixture: kept+audited+no authority",
+   "mode": "UNIT_PGLITE",
+   "status": "PASS"
+  },
+  {
+   "test": "revoked synthetic admin loses admin RPCs",
+   "mode": "UNIT_PGLITE",
+   "status": "PASS"
+  },
+  {
+   "test": "scope audit exact before/after/requested UUIDs, no secrets",
+   "mode": "UNIT_PGLITE",
+   "status": "PASS"
+  },
+  {
+   "test": "prior staff-retirement/null-guard/lease/atomic regression (23)",
+   "mode": "UNIT_PGLITE",
+   "status": "PASS"
+  },
+  {
+   "test": "live readback 0010",
+   "mode": "HOSTED_SQL_READ",
+   "status": "PASS",
+   "actual": "role honors revoked_at; manage audit has before/after; anon cannot execute revoke/manage; revoked=0 real_staff=0 real_creds=0; real-access OFF, sending OFF"
+  }
+ ]
+}

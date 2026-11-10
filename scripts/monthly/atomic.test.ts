@@ -3,7 +3,7 @@
 import { PGlite } from '@electric-sql/pglite';
 import { readFileSync } from 'fs';
 import { expect, test, beforeAll } from 'bun:test';
-const root = new URL('../../drizzle/migrations/', import.meta.url).pathname;
+const root = process.env.MIG_ROOT ?? new URL('../../drizzle/migrations/', import.meta.url).pathname;
 const db = new PGlite();
 const ADMIN = '11111111-1111-4111-8111-111111111111', EDITOR = '22222222-2222-4222-8222-222222222222', CLIENT = '33333333-3333-4333-8333-333333333333';
 const as = (u: string | null) => db.exec(`SELECT set_config('test.uid','${u ?? ''}',false)`);

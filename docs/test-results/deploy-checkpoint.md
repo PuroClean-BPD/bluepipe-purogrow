@@ -29,3 +29,11 @@ and writes the monthly_audit_log row in the same transaction. No row deletion. S
 ## Next step
 Coordinator confirms Netlify deploy ID/state for this commit, then authorizes the deployed synthetic regression run (next checkpoint).
 Human prerequisites remain: Bill account + staff classification, 24-location package, salted verifier manifest.
+
+## Deployed runtime checkpoint (Netlify 6af37af58a30a9e9d3155135 / 87a6efe)
+Ledger: deployed-runtime-ledger.json. Anonymous deployed HTTP checks ran; all signed-in/credential checks BLOCKED because the
+approved synthetic admin session was lost when the sandbox restarted, and it was not re-minted (no new sessions rule).
+Backend-only 0010 (no frontend redeploy): scope audit keeps exact UUID lists; non-deleting synthetic staff revocation,
+genuine real admin only, reserved fixture target only. Staff UI still reads its own staff row directly for display; all data and RPC authority
+uses monthly_staff_role, which honors revocation.
+Next human step: coordinator re-approves a synthetic admin session for 76a43a8c (explicit), then the blocked deployed rows run.

@@ -478,16 +478,22 @@ export type Database = {
       }
       monthly_staff: {
         Row: {
+          revoked_at: string | null
+          revoked_by: string | null
           role: string
           synthetic: boolean
           user_id: string
         }
         Insert: {
+          revoked_at?: string | null
+          revoked_by?: string | null
           role: string
           synthetic?: boolean
           user_id: string
         }
         Update: {
+          revoked_at?: string | null
+          revoked_by?: string | null
           role?: string
           synthetic?: boolean
           user_id?: string
@@ -739,6 +745,10 @@ export type Database = {
       monthly_require_admin: { Args: never; Returns: string }
       monthly_require_real_admin: { Args: never; Returns: string }
       monthly_revoke: { Args: { mid: string }; Returns: undefined }
+      monthly_revoke_synthetic_staff: {
+        Args: { p_reason: string; p_user: string }
+        Returns: undefined
+      }
       monthly_staff_role: { Args: never; Returns: string }
       monthly_stage_fingerprint: {
         Args: { p_bytes: Json; p_sums: Json }
