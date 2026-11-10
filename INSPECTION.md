@@ -46,3 +46,12 @@ The migration tool also added its required Drizzle configuration/dependencies an
 
 Initial visible project billing-period usage: 10.321354488 credits (period 2026-10-28 through 2026-11-28). This is cumulative project usage, not the cost of this request. No purchase or upgrade was attempted.
 Final visible billing-period usage at the last read: 18.821354488 credits; increase from the initial read: **8.5 credits**. This is visible project usage during this work, not a guaranteed final invoice for the turn. No paid purchase/upgrade occurred.
+
+## Nov 10 2026 16:40 UTC - hosted auth/email readback (read-only tools)
+- supabase--debug_oauth_server: Site URL https://bluepipe-purogrow.lovable.app. Allow list = 7 Lovable-managed
+  wildcard entries (preview id-preview*--bd1a7847..., project--, lovableproject.com, preview*--bluepipe-purogrow,
+  bluepipe-purogrow.lovable.app/**). https://puroclean.bluepipedigital.com/portal/callback ABSENT. Exact preview
+  callback is matched only by Lovable-managed wildcard (Lovable re-syncs these; not removable by us).
+- email_domain--list_email_domains: none in workspace. check_email_domain_status: none for project; setup not_started.
+- No sanctioned tool reads/sets a Send Email hook, OTP length, or redirect list. Server-wide delivery restriction UNVERIFIED/NOT IN PLACE.
+- Per docs.lovable.dev/features/custom-emails, disabling custom emails falls back to default sender: not a kill-switch.
