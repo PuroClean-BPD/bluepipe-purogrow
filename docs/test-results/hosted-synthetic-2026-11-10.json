@@ -354,8 +354,8 @@
    "test": "same id same bytes retry",
    "at_ct": "2026-11-10T11:58:38-06:00",
    "expected": "200 same version",
-   "actual": "HTTP 200 version_id_same=True; corrected: response key is id, not version_id; DB shows exactly 1 version (v5) for this request_id",
-   "status": "PASS",
+   "actual": "original run compared version_id None==None (harness bug); not runtime proof. See T8-replay-existing.",
+   "status": "SUPERSEDED",
    "request_id": "59e9dda7-01a9-49f9-a9e6-b747fb794298"
   },
   {
@@ -372,7 +372,7 @@
    "test": "3 parallel distinct requests",
    "at_ct": "2026-11-10T11:58:47-06:00",
    "expected": "all 200, unique versions",
-   "actual": "codes=[200, 200, 200] versions=[6, 8, 7]",
+   "actual": "codes=[200, 200, 200] versions=[6, 8, 7]; DB read-only: v6 975ae39d, v7 88a06509, v8 e8e76257 distinct ids",
    "status": "PASS",
    "request_ids": [
     "10576c5e-5da2-45f8-b696-11c8c450ff29",
@@ -385,8 +385,8 @@
    "test": "2 parallel same request_id",
    "at_ct": "2026-11-10T11:58:52-06:00",
    "expected": "<=1 committed version; other 200-replay or 409",
-   "actual": "codes=[200, 409] distinct_version_ids=1",
-   "status": "PASS",
+   "actual": "codes=[200, 409] distinct_version_ids=1; harness counted {None}; uniqueness only from DB read-only: request bfeb0579 -> single version v9 55369b05",
+   "status": "UNVERIFIED-BY-HARNESS",
    "request_id": "bfeb0579-a5d9-4701-a6e4-3f90dd8aff6a"
   },
   {
@@ -583,9 +583,47 @@
    "expected": "recoverable",
    "actual": "request 3d4ff2be\u2026 left state=reserved v10 with expired lease, no version, no storage objects; reacquirable",
    "status": "PASS"
+  },
+  {
+   "id": "T8-replay-existing",
+   "test": "same-payload replay of existing request 59e9dda7",
+   "at_ct": "2026-11-10T12:03:48-06:00",
+   "expected": {
+    "id": "6e5c448a-e95e-4444-ac5d-f0a102eb52ed",
+    "version": 5,
+    "state": "draft",
+    "sha256": {
+     "html": "bbf0154a38dd0d429b7d2b27f447ac7c86ebfe5ea118d45a1928952e3df8afd9",
+     "pdf": "a2aefbab3c82df701ef058c6bfaeeee5df1f9ceaf41ff5c8cc1ae5c883771b83",
+     "content": "44dd976c3b91c9d5abdad2f3f884d7ff8bfab978a29a5392f44be21993d3bcd9"
+    },
+    "bytes": {
+     "html": 198,
+     "pdf": 139,
+     "content": 32
+    }
+   },
+   "actual": {
+    "http": 200,
+    "id": "6e5c448a-e95e-4444-ac5d-f0a102eb52ed",
+    "version": 5,
+    "state": "draft",
+    "sha256": {
+     "pdf": "a2aefbab3c82df701ef058c6bfaeeee5df1f9ceaf41ff5c8cc1ae5c883771b83",
+     "html": "bbf0154a38dd0d429b7d2b27f447ac7c86ebfe5ea118d45a1928952e3df8afd9",
+     "content": "44dd976c3b91c9d5abdad2f3f884d7ff8bfab978a29a5392f44be21993d3bcd9"
+    },
+    "bytes": {
+     "pdf": 139,
+     "html": 198,
+     "content": 32
+    }
+   },
+   "status": "PASS",
+   "request_id": "59e9dda7-01a9-49f9-a9e6-b747fb794298"
   }
  ],
- "T7_version": null,
+ "T7_version": "6e5c448a-e95e-4444-ac5d-f0a102eb52ed",
  "distinct_ids": [
   "10576c5e-5da2-45f8-b696-11c8c450ff29",
   "1179265b-8d48-4136-9656-6d2319193a16",
@@ -623,7 +661,9 @@
   "no_storage_delete": true
  },
  "summary": {
-  "PASS": 56,
+  "PASS": 55,
+  "SUPERSEDED": 1,
+  "UNVERIFIED-BY-HARNESS": 1,
   "BLOCKED": 11,
   "NOTE": 1
  }

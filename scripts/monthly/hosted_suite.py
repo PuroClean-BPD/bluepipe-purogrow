@@ -75,12 +75,14 @@ r=fn('monthly-admin',b,ADMIN);j=r.json() if r.content else {}
 safe={k:v for k,v in j.items() if 'url' not in k.lower()}
 row('T7-stage','admin stage benign synthetic triplet','200 + readback hashes match',f'HTTP {r.status_code} {json.dumps(safe)[:400]}','PASS' if r.ok and all(h in json.dumps(j) for h,_ in exp.values()) else 'FAIL',request_id=rid,expected_receipt={k:{'sha256':v[0],'bytes':v[1]} for k,v in exp.items()})
 T7=j
-vid=j.get('version_id')
+vid=j.get('id')
+assert isinstance(vid,str) and len(vid)==36, 'stage response must carry non-null UUID id'
 if vid:
   v=rest('monthly_report_versions',ADMIN,q=f'?id=eq.{vid}&select=state,version,html_path,pdf_path').json()
   row('T7-draft-only','staged version state','draft',json.dumps(v),'PASS' if v and v[0]['state']=='draft' else 'FAIL',version_id=vid)
 r2=fn('monthly-admin',b,ADMIN);j2=r2.json()
-row('T8-commit-idempotent','same id same bytes retry','200 same version',f'HTTP {r2.status_code} version_id_same={j2.get("version_id")==vid}','PASS' if r2.ok and j2.get('version_id')==vid else 'FAIL',request_id=rid)
+same=r2.ok and j2.get('id') is not None and all(j2.get(k)==j.get(k) for k in ('id','version','state','sha256','bytes'))
+row('T8-commit-idempotent','same id same bytes retry','200 identical id/version/state/receipt',f'HTTP {r2.status_code} id={j2.get("id")} identical={same}','PASS' if same else 'FAIL',request_id=rid)
 bx,_=body(rid,'T7-CHANGED');r3=fn('monthly-admin',bx,ADMIN)
 row('T8-changed-payload','same id different bytes+new hashes','reject 409/4xx',f'HTTP {r3.status_code} {r3.text[:120]}','PASS' if 400<=r3.status_code<500 else 'FAIL',request_id=rid)
 # distinct concurrent
@@ -88,13 +90,14 @@ res={}
 def go(k,bb):res[k]=fn('monthly-admin',bb,ADMIN)
 ids=[str(uuid.uuid4()) for _ in range(3)];th=[threading.Thread(target=go,args=(i,body(i,'C'+i[:4])[0])) for i in ids]
 [t.start() for t in th];[t.join() for t in th]
-vers=[res[i].json().get('version') for i in ids]
-row('T8-distinct-concurrent','3 parallel distinct requests','all 200, unique versions',f'codes={[res[i].status_code for i in ids]} versions={vers}','PASS' if all(res[i].ok for i in ids) and len(set(vers))==3 and None not in vers else 'FAIL',request_ids=ids)
+vers=[res[i].json().get('version') for i in ids];vids3=[res[i].json().get('id') for i in ids]
+row('T8-distinct-concurrent','3 parallel distinct requests','all 200, unique versions',f'codes={[res[i].status_code for i in ids]} versions={vers}','PASS' if all(res[i].ok for i in ids) and len(set(vers))==3 and None not in vers and None not in vids3 and len(set(vids3))==3 else 'FAIL',request_ids=ids)
 # same-id overlap
 oid=str(uuid.uuid4());ob=body(oid,'OVL')[0];res={}
 th=[threading.Thread(target=go,args=(k,ob)) for k in ('a','b')];[t.start() for t in th];[t.join() for t in th]
-codes=sorted(res[k].status_code for k in res);vids={res[k].json().get('version_id') for k in res if res[k].ok}
-row('T8-same-id-overlap','2 parallel same request_id','<=1 committed version; other 200-replay or 409',f'codes={codes} distinct_version_ids={len(vids)}','PASS' if len(vids)<=1 and 200 in codes else 'FAIL',request_id=oid)
+codes=sorted(res[k].status_code for k in res);okids=[res[k].json().get('id') for k in res if res[k].ok]
+good=len(okids)>=1 and None not in okids and len(set(okids))==1
+row('T8-same-id-overlap','2 parallel same request_id','exactly 1 non-null success id; if 2 successes ids equal; other 409',f'codes={codes} success_ids={okids}','PASS' if good else 'FAIL',request_id=oid)
 # hash mismatch
 mid=str(uuid.uuid4());r=fn('monthly-admin',body(mid,'BAD',bad=True)[0],ADMIN)
 row('T8-hash-mismatch','wrong expected sha','reject, no version',f'HTTP {r.status_code} {r.text[:120]}','PASS' if not r.ok and 'version_id' not in r.text else 'FAIL',request_id=mid)
