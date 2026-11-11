@@ -57,6 +57,7 @@ export type Database = {
           id: string
           org_id: string
           package: string | null
+          retired_at: string | null
           slug: string
           status: string
         }
@@ -66,6 +67,7 @@ export type Database = {
           id?: string
           org_id: string
           package?: string | null
+          retired_at?: string | null
           slug: string
           status?: string
         }
@@ -75,6 +77,7 @@ export type Database = {
           id?: string
           org_id?: string
           package?: string | null
+          retired_at?: string | null
           slug?: string
           status?: string
         }
@@ -708,6 +711,19 @@ export type Database = {
       }
       monthly_can_client: { Args: { cid: string }; Returns: boolean }
       monthly_can_version: { Args: { vid: string }; Returns: boolean }
+      monthly_cleanup_auth_begin: { Args: { p_user: string }; Returns: string }
+      monthly_cleanup_auth_finish: {
+        Args: { p_disabled: boolean; p_intent: string }
+        Returns: string
+      }
+      monthly_cleanup_retire_clients: {
+        Args: { p_clients: string[] }
+        Returns: string
+      }
+      monthly_cleanup_user_allowed: {
+        Args: { p_user: string }
+        Returns: boolean
+      }
       monthly_code_access: {
         Args: {
           p_action: string

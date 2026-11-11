@@ -1,0 +1,22 @@
+import {PGlite} from '@electric-sql/pglite';
+import {readFileSync,readdirSync} from 'node:fs';
+const db=new PGlite(); const bill='47954f6b-ccc8-47f9-a93b-e16935a9e326';
+await db.exec(`create role anon;create role authenticated;create role service_role;create schema auth;create table auth.users(id uuid primary key,email text,banned_until timestamptz);create function auth.uid() returns uuid language sql stable as $$select nullif(current_setting('unit.uid',true),'')::uuid$$;create schema storage;create table storage.objects(bucket_id text);alter table storage.objects enable row level security;`);
+for(const f of readdirSync('drizzle/migrations').filter(x=>x.endsWith('.sql')).sort()) await db.exec(readFileSync('drizzle/migrations/'+f,'utf8').replaceAll('--> statement-breakpoint',''));
+await db.exec(`insert into monthly_staff(user_id,role,synthetic) values('${bill}','admin',false);select set_config('unit.uid','${bill}',false);`);
+const ids=[...readFileSync('drizzle/migrations/0011_monthly_reserved_fixture_cleanup.sql','utf8').matchAll(/allowed uuid\[\]:=ARRAY\[([^\]]+)\]/g)][0][1].match(/[0-9a-f]{8}-[0-9a-f-]{27}/g);const oid=crypto.randomUUID();
+await db.exec(`insert into monthly_organizations(id,name)values('${oid}','Synthetic UNIT');insert into storage.objects values('reports-private');`);
+for(const id of ids)await db.query(`insert into monthly_clients(id,org_id,slug,display_name)values($1,$2,$3,'UNIT')`,[id,oid,'syn-unit-'+id]);
+const rid=crypto.randomUUID(),vid=crypto.randomUUID();await db.query(`insert into monthly_reports(id,client_id,period_start,period_end,period_label,kind)values($1,$2,now(),now()+interval '1 day','UNIT','monthly')`,[rid,ids[0]]);
+await db.query(`insert into monthly_report_versions(id,report_id,version,dataset_sha256,dataset,html_path,pdf_path,created_by)values($1,$2,1,$3,'{}','monthly/u/report.html','monthly/u/report.pdf',$4)`,[vid,rid,'a'.repeat(64),bill]);
+async function rejected(fn:()=>Promise<unknown>,name:string){let failed=false;try{await fn()}catch{failed=true}if(!failed)throw Error(name);console.log('PASS',name)}
+await rejected(()=>db.query('select monthly_cleanup_auth_begin($1)',[bill]),'Bill rejected');
+const real=crypto.randomUUID();await db.query(`insert into monthly_clients(id,org_id,slug,display_name)values($1,$2,'real-unit','REAL UNIT')`,[real,oid]);
+await rejected(()=>db.query('select monthly_cleanup_retire_clients($1)',[[...ids.slice(1),real]]),'real client rejected');
+await db.exec(`create function unit_audit_fail() returns trigger language plpgsql as $$begin raise exception 'UNIT audit failure';end$$;create trigger unit_audit_failure before insert on monthly_audit_log for each row execute function unit_audit_fail();`);
+await rejected(()=>db.query('select monthly_cleanup_retire_clients($1)',[ids]),'retirement audit fails closed');
+if((await db.query('select count(*) n from monthly_clients where retired_at is not null')).rows[0].n!==0)throw Error('partial retirement');
+await db.exec('drop trigger unit_audit_failure on monthly_audit_log');await db.query('select monthly_cleanup_retire_clients($1)',[ids]);
+await db.exec('set role authenticated');const clients=(await db.query('select id from monthly_clients')).rows;const versions=(await db.query('select id from monthly_report_versions')).rows;if(clients.length!==1||versions.length!==0)throw Error('visibility');console.log('PASS empty fixture queries; real client preserved');await db.exec('reset role');
+if((await db.query('select count(*) n from storage.objects')).rows[0].n!==1)throw Error('storage lost');console.log('PASS retained storage');
+await rejected(()=>db.query(`select monthly_admin_create_report($1,now(),now()+interval '1 day','UNIT','monthly')`,[ids[0]]),'retired import denied');

@@ -12,3 +12,4 @@
 - Bound streamed JSON reads and whitelist broker outputs; release only successful login reservations, require frozen raw-file hashes before signing/rendering, and preserve calendar date boundaries independently of viewer timezone.
 
 - Staff password entry uses the isolated monthly client and server staff-role readback; it never signs up or emails users, and transition guards preserve approver approval while real imports remain genuine-admin-only.
+- Fixture cleanup uses exact protected allowlists, real-admin audit-before-Auth bans and transactional client retirement; retained fixtures cannot authorize reads or new writes, and storage is never deleted.

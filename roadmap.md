@@ -1,5 +1,7 @@
 # Monthly portal
 
+- [x] Approved backend-only cleanup: six reserved logins disabled, 74 fixture locations retired, 123 original objects retained; 24 private drafts imported with 72 server-side raw-file readbacks and 48 independent staff HTML/PDF downloads. Independent content signing and browser rendering remain unavailable/unobserved. No codes generated or access activated.
+
 - [x] Verify requested code rollback commit and inspect existing auth/policies/hosting without mutation.
 - [x] Record non-destructive rollback and integration constraints.
 - [x] Establish local admin-only email-free synthetic fixture provisioning using managed sandbox credentials.
@@ -10,7 +12,7 @@
 - [x] Run real backend security tests and authenticated UI flow; record actual passes, initial failures and limitations.
 - [ ] Frontend deploy withheld: strict shared-bundle external-key exclusion unresolved without legacy-route refactor; hosted OTP/PKCE exchange unverified with emails prohibited; Netlify broker deployment withheld by coordinator.
 - [x] Admin-only `monthly-admin` function + recipient/callback restriction (commit 3ce0f46).
-- [ ] Real import of 24 locations (Rocklin excluded) from coordinator's separate 24-location package — blocked: needs Bill's real staff session and the package.
+- [x] Real import of 24 locations (Rocklin excluded) from coordinator's separate R6 package under Bill's genuine native session; all drafts, real access OFF.
 - [ ] Explicit grants for the 24 locations incl. King of Prussia (ksunshine@puroclean.com) and Burlington (Jennifer Wine, jwine@puroclean.com) — blocked: Bill's staff session; no emails, no publication.
 - [x] Genuine approved synthetic admin runtime used; editor identity remains unavailable and must not be retried.
 

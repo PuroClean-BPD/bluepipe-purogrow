@@ -2,6 +2,7 @@ import { createClient } from "npm:@supabase/supabase-js@2";
 import { corsHeaders } from "npm:@supabase/supabase-js@2/cors";
 import { z } from "npm:zod@3";
 import { type Deps, provisionOwner, stageVersion } from "./core.ts";
+import { disableFixture } from "./cleanup.ts";
 
 // Admin-only monthly portal operations. Caller must be a real signed-in monthly_staff admin.
 // All DB mutations go through audited RPCs under the caller's own JWT (mutation + audit atomic).
@@ -15,6 +16,8 @@ const b64 = z
   .regex(/^[A-Za-z0-9+/]+={0,2}$/);
 const hex = z.string().regex(/^[a-f0-9]{64}$/);
 const Action = z.discriminatedUnion("action", [
+  z.object({ action: z.literal("disable_synthetic_login"), user_id: uuid }).strict(),
+  z.object({ action: z.literal("retire_synthetic_locations"), client_ids: z.array(uuid).length(74) }).strict(),
   z
     .object({
       action: z.literal("stage_owner_verifier"),
@@ -193,6 +196,23 @@ Deno.serve(async (req) => {
   };
 
   switch (a.action) {
+    case "disable_synthetic_login": {
+      const result = await disableFixture({
+        rpc: deps.rpc,
+        getUser: async (id) => {
+          const { data, error } = await admin.auth.admin.getUserById(id);
+          if (error || !data.user) return null;
+          return { id: data.user.id, email: data.user.email, banned_until: (data.user as unknown as { banned_until?: string }).banned_until };
+        },
+        banUser: async (id) => {
+          const { error } = await admin.auth.admin.updateUserById(id, { ban_duration: "876000h" });
+          return !error;
+        },
+      }, a.user_id);
+      return reply(result.body, result.status);
+    }
+    case "retire_synthetic_locations":
+      return rpcOut("monthly_cleanup_retire_clients", { p_clients: a.client_ids }, "audit_id");
     case "stage_owner_verifier":
       return rpcOut(
         "monthly_code_manage",
