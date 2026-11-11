@@ -131,7 +131,7 @@
     <p class="sub">Visibility Audit · PuroClean of Northeast Sacramento</p>
     <form id="form" autocomplete="off">
       <label for="code">Enter your access code</label>
-      <input id="code" name="code" type="password" inputmode="text" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="CHA-0000" required>
+      <input id="code" name="code" type="password" inputmode="text" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="NES-0000" required>
       <button type="submit" id="btn">Unlock audit</button>
       <div class="err" id="err">That code didn’t unlock this audit. Check the code and try again.</div>
       <div class="busy" id="busy">Decrypting… this can take a few seconds.</div>
@@ -140,7 +140,7 @@
   </div>
 <script>
 (function () {
-  const META = {"slug":"northeast-sacramento-ca-d79053682924f33d","html":{"salt_b64":"K7Soi9vZZWlaThrtRR1nAQ==","iv_b64":"XRqC0Vier8UxWj20","iterations":210000},"pdf":{"salt_b64":"nYe1uqL87WLD2yrKFh8Yng==","iv_b64":"wunTP2sepy1WwNGx","iterations":210000},"html_chunks":["html-payload-1.txt","html-payload-2.txt","html-payload-3.txt"],"pdf_chunks":["pdf-payload-1.txt","pdf-payload-2.txt"]};
+  const META = {"slug":"northeast-sacramento-ca-d79053682924f33d","html":{"salt_b64":"QCkVQtHO5SdDSBgiWQzMZw==","iv_b64":"Y+FnXmbI0m6+Hpnd","iterations":210000},"pdf":{"salt_b64":"nSyad/OPBlv5VRfwhjukMQ==","iv_b64":"ftJoLF3V5q7Op9Et","iterations":210000},"html_chunks":["html-payload-1.txt","html-payload-2.txt","html-payload-3.txt","html-payload-4.txt","html-payload-5.txt"],"pdf_chunks":["pdf-payload-1.txt","pdf-payload-2.txt"]};
   const STORAGE_KEY = "bp_audit_code_" + (META.slug || "audit");
 
   function b64ToBytes(b64) {
