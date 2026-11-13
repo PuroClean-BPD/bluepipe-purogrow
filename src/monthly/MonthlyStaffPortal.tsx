@@ -15,6 +15,8 @@ import { monthlyClient } from "./client";
 import { hasStaffSession } from "./staff-auth";
 import logo from "@/assets/bluepipe-logo.png";
 import "./monthly.css";
+import { latestFirst } from "./owner-rules";
+import { OWNER_GROUPS, ownerPeriodLabel } from "./staff-owner-groups";
 type Client = {
   id: string;
   display_name: string;
@@ -51,7 +53,9 @@ export default function MonthlyPortal() {
     [selected, setSelected] = useState(""),
     [message, setMessage] = useState(""),
     [busy, setBusy] = useState(false),
-    [preview, setPreview] = useState<string | null>(null);
+    [preview, setPreview] = useState<string | null>(null),
+    [ownerMode, setOwnerMode] = useState(false),
+    [owner, setOwner] = useState(OWNER_GROUPS[0].name);
   const load = async () => {
     const {
       data: { user },
@@ -102,15 +106,32 @@ export default function MonthlyPortal() {
     void load();
     return () => subscription.unsubscribe();
   }, []);
+  const ownerSlugs =
+    OWNER_GROUPS.find((g) => g.name === owner)?.slugs ?? [];
+  const shownClients = ownerMode
+    ? clients.filter((c) => ownerSlugs.includes(c.slug))
+    : clients;
+  if (ownerMode && !shownClients.some((c) => c.id === location) && shownClients[0])
+    setTimeout(() => setLocation(shownClients[0].id), 0);
   const archive = reports.filter((r) => r.client_id === location);
-  const visible = versions.filter((v) =>
+  const staffVisible = versions.filter((v) =>
     archive.some((r) => r.id === v.report_id),
   );
+  const visible = ownerMode
+    ? latestFirst(
+        staffVisible
+          .filter((v) => ["draft", "approved", "published"].includes(v.state))
+          .map((v) => {
+            const r = archive.find((x) => x.id === v.report_id)!;
+            return { ...v, period_start: r.period_start, period_end: r.period_end };
+          }),
+      )
+    : staffVisible;
   const current = visible.find((v) => v.id === selected) ?? visible[0];
   const report = reports.find((r) => r.id === current?.report_id);
   const client = clients.find((c) => c.id === location);
   const act = async (next: string) => {
-    if (!current) return;
+    if (!current || ownerMode) return;
     setBusy(true);
     const { error } = await monthlyClient.rpc("monthly_transition", {
       vid: current.id,
@@ -192,11 +213,38 @@ export default function MonthlyPortal() {
           <p>Staff access unavailable.</p>
         ) : (
           <>
+            <div className="flex flex-wrap items-end gap-3 mb-6">
+              {ownerMode ? (
+                <Button variant="secondary" onClick={() => { setOwnerMode(false); setSelected(""); setPreview(null); }}>
+                  Exit preview
+                </Button>
+              ) : (
+                <Button variant="secondary" onClick={() => { setOwnerMode(true); setSelected(""); setPreview(null); setMessage(""); }}>
+                  Preview as owner
+                </Button>
+              )}
+              <select
+                aria-label="Owner"
+                value={owner}
+                onChange={(e) => { setOwner(e.target.value); setSelected(""); setPreview(null); }}
+              >
+                {OWNER_GROUPS.map((g) => (
+                  <option key={g.name} value={g.name}>{g.name}</option>
+                ))}
+              </select>
+            </div>
+            {ownerMode && (
+              <p className="monthly-warning text-sm mb-6 font-semibold" role="status">
+                Staff preview — owners cannot see this until you Publish
+              </p>
+            )}
             <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-8">
               <div>
-                <p className="text-primary text-sm font-semibold mb-3">
-                  VISIBILITY REPORTING {role && `· ${role.toUpperCase()}`}
-                </p>
+                {!ownerMode && (
+                  <p className="text-primary text-sm font-semibold mb-3">
+                    VISIBILITY REPORTING {role && `· ${role.toUpperCase()}`}
+                  </p>
+                )}
                 <h1 className="text-3xl sm:text-4xl">
                   {client?.display_name ?? "Your locations"}
                 </h1>
@@ -221,7 +269,7 @@ export default function MonthlyPortal() {
                     setPreview(null);
                   }}
                 >
-                  {clients.map((c) => (
+                  {shownClients.map((c) => (
                     <option key={c.id} value={c.id}>
                       {c.display_name}
                     </option>
@@ -229,7 +277,7 @@ export default function MonthlyPortal() {
                 </select>
               </div>
             </div>
-            {clients.length === 0 ? (
+            {shownClients.length === 0 ? (
               <div className="border-t border-border py-12">
                 <h2 className="text-2xl mb-3">No locations assigned</h2>
                 <p className="text-muted-foreground">
@@ -255,6 +303,17 @@ export default function MonthlyPortal() {
                         }}
                       >
                         <FileText />
+                        {ownerMode ? (
+                          <span>
+                            {(() => {
+                              const r = reports.find((x) => x.id === v.report_id);
+                              return r ? ownerPeriodLabel(r.period_start, r.period_end, v.version) : null;
+                            })()}
+                            {v.state !== "published" && (
+                              <span className="block text-xs opacity-75">{v.state}</span>
+                            )}
+                          </span>
+                        ) : (
                         <span>
                           {
                             reports.find((r) => r.id === v.report_id)
@@ -264,6 +323,7 @@ export default function MonthlyPortal() {
                             Version {v.version} · {v.state}
                           </span>
                         </span>
+                        )}
                       </Button>
                     ))}
                   </div>
@@ -308,6 +368,7 @@ export default function MonthlyPortal() {
                           </Button>
                         </div>
                       </div>
+                      {!ownerMode && (<>
                       <div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-4 mb-8">
                         {Object.entries(current.dataset.metrics ?? {}).map(
                           ([label, value]) => (
@@ -344,7 +405,8 @@ export default function MonthlyPortal() {
                           </div>
                         ))}
                       </div>
-                      {role && (
+                      </>)}
+                      {role && !ownerMode && (
                         <div className="border-t border-border pt-5 flex flex-wrap gap-3">
                           <span className="text-muted-foreground self-center text-sm">
                             {current.state} · v{current.version}
@@ -393,9 +455,11 @@ export default function MonthlyPortal() {
                           srcDoc={preview}
                         />
                       )}
-                      <p className="text-xs text-muted-foreground mt-6 break-all">
-                        Frozen dataset · SHA256 {current.dataset_sha256}
-                      </p>
+                      {!ownerMode && (
+                        <p className="text-xs text-muted-foreground mt-6 break-all">
+                          Frozen dataset · SHA256 {current.dataset_sha256}
+                        </p>
+                      )}
                     </>
                   )}
                 </section>
