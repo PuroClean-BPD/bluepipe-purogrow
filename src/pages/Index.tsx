@@ -8,12 +8,14 @@ import CaseStudiesPreview from "@/components/CaseStudiesPreview";
 import WhyChooseSection from "@/components/WhyChooseSection";
 import NewsletterSection from "@/components/NewsletterSection";
 import AuditCTASection from "@/components/AuditCTASection";
+import SparPartnerStrip from "@/components/SparPartnerStrip";
 
 const Index = () => {
   return (
     <div className="min-h-screen">
       <Navbar />
       <HeroSection />
+      <SparPartnerStrip />
       <PartnershipSection />
       <SolutionsSection />
       <HowItWorksSection />
