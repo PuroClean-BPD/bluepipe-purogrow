@@ -17,6 +17,7 @@ import logo from "@/assets/bluepipe-logo.png";
 import "./monthly.css";
 import { latestFirst } from "./owner-rules";
 import { OWNER_GROUPS, ownerPeriodLabel } from "./staff-owner-groups";
+import { addMapZoom } from "./addMapZoom";
 type Client = {
   id: string;
   display_name: string;
@@ -161,7 +162,7 @@ export default function MonthlyPortal() {
     }
     if (format === "html") {
       const content = await response.text();
-      setPreview(content);
+      setPreview(addMapZoom(content));
     } else {
       const blob = await response.blob();
       const url = URL.createObjectURL(blob);

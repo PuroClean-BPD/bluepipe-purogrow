@@ -11,6 +11,7 @@ import {
 import logo from "@/assets/bluepipe-logo.png";
 import { ownerRequest } from "./owner-api";
 import { calendarDate, latestFirst, verifyFrozenBytes } from "./owner-rules";
+import { addMapZoom } from "./addMapZoom";
 import "./monthly.css";
 type Location = { id: string; display_name: string; package: string | null };
 type Report = {
@@ -83,7 +84,7 @@ export default function MonthlyOwnerPortal() {
       if (!r.ok) throw Error();
       const bytes = await r.arrayBuffer();
       await verifyFrozenBytes(bytes, d.sha256);
-      if (format === "html") setPreview(new TextDecoder().decode(bytes));
+      if (format === "html") setPreview(addMapZoom(new TextDecoder().decode(bytes)));
       else {
         const u = URL.createObjectURL(
           new Blob([bytes], { type: "application/pdf" }),
