@@ -181,7 +181,7 @@ function uploadDeps(b: ReturnType<typeof backend>, opt: { signFail?: boolean } =
   const types = new Map<string, string>();
   const d: UploadDeps = {
     rpc: base.rpc,
-    signUpload: async (path) => (opt.signFail ? null : { url: `signed://${path}` }),
+    signUpload: async (path) => (opt.signFail ? null : b.objects.has(path) ? { exists: true } : { url: `signed://${path}` }),
     stagingRow: async (req) => {
       const s = b.staging.get(req);
       return s ? { base_path: s.base_path, state: s.state, created_by: ADMIN, version: s.version, version_id: s.version_id, lease_token: s.lease, sums: s.sums as never, bytes: s.bytes as never } : null;
@@ -237,9 +237,14 @@ Deno.test('upload path: resumes a stale reservation with the same request_id and
   b.clock.now += 1000; // lease expired
   const { d, put } = uploadDeps(b);
   const o = await begin(d, id); assertEquals(o.status, 200); assertEquals(o.body.version, first.body.version);
-  const u2 = o.body.uploads as Record<string, { url: string }>;
-  assertEquals(put(u2.html.url, FILES.html), false); put(u2.pdf.url, FILES.pdf); put(u2.content.url, FILES.content);
+  const u2 = o.body.uploads as Record<string, { url: string; already_stored?: boolean }>;
+  assertEquals(u2.html.already_stored, true); put(u2.pdf.url, FILES.pdf); put(u2.content.url, FILES.content);
   assertEquals((await stageUploadCommit(d, ADMIN, { request_id: id, lease: o.body.lease as string })).status, 200);
+});
+Deno.test('upload path: signing failure releases the lease without failing the request', async () => {
+  const b = backend(); const id = crypto.randomUUID();
+  assertEquals((await begin(uploadDeps(b, { signFail: true }).d, id)).status, 502);
+  assertEquals(b.staging.get(id)!.state, 'reserved'); assertEquals(b.staging.get(id)!.lease, null);
 });
 Deno.test('upload path: changed bytes for the same request_id and oversize files are refused', async () => {
   const b = backend(); const { d } = uploadDeps(b); const id = crypto.randomUUID();

@@ -317,7 +317,9 @@ Deno.serve(async (req) => {
         rpc: deps.rpc,
         signUpload: async (path) => {
           const { data, error } = await store.createSignedUploadUrl(path);
-          return error || !data ? null : { url: data.signedUrl };
+          if (data?.signedUrl && !error) return { url: data.signedUrl };
+          const m = String((error as { message?: string } | null)?.message ?? "");
+          return /exists|duplicate/i.test(m) ? { exists: true } : null;
         },
         stagingRow: async (request) => {
           const { data } = await admin
@@ -328,8 +330,13 @@ Deno.serve(async (req) => {
           return data ?? null;
         },
         downloadTyped: async (path) => {
+          // Type comes from the stored object metadata: Storage serves HTML downloads as text/plain.
+          const cut = path.lastIndexOf("/"), name = path.slice(cut + 1);
+          const { data: list } = await store.list(path.slice(0, cut), { search: name });
+          const type = (list ?? []).find((e) => e.name === name)?.metadata?.mimetype;
+          if (typeof type !== "string") return null;
           const { data } = await store.download(path);
-          return data ? { bytes: new Uint8Array(await data.arrayBuffer()), type: data.type } : null;
+          return data ? { bytes: new Uint8Array(await data.arrayBuffer()), type } : null;
         },
       };
       const o = a.action === "stage_upload_begin"

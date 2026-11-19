@@ -90,7 +90,7 @@ export async function provisionOwner(d: Deps, a: { request_id: string; email: st
 export type StageRow = { base_path: string; state: string; created_by: string; version: number; version_id: string | null; lease_token: string | null; sums: Record<Kind, string>; bytes: Record<Kind, number> };
 export interface UploadDeps {
   rpc: Deps['rpc'];
-  signUpload(path: string): Promise<{ url: string } | null>; // private bucket, no overwrite
+  signUpload(path: string): Promise<{ url?: string; exists?: boolean } | null>; // private bucket, no overwrite
   stagingRow(request: string): Promise<StageRow | null>; // read-only lookup of the reserved row
   downloadTyped(path: string): Promise<{ bytes: Uint8Array; type: string } | null>;
 }
@@ -109,10 +109,12 @@ export async function stageUploadBegin(d: UploadDeps, a: { request_id: string; r
   }
   if (s.state === 'committed') return ok({ id: s.version_id, version: s.version, state: 'draft', sha256: s.sums, bytes: s.bytes, idempotent: true });
   if (s.state !== 'reserved' || !s.lease) return err(409, 'Request already failed; use a new request_id');
-  const uploads = {} as Record<Kind, { url: string; content_type: string }>;
+  const uploads = {} as Record<Kind, { url: string; content_type: string } | { already_stored: true }>;
   for (const k of KINDS) {
     const u = await d.signUpload(`${s.base_path}/${NAMES[k]}`);
-    if (!u) {
+    // Object from an earlier attempt of this same fingerprint-bound request: never overwritten, verified at commit.
+    if (u?.exists) { uploads[k] = { already_stored: true }; continue; }
+    if (!u?.url) {
       const r = await d.rpc('monthly_admin_stage_release', { p_request: a.request_id, p_lease: s.lease, p_reason: `sign_${k}`, p_fatal: false, p_orphans: [] });
       return r.error ? err(500, 'Recovery required') : err(502, `sign_${k}`);
     }
