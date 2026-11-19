@@ -171,3 +171,79 @@ Deno.test('provision: no Auth call if intent audit fails; finish failure => reco
   const d3: Deps = { ...base, rpc: async (fn) => fn === 'monthly_admin_provision_begin' ? { data: [{ state: 'pending', user_id: null }], error: null } : { data: null, error: null }, createUser: async () => ({ exists: true }), findUserId: async () => 'u-existing' };
   assertEquals((await provisionOwner(d3, { request_id: crypto.randomUUID(), email: 'a@example.invalid' })).body.user_id, 'u-existing');
 });
+
+// ---- Direct private upload + server-verified commit ----
+import { type UploadDeps, stageUploadBegin, stageUploadCommit } from './core.ts';
+const ADMIN = 'admin-1';
+const TYPES: Record<string, string> = { 'report.html': 'text/html; charset=utf-8', 'report.pdf': 'application/pdf', 'content.json': 'application/json' };
+function uploadDeps(b: ReturnType<typeof backend>, opt: { signFail?: boolean } = {}) {
+  const base = b.deps();
+  const types = new Map<string, string>();
+  const d: UploadDeps = {
+    rpc: base.rpc,
+    signUpload: async (path) => (opt.signFail ? null : { url: `signed://${path}` }),
+    stagingRow: async (req) => {
+      const s = b.staging.get(req);
+      return s ? { base_path: s.base_path, state: s.state, created_by: ADMIN, version: s.version, version_id: s.version_id, lease_token: s.lease, sums: s.sums as never, bytes: s.bytes as never } : null;
+    },
+    downloadTyped: async (path) => { const x = b.objects.get(path); return x ? { bytes: x, type: types.get(path) ?? TYPES[path.split('/').pop()!] } : null; },
+  };
+  // Simulates the caller PUTting to each signed URL (no overwrite).
+  const put = (url: string, bytes: Uint8Array, type?: string) => { const p = url.replace('signed://', ''); if (b.objects.has(p)) return false; b.objects.set(p, bytes); if (type) types.set(p, type); return true; };
+  return { d, put };
+}
+const bytesOf = (f: ReturnType<typeof mk>) => ({ html: f.html.length, pdf: f.pdf.length, content: f.content.length });
+const begin = async (d: UploadDeps, id: string, f = FILES) => stageUploadBegin(d, { request_id: id, report_id: REPORT, expected: await sumsOf(f), bytes: bytesOf(f) });
+
+Deno.test('upload path: begin -> direct uploads -> verified draft commit; retry is idempotent', async () => {
+  const b = backend(); const { d, put } = uploadDeps(b); const id = crypto.randomUUID();
+  const o = await begin(d, id); assertEquals(o.status, 200);
+  const up = o.body.uploads as Record<string, { url: string }>;
+  put(up.html.url, FILES.html); put(up.pdf.url, FILES.pdf); put(up.content.url, FILES.content);
+  const c = await stageUploadCommit(d, ADMIN, { request_id: id, lease: o.body.lease as string });
+  assertEquals(c.status, 200); assertEquals(c.body.state, 'draft'); assertEquals(c.body.sha256, await sumsOf(FILES));
+  const again = await stageUploadCommit(d, ADMIN, { request_id: id, lease: 'x' });
+  assertEquals(again.body.idempotent, true); assertEquals(again.body.id, c.body.id);
+});
+Deno.test('upload path: tampered bytes are rejected fatally and nothing is deleted', async () => {
+  const b = backend(); const { d, put } = uploadDeps(b); const id = crypto.randomUUID();
+  const o = await begin(d, id); const up = o.body.uploads as Record<string, { url: string }>;
+  put(up.html.url, FILES.html); put(up.pdf.url, enc('%PDF-tampered')); put(up.content.url, FILES.content);
+  const c = await stageUploadCommit(d, ADMIN, { request_id: id, lease: o.body.lease as string });
+  assertEquals(c.status, 502); assertEquals(b.staging.get(id)!.state, 'failed'); assertEquals(b.objects.size, 3);
+  assertEquals(b.audit.at(-1)!.action, 'stage_failed');
+});
+Deno.test('upload path: wrong MIME type is rejected', async () => {
+  const b = backend(); const { d, put } = uploadDeps(b); const id = crypto.randomUUID();
+  const o = await begin(d, id); const up = o.body.uploads as Record<string, { url: string }>;
+  put(up.html.url, FILES.html, 'text/plain'); put(up.pdf.url, FILES.pdf); put(up.content.url, FILES.content);
+  assertEquals((await stageUploadCommit(d, ADMIN, { request_id: id, lease: o.body.lease as string })).status, 502);
+});
+Deno.test('upload path: missing file keeps the lease; another caller or wrong lease is refused', async () => {
+  const b = backend(); const { d, put } = uploadDeps(b); const id = crypto.randomUUID();
+  const o = await begin(d, id); const up = o.body.uploads as Record<string, { url: string }>; const lease = o.body.lease as string;
+  put(up.html.url, FILES.html);
+  assertEquals((await stageUploadCommit(d, ADMIN, { request_id: id, lease })).status, 409);
+  assertEquals(b.staging.get(id)!.state, 'reserved');
+  assertEquals((await stageUploadCommit(d, 'someone-else', { request_id: id, lease })).status, 403);
+  assertEquals((await stageUploadCommit(d, ADMIN, { request_id: id, lease: crypto.randomUUID() })).status, 409);
+  put(up.pdf.url, FILES.pdf); put(up.content.url, FILES.content);
+  assertEquals((await stageUploadCommit(d, ADMIN, { request_id: id, lease })).status, 200);
+});
+Deno.test('upload path: resumes a stale reservation with the same request_id and an already stored file', async () => {
+  const b = backend(); const id = crypto.randomUUID();
+  const first = await begin(uploadDeps(b).d, id); const up = first.body.uploads as Record<string, { url: string }>;
+  b.objects.set(up.html.url.replace('signed://', ''), FILES.html); // earlier partial attempt
+  b.clock.now += 1000; // lease expired
+  const { d, put } = uploadDeps(b);
+  const o = await begin(d, id); assertEquals(o.status, 200); assertEquals(o.body.version, first.body.version);
+  const u2 = o.body.uploads as Record<string, { url: string }>;
+  assertEquals(put(u2.html.url, FILES.html), false); put(u2.pdf.url, FILES.pdf); put(u2.content.url, FILES.content);
+  assertEquals((await stageUploadCommit(d, ADMIN, { request_id: id, lease: o.body.lease as string })).status, 200);
+});
+Deno.test('upload path: changed bytes for the same request_id and oversize files are refused', async () => {
+  const b = backend(); const { d } = uploadDeps(b); const id = crypto.randomUUID();
+  await begin(d, id); b.clock.now += 1000;
+  assertEquals((await begin(d, id, mk('other'))).status, 409);
+  assertEquals((await stageUploadBegin(d, { request_id: crypto.randomUUID(), report_id: REPORT, expected: await sumsOf(FILES), bytes: { ...bytesOf(FILES), html: 15_000_001 } })).status, 413);
+});

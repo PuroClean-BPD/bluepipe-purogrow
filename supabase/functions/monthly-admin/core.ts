@@ -84,3 +84,66 @@ export async function provisionOwner(d: Deps, a: { request_id: string; email: st
   if (fin.error) return err(500, 'Recovery required'); // audited provision_intent remains pending
   return id ? ok({ user_id: id }) : err(409, 'Rejected');
 }
+
+// ---- Large reports: direct private upload, then server-verified commit (same lease/fingerprint RPCs). ----
+// The request body stays tiny, so big files never pass through the function as base64.
+export type StageRow = { base_path: string; state: string; created_by: string; version: number; version_id: string | null; lease_token: string | null; sums: Record<Kind, string>; bytes: Record<Kind, number> };
+export interface UploadDeps {
+  rpc: Deps['rpc'];
+  signUpload(path: string): Promise<{ url: string } | null>; // private bucket, no overwrite
+  stagingRow(request: string): Promise<StageRow | null>; // read-only lookup of the reserved row
+  downloadTyped(path: string): Promise<{ bytes: Uint8Array; type: string } | null>;
+}
+export const UPLOAD_LEASE_SECONDS = 600;
+const baseMime = (m: string) => m.split(';')[0].trim().toLowerCase();
+
+export async function stageUploadBegin(d: UploadDeps, a: { request_id: string; report_id: string; expected: Record<Kind, string>; bytes: Record<Kind, number> }): Promise<Out> {
+  for (const k of KINDS) if (!Number.isInteger(a.bytes[k]) || a.bytes[k] <= 0 || a.bytes[k] > LIMITS[k]) return err(413, `Size limit: ${k}`);
+  const res = await d.rpc('monthly_admin_stage_acquire', { p_request: a.request_id, p_report: a.report_id, p_sums: a.expected, p_bytes: a.bytes, p_lease_seconds: UPLOAD_LEASE_SECONDS });
+  const s = res.data?.[0];
+  if (res.error || !s) {
+    const m = String((res.error as { message?: string })?.message ?? res.error);
+    if (/Payload mismatch/.test(m)) return err(409, 'Payload differs from original request');
+    if (/Busy/.test(m)) return err(409, 'Request in progress; retry later');
+    return err(403, 'Rejected');
+  }
+  if (s.state === 'committed') return ok({ id: s.version_id, version: s.version, state: 'draft', sha256: s.sums, bytes: s.bytes, idempotent: true });
+  if (s.state !== 'reserved' || !s.lease) return err(409, 'Request already failed; use a new request_id');
+  const uploads = {} as Record<Kind, { url: string; content_type: string }>;
+  for (const k of KINDS) {
+    const u = await d.signUpload(`${s.base_path}/${NAMES[k]}`);
+    if (!u) {
+      const r = await d.rpc('monthly_admin_stage_release', { p_request: a.request_id, p_lease: s.lease, p_reason: `sign_${k}`, p_fatal: false, p_orphans: [] });
+      return r.error ? err(500, 'Recovery required') : err(502, `sign_${k}`);
+    }
+    uploads[k] = { url: u.url, content_type: MIME[k] };
+  }
+  return ok({ lease: s.lease, version: s.version, expires_in: UPLOAD_LEASE_SECONDS, uploads });
+}
+
+export async function stageUploadCommit(d: UploadDeps, caller: string, a: { request_id: string; lease: string; notes?: string }): Promise<Out> {
+  const s = await d.stagingRow(a.request_id);
+  if (!s || s.created_by !== caller) return err(403, 'Rejected');
+  if (s.state === 'committed' && s.version_id) return ok({ id: s.version_id, version: s.version, state: 'draft', sha256: s.sums, bytes: s.bytes, idempotent: true });
+  if (s.state !== 'reserved' || !s.lease_token || s.lease_token !== a.lease) return err(409, 'Lease lost');
+  const paths = KINDS.map((k) => `${s.base_path}/${NAMES[k]}`);
+  const release = async (reason: string): Promise<Out> => {
+    const r = await d.rpc('monthly_admin_stage_release', { p_request: a.request_id, p_lease: a.lease, p_reason: reason, p_fatal: true, p_orphans: paths });
+    return r.error ? err(500, 'Recovery required') : err(502, reason);
+  };
+  let dataset: unknown = null;
+  for (const k of KINDS) {
+    const got = await d.downloadTyped(`${s.base_path}/${NAMES[k]}`);
+    if (!got) return err(409, `Upload missing: ${k}`); // nothing mutated; upload it and commit again within the lease
+    const b = got.bytes;
+    if (b.length !== Number(s.bytes[k]) || (await sha256(b)) !== s.sums[k] || baseMime(got.type) !== baseMime(MIME[k])) return release(`readback_${k}`);
+    if (k === 'pdf' && new TextDecoder().decode(b.slice(0, 5)) !== '%PDF-') return release('format_pdf');
+    if (k === 'html' && !/<html[\s>]/i.test(new TextDecoder().decode(b.slice(0, 4096)))) return release('format_html');
+    if (k === 'content') {
+      try { dataset = JSON.parse(new TextDecoder('utf-8', { fatal: true }).decode(b)); } catch { return release('format_content'); }
+    }
+  }
+  const c = await d.rpc('monthly_admin_stage_commit', { p_request: a.request_id, p_lease: a.lease, p_dataset: dataset, p_notes: a.notes ?? null });
+  if (c.error || !c.data) return err(503, 'Commit outcome unknown; retry with the same request_id');
+  return ok({ id: c.data, version: s.version, state: 'draft', sha256: s.sums, bytes: s.bytes });
+}

@@ -1,7 +1,7 @@
 import { createClient } from "npm:@supabase/supabase-js@2";
 import { corsHeaders } from "npm:@supabase/supabase-js@2/cors";
 import { z } from "npm:zod@3";
-import { type Deps, provisionOwner, stageVersion } from "./core.ts";
+import { type Deps, provisionOwner, stageUploadBegin, stageUploadCommit, stageVersion, type UploadDeps } from "./core.ts";
 import { disableFixture } from "./cleanup.ts";
 
 // Admin-only monthly portal operations. Caller must be a real signed-in monthly_staff admin.
@@ -63,6 +63,27 @@ const Action = z.discriminatedUnion("action", [
       expected: z
         .object({ html_sha256: hex, pdf_sha256: hex, content_sha256: hex })
         .strict(),
+      notes: z.string().max(500).optional(),
+    })
+    .strict(),
+  z
+    .object({
+      action: z.literal("stage_upload_begin"),
+      request_id: uuid,
+      report_id: uuid,
+      expected: z
+        .object({ html_sha256: hex, pdf_sha256: hex, content_sha256: hex })
+        .strict(),
+      bytes: z
+        .object({ html: z.number().int().positive(), pdf: z.number().int().positive(), content: z.number().int().positive() })
+        .strict(),
+    })
+    .strict(),
+  z
+    .object({
+      action: z.literal("stage_upload_commit"),
+      request_id: uuid,
+      lease: uuid,
       notes: z.string().max(500).optional(),
     })
     .strict(),
@@ -285,6 +306,40 @@ Deno.serve(async (req) => {
         },
         notes: a.notes,
       });
+      return reply(o.body, o.status);
+    }
+    case "stage_upload_begin":
+    case "stage_upload_commit": {
+      // Large reports: the caller PUTs bytes to single-use private signed upload URLs (no overwrite),
+      // then the server re-reads each object, checks size/sha256/type against the frozen fingerprint,
+      // and commits through the same lease-fenced audited RPC.
+      const ud: UploadDeps = {
+        rpc: deps.rpc,
+        signUpload: async (path) => {
+          const { data, error } = await store.createSignedUploadUrl(path);
+          return error || !data ? null : { url: data.signedUrl };
+        },
+        stagingRow: async (request) => {
+          const { data } = await admin
+            .from("monthly_staging")
+            .select("base_path,state,created_by,version,version_id,lease_token,sums,bytes")
+            .eq("request_id", request)
+            .maybeSingle();
+          return data ?? null;
+        },
+        downloadTyped: async (path) => {
+          const { data } = await store.download(path);
+          return data ? { bytes: new Uint8Array(await data.arrayBuffer()), type: data.type } : null;
+        },
+      };
+      const o = a.action === "stage_upload_begin"
+        ? await stageUploadBegin(ud, {
+          request_id: a.request_id,
+          report_id: a.report_id,
+          expected: { html: a.expected.html_sha256, pdf: a.expected.pdf_sha256, content: a.expected.content_sha256 },
+          bytes: a.bytes,
+        })
+        : await stageUploadCommit(ud, u.user.id, { request_id: a.request_id, lease: a.lease, notes: a.notes });
       return reply(o.body, o.status);
     }
     case "provision_owner": {
